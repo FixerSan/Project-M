@@ -40,11 +40,7 @@ public class Define
         Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
-    public enum MainSpecialty
-    {
-
-    }
-    public enum SubSpecialty
+    public enum Specialty
     {
 
     }

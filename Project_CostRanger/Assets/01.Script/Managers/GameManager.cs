@@ -10,41 +10,42 @@ public class GameManager : Singleton<GameManager>
     //현재 게임 데이터 및 상태
     public GameState state;
     public BattleInfo battleInfo;
+    public PlayerData playerData;
 
     public void Awake()
     {
-        Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback: () => 
-        {
-            StartGame(() => 
-            {
-                state = GameState.BattleBefore;
-                battleInfo = new BattleInfo();
-            });
-        });
+        //Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback: () => 
+        //{
+        //    StartGame(() => 
+        //    {
+        //        state = GameState.BattleBefore;
+        //        battleInfo = new BattleInfo();
+        //    });
+        //});
     }
 
     //게임 시작
     public void StartGame(Action _callback)
     {
-        Managers.Data.LoadPreData(() => { Managers.Scene.LoadScene(Define.Scene.Main); _callback?.Invoke(); });
+        //Managers.Data.LoadPreData(() => { Managers.Scene.LoadScene(Define.Scene.Main); _callback?.Invoke(); });
     }
 
     //게임 저장
     public void SaveGame()
     {
-        Managers.Data.SavePlayerData(Managers.Data.playerData);
+        //Managers.Data.SavePlayerData(Managers.Data.playerData);
     }
 
     private void Update()
     {
-        if(battleInfo != null)
-            battleInfo.Update();
+        //if(battleInfo != null)
+        //    battleInfo.Update();
     }
 
     public void OnApplicationPause(bool pause)
     {
-        if (pause)
-            SaveGame();
+        //if (pause)
+        //    SaveGame();
     }
 }
 
