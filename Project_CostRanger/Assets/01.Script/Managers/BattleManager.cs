@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class BattleManager
 {
-    //치명타 배율
-    public readonly float criticalMultiplier = 2f;
-
     //공격 처리
-    public void AttackCalculation(BattleEntityController _attacker, BattleEntityController _hiter, Action<int> _damageCallback = null)
+    public void AttackCalculation(BaseController _attacker, BaseController _hiter, Action<float> _damageCallback = null)
     {
-        int tempInt = UnityEngine.Random.Range(0, 101);
-        int currentDamage = _attacker.status.attackForce;
+        float currentDamage = _attacker.status.CurrentAttackForce;
 
-        //랜덤값이 50이 넘으면 치명타 데미지 계산
-        if(tempInt > 50)
-            currentDamage = (int)(currentDamage * criticalMultiplier);
+        //치명타인지 체크 후 맞으면 치명타 처리
+        float tempInt = UnityEngine.Random.Range(0, 101);
+        if(tempInt >= _attacker.status.CurrentCriticalProbability)
+            currentDamage = (int)(currentDamage * _attacker.status.CurrentCriticalForce);
 
         //데미지 처리 및 콜백
         _hiter.Hit(currentDamage);
@@ -31,13 +28,13 @@ public class BattleManager
     /// <param name="_damageCallback">콜백</param>
     public void AttackCalculation(int _damage, BattleEntityController _hiter, Action<int> _damageCallback = null)
     {
-        int tempInt = UnityEngine.Random.Range(0, 101);
-        int currentDamage = _damage;
+        //int tempInt = UnityEngine.Random.Range(0, 101);
+        //int currentDamage = _damage;
 
-        if (tempInt > 50)
-            currentDamage = (int)(currentDamage * criticalMultiplier);
+        //if (tempInt > 50)
+        //    currentDamage = (int)(currentDamage * criticalMultiplier);
 
-        _hiter.Hit(currentDamage);
-        _damageCallback?.Invoke(currentDamage);
+        //_hiter.Hit(currentDamage);
+        //_damageCallback?.Invoke(currentDamage);
     }
 }

@@ -252,3 +252,25 @@ public class BattleEntityDatas : Data
     public BattleEntityData[] enemyThree;
 }
 
+public class RangerInfoData : Data
+{
+    public int UID;                     //인덱스
+    public string name;                 //이름
+    public int cost;                    //코스트
+}
+
+public class RangerControllerData : Data
+{
+    public int UID;                     //인덱스
+    public string name;                 //이름
+    public int cost;                    //코스트
+    public float attackForce;           //공격력
+    public float attackSpeed;           //공격속도
+    public float attackDistance;        //공격 사거리
+    public float criticalForce;         //크리티컬 배율
+    public float criticalProbability;   //크리티컬 확률
+    public float defenseForce;          //방어력
+    public float hp;                    //체력
+    public float moveSpeed;             //이동속도
+    public float skillCooltime;         //스킬 쿨타임
+}

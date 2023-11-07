@@ -46,7 +46,7 @@ public abstract class BattleEntity : IAttackable, IHittable
     public virtual IEnumerator AttackRoutine()
     {
         controller.status.checkAttackTime = controller.status.currentAttackCycle;
-        Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { controller.mvpPoint += _damage; });
+        Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { /*controller.mvpPoint += _damage;*/ });
         Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
         controller.routines.Remove("attack");
