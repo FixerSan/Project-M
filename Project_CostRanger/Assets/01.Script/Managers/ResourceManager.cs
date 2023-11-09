@@ -114,8 +114,8 @@ public class ResourceManager
     //로드 키 변환
     private string ChangeKey<T>(string _key) where T : Object
     {
+        if (typeof(T) == typeof(GameObject)) _key = _key + ".prefab";
         if (typeof(T) == typeof(TextAsset)) _key = _key + ".Data";
-        if (typeof(T) == typeof(GameObject)) _key = _key + ".GameObject";
         if (typeof(T) == typeof(AudioClip)) _key = _key + ".AudioClip";
         if (typeof(T) == typeof(Sprite)) _key = _key + ".Sprite";
         if (typeof(T) == typeof(RuntimeAnimatorController)) _key = _key + ".AnimatorController";

@@ -45,7 +45,30 @@ public class ObjectManager
 
     //스폰된 아군 위치
     public List<BattleEntityController> Armys { get; } = new List<BattleEntityController>();
-    
+    public List<RangerController> Rangers { get; } = new List<RangerController>();
+
+
+    // 아군 스폰 위치
+    public Transform RangerTrans
+    {
+        get
+        {
+            if (rangerTrans == null)
+            {
+                GameObject go = GameObject.Find("@RangerTrans");
+                if (go == null)
+                {
+                    go = new GameObject(name: "@RangerTrans");
+                    go.transform.SetParent(EntityTrans);
+                }
+                rangerTrans = go.transform;
+            }
+            return rangerTrans;
+        }
+    }
+    private Transform rangerTrans;
+
+
     //적 스폰 위치
     public Transform EnemyBattleEntityTrnas
     {
@@ -282,4 +305,31 @@ public class ObjectManager
         return null;
     }
 
+    public RangerController SpawnRanger(int _UID, Vector2 _position = new Vector2())
+    {
+        RangerControllerData data = Managers.Data.GetRangerControllerData(_UID);
+        RangerController controller = Managers.Resource.Instantiate(data.name, RangerTrans).GetOrAddComponent<RangerController>();
+        RangerStatus status = new RangerStatus(data);
+        Ranger ranger = null;
+        Dictionary<RangerState, State<RangerController>> states = new Dictionary<RangerState, State<RangerController>>();
+
+        Define.Ranger rangerEnum = Util.ParseEnum<Define.Ranger>(data.name);
+        switch (rangerEnum)
+        {
+            case Define.Ranger.TestRanger:
+                ranger = new Rangers.TestRanger();
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+        }
+
+        controller.Init(ranger, data, status, states);
+        Rangers.Add(controller);
+        return controller;
+    }
 }

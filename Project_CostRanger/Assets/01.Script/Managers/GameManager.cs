@@ -14,14 +14,13 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
-        //Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback: () => 
-        //{
-        //    StartGame(() => 
-        //    {
-        //        state = GameState.BattleBefore;
-        //        battleInfo = new BattleInfo();
-        //    });
-        //});
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback:() => 
+        {
+            Managers.Data.LoadPreData(() => 
+            {
+                
+            });
+        });
     }
 
     //게임 시작
@@ -59,7 +58,7 @@ public class BattleInfo
     //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
     public BattleEntityData[] armyFront;
     public BattleEntityData[] armyCenter;
-    public BattleEntityData[] armyRear;
+    public BattleEntityData[] armyRear; 
 
     //현재 진행중인 스테이지중 플레이어의 상태
     public int isCanUseBattleEntityCount;

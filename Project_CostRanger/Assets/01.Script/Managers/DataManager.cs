@@ -8,10 +8,12 @@ public class DataManager
 {
     public PlayerData playerData;
 
-    public Dictionary<int, Dictionary<int,BattleEntityData>> battleEntityStatusDatas;
+    public Dictionary<int, RangerControllerData> rangerControllerDatas;
+    public Dictionary<int, RangerInfoData> rangerInfoDatas;
     public Dictionary<int, KnightageData> knightageDatas;
     public Dictionary<int, DialogData> dialogDatas;
     public Dictionary<int, StageData> stageDatas;
+    
     public readonly string PLAYERSAVEDATA_PATH;
 
     //플레이어 데이터 반환
@@ -37,18 +39,33 @@ public class DataManager
     //엔티티 데이터 반환
     public BattleEntityData GetBattleEntityData(int _UID, int _level)
     {
-        if (battleEntityStatusDatas.TryGetValue(_UID, out Dictionary<int, BattleEntityData> datas)) if (datas.TryGetValue(_level, out BattleEntityData data)) return data;
+        //if (battleEntityStatusDatas.TryGetValue(_UID, out Dictionary<int, BattleEntityData> datas)) if (datas.TryGetValue(_level, out BattleEntityData data)) return data;
         return null;
 
+    }
+
+    //레인저 인포 데이터 반환
+    public RangerInfoData GetRangerInfoData(int _UID)
+    {
+        if (rangerInfoDatas.TryGetValue(_UID, out RangerInfoData data)) return data;
+        return null;
+    }
+
+
+    //레인저 컨트롤러 데이터 반환
+    public RangerControllerData GetRangerControllerData(int _UID)
+    {
+        if (rangerControllerDatas.TryGetValue(_UID, out RangerControllerData data)) return data;
+        return null;
     }
 
     //게임 기반 데이터 로드
     public void LoadPreData(Action _callback)
     {
-        GetPlayerData(Define.userUID);
-        LoadBattleEntityStatusData();
-        LoadStageData();
-
+        //GetPlayerData(Define.userUID);
+        //LoadBattleEntityStatusData();
+        //LoadStageData();
+        LoadRangerData();
         _callback?.Invoke();
     }
 
@@ -76,27 +93,6 @@ public class DataManager
         return playerData;
     }
 
-    //배틀 엔티티 스텟 데이터 로드
-    public void LoadBattleEntityStatusData()
-    {
-        TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityData");
-        BattleEntityDatas _battleEntityStatusDatas = JsonUtility.FromJson<BattleEntityDatas>(textAsset.text);
-
-        for (int i = 0; i < Define.currentBattleEntityCount; i++)
-        {
-            battleEntityStatusDatas.Add(i, new Dictionary<int, BattleEntityData>());
-        }
-
-        for (int i = 0; i < Define.currentBattleEntityMaxLevel; i++)
-        {
-            battleEntityStatusDatas[0].Add(_battleEntityStatusDatas.warrior[i].level, _battleEntityStatusDatas.warrior[i]);
-            battleEntityStatusDatas[1].Add(_battleEntityStatusDatas.wizard[i].level, _battleEntityStatusDatas.wizard[i]);
-            battleEntityStatusDatas[2].Add(_battleEntityStatusDatas.tank[i].level, _battleEntityStatusDatas.tank[i]);
-            battleEntityStatusDatas[3].Add(_battleEntityStatusDatas.enemyOne[i].level, _battleEntityStatusDatas.enemyOne[i]);
-            battleEntityStatusDatas[4].Add(_battleEntityStatusDatas.enemyTwo[i].level, _battleEntityStatusDatas.enemyTwo[i]);
-            battleEntityStatusDatas[5].Add(_battleEntityStatusDatas.enemyThree[i].level, _battleEntityStatusDatas.enemyThree[i]);
-        }
-    }
 
     //스테이지 데이터 로드
     public void LoadStageData()
@@ -133,11 +129,26 @@ public class DataManager
         File.WriteAllText(PLAYERSAVEDATA_PATH, saveDataJson);
     }
 
+    public void LoadRangerData()
+    {
+        TextAsset textAsset = Managers.Resource.Load<TextAsset>("RangerData");
+        RangerDatas rangerDatas = JsonUtility.FromJson<RangerDatas>(textAsset.text);
+
+        for (int i = 0; i < rangerDatas.infoDatas.Length; i++)
+            if (!rangerInfoDatas.TryAdd(rangerDatas.infoDatas[i].UID, rangerDatas.infoDatas[i]))
+                Debug.LogError($"{i}번째 레인저 인포 데이터 로드에 실패하였습니다. ");
+
+        for (int i = 0; i < rangerDatas.controllersData.Length; i++)
+            if (!rangerControllerDatas.TryAdd(rangerDatas.controllersData[i].UID, rangerDatas.controllersData[i]))
+                Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
+    }
+
     public DataManager()
     {
         playerData = null;
         dialogDatas = new Dictionary<int, DialogData> ();
-        battleEntityStatusDatas = new Dictionary<int, Dictionary<int, BattleEntityData>>();
+        rangerInfoDatas = new Dictionary<int, RangerInfoData> ();
+        rangerControllerDatas = new Dictionary<int, RangerControllerData>();
         knightageDatas = new Dictionary<int,  KnightageData>();
         stageDatas = new Dictionary<int, StageData>();
         PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
@@ -252,13 +263,23 @@ public class BattleEntityDatas : Data
     public BattleEntityData[] enemyThree;
 }
 
+[System.Serializable]
+public class RangerDatas
+{
+    public RangerInfoData[] infoDatas;  
+    public RangerControllerData[] controllersData;
+}
+
+[System.Serializable]
 public class RangerInfoData : Data
 {
     public int UID;                     //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
+    public string description;
 }
 
+[System.Serializable]
 public class RangerControllerData : Data
 {
     public int UID;                     //인덱스

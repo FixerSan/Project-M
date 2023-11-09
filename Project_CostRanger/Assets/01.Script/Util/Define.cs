@@ -45,6 +45,11 @@ public class Define
         Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
+    public enum Ranger
+    {
+        TestRanger
+    }
+
     public enum Specialty
     {
 

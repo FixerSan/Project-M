@@ -7,7 +7,8 @@ public class RangerController : BaseController
 {
     //Ranger Identity
     public Ranger ranger;
-
+    public RangerControllerData data;
+    
     //Ranger State
     public RangerState state;
     public Dictionary<RangerState, State<RangerController>> states;
@@ -19,9 +20,10 @@ public class RangerController : BaseController
     public Rigidbody2D rb;
     public Dictionary<string, Coroutine> routines;
 
-    public void Init(Ranger _ranger, RangerStatus _status, Dictionary<RangerState, State<RangerController>> _states)
+    public void Init(Ranger _ranger, RangerControllerData _data, RangerStatus _status, Dictionary<RangerState, State<RangerController>> _states)
     {
         ranger = _ranger;
+        data = _data;
         status = _status;
         states = _states;
         stateMachine = new StateMachine<RangerController>(this, states[RangerState.Idle]);
