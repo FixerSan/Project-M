@@ -22,7 +22,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 8be3f942edee5d74e97cb875923a65a5
+  - m_GUID: 6877fb649746c674d8fbbcf60d41892b
     m_Address: TestRanger.prefab
     m_ReadOnly: 0
     m_SerializedLabels:

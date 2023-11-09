@@ -48,7 +48,7 @@ public class UISlot_MVPPoint : UIBase
     public void UpdateValue()
     {
         GetText((int)Texts.Text_MVPPoint).text = $"{Managers.Game.battleInfo.battleMVPPoints[order].mvpPoint}";
-        GetImage((int)Images.Image_Point).fillAmount = (float)Managers.Game.battleInfo.battleMVPPoints[order].mvpPoint / (float)Managers.Game.battleInfo.allBattlePoint;
+        GetImage((int)Images.Image_Point).fillAmount = (float)Managers.Game.battleInfo.battleMVPPoints[order].mvpPoint / (float)Managers.Game.battleInfo.allDamage;
     }
 
 

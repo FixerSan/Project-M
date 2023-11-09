@@ -62,7 +62,7 @@ public class UIPopup_BattleBefore : UIPopup
 
         GetText((int)Texts.Text_Stage).text = $"Stage {Managers.Game.battleInfo.currentStage.stageName}";
 
-        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseBattleEntityCount} / {Managers.Game.battleInfo.isCanUseBattleEntityCount}";
+        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseCost} / {Managers.Game.battleInfo.canUseCost}";
         GetText((int)Texts.Text_ArmyBattleForce).text = $"{Managers.Game.battleInfo.armybattleForce}";
 
         GetText((int)Texts.Text_CanSpawnEnemyEntityCount).text = $"{Managers.Game.battleInfo.nowEnemyCount} / {Managers.Game.battleInfo.nowEnemyCount}";
@@ -74,7 +74,7 @@ public class UIPopup_BattleBefore : UIPopup
     {
         if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
 
-        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseBattleEntityCount} / {Managers.Game.battleInfo.isCanUseBattleEntityCount}";
+        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseCost} / {Managers.Game.battleInfo.canUseCost}";
         GetText((int)Texts.Text_ArmyBattleForce).text = $"{Managers.Game.battleInfo.armybattleForce}";
         ClearArmyUseSlots();
         CreateArmyUseSlots();
@@ -192,7 +192,7 @@ public class UIPopup_BattleBefore : UIPopup
 
     public void CheckStart()
     {
-        if(Managers.Game.battleInfo.nowUseBattleEntityCount == 0)
+        if(Managers.Game.battleInfo.nowUseCost == 0)
         {
             Managers.UI.ShowToast("You have to put in a unit.");
             return;

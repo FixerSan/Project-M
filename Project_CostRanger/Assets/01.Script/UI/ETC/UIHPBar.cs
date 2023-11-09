@@ -29,7 +29,7 @@ public class UIHPBar : MonoBehaviour
             Managers.Resource.Destroy(gameObject);
             return;
         }
-        hpSlider.fillAmount = (float)controller.status.CurrentHP / (float)controller.status.maxHP;
+        hpSlider.fillAmount = (float)controller.battleEntityStatus.CurrentHP / (float)controller.battleEntityStatus.maxHP;
         bundle.position = Managers.Screen.CameraController.Camera.WorldToScreenPoint(controller.transform.position + offset);
     }
 }

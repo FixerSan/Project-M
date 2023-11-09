@@ -10,7 +10,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                Debug.Log("¾ÆÀÌµé µé¾î¿È");
             }
 
             public override void ExitState(RangerController _entity)
@@ -28,7 +28,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                Debug.Log("¹«ºê µé¾î¿È");
             }
 
             public override void ExitState(RangerController _entity)
@@ -46,7 +46,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                Debug.Log("ÆÈ·Î¿ì µé¾î¿È");
             }
 
             public override void ExitState(RangerController _entity)

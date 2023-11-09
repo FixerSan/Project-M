@@ -40,14 +40,24 @@ public class Define
         Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
     
+    public enum Ranger
+    {
+        TestRanger
+    }
+
     public enum RangerState
     {
         Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
-    public enum Ranger
+    public enum Enemy
     {
-        TestRanger
+        TestEnemy
+    }
+
+    public enum EnemyState
+    {
+        Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
     public enum Specialty

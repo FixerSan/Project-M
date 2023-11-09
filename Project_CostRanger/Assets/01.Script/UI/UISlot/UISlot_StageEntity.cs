@@ -37,9 +37,9 @@ public class UISlot_StageEntity : UIBase
             return;
         }
 
-        GetImage((int)Images.Image_Cooltime).fillAmount = controller.status.currentSkillCooltime / controller.entity.data.skillCooltime;
-        GetText((int)Texts.Text_Cooltime).text = $"{(int)controller.status.currentSkillCooltime}";
-        if (controller.status.currentSkillCooltime == 0)
+        GetImage((int)Images.Image_Cooltime).fillAmount = controller.battleEntityStatus.currentSkillCooltime / controller.entity.data.skillCooltime;
+        GetText((int)Texts.Text_Cooltime).text = $"{(int)controller.battleEntityStatus.currentSkillCooltime}";
+        if (controller.battleEntityStatus.currentSkillCooltime == 0)
         {
             GetText((int)Texts.Text_Cooltime).gameObject.SetActive(false);
             GetImage((int)Images.Image_Cooltime).gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class UISlot_StageEntity : UIBase
     public void CheckHpBar()
     {
         if (!controller.isDead)
-            GetImage((int)Images.Image_HP).fillAmount = (float)controller.status.CurrentHP / controller.status.maxHP;
+            GetImage((int)Images.Image_HP).fillAmount = (float)controller.battleEntityStatus.CurrentHP / controller.battleEntityStatus.maxHP;
         else if (controller.isDead)
             GetImage((int)Images.Image_HP).fillAmount = 0;
     }
