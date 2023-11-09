@@ -35,10 +35,20 @@ public class GameManager : Singleton<GameManager>
         //Managers.Data.SavePlayerData(Managers.Data.playerData);
     }
 
+    public void StartBattleStage(int _UID)
+    {
+        battleInfo = new BattleInfo(Managers.Data.GetStageData(_UID));
+    }
+
+    public void EndBattleStage()
+    {
+        battleInfo = null;
+    }
+
     private void Update()
     {
-        //if(battleInfo != null)
-        //    battleInfo.Update();
+        if (battleInfo != null)
+            battleInfo.Update();
     }
 
     public void OnApplicationPause(bool pause)
@@ -47,6 +57,8 @@ public class GameManager : Singleton<GameManager>
         //    SaveGame();
     }
 }
+
+
 
 [System.Serializable]
 public class BattleInfo
@@ -61,13 +73,13 @@ public class BattleInfo
     public BattleEntityData[] armyRear; 
 
     //현재 진행중인 스테이지중 플레이어의 상태
-    public int isCanUseBattleEntityCount;
-    public int nowUseBattleEntityCount;
+    public int canUseCost;
+    public int nowUseCost;
     public int armyCurrentHP;
     public int armyMaxHP;
     public int armyAttackForce;
     public int armybattleForce;
-    public int allBattlePoint;
+    public int allDamage;
 
     //데미지의 맞춰 정렬된 플레이어 엔티티들
     public List<BattleEntityController> battleMVPPoints;
@@ -94,8 +106,8 @@ public class BattleInfo
     public bool UseBattleEntity(BattleEntityData _data)
     {
         //더 배치할 수 있는지 체크
-        if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
-        nowUseBattleEntityCount++;
+        if (nowUseCost == canUseCost) return false;
+        nowUseCost++;
 
         //비어있는 배열 체크 및 적용
         int nullIndex = armyFront.FindEmptyArrayIndex();
@@ -129,8 +141,8 @@ public class BattleInfo
     //지정된 위치에 플레이어 엔티티 배치
     public bool UseBattleEntity(BattleEntityData _data, PlaceType _type)
     {
-        if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
-        nowUseBattleEntityCount++;
+        if (nowUseCost == canUseCost) return false;
+        nowUseCost++;
 
         int nullIndex = 0;
         switch (_type)
@@ -170,7 +182,7 @@ public class BattleInfo
     public void UnUseBattleEntity(BattleEntityData _data)
     {
         //배치 카운트 감소
-        nowUseBattleEntityCount--;
+        nowUseCost--;
 
         //각 배치 검사 후 그 배치에 있으면 배치 취소
         for (int i = 0; i < armyFront.Length; i++)
@@ -211,7 +223,7 @@ public class BattleInfo
         armyCenter = new BattleEntityData[3];
         armyRear = new BattleEntityData[3];
 
-        nowUseBattleEntityCount = 0;
+        nowUseCost = 0;
         armybattleForce = 0;
 
         UpdateUI();
@@ -310,7 +322,7 @@ public class BattleInfo
     public void StartStage()
     {
         clearStar = 0;
-        allBattlePoint = 0;
+        allDamage = 0;
 
         armyCurrentHP = armyMaxHP;
         enemyCurrentHP = enemyMaxHP;
@@ -347,10 +359,10 @@ public class BattleInfo
         }
 
         battleMVPPoints = tempList;
-        allBattlePoint = 0;
+        allDamage = 0;
 
         for (int i = 0; i < battleMVPPoints.Count; i++)
-            allBattlePoint += battleMVPPoints[i].mvpPoint;
+            allDamage += battleMVPPoints[i].mvpPoint;
 
         UpdateUI();
     }
@@ -365,9 +377,9 @@ public class BattleInfo
 
         
         foreach (var item in Managers.Object.Armys)
-            armyCurrentHP += item.status.CurrentHP;
+            armyCurrentHP += item.battleEntityStatus.CurrentHP;
         foreach (var item in Managers.Object.Enemys)
-            enemyCurrentHP += item.status.CurrentHP;
+            enemyCurrentHP += item.battleEntityStatus.CurrentHP;
         UpdateUI();
     }
 
@@ -427,7 +439,7 @@ public class BattleInfo
         armyFront = new BattleEntityData[3];
         armyCenter = new BattleEntityData[3];
         armyRear = new BattleEntityData[3];
-        nowUseBattleEntityCount = 0;
+        nowUseCost = 0;
         armyCurrentHP = 0;
         armyMaxHP = 0;
         armyAttackForce = 0;
@@ -510,8 +522,46 @@ public class BattleInfo
         CheckTime();
     }
 
-    public BattleInfo()
+    public BattleInfo(StageData _stageData)
     {
+        //현재 진행중인 스테이지 데이터
+        currentStage = _stageData;
+        clearStar = 0;
+
+        //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
+        armyRear = new BattleEntityData[3];
+        armyCenter = new BattleEntityData[3];
+        armyFront = new BattleEntityData[3];
+
+        //현재 진행중인 스테이지중 플레이어의 상태
+        canUseCost = _stageData.canUseCost;
+        nowUseCost = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        allDamage = 0;
+
+        //데미지의 맞춰 정렬된 플레이어 엔티티들
+        battleMVPPoints = new List<BattleEntityController>();
+
+        //현재 진행중인 스테이지의 배치된 적 entity  및 위치
+        enemyRear = new BattleEntityData[3];
+        enemyCenter = new BattleEntityData[3];
+        enemyFront = new BattleEntityData[3];
+
+        //현재 진행중인 스테이지중 적의 상태
+        nowEnemyCount = 0;
+        enemyCurrentHP = 0;
+        enemyMaxHP = 0;
+        enemyAttackForce = 0;
+        enemybattleForce = 0;
+
+        //게임 진행 설정 및 정보
+        isAutoSkill = false;
+        isFastSpeed = false;
+        time = 0;
+
         armyRear = new BattleEntityData[3];
         armyCenter = new BattleEntityData[3];
         armyFront = new BattleEntityData[3];
@@ -520,12 +570,124 @@ public class BattleInfo
         enemyCenter = new BattleEntityData[3];
         enemyFront = new BattleEntityData[3];
 
-        isCanUseBattleEntityCount = 4;
+        canUseCost = 4;
         battleMVPPoints = new List<BattleEntityController>();
         isAutoSkill = false;
         isFastSpeed = false;
 
         Managers.Event.OnVoidEvent -= UpdateTeamHP;
         Managers.Event.OnVoidEvent += UpdateTeamHP;
+    }
+}
+
+public class BattleStage
+{
+    //현재 진행중인 스테이지 데이터
+    public StageData currentStage;
+    public int clearStar;
+
+    //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
+    public RangerControllerData[] armyFront;
+    public RangerControllerData[] armyCenter;
+    public RangerControllerData[] armyRear;
+
+    //현재 진행중인 스테이지중 플레이어의 상태
+    public int canUseCost;
+    public int nowUseCost;
+    public int armyCurrentHP;
+    public int armyMaxHP;
+    public int armyAttackForce;
+    public int armybattleForce;
+    public int allDamage;
+
+    //데미지의 맞춰 정렬된 플레이어 엔티티들
+    public List<BattleEntityController> battleMVPPoints;
+
+    //현재 진행중인 스테이지의 배치된 적 entity  및 위치
+    public EnemyControllerData[] frontEnemy;
+    public EnemyControllerData[] centerEnemy;
+    public EnemyControllerData[] rearEnemy;
+
+    //현재 진행중인 스테이지중 적의 상태
+    public int nowEnemyCount;
+    public int enemyCurrentHP;
+    public int enemyMaxHP;
+    public int enemyAttackForce;
+    public int enemybattleForce;
+
+    //게임 진행 설정 및 정보
+    public bool isAutoSkill;
+    public bool isFastSpeed;
+    public float time;
+
+
+    public void SetEnemy()
+    {
+        for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
+            frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
+
+        for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
+            centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
+
+        for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
+            rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
+    }
+
+    public void StartStage()
+    {
+
+    }
+
+    public void Victory()
+    {
+
+    }
+
+    public void Lose()
+    {
+
+    }
+
+    public BattleStage(StageData _stageData)
+    {
+        //현재 진행중인 스테이지 데이터
+        currentStage = _stageData;
+        clearStar = 0;
+
+        //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
+        armyRear = new RangerControllerData[3];
+        armyCenter = new RangerControllerData[3];
+        armyFront = new RangerControllerData[3];
+
+        //현재 진행중인 스테이지중 플레이어의 상태
+        canUseCost = _stageData.canUseCost;
+        nowUseCost = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        allDamage = 0;
+
+        //데미지의 맞춰 정렬된 플레이어 엔티티들
+        battleMVPPoints = new List<BattleEntityController>();
+
+        //현재 진행중인 스테이지의 배치된 적 entity  및 위치
+        frontEnemy = new EnemyControllerData[3];
+        centerEnemy = new EnemyControllerData[3];
+        rearEnemy = new EnemyControllerData[3];
+
+        //현재 진행중인 스테이지중 적의 상태
+        nowEnemyCount = 0;
+        enemyCurrentHP = 0;
+        enemyMaxHP = 0;
+        enemyAttackForce = 0;
+        enemybattleForce = 0;
+
+        //게임 진행 설정 및 정보
+        isAutoSkill = false;
+        isFastSpeed = false;
+        time = 0;
+
+        SetEnemy();
     }
 }

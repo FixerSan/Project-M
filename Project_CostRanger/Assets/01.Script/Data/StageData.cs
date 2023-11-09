@@ -12,6 +12,7 @@ public class StageData : ScriptableObject
     public int twoStarReward;
     public int threeStarReward;
     public int clearReward;
+    public int canUseCost;
 
     public int[] frontEnemyUIDs;
     public int[] frontEnemyLevels;

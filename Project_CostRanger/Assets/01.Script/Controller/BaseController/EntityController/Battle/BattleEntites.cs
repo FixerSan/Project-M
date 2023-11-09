@@ -15,16 +15,16 @@ public abstract class BattleEntity : IAttackable, IHittable
     public virtual bool CheckAttack()
     {
         //공격 쿨타임이 있을 때 쿨타임 감소
-        if (controller.status.checkAttackTime > 0)
+        if (controller.battleEntityStatus.checkAttackTime > 0)
         {
-            controller.status.checkAttackTime -= Time.deltaTime;
-            if (controller.status.checkAttackTime <= 0)
-                controller.status.checkAttackTime = 0;
+            controller.battleEntityStatus.checkAttackTime -= Time.deltaTime;
+            if (controller.battleEntityStatus.checkAttackTime <= 0)
+                controller.battleEntityStatus.checkAttackTime = 0;
         }
 
         //예외 처리
         if (controller.attackTarget == null) return false;
-        if (controller.status.checkAttackTime > 0) return false;
+        if (controller.battleEntityStatus.checkAttackTime > 0) return false;
         if (controller.state != Define.BattleEntityState.Follow) return false;
 
         //공격 가능한 거리인지 체크 후 가능하면 공격 상태로 변환
@@ -45,7 +45,7 @@ public abstract class BattleEntity : IAttackable, IHittable
     //공격 처리 루틴
     public virtual IEnumerator AttackRoutine()
     {
-        controller.status.checkAttackTime = controller.status.currentAttackCycle;
+        controller.battleEntityStatus.checkAttackTime = controller.battleEntityStatus.currentAttackCycle;
         Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { /*controller.mvpPoint += _damage;*/ });
         Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
@@ -62,16 +62,16 @@ public abstract class BattleEntity : IAttackable, IHittable
     //데미지 처리
     public virtual void GetDamage(int _damage)
     {
-        if(controller.status.buff.CheckCanMiss())
+        if(controller.battleEntityStatus.buff.CheckCanMiss())
         {
             Managers.UI.MakeWorldText("Miss", controller.transform.position + controller.textOffset, Define.TextType.Damage);
             return;
         }
-        controller.status.CurrentHP -= _damage;
+        controller.battleEntityStatus.CurrentHP -= _damage;
         Managers.UI.MakeWorldText(_damage.ToString(), controller.transform.position + controller.textOffset, Define.TextType.Damage);
-        if(controller.status.CurrentHP <= 0)
+        if(controller.battleEntityStatus.CurrentHP <= 0)
         {
-            controller.status.CurrentHP = 0;
+            controller.battleEntityStatus.CurrentHP = 0;
             controller.ChangeState(Define.BattleEntityState.Die);
         }
     }
@@ -82,7 +82,7 @@ public abstract class BattleEntity : IAttackable, IHittable
         if(controller.moveTarget != null)
         {
             Vector2 dir = (controller.moveTarget.position - controller.transform.position).normalized;
-            controller.rb.velocity = (dir * controller.status.moveSpeed) * Time.fixedDeltaTime * 20;
+            controller.rb.velocity = (dir * controller.battleEntityStatus.moveSpeed) * Time.fixedDeltaTime * 20;
         }
     }
 
@@ -97,7 +97,7 @@ public abstract class BattleEntity : IAttackable, IHittable
                 return;
             }
             Vector2 dir = (controller.attackTarget.transform.position - controller.transform.position).normalized;
-            controller.rb.velocity = (dir * controller.status.moveSpeed) * Time.fixedDeltaTime * 20;
+            controller.rb.velocity = (dir * controller.battleEntityStatus.moveSpeed) * Time.fixedDeltaTime * 20;
         }
     }
 
@@ -116,18 +116,18 @@ public abstract class BattleEntity : IAttackable, IHittable
     public virtual bool CheckCanUseSkill()
     {
         //스킬 쿨타임이 있다면 쿨타임 감소
-        if(controller.status.currentSkillCooltime > 0)
+        if(controller.battleEntityStatus.currentSkillCooltime > 0)
         {
-            controller.status.currentSkillCooltime -= Time.deltaTime;
-            if (controller.status.currentSkillCooltime <= 0)
-                controller.status.currentSkillCooltime = 0;
+            controller.battleEntityStatus.currentSkillCooltime -= Time.deltaTime;
+            if (controller.battleEntityStatus.currentSkillCooltime <= 0)
+                controller.battleEntityStatus.currentSkillCooltime = 0;
         }
         //예외처리
         if (Managers.Screen.isSkillCasting) return false;
         if (controller.entityType == Define.BattleEntityType.Enemy) 
         {
             if (controller.state != Define.BattleEntityState.Follow) return false;
-            if (controller.status.currentSkillCooltime <= 0)
+            if (controller.battleEntityStatus.currentSkillCooltime <= 0)
             {
                 //스킬 사용 상태로 변경
                 controller.ChangeState(Define.BattleEntityState.SkillCast);
@@ -138,7 +138,7 @@ public abstract class BattleEntity : IAttackable, IHittable
         //오토 스킬 처리
         if (!Managers.Game.battleInfo.isAutoSkill) return false;
         if (controller.state != Define.BattleEntityState.Follow) return false;
-        if (controller.status.currentSkillCooltime <= 0)
+        if (controller.battleEntityStatus.currentSkillCooltime <= 0)
         {
             controller.ChangeState(Define.BattleEntityState.SkillCast);
             return true;
@@ -165,7 +165,7 @@ namespace BattleEntites
             BaseSkill(controller.entity.data);
             for (int i = 0; i < Managers.Object.Armys.Count; i++)
             {
-                Managers.Object.Armys[i].SetBuff_PlusSpeed(3f,Managers.Object.Armys[i].status.currentAttackCycle * 0.25f);
+                Managers.Object.Armys[i].SetBuff_PlusSpeed(3f,Managers.Object.Armys[i].battleEntityStatus.currentAttackCycle * 0.25f);
             }
         }
 
@@ -202,7 +202,7 @@ namespace BattleEntites
             BaseSkill(controller.entity.data);
             for (int i = 0; i < Managers.Object.Armys.Count; i++)
             {
-                Managers.Object.Armys[i].Heal((int)((Managers.Object.Armys[i].status.maxHP - Managers.Object.Armys[i].status.CurrentHP) * 0.25f));
+                Managers.Object.Armys[i].Heal((int)((Managers.Object.Armys[i].battleEntityStatus.maxHP - Managers.Object.Armys[i].battleEntityStatus.CurrentHP) * 0.25f));
             }
         }
 
@@ -219,7 +219,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill(controller.entity.data);
-            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
+            Managers.Battle.AttackCalculation(controller.battleEntityStatus.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Three(BattleEntityController _controller, BattleEntityData _data)
@@ -235,7 +235,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill(controller.entity.data);
-            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
+            Managers.Battle.AttackCalculation(controller.battleEntityStatus.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Four (BattleEntityController _controller, BattleEntityData _data)
@@ -251,7 +251,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill(controller.entity.data);
-            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
+            Managers.Battle.AttackCalculation(controller.battleEntityStatus.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Five(BattleEntityController _controller, BattleEntityData _data)

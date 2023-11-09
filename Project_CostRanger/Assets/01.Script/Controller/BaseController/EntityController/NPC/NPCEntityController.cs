@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class NPCEntityController : EntityController
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void GetDamage(float _damage)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Hit(float _damage)
     {
-        
+
     }
 }

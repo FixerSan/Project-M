@@ -10,7 +10,8 @@ public class DataManager
 
     public Dictionary<int, RangerControllerData> rangerControllerDatas;
     public Dictionary<int, RangerInfoData> rangerInfoDatas;
-    public Dictionary<int, KnightageData> knightageDatas;
+    public Dictionary<int, EnemyControllerData> enemyControllerDatas;
+    public Dictionary<int, EnemyInfoData> enemyInfoDatas;
     public Dictionary<int, DialogData> dialogDatas;
     public Dictionary<int, StageData> stageDatas;
     
@@ -56,6 +57,21 @@ public class DataManager
     public RangerControllerData GetRangerControllerData(int _UID)
     {
         if (rangerControllerDatas.TryGetValue(_UID, out RangerControllerData data)) return data;
+        return null;
+    }
+
+    //적 인포 데이터 반환
+    public EnemyInfoData GetEnemyInfoData(int _UID)
+    {
+        if (enemyInfoDatas.TryGetValue(_UID, out EnemyInfoData data)) return data;
+        return null;
+    }
+
+
+    //적 컨트롤러 데이터 반환
+    public EnemyControllerData GetEnemyControllerData(int _UID)
+    {
+        if (enemyControllerDatas.TryGetValue(_UID, out EnemyControllerData data)) return data;
         return null;
     }
 
@@ -143,13 +159,28 @@ public class DataManager
                 Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
     }
 
+    public void LoadEnemyData()
+    {
+        TextAsset textAsset = Managers.Resource.Load<TextAsset>("EnemyData");
+        EnemyDatas enemyDatas = JsonUtility.FromJson<EnemyDatas>(textAsset.text);
+
+        for (int i = 0; i < enemyDatas.infoDatas.Length; i++)
+            if (!enemyInfoDatas.TryAdd(enemyDatas.infoDatas[i].UID, enemyDatas.infoDatas[i]))
+                Debug.LogError($"{i}번째 레인저 인포 데이터 로드에 실패하였습니다. ");
+
+        for (int i = 0; i < enemyDatas.controllersData.Length; i++)
+            if (!enemyControllerDatas.TryAdd(enemyDatas.controllersData[i].UID, enemyDatas.controllersData[i]))
+                Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
+    }
+
     public DataManager()
     {
         playerData = null;
         dialogDatas = new Dictionary<int, DialogData> ();
         rangerInfoDatas = new Dictionary<int, RangerInfoData> ();
         rangerControllerDatas = new Dictionary<int, RangerControllerData>();
-        knightageDatas = new Dictionary<int,  KnightageData>();
+        enemyControllerDatas = new Dictionary<int, EnemyControllerData>();
+        enemyInfoDatas = new Dictionary<int, EnemyInfoData>();
         stageDatas = new Dictionary<int, StageData>();
         PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
     }
@@ -281,6 +312,39 @@ public class RangerInfoData : Data
 
 [System.Serializable]
 public class RangerControllerData : Data
+{
+    public int UID;                     //인덱스
+    public string name;                 //이름
+    public int cost;                    //코스트
+    public float attackForce;           //공격력
+    public float attackSpeed;           //공격속도
+    public float attackDistance;        //공격 사거리
+    public float criticalForce;         //크리티컬 배율
+    public float criticalProbability;   //크리티컬 확률
+    public float defenseForce;          //방어력
+    public float hp;                    //체력
+    public float moveSpeed;             //이동속도
+    public float skillCooltime;         //스킬 쿨타임
+}
+
+[System.Serializable]
+public class EnemyDatas
+{
+    public EnemyInfoData[] infoDatas;
+    public EnemyControllerData[] controllersData;
+}
+
+[System.Serializable]
+public class EnemyInfoData : Data
+{
+    public int UID;                     //인덱스
+    public string name;                 //이름
+    public int cost;                    //코스트
+    public string description;
+}
+
+[System.Serializable]
+public class EnemyControllerData : Data
 {
     public int UID;                     //인덱스
     public string name;                 //이름

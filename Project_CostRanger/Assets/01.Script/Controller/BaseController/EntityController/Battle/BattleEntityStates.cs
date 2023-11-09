@@ -95,7 +95,7 @@ namespace BattleEntityStates
 
             public override void ExitState(BattleEntityController _controller)
             {
-                _controller.status.currentSkillCooltime = _controller.entity.data.skillCooltime;
+                _controller.battleEntityStatus.currentSkillCooltime = _controller.entity.data.skillCooltime;
             }
 
             public override void UpdateState(BattleEntityController _controller)

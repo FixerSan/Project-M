@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static Define;
 
-public class BattleEntityController : EntityController, IAttackable, IHittable
+public class BattleEntityController : EntityController
 {
     //각 파츠
     public BattleEntity entity;
     public StateMachine<BattleEntityController> stateMachine;
-    public BattleEntityStatus status;
+    public BattleEntityStatus battleEntityStatus;
     public Dictionary<BattleEntityState, State<BattleEntityController>> states;
     public Rigidbody2D rb;
 
@@ -34,7 +34,7 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         if (init) return;
         entity = _entity;
         states = _states;
-        status = _status;
+        battleEntityStatus = _status;
         entityType = _entityType;
         state = BattleEntityState.Idle;
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
@@ -57,17 +57,17 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     }
 
     //데미지 처리
-    public void GetDamage(int _damage)
+    public override void GetDamage(float _damage)
     {
         if (isDead) return;
-        entity.GetDamage(_damage);
+        entity.GetDamage((int)_damage);
     }
 
     //피격 처리
-    public void Hit(int _damage)
+    public override void Hit(float _damage)
     {
         if (isDead) return;
-        entity.Hit(_damage);
+        entity.Hit((int)_damage);
     }
     
     //스킬 처리
@@ -169,30 +169,30 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     //체력 회복 처리
     public void Heal(int _healValue)
     {
-        if (status.CurrentHP >= status.maxHP)
+        if (battleEntityStatus.CurrentHP >= battleEntityStatus.maxHP)
             return;
-        status.CurrentHP += _healValue;
+        battleEntityStatus.CurrentHP += _healValue;
         Managers.UI.MakeWorldText($"+ {_healValue}", transform.position + textOffset, TextType.Heal);
     }
 
     //공격속도 업 처리
     public void SetBuff_PlusSpeed(float _time, float _plusAttackSpeed)
     {
-        status.buff.StartPlusAttackSpeed(_time, _plusAttackSpeed);
+        battleEntityStatus.buff.StartPlusAttackSpeed(_time, _plusAttackSpeed);
         Managers.UI.MakeWorldText($"AttackSpeed + 25%", transform.position + textOffset, TextType.Normal);
     }
 
     //방어 카운트 증가 처리
     public void SetBuff_SetMissCount(int _count)
     {
-        status.buff.SetMissCount(_count);
+        battleEntityStatus.buff.SetMissCount(_count);
     }
 
     public void Update()
     {
         if (!init) return;
         stateMachine.UpdateState();
-        status.buff.CheckBuff();
+        battleEntityStatus.buff.CheckBuff();
     }
 
     public void OnDisable()
