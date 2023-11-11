@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainScene : BaseScene
 {
-    public override void Init(Action _callback = null)
+    public override void Init(Action _callback)
     {
         Managers.UI.ShowSceneUI<UIScene_Main>();
         Managers.Game.state = Define.GameState.BattleBefore;

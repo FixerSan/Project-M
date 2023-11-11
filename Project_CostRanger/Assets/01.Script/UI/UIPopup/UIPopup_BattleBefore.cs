@@ -55,8 +55,8 @@ public class UIPopup_BattleBefore : UIPopup
 
 
 
-        for (int i = 0; i < Managers.Data.playerData.hasEntites.Count; i++)
-            CreateCanUseSlot(Managers.Data.playerData.hasEntites[i].UID, Managers.Data.playerData.hasEntites[i].level);
+        //for (int i = 0; i < Managers.Data.playerData.hasEntites.Count; i++)
+        //    CreateCanUseSlot(Managers.Data.playerData.hasEntites[i].UID, Managers.Data.playerData.hasEntites[i].level);
 
         CreateEnemyUseSlots();
 

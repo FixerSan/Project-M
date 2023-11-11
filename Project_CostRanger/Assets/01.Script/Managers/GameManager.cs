@@ -9,30 +9,34 @@ public class GameManager : Singleton<GameManager>
 {
     //현재 게임 데이터 및 상태
     public GameState state;
+    public LoginSystem loginSystem;
+    public BattleStageSystem battleStageSystem;
     public BattleInfo battleInfo;
     public PlayerData playerData;
 
+    public PlayerSaveData[] DSDS;
+
     public void Awake()
     {
-        Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback:() => 
-        {
-            Managers.Data.LoadPreData(() => 
-            {
-                
-            });
-        });
+        StartGame();
     }
 
     //게임 시작
-    public void StartGame(Action _callback)
+    public void StartGame()
     {
-        //Managers.Data.LoadPreData(() => { Managers.Scene.LoadScene(Define.Scene.Main); _callback?.Invoke(); });
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>("Preload", _completeCallback: () =>
+        {
+            Managers.Data.LoadPreData(() =>
+            {
+                Managers.Scene.LoadScene(Define.Scene.Login);
+            });
+        });
     }
 
     //게임 저장
     public void SaveGame()
     {
-        //Managers.Data.SavePlayerData(Managers.Data.playerData);
+        Managers.Data.SavePlayerData(Managers.Game.playerData);
     }
 
     public void StartBattleStage(int _UID)
@@ -45,6 +49,13 @@ public class GameManager : Singleton<GameManager>
         battleInfo = null;
     }
 
+    public void Login(string _ID, string _passward, Action<LoginEvent> _callback)
+    {
+        if(loginSystem == null)
+            loginSystem = new LoginSystem();
+        loginSystem.Login(_ID, _passward, _callback);
+    }
+
     private void Update()
     {
         if (battleInfo != null)
@@ -53,8 +64,8 @@ public class GameManager : Singleton<GameManager>
 
     public void OnApplicationPause(bool pause)
     {
-        //if (pause)
-        //    SaveGame();
+        if (pause)
+            SaveGame();
     }
 }
 
@@ -580,7 +591,7 @@ public class BattleInfo
     }
 }
 
-public class BattleStage
+public class BattleStageSystem
 {
     //현재 진행중인 스테이지 데이터
     public StageData currentStage;
@@ -648,7 +659,7 @@ public class BattleStage
 
     }
 
-    public BattleStage(StageData _stageData)
+    public BattleStageSystem(StageData _stageData)
     {
         //현재 진행중인 스테이지 데이터
         currentStage = _stageData;
@@ -689,5 +700,26 @@ public class BattleStage
         time = 0;
 
         SetEnemy();
+    }
+}
+
+public class LoginSystem
+{
+    public void Login(string _ID, string _passward, Action<LoginEvent> _callback)
+    {
+        PlayerSaveData playerData = Managers.Data.GetPlayerSaveData(_ID);
+        if(playerData == null)
+        {
+            _callback?.Invoke(LoginEvent.NotExistPlayerData);
+            return;
+        }    
+
+        if(playerData.passward != _passward)
+        {
+            _callback.Invoke(LoginEvent.IncorrectPassward);
+            return;
+        }
+
+        _callback?.Invoke(LoginEvent.SuccessLogin);
     }
 }

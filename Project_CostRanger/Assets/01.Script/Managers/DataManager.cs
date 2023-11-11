@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
-
+using JetBrains.Annotations;
 
 public class DataManager
 {
     public PlayerData playerData;
-
+    public Dictionary<string, PlayerSaveData> playerSaveDatas;
     public Dictionary<int, RangerControllerData> rangerControllerDatas;
     public Dictionary<int, RangerInfoData> rangerInfoDatas;
     public Dictionary<int, EnemyControllerData> enemyControllerDatas;
@@ -17,10 +17,11 @@ public class DataManager
     
     public readonly string PLAYERSAVEDATA_PATH;
 
-    //플레이어 데이터 반환
-    public PlayerData GetPlayerData(int _UID)
+
+    public PlayerSaveData GetPlayerSaveData(string _ID)
     {
-        return LoadPlayerData(_UID);
+        if (playerSaveDatas.TryGetValue(_ID, out PlayerSaveData data)) return data;
+        return null;
     }
 
     //스테이지 데이터 반환
@@ -82,31 +83,18 @@ public class DataManager
         //LoadBattleEntityStatusData();
         //LoadStageData();
         LoadRangerData();
+        LoadPlayerSaveData();
         _callback?.Invoke();
     }
 
-    //플레이어 데이터 로드
-    private PlayerData LoadPlayerData(int _UID)
+    private void LoadPlayerSaveData()
     {
-        if(playerData == null)
-        {
-            TextAsset textAsset = Managers.Resource.Load<TextAsset>("PlayerSaveData");
-            PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(textAsset.text);
+        TextAsset textAsset = Managers.Resource.Load<TextAsset>("PlayerSaveData");
+        PlayerSaveDatas saveData = JsonUtility.FromJson<PlayerSaveDatas>(textAsset.text);
 
-            string[] entityUIDs = saveData.hasEntityUID.Split(',');
-            string[] entityLevels = saveData.hasEntityLevel.Split(',');
-
-            List<BaseBattleEntityData> entityDatas = new List<BaseBattleEntityData>();
-
-            for (int i = 0; i < entityUIDs.Length; i++)
-            {
-                BaseBattleEntityData entityData = new BaseBattleEntityData(Int32.Parse(entityUIDs[i]), Int32.Parse(entityLevels[i]));
-                entityDatas.Add(entityData);
-            }
-
-            playerData = new PlayerData(saveData.UID, saveData.name, saveData.knightageLevel, entityDatas);
-        }
-        return playerData;
+        if (saveData.playerSaveDatas == null) return;
+        for (int i = 0; i < saveData.playerSaveDatas.Length; i++)
+            if (!playerSaveDatas.TryAdd(saveData.playerSaveDatas[i].ID, saveData.playerSaveDatas[i])) Debug.LogError($"{i}번째 플레이어 세이브 데이터가 로드 되지 않았음");
     }
 
 
@@ -124,24 +112,35 @@ public class DataManager
     //플레이어 데이터 저장
     public void SavePlayerData(PlayerData _playerData)
     {
-        string hasEntityUIDs = string.Empty;
-        string hasEntityLevel = string.Empty;
-
-        for (int i = 0; i < _playerData.hasEntites.Count; i++)
+        if(playerSaveDatas.TryGetValue(_playerData.ID, out PlayerSaveData saveDate))
         {
-            if(i == _playerData.hasEntites.Count-1)
+            string hasRangerUIDs = string.Empty;
+            for (int i = 0; i < _playerData.hasEntites.Count; i++)
             {
-                hasEntityUIDs += (_playerData.hasEntites[i].UID);
-                hasEntityLevel += (_playerData.hasEntites[i].level);
-                continue;
+                if (i != _playerData.hasEntites.Count - 1)
+                {
+                    hasRangerUIDs += (_playerData.hasEntites[i].UID + ",");
+                    continue;
+                }
+                hasRangerUIDs += (_playerData.hasEntites[i].UID);
             }
-            hasEntityUIDs += (_playerData.hasEntites[i].UID + ",");
-            hasEntityLevel += (_playerData.hasEntites[i].level + ",");
+
+            saveDate.name = _playerData.name;
+            saveDate.hasRangerUID = hasRangerUIDs;
         }
 
-        PlayerSaveData saveData = new PlayerSaveData(_playerData.UID, _playerData.name, _playerData.knightageLevel, hasEntityUIDs, hasEntityLevel);
-        string saveDataJson = JsonUtility.ToJson(saveData);
+        PlayerSaveData[] saveDatas = null;
+        int count = 0;
 
+        foreach (var data in playerSaveDatas)
+        {
+            saveDatas[count] = data.Value;
+            count++;
+        }
+
+        PlayerSaveDatas saveData = new PlayerSaveDatas(Managers.Game.DSDS);
+        
+        string saveDataJson = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(PLAYERSAVEDATA_PATH, saveDataJson);
     }
 
@@ -176,13 +175,14 @@ public class DataManager
     public DataManager()
     {
         playerData = null;
+        playerSaveDatas = new Dictionary<string, PlayerSaveData>();
         dialogDatas = new Dictionary<int, DialogData> ();
         rangerInfoDatas = new Dictionary<int, RangerInfoData> ();
         rangerControllerDatas = new Dictionary<int, RangerControllerData>();
         enemyControllerDatas = new Dictionary<int, EnemyControllerData>();
         enemyInfoDatas = new Dictionary<int, EnemyInfoData>();
         stageDatas = new Dictionary<int, StageData>();
-        PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
+        PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/05.Data/", "PlayerSaveData.txt");
     }
 }
 
@@ -196,16 +196,14 @@ public class Data
 [System.Serializable]
 public class PlayerData : Data
 {
-    public int UID;
+    public string ID;
     public string name;
-    public int knightageLevel;
-    public List<BaseBattleEntityData> hasEntites;
+    public List<RangerInfoData> hasEntites;
 
-    public PlayerData(int _UID, string _name, int _knightageLevel, List<BaseBattleEntityData> _hasEntites)
+    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasEntites)
     {
-        UID = _UID;
+        ID = _ID;
         name = _name;
-        knightageLevel = _knightageLevel;
         hasEntites = _hasEntites;
     }
 }
@@ -213,19 +211,28 @@ public class PlayerData : Data
 [System.Serializable]
 public class PlayerSaveData : Data
 {
-    public int UID;
+    public string ID;
+    public string passward;
     public string name;
-    public string hasEntityUID;
-    public string hasEntityLevel;
-    public int knightageLevel;
+    public string hasRangerUID;
 
-    public PlayerSaveData(int _UID, string _name, int _knightageLevel, string _hasEntityUID, string _hasEntityLevel)
+    public PlayerSaveData(string _ID, string _passward , string _name,  string _hasRangerUID)
     {
-        UID = _UID;
+        ID = _ID;
+        passward = _passward;
         name = _name;
-        knightageLevel = _knightageLevel;
-        hasEntityUID = _hasEntityUID;
-        hasEntityLevel = _hasEntityLevel;
+        hasRangerUID = _hasRangerUID;
+    }
+}
+
+[System.Serializable]
+public class PlayerSaveDatas : Data
+{
+    public PlayerSaveData[] playerSaveDatas;
+
+    public PlayerSaveDatas(PlayerSaveData[] _playerSaveDatas)
+    {
+        playerSaveDatas = _playerSaveDatas;
     }
 }
 

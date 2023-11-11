@@ -36,7 +36,7 @@ public class SceneManager
         RemoveScene(currentScene, () =>
         {
             currentScene = _scene;
-            AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+            AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
             async.completed += (_) => 
             { 
                 AddScene(sceneName);
@@ -50,6 +50,10 @@ public class SceneManager
         BaseScene bs = null;
         switch (_scene)
         {
+            case Define.Scene.Login:
+                bs = SceneTrans.GetComponent<LoginScene>();
+                break;
+
             case Define.Scene.Main:
                 bs = SceneTrans.GetComponent<MainScene>();
                 break;
@@ -62,6 +66,7 @@ public class SceneManager
                 _callback?.Invoke();
                 return;
         }
+
         if(bs != null)
         {
             bs.Clear();
@@ -78,6 +83,10 @@ public class SceneManager
         //Managers.Data.LoadSceneData(addScene);
         switch (addScene)
         {
+            case Define.Scene.Login:
+                bs = SceneTrans.gameObject.AddComponent<LoginScene>();
+                break;
+
             case Define.Scene.Main:
                 bs = SceneTrans.gameObject.AddComponent<MainScene>();
                 break;

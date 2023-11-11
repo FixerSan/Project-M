@@ -51,7 +51,8 @@ public abstract class UIBase : MonoBehaviour
     protected void BindText(Type _type) { Bind<TMP_Text>(_type); }
     protected void BindButton(Type _type) { Bind<Button>(_type); }
     protected void BindToggle(Type _type) { Bind<Toggle>(_type); }
-    protected void BindSlider(Type _type) { Bind<Slider>(_type); }
+    protected void BindSlider(Type _type) { Bind<Slider>(_type); } 
+    protected void BindInputField(Type _type) { Bind<TMP_InputField>(_type); }
 
     protected T Get<T>(int _index) where T : Object
     {
@@ -68,6 +69,7 @@ public abstract class UIBase : MonoBehaviour
     protected Image GetImage(int _index) { return Get<Image>(_index); }
     protected Toggle GetToggle(int _index) { return Get<Toggle>(_index); }
     protected Slider GetSlider(int _index) { return Get<Slider>(_index); }
+    protected TMP_InputField GetInputField(int _index) { return Get<TMP_InputField>(_index); }
 
     public static void BindEvent(GameObject _go, Action _callback = null, Action<PointerEventData> _dracCallback = null, Action<PointerEventData> _dropCallback = null, Define.UIEventType _type = Define.UIEventType.Click)
     {

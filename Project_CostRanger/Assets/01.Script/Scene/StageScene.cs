@@ -6,7 +6,7 @@ using UnityEngine;
 public class StageScene : BaseScene
 {
     public Dictionary<string, Transform> poses;
-    public override void Init(Action _callback = null)
+    public override void Init(Action _callback)
     {
         poses = new Dictionary<string, Transform>();
         string[] names = Enum.GetNames(typeof(Trans));

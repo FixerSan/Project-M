@@ -75,6 +75,11 @@ public class Define
         OnChangeBattleInfo, OnChangeControllerStatus
     }
 
+    public enum LoginEvent
+    {
+        NotExistPlayerData, IncorrectPassward, SuccessLogin
+    }
+
     public enum IntEventType
     {
 
@@ -101,7 +106,7 @@ public class Define
 
     public enum Scene
     {
-        Main, Stage
+        Login, Main, Stage
     }
 
     public enum Buff
