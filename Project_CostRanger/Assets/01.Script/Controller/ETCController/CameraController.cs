@@ -47,6 +47,10 @@ public class CameraController : MonoBehaviour
         else
             Managers.Screen.SetCamera(this);
     }
+    public void SetPosition(Vector2 _vector2)
+    {
+        Trans.position = _vector2;
+    }
 
     public void SetTarget(Transform _target)
     {

@@ -12,14 +12,9 @@ public class ScreenManager
     {
         get
         {
-            if(cameraController == null)
-            {
-                GameObject go = GameObject.Find("Main Camera");
-                if(go == null)
-                    go = Managers.Resource.Instantiate("Main Camera");
-                UnityEngine.Object.DontDestroyOnLoad(go);
-                cameraController = go.GetOrAddComponent<CameraController>();
-            }
+            if (cameraController == null)
+                CreateCamera();
+
             return cameraController;
         }
     }
@@ -29,6 +24,21 @@ public class ScreenManager
     {
         cameraController = _cameraController;
     }
+
+    public void SetCameraPosition(Vector2 _vector2 )
+    {
+        CameraController.SetPosition(_vector2);
+    }
+
+    private void CreateCamera()
+    {
+        GameObject go = GameObject.Find("Main Camera");
+        if (go == null)
+            go = Managers.Resource.Instantiate("Main Camera");
+        UnityEngine.Object.DontDestroyOnLoad(go);
+        cameraController = go.GetOrAddComponent<CameraController>();
+    }
+
     // 카메라 타겟 설정
     public void SetCameraTarget(Transform _target)
     {

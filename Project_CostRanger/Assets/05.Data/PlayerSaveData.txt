@@ -4,13 +4,19 @@
             "ID": "Fixer",
             "passward": "1234",
             "name": "Fixer",
-            "hasRangerUID": "111010"
+            "hasRangerUID": "111010,111020"
         },
         {
             "ID": "Test",
             "passward": "1234",
             "name": "Test",
             "hasRangerUID": "111010"
+        },
+        {
+            "ID": "gangsan",
+            "passward": "123",
+            "name": "gangsan",
+            "hasRangerUID": "111010,111020"
         }
     ]
 }

@@ -97,7 +97,6 @@ public class DataManager
             if (!playerSaveDatas.TryAdd(saveData.playerSaveDatas[i].ID, saveData.playerSaveDatas[i])) Debug.LogError($"{i}번째 플레이어 세이브 데이터가 로드 되지 않았음");
     }
 
-
     //스테이지 데이터 로드
     public void LoadStageData()
     {
@@ -109,9 +108,32 @@ public class DataManager
             stageDatas.Add(datas.hard[i].UID, datas.hard[i]);
     }
 
+    public PlayerData CreatePlayerData(string _ID)
+    {
+        PlayerSaveData saveData = Managers.Data.GetPlayerSaveData(_ID);
+        List<RangerInfoData> hasRangers = new List<RangerInfoData>();
+        string[] rangerUIDs = saveData.hasRangerUID.Split(',');
+
+        if (rangerUIDs[0] != string.Empty)
+        {
+            for (int i = 0; i < rangerUIDs.Length; i++)
+                hasRangers.Add(Managers.Data.GetRangerInfoData(Int32.Parse(rangerUIDs[i])));
+        }
+
+        PlayerData data = new PlayerData(saveData.ID, saveData.name, hasRangers);
+        return data;
+    }
+
+    public void CreatePlayerSaveData(string _ID, string _passward, string _name, string _hasRangerUID)
+    {
+        PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, _hasRangerUID);
+        playerSaveDatas.TryAdd(playerSaveData.ID, playerSaveData);
+    }
+
     //플레이어 데이터 저장
     public void SavePlayerData(PlayerData _playerData)
     {
+        if (_playerData == null) return;
         if(playerSaveDatas.TryGetValue(_playerData.ID, out PlayerSaveData saveDate))
         {
             string hasRangerUIDs = string.Empty;
@@ -129,7 +151,7 @@ public class DataManager
             saveDate.hasRangerUID = hasRangerUIDs;
         }
 
-        PlayerSaveData[] saveDatas = null;
+        PlayerSaveData[] saveDatas = new PlayerSaveData[playerSaveDatas.Count];
         int count = 0;
 
         foreach (var data in playerSaveDatas)
@@ -138,7 +160,7 @@ public class DataManager
             count++;
         }
 
-        PlayerSaveDatas saveData = new PlayerSaveDatas(Managers.Game.DSDS);
+        PlayerSaveDatas saveData = new PlayerSaveDatas(saveDatas);
         
         string saveDataJson = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(PLAYERSAVEDATA_PATH, saveDataJson);

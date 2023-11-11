@@ -17,7 +17,20 @@
   "skillCooltime": 1
  },
  {
-  "UID": 111010
+  "UID": 111010,
+  "name": "Unemployed Knight",
+  "cost": 3,
+  "hp": 180,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 30,
+  "attackSpeed": 1,
+  "attackDistance": 2,
+  "criticalForce": 1.5,
+  "criticalProbability": 4.2,
+  "defenseForce": 10,
+  "moveSpeed": 4,
+  "skillCooltime": 1
  },
  {
   "UID": 111011
@@ -35,7 +48,20 @@
   "UID": 111015
  },
  {
-  "UID": 111020
+  "UID": 111020,
+  "name": "Boring Spearman",
+  "cost": 4,
+  "hp": 140,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 44,
+  "attackSpeed": 1.6,
+  "attackDistance": 7.6,
+  "criticalForce": 1.6,
+  "criticalProbability": 3.8,
+  "defenseForce": 6,
+  "moveSpeed": 6,
+  "skillCooltime": 1
  },
  {
   "UID": 111021
@@ -53,7 +79,20 @@
   "UID": 111025
  },
  {
-  "UID": 111030
+  "UID": 111030,
+  "name": "Dull Axeman",
+  "cost": 7,
+  "hp": 200,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 120,
+  "attackSpeed": 4.2,
+  "attackDistance": 6,
+  "criticalForce": 2,
+  "criticalProbability": 2,
+  "defenseForce": 12,
+  "moveSpeed": 3,
+  "skillCooltime": 1
  },
  {
   "UID": 111031
@@ -71,7 +110,20 @@
   "UID": 111035
  },
  {
-  "UID": 111040
+  "UID": 111040,
+  "name": "Strange Assassin",
+  "cost": 9,
+  "hp": 130,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 60,
+  "attackSpeed": 0.8,
+  "attackDistance": 1.6,
+  "criticalForce": 3,
+  "criticalProbability": 1.2,
+  "defenseForce": 0,
+  "moveSpeed": 9,
+  "skillCooltime": 1
  },
  {
   "UID": 111041
@@ -107,7 +159,20 @@
   "UID": 111055
  },
  {
-  "UID": 112010
+  "UID": 112010,
+  "name": "Goofy Hammeman",
+  "cost": 6,
+  "hp": 210,
+  "attackType1": 1,
+  "attackType2": 2,
+  "attackForce": 85,
+  "attackSpeed": 3.3,
+  "attackDistance": 6.3,
+  "criticalForce": 2,
+  "criticalProbability": 2.2,
+  "defenseForce": 15,
+  "moveSpeed": 3.5,
+  "skillCooltime": 1
  },
  {
   "UID": 112011
@@ -125,7 +190,20 @@
   "UID": 112015
  },
  {
-  "UID": 112020
+  "UID": 112020,
+  "name": "Scared Thug",
+  "cost": 5,
+  "hp": 100,
+  "attackType1": 1,
+  "attackType2": 2,
+  "attackForce": 48,
+  "attackSpeed": 2,
+  "attackDistance": 6.5,
+  "criticalForce": 1.5,
+  "criticalProbability": 6,
+  "defenseForce": 4,
+  "moveSpeed": 3.8,
+  "skillCooltime": 1
  },
  {
   "UID": 112021
@@ -197,7 +275,20 @@
   "UID": 112055
  },
  {
-  "UID": 121010
+  "UID": 121010,
+  "name": "Clumsy Archer",
+  "cost": 10,
+  "hp": 80,
+  "attackType1": 2,
+  "attackType2": 1,
+  "attackForce": 30,
+  "attackSpeed": 3,
+  "attackDistance": 15,
+  "criticalForce": 1.5,
+  "criticalProbability": 3,
+  "defenseForce": 6,
+  "moveSpeed": 6,
+  "skillCooltime": 1
  },
  {
   "UID": 121011
@@ -215,7 +306,20 @@
   "UID": 121015
  },
  {
-  "UID": 121020
+  "UID": 121020,
+  "name": "Lenient Ninja",
+  "cost": 8,
+  "hp": 110,
+  "attackType1": 2,
+  "attackType2": 1,
+  "attackForce": 20,
+  "attackSpeed": 1.1,
+  "attackDistance": 11,
+  "criticalForce": 1.2,
+  "criticalProbability": 15,
+  "defenseForce": 3,
+  "moveSpeed": 11,
+  "skillCooltime": 1
  },
  {
   "UID": 121021
@@ -287,7 +391,20 @@
   "UID": 121055
  },
  {
-  "UID": 122010
+  "UID": 122010,
+  "name": "Fiery Archer",
+  "cost": 12,
+  "hp": 68,
+  "attackType1": 2,
+  "attackType2": 2,
+  "attackForce": 52,
+  "attackSpeed": 4.5,
+  "attackDistance": 15,
+  "criticalForce": 1.5,
+  "criticalProbability": 3,
+  "defenseForce": 4,
+  "moveSpeed": 7,
+  "skillCooltime": 1
  },
  {
   "UID": 122011

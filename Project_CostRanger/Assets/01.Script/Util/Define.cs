@@ -80,6 +80,11 @@ public class Define
         NotExistPlayerData, IncorrectPassward, SuccessLogin
     }
 
+    public enum SignUpEvent
+    {
+        IDisNull, PasswardIsNull, ExistSameID, ExistSameNickName, PasswardNotSame, SuccessSignUp
+    }
+
     public enum IntEventType
     {
 

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ public class GameManager : Singleton<GameManager>
         {
             Managers.Data.LoadPreData(() =>
             {
+                Managers.Screen.SetCameraPosition(Vector2.zero);
                 Managers.Scene.LoadScene(Define.Scene.Login);
             });
         });
@@ -56,6 +58,13 @@ public class GameManager : Singleton<GameManager>
         loginSystem.Login(_ID, _passward, _callback);
     }
 
+    public void SignUp(string _ID, string _name, string _passward, string _passwardReCheck, Action<SignUpEvent> _callback)
+    {
+        if (loginSystem == null)
+            loginSystem = new LoginSystem();
+        loginSystem.SignUp(_ID, _name, _passward, _passwardReCheck, _callback);
+    }
+
     private void Update()
     {
         if (battleInfo != null)
@@ -66,6 +75,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (pause)
             SaveGame();
+    }
+
+    public void OnApplicationQuit()
+    {
+        SaveGame();
     }
 }
 
@@ -720,6 +734,38 @@ public class LoginSystem
             return;
         }
 
+        Managers.Game.playerData = Managers.Data.CreatePlayerData(_ID);
         _callback?.Invoke(LoginEvent.SuccessLogin);
+    }
+
+    public void SignUp(string _ID, string _name, string _passward, string _passwardReCheck, Action<SignUpEvent> _callback)
+    {
+        PlayerSaveData saveData = Managers.Data.GetPlayerSaveData(_ID);
+        if(_ID == string.Empty)
+        {
+            _callback.Invoke(SignUpEvent.IDisNull);
+            return;
+        }
+
+        if (_passward == string.Empty)
+        {
+            _callback.Invoke(SignUpEvent.PasswardIsNull);
+            return;
+        }
+
+        if (saveData != null)
+        {
+            _callback?.Invoke(SignUpEvent.ExistSameID);
+            return;
+        }
+
+        if(_passward != _passwardReCheck)
+        {
+            _callback?.Invoke(SignUpEvent.PasswardNotSame);
+            return;
+        }
+
+        Managers.Data.CreatePlayerSaveData(_ID, _passward, _name, string.Empty);
+        _callback?.Invoke(SignUpEvent.SuccessSignUp);
     }
 }
