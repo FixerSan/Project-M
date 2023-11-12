@@ -1,22 +1,16 @@
 {
     "playerSaveDatas": [
         {
-            "ID": "Fixer",
+            "ID": "Fixer1302",
             "passward": "1234",
             "name": "Fixer",
-            "hasRangerUID": "111010,111020"
+            "hasRangerUID": ""
         },
         {
-            "ID": "Test",
-            "passward": "1234",
-            "name": "Test",
-            "hasRangerUID": "111010"
-        },
-        {
-            "ID": "gangsan",
+            "ID": "GangSan1302",
             "passward": "123",
-            "name": "gangsan",
-            "hasRangerUID": "111010,111020"
+            "name": "GangSan",
+            "hasRangerUID": ""
         }
     ]
 }

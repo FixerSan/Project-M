@@ -90,6 +90,7 @@ public class DataManager
     private void LoadPlayerSaveData()
     {
         TextAsset textAsset = Managers.Resource.Load<TextAsset>("PlayerSaveData");
+        if (textAsset == null) return;
         PlayerSaveDatas saveData = JsonUtility.FromJson<PlayerSaveDatas>(textAsset.text);
 
         if (saveData.playerSaveDatas == null) return;

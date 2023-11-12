@@ -27,13 +27,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: a3152f8e0c4cb2d409707b8adec0be86
+    m_Address: Main Camera.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   - m_GUID: de626d1b0edda7640bac0ff7184cdb3e
     m_Address: PlayerSaveData.Data
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: a3152f8e0c4cb2d409707b8adec0be86
-    m_Address: Main Camera.prefab
+  - m_GUID: c76f76624f1d3b4419d12b94d3049ccf
+    m_Address: UIScene_Login.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: b54501a5d9e697f4f8566abc0b3b06df
+    m_Address: UIPopup_SignUp.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload

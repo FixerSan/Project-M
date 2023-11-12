@@ -7,7 +7,7 @@ public class LoginScene : BaseScene
 {
     public override void Init(Action _callback)
     {
-        Debug.Log("·Î±×ÀÎ ¾À ·ÎµåµÊ");
+        Managers.UI.ShowSceneUI<UIScene_Login>();
         _callback?.Invoke();
     }
 
