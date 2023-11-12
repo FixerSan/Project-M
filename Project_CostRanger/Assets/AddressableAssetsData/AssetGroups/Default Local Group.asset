@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 6877fb649746c674d8fbbcf60d41892b
-    m_Address: TestRanger.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
   - m_GUID: a3152f8e0c4cb2d409707b8adec0be86
     m_Address: Main Camera.prefab
     m_ReadOnly: 0
@@ -44,6 +39,11 @@ MonoBehaviour:
     - Preload
   - m_GUID: b54501a5d9e697f4f8566abc0b3b06df
     m_Address: UIPopup_SignUp.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 063d9be49bf7b7e4c896552cd7896133
+    m_Address: UIPopup_PrepareStage.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
