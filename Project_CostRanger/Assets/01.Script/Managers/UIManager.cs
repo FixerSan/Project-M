@@ -109,6 +109,38 @@ public class UIManager
         }
     }
 
+    public void SetCanvas_ScreenSpaceCamera(GameObject _go, bool _sort = true, int _sortOrder = 0, bool _isToast = false)
+    {
+        GameObject go = GameObject.Find("EventSystem");
+        if (go == null) SetEventSystem();
+        Canvas canvas = _go.GetOrAddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = Managers.Screen.CameraController.Camera;
+        canvas.overrideSorting = true;
+
+        CanvasScaler cs = _go.GetOrAddComponent<CanvasScaler>();
+        cs.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        cs.referenceResolution = new Vector2(1920, 1080);
+
+        _go.GetOrAddComponent<GraphicRaycaster>();
+
+        if (_sort)
+        {
+            canvas.sortingOrder = order;
+            order++;
+        }
+        else
+        {
+            canvas.sortingOrder = _sortOrder;
+        }
+        if (_isToast)
+        {
+            toastOrder++;
+            canvas.sortingOrder = toastOrder;
+        }
+    }
+
+
     public UIPopup_WorldText MakeWorldText(string _description, Vector2 _position, Define.TextType _type)
     {
         if (string.IsNullOrEmpty(_description))
@@ -129,7 +161,7 @@ public class UIManager
         }
 
         GameObject go = Managers.Resource.Instantiate($"{_name}");
-
+        
         T _sceneUI = go.GetOrAddComponent<T>();
         sceneUI = _sceneUI;
 
@@ -153,6 +185,7 @@ public class UIManager
         go.transform.SetParent(Root.transform);
         return popup;
     }
+
 
     // 팝업 삭제체크
     public void ClosePopupUI(UIPopup _popup)
