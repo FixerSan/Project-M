@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class DataManager
 {
@@ -194,6 +195,9 @@ public class DataManager
             if (!enemyControllerDatas.TryAdd(enemyDatas.controllersData[i].UID, enemyDatas.controllersData[i]))
                 Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
     }
+
+    public void CreateStageData()
+    { }
 
     public DataManager()
     {
@@ -388,4 +392,28 @@ public class EnemyControllerData : Data
     public float hp;                    //체력
     public float moveSpeed;             //이동속도
     public float skillCooltime;         //스킬 쿨타임
+}
+
+public class StageData : Data
+{
+    public int UID;
+    public string stageName;
+    public int oneStarReward;
+    public int twoStarReward;
+    public int threeStarReward;
+    public int clearReward;
+    public int canUseCost;
+    public string enemyUIDs; 
+
+    public StageData(int _UID, string _stageName, int _oneStarReward, int _twoStarReward, int _threeStarReward, int _clearReward, int _canUseCost, string _enemyUIDs)
+    {
+        UID = _UID;
+        stageName = _stageName;
+        oneStarReward = _oneStarReward;
+        twoStarReward = _twoStarReward;
+        threeStarReward = _threeStarReward;
+        clearReward = _clearReward;
+        canUseCost = _canUseCost;
+        enemyUIDs = _enemyUIDs;
+    }
 }

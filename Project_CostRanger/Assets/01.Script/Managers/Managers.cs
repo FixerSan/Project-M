@@ -18,6 +18,7 @@ public class Managers : Singleton<Managers>
     private ScreenManager screen;
     private SceneManager scene;
     private BattleManager battle;
+    private StageManager stage;
 
     // 각각의 매니저들에 대한 public 프로퍼티를 추가
     public static ResourceManager Resource { get { return Instance?.resource; } }
@@ -32,7 +33,7 @@ public class Managers : Singleton<Managers>
     public static SceneManager Scene { get { return Instance?.scene; } }
     public static BattleManager Battle { get { return Instance?.battle; } }
 
-
+    public static StageManager Stage { get { return Instance?.stage; } }
 
     public static GameManager Game { get { return Instance?.game; } }
     public static CoroutineManager Routine { get { return Instance.routine; } }
@@ -73,8 +74,9 @@ public class Managers : Singleton<Managers>
         screen = new ScreenManager();
         scene = new SceneManager();
         battle = new BattleManager();
+        stage = new StageManager();
 
-        game = GameManager.Instance;
         routine = CoroutineManager.Instance;
+        game = GameManager.Instance;
     }
 }

@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
             Managers.Data.LoadPreData(() =>
             {
                 Managers.Screen.SetCameraPosition(Vector2.zero);
-                Managers.Scene.LoadScene(Define.Scene.Login);
+                //Managers.Scene.LoadScene(Define.Scene.Login);
             });
         });
     }
@@ -301,46 +301,46 @@ public class BattleInfo
     /// <param name="_UID">스테이지 데이터 인덱스</param>
     public void SetStageData(int _UID)
     {
-        currentStage = Managers.Data.GetStageData(_UID);
+        //currentStage = Managers.Data.GetStageData(_UID);
 
-        nowEnemyCount = 0;
-        enemyAttackForce = 0;
-        enemyMaxHP = 0;
-        enemybattleForce = 0;
-        time = 60;
+        //nowEnemyCount = 0;
+        //enemyAttackForce = 0;
+        //enemyMaxHP = 0;
+        //enemybattleForce = 0;
+        //time = 60;
 
-        enemyFront = new BattleEntityData[3];
+        //enemyFront = new BattleEntityData[3];
 
-        for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
-        {
-            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.frontEnemyUIDs[i], currentStage.frontEnemyLevels[i]);
-            enemyFront[i] = data;
-            nowEnemyCount++;
-            enemyAttackForce += data.attackForce;
-            enemyMaxHP += data.maxHP;
-        }
+        //for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
+        //{
+        //    BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.frontEnemyUIDs[i], currentStage.frontEnemyLevels[i]);
+        //    enemyFront[i] = data;
+        //    nowEnemyCount++;
+        //    enemyAttackForce += data.attackForce;
+        //    enemyMaxHP += data.maxHP;
+        //}
 
-        enemyCenter = new BattleEntityData[3];
-        for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
-        {
-            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.centerEnemyUIDs[i], currentStage.centerEnemyLevels[i]);
-            enemyCenter[i] = data;
-            nowEnemyCount++;
-            enemyAttackForce += data.attackForce;
-            enemyMaxHP += data.maxHP;
-        }
+        //enemyCenter = new BattleEntityData[3];
+        //for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
+        //{
+        //    BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.centerEnemyUIDs[i], currentStage.centerEnemyLevels[i]);
+        //    enemyCenter[i] = data;
+        //    nowEnemyCount++;
+        //    enemyAttackForce += data.attackForce;
+        //    enemyMaxHP += data.maxHP;
+        //}
 
-        enemyRear = new BattleEntityData[3];
-        for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
-        {
-            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.rearEnemyUIDs[i], currentStage.rearEnemyLevels[i]);
-            enemyRear[i] = data;
-            nowEnemyCount++;
-            enemyAttackForce += data.attackForce;
-            enemyMaxHP += data.maxHP;
-        }
+        //enemyRear = new BattleEntityData[3];
+        //for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
+        //{
+        //    BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.rearEnemyUIDs[i], currentStage.rearEnemyLevels[i]);
+        //    enemyRear[i] = data;
+        //    nowEnemyCount++;
+        //    enemyAttackForce += data.attackForce;
+        //    enemyMaxHP += data.maxHP;
+        //}
 
-        enemybattleForce = enemyMaxHP + enemyAttackForce;
+        //enemybattleForce = enemyMaxHP + enemyAttackForce;
     }
 
     //스테이지가 시작됄 시 초기화
@@ -648,14 +648,14 @@ public class BattleStageSystem
 
     public void SetEnemy()
     {
-        for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
-            frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
+        //for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
+        //    frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
 
-        for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
-            centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
+        //for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
+        //    centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
 
-        for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
-            rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
+        //for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
+        //    rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
     }
 
     public void StartStage()
