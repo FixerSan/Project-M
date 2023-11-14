@@ -72,7 +72,7 @@ public class UIPopup_BattleBefore : UIPopup
 
     public void OnChangeBattleInfo(Define.VoidEventType _type)
     {
-        if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
+        if (_type != Define.VoidEventType.OnChangePrepare) return;
 
         GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseCost} / {Managers.Game.battleInfo.canUseCost}";
         GetText((int)Texts.Text_ArmyBattleForce).text = $"{Managers.Game.battleInfo.armybattleForce}";

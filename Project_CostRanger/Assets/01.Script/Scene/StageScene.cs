@@ -254,7 +254,7 @@ public class StageScene : BaseScene
 
     public void CheckEndStage(Define.VoidEventType _type)
     {
-        if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
+        if (_type != Define.VoidEventType.OnChangePrepare) return;
         if (Managers.Game.state != Define.GameState.BattleProgress) return;
 
         if (Managers.Game.battleInfo.armyCurrentHP == 0)

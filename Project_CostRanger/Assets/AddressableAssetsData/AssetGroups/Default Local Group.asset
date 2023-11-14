@@ -47,6 +47,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: a6baf832f99a1aa498cbf3ad34911338
+    m_Address: UIScene_CreateStage.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: cf4cdd77cb51e044aabdf3df32064647
+    m_Address: UIScene_Main.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 05df236f571402449a32a9dbc99ef7b4
+    m_Address: UIPopup_WorldMap_ChapterOne.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:

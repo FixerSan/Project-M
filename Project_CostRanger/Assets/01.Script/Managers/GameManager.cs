@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     //현재 게임 데이터 및 상태
     public GameState state;
     public LoginSystem loginSystem;
+    public PrepareStageSystem prepareStageSystem;
     public BattleStageSystem battleStageSystem;
     public BattleInfo battleInfo;
     public PlayerData playerData;
@@ -30,7 +31,7 @@ public class GameManager : Singleton<GameManager>
             Managers.Data.LoadPreData(() =>
             {
                 Managers.Screen.SetCameraPosition(Vector2.zero);
-                //Managers.Scene.LoadScene(Define.Scene.Login);
+                Managers.Scene.LoadScene(Define.Scene.Login);
             });
         });
     }
@@ -41,9 +42,21 @@ public class GameManager : Singleton<GameManager>
         Managers.Data.SavePlayerData(Managers.Game.playerData);
     }
 
-    public void StartBattleStage(int _UID)
+    public void StartBattleStage()
     {
-        battleInfo = new BattleInfo(Managers.Data.GetStageData(_UID));
+        //battleInfo = new BattleInfo(Managers.Data.GetStageData(_UID));
+        if (battleStageSystem == null)
+            battleStageSystem = new BattleStageSystem();
+
+        battleStageSystem.Init();
+    }
+
+    public void StartPrepare(int _stageUID)
+    {
+        if (prepareStageSystem == null)
+            prepareStageSystem = new PrepareStageSystem();
+
+        prepareStageSystem.Init(Managers.Data.GetStageData(_stageUID));
     }
 
     public void EndBattleStage()
@@ -55,6 +68,7 @@ public class GameManager : Singleton<GameManager>
     {
         if(loginSystem == null)
             loginSystem = new LoginSystem();
+
         loginSystem.Login(_ID, _passward, _callback);
     }
 
@@ -83,8 +97,199 @@ public class GameManager : Singleton<GameManager>
     }
 }
 
+public class LoginSystem
+{
+    public void Login(string _ID, string _passward, Action<LoginEvent> _callback)
+    {
+        PlayerSaveData playerData = Managers.Data.GetPlayerSaveData(_ID);
+        if(playerData == null)
+        {
+            _callback?.Invoke(LoginEvent.NotExistPlayerData);
+            return;
+        }    
+
+        if(playerData.passward != _passward)
+        {
+            _callback.Invoke(LoginEvent.IncorrectPassward);
+            return;
+        }
+
+        Managers.Game.playerData = Managers.Data.CreatePlayerData(_ID);
+        _callback?.Invoke(LoginEvent.SuccessLogin);
+    }
+
+    public void SignUp(string _ID, string _name, string _passward, string _passwardReCheck, Action<SignUpEvent> _callback)
+    {
+        PlayerSaveData saveData = Managers.Data.GetPlayerSaveData(_ID);
+        if(_ID == string.Empty)
+        {
+            _callback.Invoke(SignUpEvent.IDisNull);
+            return;
+        }
+
+        if (_passward == string.Empty)
+        {
+            _callback.Invoke(SignUpEvent.PasswardIsNull);
+            return;
+        }
+
+        if (saveData != null)
+        {
+            _callback?.Invoke(SignUpEvent.ExistSameID);
+            return;
+        }
+
+        if(_passward != _passwardReCheck)
+        {
+            _callback?.Invoke(SignUpEvent.PasswardNotSame);
+            return;
+        }
+
+        Managers.Data.CreatePlayerSaveData(_ID, _passward, _name, string.Empty);
+        _callback?.Invoke(SignUpEvent.SuccessSignUp);
+    }
+}
+public class PrepareStageSystem
+{
+    public RangerControllerData[] rangers;
+    public Batch batch;
+
+    //초기 설정
+    public void Init(StageData _stageData)
+    {
+        //저장된 레인저 프리셋 설정
+        SetupCanUseRanger(); //저장된 레인저 프리셋으로 인 해 사용되는 레인저를 제외한 
+        SetupEnemy();
+
+        UpdataUI();
+    }
+
+    //저장된 레인저 프리셋안에 들어가 있는 레인저를 제외한 나머지 레인저들의 카드를 생성
+    public void SetupCanUseRanger()
+    {
+
+    }
+
+    //적 정보 대로 생성
+    public void SetupEnemy()
+    {
+
+    }
+
+    public void UpdataUI()
+    {
+        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangePrepare);
+    }
+
+    public PrepareStageSystem()
+    {
+        rangers = new RangerControllerData[6];
+    }
+}
+public class BattleStageSystem
+{
+    //현재 진행중인 스테이지중 플레이어의 상태
+    public int canUseCost;
+    public int nowUseCost;
+    public int armyCurrentHP;
+    public int armyMaxHP;
+    public int armyAttackForce;
+    public int armybattleForce;
+    public int allDamage;
+
+    //데미지의 맞춰 정렬된 플레이어 엔티티들
+    public List<RangerController> battleMVPPoints;
+
+    //현재 진행중인 스테이지중 적의 상태
+    public int nowEnemyCount;
+    public int enemyCurrentHP;
+    public int enemyMaxHP;
+    public int enemyAttackForce;
+    public int enemybattleForce;
+
+    //게임 진행 설정 및 정보
+    public bool isAutoSkill;
+    public bool isFastSpeed;
+    public float time;
 
 
+    public void Init()
+    {
+        //여기서 프리페어 시스템 정보를 적용시킬 것임
+        nowUseCost = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        allDamage = 0;
+
+        battleMVPPoints.Clear();
+
+        nowEnemyCount = 0;
+        enemyCurrentHP = 0;
+        enemyMaxHP = 0;
+        enemyAttackForce = 0;
+        enemybattleForce = 0;
+
+        time = 0;
+        SetEnemy();
+    }
+
+    public void SetEnemy()
+    {
+        //for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
+        //    frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
+
+        //for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
+        //    centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
+
+        //for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
+        //    rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
+    }
+
+    public void StartStage()
+    {
+
+    }
+
+    public void Victory()
+    {
+
+    }
+
+    public void Lose()
+    {
+
+    }
+
+    public BattleStageSystem()
+    {
+        //현재 진행중인 스테이지중 플레이어의 상태
+        nowUseCost = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        allDamage = 0;
+
+        //데미지의 맞춰 정렬된 플레이어 엔티티들
+        battleMVPPoints = new List<RangerController>();
+
+        //현재 진행중인 스테이지중 적의 상태
+        nowEnemyCount = 0;
+        enemyCurrentHP = 0;
+        enemyMaxHP = 0;
+        enemyAttackForce = 0;
+        enemybattleForce = 0;
+
+        //게임 진행 설정 및 정보
+        isAutoSkill = false;
+        isFastSpeed = false;
+        time = 0;
+    }
+}
+
+//과거에 쓰던 전체 시스템
 [System.Serializable]
 public class BattleInfo
 {
@@ -425,7 +630,6 @@ public class BattleInfo
     //UI 업데이트 이벤트 호출
     public void UpdateUI()
     {
-        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
     }
 
     //스테이지가 진행중일 때 시간 감소 처리 및 상태 변경
@@ -602,170 +806,5 @@ public class BattleInfo
 
         Managers.Event.OnVoidEvent -= UpdateTeamHP;
         Managers.Event.OnVoidEvent += UpdateTeamHP;
-    }
-}
-
-public class BattleStageSystem
-{
-    //현재 진행중인 스테이지 데이터
-    public StageData currentStage;
-    public int clearStar;
-
-    //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
-    public RangerControllerData[] armyFront;
-    public RangerControllerData[] armyCenter;
-    public RangerControllerData[] armyRear;
-
-    //현재 진행중인 스테이지중 플레이어의 상태
-    public int canUseCost;
-    public int nowUseCost;
-    public int armyCurrentHP;
-    public int armyMaxHP;
-    public int armyAttackForce;
-    public int armybattleForce;
-    public int allDamage;
-
-    //데미지의 맞춰 정렬된 플레이어 엔티티들
-    public List<BattleEntityController> battleMVPPoints;
-
-    //현재 진행중인 스테이지의 배치된 적 entity  및 위치
-    public EnemyControllerData[] frontEnemy;
-    public EnemyControllerData[] centerEnemy;
-    public EnemyControllerData[] rearEnemy;
-
-    //현재 진행중인 스테이지중 적의 상태
-    public int nowEnemyCount;
-    public int enemyCurrentHP;
-    public int enemyMaxHP;
-    public int enemyAttackForce;
-    public int enemybattleForce;
-
-    //게임 진행 설정 및 정보
-    public bool isAutoSkill;
-    public bool isFastSpeed;
-    public float time;
-
-
-    public void SetEnemy()
-    {
-        //for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
-        //    frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
-
-        //for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
-        //    centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
-
-        //for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
-        //    rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
-    }
-
-    public void StartStage()
-    {
-
-    }
-
-    public void Victory()
-    {
-
-    }
-
-    public void Lose()
-    {
-
-    }
-
-    public BattleStageSystem(StageData _stageData)
-    {
-        //현재 진행중인 스테이지 데이터
-        currentStage = _stageData;
-        clearStar = 0;
-
-        //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
-        armyRear = new RangerControllerData[3];
-        armyCenter = new RangerControllerData[3];
-        armyFront = new RangerControllerData[3];
-
-        //현재 진행중인 스테이지중 플레이어의 상태
-        canUseCost = _stageData.canUseCost;
-        nowUseCost = 0;
-        armyCurrentHP = 0;
-        armyMaxHP = 0;
-        armyAttackForce = 0;
-        armybattleForce = 0;
-        allDamage = 0;
-
-        //데미지의 맞춰 정렬된 플레이어 엔티티들
-        battleMVPPoints = new List<BattleEntityController>();
-
-        //현재 진행중인 스테이지의 배치된 적 entity  및 위치
-        frontEnemy = new EnemyControllerData[3];
-        centerEnemy = new EnemyControllerData[3];
-        rearEnemy = new EnemyControllerData[3];
-
-        //현재 진행중인 스테이지중 적의 상태
-        nowEnemyCount = 0;
-        enemyCurrentHP = 0;
-        enemyMaxHP = 0;
-        enemyAttackForce = 0;
-        enemybattleForce = 0;
-
-        //게임 진행 설정 및 정보
-        isAutoSkill = false;
-        isFastSpeed = false;
-        time = 0;
-
-        SetEnemy();
-    }
-}
-
-public class LoginSystem
-{
-    public void Login(string _ID, string _passward, Action<LoginEvent> _callback)
-    {
-        PlayerSaveData playerData = Managers.Data.GetPlayerSaveData(_ID);
-        if(playerData == null)
-        {
-            _callback?.Invoke(LoginEvent.NotExistPlayerData);
-            return;
-        }    
-
-        if(playerData.passward != _passward)
-        {
-            _callback.Invoke(LoginEvent.IncorrectPassward);
-            return;
-        }
-
-        Managers.Game.playerData = Managers.Data.CreatePlayerData(_ID);
-        _callback?.Invoke(LoginEvent.SuccessLogin);
-    }
-
-    public void SignUp(string _ID, string _name, string _passward, string _passwardReCheck, Action<SignUpEvent> _callback)
-    {
-        PlayerSaveData saveData = Managers.Data.GetPlayerSaveData(_ID);
-        if(_ID == string.Empty)
-        {
-            _callback.Invoke(SignUpEvent.IDisNull);
-            return;
-        }
-
-        if (_passward == string.Empty)
-        {
-            _callback.Invoke(SignUpEvent.PasswardIsNull);
-            return;
-        }
-
-        if (saveData != null)
-        {
-            _callback?.Invoke(SignUpEvent.ExistSameID);
-            return;
-        }
-
-        if(_passward != _passwardReCheck)
-        {
-            _callback?.Invoke(SignUpEvent.PasswardNotSame);
-            return;
-        }
-
-        Managers.Data.CreatePlayerSaveData(_ID, _passward, _name, string.Empty);
-        _callback?.Invoke(SignUpEvent.SuccessSignUp);
     }
 }

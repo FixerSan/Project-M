@@ -49,7 +49,7 @@ public class UIScene_Stage : UIScene
 
     public void UpdateUI(Define.VoidEventType _type)
     {
-        if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
+        if (_type != Define.VoidEventType.OnChangePrepare) return;
 
         GetImage((int)Images.Image_ArmyHP).fillAmount = (float)Managers.Game.battleInfo.armyCurrentHP / Managers.Game.battleInfo.armyMaxHP;
         GetImage((int)Images.Image_EnemyHP).fillAmount = (float)Managers.Game.battleInfo.enemyCurrentHP / Managers.Game.battleInfo.enemyMaxHP;

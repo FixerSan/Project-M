@@ -72,7 +72,7 @@ public class Define
 
     public enum VoidEventType
     {
-        OnChangeBattleInfo, OnChangeControllerStatus
+        OnChangePrepare, OnChangeControllerStatus
     }
 
     public enum LoginEvent
@@ -127,5 +127,10 @@ public class Define
     public enum PlaceType
     {
         Front, Center, Rear
+    }
+
+    public enum Batch
+    {
+        One, Two
     }
 }

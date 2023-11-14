@@ -10,7 +10,7 @@ public class UIScene_Main : UIScene
             return false;
 
         BindButton(typeof(Buttons));
-        BindEvent(GetButton((int)Buttons.Button_Stage).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_WorldMap_ChapterOne>(); });
+        BindEvent(GetButton((int)Buttons.Button_Battle).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_WorldMap_ChapterOne>(); });
 
 
         return true;
@@ -18,6 +18,6 @@ public class UIScene_Main : UIScene
 
     private enum Buttons
     {
-        Button_Stage
+        Button_Battle
     }
 }
