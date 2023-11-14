@@ -168,4 +168,31 @@ public abstract class ControllerStatus
             currentSkillCooltime = value;
         }
     }
+
+    protected float checkAttackCooltime;
+    public float CheckAttackCooltime 
+    {
+        get
+        {
+            return checkAttackCooltime;
+        }
+
+        set
+        {
+            checkAttackCooltime = value;
+        }
+    }
+    protected float checkSkillCooltime;
+    public float CheckSkillCooltime
+    {
+        get
+        {
+            return checkSkillCooltime;
+        }
+
+        set
+        {
+            checkSkillCooltime = value;
+        }
+    }
 }

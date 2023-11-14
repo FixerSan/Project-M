@@ -10,8 +10,8 @@ public class RangerController : BaseController
     public RangerControllerData data;
 
     //Ranger State
-    public RangerState State;   //외부에서 스테이트를 조작하기 위해 만든 프로퍼티 같은 느낌
-    private RangerState state;
+    public RangerState setState;   //외부에서 스테이트를 조작하기 위해 만든 프로퍼티 같은 느낌
+    public RangerState currentState;
     public Dictionary<RangerState, State<RangerController>> states;
     public StateMachine<RangerController> stateMachine;
     public bool isDead;
@@ -20,6 +20,7 @@ public class RangerController : BaseController
     //Ranger ETC
     public Rigidbody2D rb;
     public Dictionary<string, Coroutine> routines;
+    public EnemyController attackTarget;
 
     public void Init(Ranger _ranger, RangerControllerData _data, RangerStatus _status, Dictionary<RangerState, State<RangerController>> _states)
     {
@@ -39,14 +40,14 @@ public class RangerController : BaseController
     public void ChangeState(RangerState _nextState, bool _isChangeSameState = false)
     {
         if (!isInit) return;
-        if (state == _nextState)
+        if (currentState == _nextState)
         {
             if (_isChangeSameState)
                 stateMachine.ChangeState(states[_nextState]);
             return;
         }
-        state = _nextState;
-        State = _nextState;
+        currentState = _nextState;
+        setState = _nextState;
         stateMachine.ChangeState(states[_nextState]);
     }
 
@@ -59,8 +60,8 @@ public class RangerController : BaseController
 
     private void CheckChangeState()
     {
-        if (state != State)
-            ChangeState(State);
+        if (currentState != setState)
+            ChangeState(setState);
     }
 
     public override void Hit(float _damage)
@@ -71,6 +72,11 @@ public class RangerController : BaseController
     public override void GetDamage(float _damage)
     {
 
+    }
+
+    public void SetAttackTarget(EnemyController _attackTarget)
+    {
+        attackTarget = _attackTarget;
     }
 }
 
@@ -114,5 +120,9 @@ public class RangerStatus : ControllerStatus
         //스킬 쿨타임
         defaultSkillCooltime = _data.skillCooltime;
         currentSkillCooltime = _data.skillCooltime;
+
+        //각 계산 시간
+        checkAttackCooltime = 0;
+        checkSkillCooltime = _data.skillCooltime;
     }
 }
