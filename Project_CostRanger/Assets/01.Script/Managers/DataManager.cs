@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using static Define;
 
 public class DataManager
 {
@@ -16,7 +17,8 @@ public class DataManager
     public Dictionary<int, DialogData> dialogDatas;
     public Dictionary<int, StageData> stageDatas;
     
-    public readonly string PLAYERSAVEDATA_PATH;
+    public readonly string PLAYERSAVEDATAPATH;
+    public readonly string STAGEDATAPATH;
 
 
     public PlayerSaveData GetPlayerSaveData(string _ID)
@@ -82,12 +84,13 @@ public class DataManager
     {
         //GetPlayerData(Define.userUID);
         //LoadBattleEntityStatusData();
-        //LoadStageData();
+        LoadStageData();
         LoadRangerData();
         LoadPlayerSaveData();
         _callback?.Invoke();
     }
 
+    //플레이어 개인 설정 데이터 로드
     private void LoadPlayerSaveData()
     {
         TextAsset textAsset = Managers.Resource.Load<TextAsset>("PlayerSaveData");
@@ -102,30 +105,33 @@ public class DataManager
     //스테이지 데이터 로드
     public void LoadStageData()
     {
-        StageDatas datas = Managers.Resource.Load<StageDatas>("OneChapterStageData.Data");
-        for (int i = 0; i < datas.normal.Length; i++)
-            stageDatas.Add(datas.normal[i].UID, datas.normal[i]);
+        StageDatas datas = JsonUtility.FromJson<StageDatas>(Managers.Resource.Load<TextAsset>("StageData").text);
 
-        for (int i = 0; i < datas.hard.Length; i++)
-            stageDatas.Add(datas.hard[i].UID, datas.hard[i]);
+        for (int i = 0; i < datas.stageDatas.Length; i++)
+            stageDatas.Add(datas.stageDatas[i].UID, datas.stageDatas[i]);
     }
 
+    //플레이어 세이브 데이터를 플레이어 데이터로 형변환 후 반환
     public PlayerData CreatePlayerData(string _ID)
     {
+        //플레이어 세이브 데이터를 Get
         PlayerSaveData saveData = Managers.Data.GetPlayerSaveData(_ID);
         List<RangerInfoData> hasRangers = new List<RangerInfoData>();
         string[] rangerUIDs = saveData.hasRangerUID.Split(',');
 
+        //플레이어 세이브 데이터의 들어있는 레인저 UID를 통해서 레인저 인포 데이터 Get
         if (rangerUIDs[0] != string.Empty)
         {
             for (int i = 0; i < rangerUIDs.Length; i++)
                 hasRangers.Add(Managers.Data.GetRangerInfoData(Int32.Parse(rangerUIDs[i])));
         }
 
+        //플레이어 데이터 생성 후 리턴
         PlayerData data = new PlayerData(saveData.ID, saveData.name, hasRangers);
         return data;
     }
 
+    //플레이에 세이브 데이터 생성
     public void CreatePlayerSaveData(string _ID, string _passward, string _name, string _hasRangerUID)
     {
         PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, _hasRangerUID);
@@ -135,9 +141,13 @@ public class DataManager
     //플레이어 데이터 저장
     public void SavePlayerData(PlayerData _playerData)
     {
+        //플레이어 데이터가 들어오지 않았으면 리턴
         if (_playerData == null) return;
+
+        //처음 플레이한 플레이어가 아닐 경우
         if(playerSaveDatas.TryGetValue(_playerData.ID, out PlayerSaveData saveDate))
         {
+            //기존 데이터에 바뀐 데이터를 업데이트
             string hasRangerUIDs = string.Empty;
             for (int i = 0; i < _playerData.hasEntites.Count; i++)
             {
@@ -148,56 +158,99 @@ public class DataManager
                 }
                 hasRangerUIDs += (_playerData.hasEntites[i].UID);
             }
-
             saveDate.name = _playerData.name;
             saveDate.hasRangerUID = hasRangerUIDs;
         }
 
+        //데이터를 저장할 배열 재생성
         PlayerSaveData[] saveDatas = new PlayerSaveData[playerSaveDatas.Count];
         int count = 0;
 
+        //배열의 저장
         foreach (var data in playerSaveDatas)
         {
             saveDatas[count] = data.Value;
             count++;
         }
 
+        //저장한 배열로 제이슨 데이터 생성 및 파일 저장
         PlayerSaveDatas saveData = new PlayerSaveDatas(saveDatas);
-        
         string saveDataJson = JsonUtility.ToJson(saveData, true);
-        File.WriteAllText(PLAYERSAVEDATA_PATH, saveDataJson);
+        File.WriteAllText(PLAYERSAVEDATAPATH, saveDataJson);
     }
 
+    //레인저 데이터 로드
     public void LoadRangerData()
     {
+        //데이터가 저장된 텍스트 파일을 데이터로 로드
         TextAsset textAsset = Managers.Resource.Load<TextAsset>("RangerData");
         RangerDatas rangerDatas = JsonUtility.FromJson<RangerDatas>(textAsset.text);
 
+        //인포 데이터를 딕셔너리에 저장
         for (int i = 0; i < rangerDatas.infoDatas.Length; i++)
             if (!rangerInfoDatas.TryAdd(rangerDatas.infoDatas[i].UID, rangerDatas.infoDatas[i]))
                 Debug.LogError($"{i}번째 레인저 인포 데이터 로드에 실패하였습니다. ");
 
+        //컨트롤러 데이터를 딕셔너리에 저장
         for (int i = 0; i < rangerDatas.controllersData.Length; i++)
             if (!rangerControllerDatas.TryAdd(rangerDatas.controllersData[i].UID, rangerDatas.controllersData[i]))
                 Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
     }
 
+    //적 데이터를 로드
     public void LoadEnemyData()
     {
+        //데이터가 저장된 텍스트 파일을 데이터로 로드
         TextAsset textAsset = Managers.Resource.Load<TextAsset>("EnemyData");
         EnemyDatas enemyDatas = JsonUtility.FromJson<EnemyDatas>(textAsset.text);
 
+        //인포 데이터를 딕셔너리에 저장
         for (int i = 0; i < enemyDatas.infoDatas.Length; i++)
             if (!enemyInfoDatas.TryAdd(enemyDatas.infoDatas[i].UID, enemyDatas.infoDatas[i]))
                 Debug.LogError($"{i}번째 레인저 인포 데이터 로드에 실패하였습니다. ");
 
+        //컨트롤러 데이터를 딕셔너리에 저장
         for (int i = 0; i < enemyDatas.controllersData.Length; i++)
             if (!enemyControllerDatas.TryAdd(enemyDatas.controllersData[i].UID, enemyDatas.controllersData[i]))
                 Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
     }
 
-    public void CreateStageData()
-    { }
+    //스테이지 데이터 생성
+    public void CreateStageData(int _stageUID, string _stageName, int _canUseCost,
+                            string _enemyUIDs, Action<CreateStageEvent> _callback)
+    { 
+        //이미 같은 UID가 존재할 때
+        if(stageDatas.ContainsKey(_stageUID))
+        {
+            //존재한다는 메세지 반환 후 리턴
+            _callback?.Invoke(CreateStageEvent.ExistSameUID);
+            return;
+        }
+
+        //스테이지 데이터 생성 및 딕셔너리에 추가
+        StageData stageData = new StageData(_stageUID,_stageName, _canUseCost,_enemyUIDs);
+        stageDatas.Add(_stageUID, stageData);
+
+        //데이터를 저장할 배열 재생성
+        StageData[] saveDatas = new StageData[stageDatas.Count];
+        int count = 0;
+
+        //배열의 저장
+        foreach (var data in stageDatas)
+        {
+            saveDatas[count] = data.Value;
+            count++;
+        }
+
+        //저장한 배열로 제이슨 데이터 생성 및 파일 저장
+        StageDatas saveData = new StageDatas(saveDatas);
+        string saveDataJson = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(STAGEDATAPATH, saveDataJson);
+
+
+        //성공 메세지 반환
+        _callback?.Invoke(CreateStageEvent.SuccessCreate);
+    }
 
     public DataManager()
     {
@@ -209,7 +262,8 @@ public class DataManager
         enemyControllerDatas = new Dictionary<int, EnemyControllerData>();
         enemyInfoDatas = new Dictionary<int, EnemyInfoData>();
         stageDatas = new Dictionary<int, StageData>();
-        PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/05.Data/", "PlayerSaveData.txt");
+        PLAYERSAVEDATAPATH = Path.Combine(Application.dataPath + "/05.Data/", "PlayerSaveData.txt");
+        STAGEDATAPATH = Path.Combine(Application.dataPath + "/05.Data/", "StageData.txt");
     }
 }
 
@@ -394,26 +448,29 @@ public class EnemyControllerData : Data
     public float skillCooltime;         //스킬 쿨타임
 }
 
+[Serializable]
 public class StageData : Data
 {
     public int UID;
     public string stageName;
-    public int oneStarReward;
-    public int twoStarReward;
-    public int threeStarReward;
-    public int clearReward;
     public int canUseCost;
     public string enemyUIDs; 
 
-    public StageData(int _UID, string _stageName, int _oneStarReward, int _twoStarReward, int _threeStarReward, int _clearReward, int _canUseCost, string _enemyUIDs)
+    public StageData(int _UID, string _stageName, int _canUseCost, string _enemyUIDs)
     {
         UID = _UID;
         stageName = _stageName;
-        oneStarReward = _oneStarReward;
-        twoStarReward = _twoStarReward;
-        threeStarReward = _threeStarReward;
-        clearReward = _clearReward;
         canUseCost = _canUseCost;
         enemyUIDs = _enemyUIDs;
+    }
+}
+
+[Serializable]
+public class StageDatas : Data
+{
+    public StageData[] stageDatas;
+    public StageDatas(StageData[] _stageDatas)
+    {
+        stageDatas = _stageDatas;
     }
 }

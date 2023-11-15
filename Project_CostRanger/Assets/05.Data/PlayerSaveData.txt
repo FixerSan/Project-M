@@ -4,7 +4,7 @@
             "ID": "Fixer1302",
             "passward": "1234",
             "name": "Fixer",
-            "hasRangerUID": ""
+            "hasRangerUID": "0"
         },
         {
             "ID": "GangSan1302",

@@ -74,6 +74,10 @@ public class Define
     {
         OnChangePrepare, OnChangeControllerStatus
     }
+    public enum IntEventType
+    {
+
+    }
 
     public enum LoginEvent
     {
@@ -85,9 +89,9 @@ public class Define
         IDisNull, PasswardIsNull, ExistSameID, ExistSameNickName, PasswardNotSame, SuccessSignUp
     }
 
-    public enum IntEventType
+    public enum CreateStageEvent
     {
-
+        NotInputUID, UIDIsNotInt , ExistSameUID , NotInputName, NotInputCanUseCost, CostIsNotInt, SuccessCreate
     }
 
     public enum UIEventType

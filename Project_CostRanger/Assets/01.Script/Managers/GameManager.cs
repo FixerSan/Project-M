@@ -16,7 +16,6 @@ public class GameManager : Singleton<GameManager>
     public BattleInfo battleInfo;
     public PlayerData playerData;
 
-    public PlayerSaveData[] DSDS;
 
     public void Awake()
     {
