@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.Rendering;
+using UnityEditor.Experimental.GraphView;
 
 public class UIManager 
 {
@@ -78,38 +80,7 @@ public class UIManager
         eventSystem = es.GetOrAddComponent<EventSystem>();
     }
 
-    // 캔버스 설정
     public void SetCanvas(GameObject _go, bool _sort = true, int _sortOrder = 0, bool _isToast = false)
-    {
-        GameObject go = GameObject.Find("EventSystem");
-        if(go == null)  SetEventSystem();
-        Canvas canvas = _go.GetOrAddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.overrideSorting = true;
-
-        CanvasScaler cs = _go.GetOrAddComponent<CanvasScaler>();
-        cs.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        cs.referenceResolution = new Vector2(1920, 1080);
-
-        _go.GetOrAddComponent<GraphicRaycaster>();
-
-        if(_sort)
-        {
-            canvas.sortingOrder = order;
-            order++;
-        }
-        else
-        {
-            canvas.sortingOrder = _sortOrder;
-        }
-        if(_isToast)
-        {
-            toastOrder++;
-            canvas.sortingOrder = toastOrder;
-        }
-    }
-
-    public void SetCanvas_ScreenSpaceCamera(GameObject _go, bool _sort = true, int _sortOrder = 0, bool _isToast = false)
     {
         GameObject go = GameObject.Find("EventSystem");
         if (go == null) SetEventSystem();
@@ -258,6 +229,15 @@ public class UIManager
             Managers.Resource.Destroy(toastStack.Dequeue().gameObject);
         }
     }
+
+    public GameObject ShowPrepareEnemy(string _key)
+    {
+        GameObject go = Managers.Resource.Instantiate(_key);
+        go.GetOrAddComponent<SortingGroup>().sortingOrder = order;
+        order++;
+        return go;
+    }
+
 
     // 팝업 카운트 반환
     public int GetPopupCount()

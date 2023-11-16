@@ -7,6 +7,9 @@ public class Define
     public static readonly int currentBattleEntityCount = 6;
     public static readonly int currentBattleEntityMaxLevel = 5;
     public static readonly int userUID = 0;
+    public static readonly Vector2 prepareEnemyOffset = new Vector2(0, -40);
+    public static readonly float attackAnimationTime = 1;
+    public static readonly float skillAnimationTime = 1;
 
     public enum GameState
     {
@@ -28,6 +31,12 @@ public class Define
         EnemyOne = 3,
         EnemyTwo = 4,
         EnemyThree = 5
+    }
+
+    public enum Direction
+    {
+        Left = -1,
+        Right = 1
     }
 
     public enum BattleEntityType
@@ -52,7 +61,7 @@ public class Define
 
     public enum Enemy
     {
-        TestEnemy
+        TestEnemyZero
     }
 
     public enum EnemyState

@@ -10,6 +10,12 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
 
         BindButton(typeof(Buttons));
         BindEvent(GetButton((int)Buttons.Button_Close).gameObject, () => { Managers.UI.ClosePopupUI(this); });
+        BindEvent(GetButton((int)Buttons.Button_StageOne).gameObject, () => 
+        { 
+            Managers.Game.StartPrepare(0);
+            Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
+            Debug.Log("눌리긴 했음");
+        });
 
         return true;
     }

@@ -6,7 +6,7 @@ public class UIPopup_PrepareStage : UIPopup
 {
     public override bool Init()
     {
-        Managers.UI.SetCanvas_ScreenSpaceCamera(gameObject, true);
+        Managers.UI.SetCanvas(gameObject, true);
 
         BindButton(typeof(Buttons));
 

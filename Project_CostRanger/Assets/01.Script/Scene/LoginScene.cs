@@ -8,7 +8,6 @@ public class LoginScene : BaseScene
     public override void Init(Action _callback)
     {
         Managers.UI.ShowSceneUI<UIScene_Login>();
-        Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
         _callback?.Invoke();
     }
 

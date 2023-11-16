@@ -1,0 +1,276 @@
+{
+"controllersData":[
+ {
+  "UID": 0,
+  "name": "TestEnemyZero",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 1,
+  "name": "TestEnemyOne",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 2,
+  "name": "TestEnemyTwo",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 3,
+  "name": "TestEnemyThree",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 4,
+  "name": "TestEnemyFour",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 5,
+  "name": "TestEnemyFive",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 6,
+  "name": "TestEnemySix",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 7,
+  "name": "TestEnemySeven",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 8,
+  "name": "TestEnemyEight",
+  "cost": 1,
+  "hp": 100,
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5
+ },
+ {
+  "UID": 211010
+ },
+ {
+  "UID": 211011
+ },
+ {
+  "UID": 211012
+ },
+ {
+  "UID": 211013
+ },
+ {
+  "UID": 211014
+ },
+ {
+  "UID": 211015
+ },
+ {
+  "UID": 211020
+ },
+ {
+  "UID": 211021
+ },
+ {
+  "UID": 211022
+ },
+ {
+  "UID": 211023
+ },
+ {
+  "UID": 211024
+ },
+ {
+  "UID": 211025
+ },
+ {
+  "UID": 211030
+ },
+ {
+  "UID": 211031
+ },
+ {
+  "UID": 211032
+ },
+ {
+  "UID": 211033
+ },
+ {
+  "UID": 211034
+ },
+ {
+  "UID": 211035
+ },
+ {
+  "UID": 211040
+ },
+ {
+  "UID": 211041
+ },
+ {
+  "UID": 211042
+ },
+ {
+  "UID": 211043
+ },
+ {
+  "UID": 211044
+ },
+ {
+  "UID": 211045
+ },
+ {
+  "UID": 211050
+ },
+ {
+  "UID": 211051
+ },
+ {
+  "UID": 211052
+ },
+ {
+  "UID": 211053
+ },
+ {
+  "UID": 211054
+ },
+ {
+  "UID": 211055
+ }
+],
+"infoDatas":[
+ {
+  "UID": 0,
+  "name": "TestEnemyZero",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 1,
+  "name": "TestEnemyOne",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 2,
+  "name": "TestEnemyTwo",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 3,
+  "name": "TestEnemyThree",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 4,
+  "name": "TestEnemyFour",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 5,
+  "name": "TestEnemyFive",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 6,
+  "name": "TestEnemySix",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 7,
+  "name": "TestEnemySeven",
+  "cost": 1,
+  "level": 1
+ },
+ {
+  "UID": 8,
+  "name": "TestEnemyEight",
+  "cost": 1,
+  "level": 1
+ }
+]
+}

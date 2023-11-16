@@ -496,6 +496,12 @@
 ],
 "infoDatas":[
  {
+  "UID": 0,
+  "name": "TestRanger",
+  "cost": 3,
+  "level": 1
+ },
+ {
   "UID": 111010,
   "level": 0
  },
