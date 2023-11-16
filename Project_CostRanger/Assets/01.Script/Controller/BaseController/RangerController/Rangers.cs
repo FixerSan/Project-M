@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Ranger 
 {
-    private RangerController controller;
-    public Define.Specialty[] specialty;
+    protected RangerController controller;
+    public List<Define.Specialty> specialties;
     protected WaitForSeconds attackWaitForSeceonds;
     protected WaitForSeconds skillWaitForSeconds;
 
@@ -71,7 +71,9 @@ namespace Rangers
     {
         public TestRanger()
         {
-            attackWaitForSeceonds = new WaitForSeconds(1);
+            attackWaitForSeceonds = new WaitForSeconds(Define.attackAnimationTime);
+            skillWaitForSeconds = new WaitForSeconds(Define.skillAnimationTime);
+            specialties = new List<Define.Specialty>();
         }
     }
 }

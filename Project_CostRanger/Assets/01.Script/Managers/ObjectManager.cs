@@ -46,6 +46,7 @@ public class ObjectManager
     //스폰된 아군 위치
     public List<BattleEntityController> Armys { get; } = new List<BattleEntityController>();
     public List<RangerController> Rangers { get; } = new List<RangerController>();
+    public List<EnemyController> enemies { get; } = new List<EnemyController>();
 
 
     // 아군 스폰 위치
@@ -330,6 +331,34 @@ public class ObjectManager
 
         controller.Init(ranger, data, status, states);
         Rangers.Add(controller);
+        return controller;
+    }
+
+    public EnemyController SpawnEnemy(int _UID, Vector2 _position = new Vector2())
+    {
+        EnemyControllerData data = Managers.Data.GetEnemyControllerData(_UID);
+        EnemyController controller = Managers.Resource.Instantiate(data.name, RangerTrans).GetOrAddComponent<EnemyController>();
+        EnemyStatus status = new EnemyStatus(data);
+        Enemy enemy = null;
+        Dictionary<EnemyState, State<EnemyController>> states = new Dictionary<EnemyState, State<EnemyController>>();
+
+        Define.Enemy rangerEnum = Util.ParseEnum<Define.Enemy>(data.name);
+        switch (rangerEnum)
+        {
+            case Define.Enemy.TestEnemyZero:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+        }
+
+        controller.Init(enemy, data, status, states);
+        enemies.Add(controller);
         return controller;
     }
 }

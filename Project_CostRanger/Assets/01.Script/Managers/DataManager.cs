@@ -86,6 +86,7 @@ public class DataManager
         //LoadBattleEntityStatusData();
         LoadStageData();
         LoadRangerData();
+        LoadEnemyData();
         LoadPlayerSaveData();
         _callback?.Invoke();
     }
@@ -207,12 +208,14 @@ public class DataManager
         //인포 데이터를 딕셔너리에 저장
         for (int i = 0; i < enemyDatas.infoDatas.Length; i++)
             if (!enemyInfoDatas.TryAdd(enemyDatas.infoDatas[i].UID, enemyDatas.infoDatas[i]))
-                Debug.LogError($"{i}번째 레인저 인포 데이터 로드에 실패하였습니다. ");
+                Debug.LogError($"{i}번째 적 인포 데이터 로드에 실패하였습니다. ");
 
         //컨트롤러 데이터를 딕셔너리에 저장
         for (int i = 0; i < enemyDatas.controllersData.Length; i++)
             if (!enemyControllerDatas.TryAdd(enemyDatas.controllersData[i].UID, enemyDatas.controllersData[i]))
-                Debug.LogError($"{i}번째 레인저 컨트롤러 데이터 로드에 실패하였습니다. ");
+                Debug.LogError($"{i}번째 적 컨트롤러 데이터 로드에 실패하였습니다. ");
+
+        Debug.Log($"로드가 완료되었습니다. 적 인포 데이터: {enemyInfoDatas.Count} , 적 컨트롤로 데이터: {enemyControllerDatas.Count}");
     }
 
     //스테이지 데이터 생성

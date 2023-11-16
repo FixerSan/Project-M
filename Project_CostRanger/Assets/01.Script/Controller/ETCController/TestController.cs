@@ -10,29 +10,9 @@ public class TestController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            TestClass rangerDatas = new TestClass();
-            Debug.Log(rangerDatas._array[0]);
-            Debug.Log(rangerDatas._int);
-
-            string textAsset = JsonUtility.ToJson(rangerDatas, true);
-            Debug.Log(textAsset);
-
-            File.WriteAllText(Application.dataPath+"TestClassData.txt", textAsset);
-
+           EnemyController controller =  Managers.Object.SpawnEnemy(0, transform.position);
+            controller.SetAttackTarget(gameObject.GetOrAddComponent<RangerController>());
+            controller.ChangeState(Define.EnemyState.Move);
         }
-    }
-}
-
-[System.Serializable]
-public class TestClass
-{
-    public string[] _array = new string[10];
-    public int _int;
-    public TestClass() 
-    {
-        _array[0] = "sksk";
-        _array[1] = "sksk";
-        _array[2] = "sksk";
-        _int = 1;
     }
 }

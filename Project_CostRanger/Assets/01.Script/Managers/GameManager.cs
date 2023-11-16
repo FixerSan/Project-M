@@ -148,14 +148,18 @@ public class LoginSystem
         _callback?.Invoke(SignUpEvent.SuccessSignUp);
     }
 }
+[System.Serializable]
 public class PrepareStageSystem
 {
+    public StageData stageData;
     public RangerControllerData[] rangers;
+    public EnemyControllerData[] enemies;
     public Batch batch;
 
     //초기 설정
     public void Init(StageData _stageData)
     {
+        stageData = _stageData;
         //저장된 레인저 프리셋 설정
         SetupCanUseRanger(); //저장된 레인저 프리셋으로 인 해 사용되는 레인저를 제외한 
         SetupEnemy();
@@ -172,7 +176,11 @@ public class PrepareStageSystem
     //적 정보 대로 생성
     public void SetupEnemy()
     {
+        string[] enemyStringArray = stageData.enemyUIDs.Split(",");
 
+        for (int i = 0; i < enemies.Length; i++)
+            if(Int32.TryParse(enemyStringArray[i], out int enemyUID))
+                enemies[i] = Managers.Data.GetEnemyControllerData(enemyUID);
     }
 
     public void UpdataUI()
@@ -183,6 +191,7 @@ public class PrepareStageSystem
     public PrepareStageSystem()
     {
         rangers = new RangerControllerData[6];
+        enemies = new EnemyControllerData[9];
     }
 }
 public class BattleStageSystem

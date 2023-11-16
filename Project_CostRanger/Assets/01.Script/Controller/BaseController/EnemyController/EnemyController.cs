@@ -10,8 +10,9 @@ public class EnemyController : BaseController
     public EnemyControllerData data;
 
     //Enemy Stage
-    public EnemyState State;
-    private EnemyState state;
+    public EnemyState setState;
+    public Direction direction;
+    private EnemyState currentState;
     public Dictionary<EnemyState, State<EnemyController>> states;
     public StateMachine<EnemyController> stateMachine;
     public bool isDead;
@@ -20,6 +21,7 @@ public class EnemyController : BaseController
     //Enemy ETC
     public Rigidbody2D rb;
     public Dictionary<string, Coroutine> routines;
+    public RangerController attackTarget;
 
     public void Init(Enemy _enemy, EnemyControllerData _data, EnemyStatus _status, Dictionary<EnemyState, State<EnemyController>> _states)
     {
@@ -30,8 +32,11 @@ public class EnemyController : BaseController
         stateMachine = new StateMachine<EnemyController>(this, states[EnemyState.Idle]);
 
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
-        routines = new Dictionary<string, Coroutine>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.isKinematic = true;
 
+        routines = new Dictionary<string, Coroutine>();
+        direction = Direction.Left;
         isDead = false;
         isInit = true;
     }
@@ -39,15 +44,22 @@ public class EnemyController : BaseController
     public void ChangeState(EnemyState _nextState, bool _isChangeSameState = false)
     {
         if (!isInit) return;
-        if (state == _nextState)
+        if (currentState == _nextState)
         {
             if (_isChangeSameState)
                 stateMachine.ChangeState(states[_nextState]);
             return;
         }
-        state = _nextState;
-        State = _nextState;
+        currentState = _nextState;
+        setState = _nextState;
         stateMachine.ChangeState(states[_nextState]);
+    }
+
+    public void ChangeDirection(Define.Direction _direction)
+    {
+        if (direction == _direction) return;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        direction = _direction;
     }
 
     private void Update()
@@ -59,8 +71,8 @@ public class EnemyController : BaseController
 
     private void CheckChangeState()
     {
-        if (state != State)
-            ChangeState(State);
+        if (currentState != setState)
+            ChangeState(setState);
     }
 
     public override void Hit(float _damage)
@@ -71,6 +83,16 @@ public class EnemyController : BaseController
     public override void GetDamage(float _damage)
     {
 
+    }
+
+    public void Follow()
+    {
+        enemy.Follow();
+    }
+
+    public void SetAttackTarget(RangerController _attackTarget)
+    {
+        attackTarget = _attackTarget;
     }
 }
 public class EnemyStatus : ControllerStatus

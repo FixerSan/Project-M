@@ -31,10 +31,14 @@ public class RangerController : BaseController
         stateMachine = new StateMachine<RangerController>(this, states[RangerState.Idle]);
 
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.isKinematic = true;
+
         routines = new Dictionary<string, Coroutine>();
 
         isDead = false;
         isInit = true;
+
     }
 
     public void ChangeState(RangerState _nextState, bool _isChangeSameState = false)
