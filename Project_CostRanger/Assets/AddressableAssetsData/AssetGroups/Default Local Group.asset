@@ -117,6 +117,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 74875882065c8cc43b99976b2718c83f
+    m_Address: TestRanger.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 099627b7a4745b743b72042997064e4d
+    m_Address: UISlot_CanUseRanger.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:

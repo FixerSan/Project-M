@@ -41,13 +41,15 @@ public class GameManager : Singleton<GameManager>
         Managers.Data.SavePlayerData(Managers.Game.playerData);
     }
 
-    public void StartBattleStage()
+    public void StartBattleStage(Action<Define.StartBattleStageEvent> _callback)
     {
+        //여기서 검증한 후 시작할 수 없는 상황이면 콜백
         //battleInfo = new BattleInfo(Managers.Data.GetStageData(_UID));
         if (battleStageSystem == null)
             battleStageSystem = new BattleStageSystem();
 
         battleStageSystem.Init();
+        
     }
 
     public void StartPrepare(int _stageUID)
@@ -245,14 +247,7 @@ public class BattleStageSystem
 
     public void SetEnemy()
     {
-        //for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
-        //    frontEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.frontEnemyUIDs[i]);
 
-        //for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
-        //    centerEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.centerEnemyUIDs[i]);
-
-        //for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
-        //    rearEnemy[i] = Managers.Data.GetEnemyControllerData(currentStage.rearEnemyUIDs[i]);
     }
 
     public void StartStage()

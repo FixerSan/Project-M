@@ -37,8 +37,8 @@ public class UISlot_UseBattleEntity : UIBase
         }
 
         BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, RemoveSlot);
-        BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dracCallback: EndDrag, _type:Define.UIEventType.EndDrag);
-        BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dracCallback: (_) => { if (slotType == SlotType.Enemy) return; DragMove(_); }, _type:Define.UIEventType.Drag);
+        BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dragCallback: EndDrag, _type:Define.UIEventType.EndDrag);
+        BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dragCallback: (_) => { if (slotType == SlotType.Enemy) return; DragMove(_); }, _type:Define.UIEventType.Drag);
 
         firstTrans = transform;
     }

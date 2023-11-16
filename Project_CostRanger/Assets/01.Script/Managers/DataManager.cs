@@ -150,14 +150,14 @@ public class DataManager
         {
             //기존 데이터에 바뀐 데이터를 업데이트
             string hasRangerUIDs = string.Empty;
-            for (int i = 0; i < _playerData.hasEntites.Count; i++)
+            for (int i = 0; i < _playerData.hasRangers.Count; i++)
             {
-                if (i != _playerData.hasEntites.Count - 1)
+                if (i != _playerData.hasRangers.Count - 1)
                 {
-                    hasRangerUIDs += (_playerData.hasEntites[i].UID + ",");
+                    hasRangerUIDs += (_playerData.hasRangers[i].UID + ",");
                     continue;
                 }
-                hasRangerUIDs += (_playerData.hasEntites[i].UID);
+                hasRangerUIDs += (_playerData.hasRangers[i].UID);
             }
             saveDate.name = _playerData.name;
             saveDate.hasRangerUID = hasRangerUIDs;
@@ -282,13 +282,13 @@ public class PlayerData : Data
 {
     public string ID;
     public string name;
-    public List<RangerInfoData> hasEntites;
+    public List<RangerInfoData> hasRangers;
 
-    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasEntites)
+    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasRangers)
     {
         ID = _ID;
         name = _name;
-        hasEntites = _hasEntites;
+        hasRangers = _hasRangers;
     }
 }
 

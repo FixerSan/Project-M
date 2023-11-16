@@ -103,6 +103,11 @@ public class Define
         NotInputUID, UIDIsNotInt , ExistSameUID , NotInputName, NotInputCanUseCost, CostIsNotInt, SuccessCreate
     }
 
+    public enum StartBattleStageEvent
+    {
+        SuccessStart, RangerIsNotExist
+    }
+
     public enum UIEventType
     {
         Click,

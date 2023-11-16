@@ -71,7 +71,7 @@ public abstract class UIBase : MonoBehaviour
     protected Slider GetSlider(int _index) { return Get<Slider>(_index); }
     protected TMP_InputField GetInputField(int _index) { return Get<TMP_InputField>(_index); }
 
-    public static void BindEvent(GameObject _go, Action _callback = null, Action<PointerEventData> _dracCallback = null, Action<PointerEventData> _dropCallback = null, Define.UIEventType _type = Define.UIEventType.Click)
+    public static void BindEvent(GameObject _go, Action _callback = null, Action<PointerEventData> _dragCallback = null, Action<PointerEventData> _dropCallback = null, Define.UIEventType _type = Define.UIEventType.Click)
     {
         UIEventHandler eventHandler = _go.GetOrAddComponent<UIEventHandler>();
 
@@ -98,18 +98,18 @@ public abstract class UIBase : MonoBehaviour
                 break;
 
             case Define.UIEventType.BeginDrag:
-                eventHandler.OnBeginDragHandler -= _dracCallback;
-                eventHandler.OnBeginDragHandler += _dracCallback;
+                eventHandler.OnBeginDragHandler -= _dragCallback;
+                eventHandler.OnBeginDragHandler += _dragCallback;
                 break;
 
             case Define.UIEventType.Drag:
-                eventHandler.OnDragHandler -= _dracCallback;
-                eventHandler.OnDragHandler += _dracCallback;
+                eventHandler.OnDragHandler -= _dragCallback;
+                eventHandler.OnDragHandler += _dragCallback;
                 break;
 
             case Define.UIEventType.EndDrag:
-                eventHandler.OnEndDragHandler -= _dracCallback;
-                eventHandler.OnEndDragHandler += _dracCallback;
+                eventHandler.OnEndDragHandler -= _dragCallback;
+                eventHandler.OnEndDragHandler += _dragCallback;
                 break;
 
             case Define.UIEventType.Drop:
