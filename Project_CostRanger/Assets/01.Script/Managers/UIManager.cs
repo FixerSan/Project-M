@@ -230,6 +230,14 @@ public class UIManager
         }
     }
 
+    public GameObject ShowPrepareRanger(string _key)
+    {
+        GameObject go = Managers.Resource.Instantiate(_key);
+        go.GetOrAddComponent<SortingGroup>().sortingOrder = order;
+        order++;
+        return go;
+    }
+
     public GameObject ShowPrepareEnemy(string _key)
     {
         GameObject go = Managers.Resource.Instantiate(_key);

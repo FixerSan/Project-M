@@ -4,35 +4,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UISlot_CanUseRanger : UIBase
+public class UISlot_CanUseRanger : UISlot_PrepareRanger
 {
-    public RangerInfoData data;
+    public RangerControllerData data;
     private Transform contentTrans;
-    private Transform canvas;
-
+    private Transform canvasTrans;
+    
     private Vector3 worldPosition;
+    private UIPrepareRanger ranger;
 
 
-    public void Init(RangerInfoData _data, Transform _canvas)
+    public void Init(RangerControllerData _data, Transform _canvasTrans)
     {
         data = _data;
-        canvas = _canvas;
+        canvasTrans = _canvasTrans;
         contentTrans = transform.parent;
-        BindEvent(gameObject, _dragCallback: OnDrag, _type: Define.UIEventType.Drag);
-        BindEvent(gameObject, _dragCallback: OnEndDrag, _type: Define.UIEventType.EndDrag);
-    }
-
-    public void OnDrag(PointerEventData _eventData)
-    {
-        transform.SetParent(canvas);
-        worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        worldPosition.z = canvas.position.z;
-        gameObject.transform.position = worldPosition;
-    }
-
-    public void OnEndDrag(PointerEventData _eventData)
-    {
-        transform.SetParent(contentTrans);
+        BindObject(typeof(Objects));
+        BindImage(typeof(Images));
+        GetObject((int)Objects.RangerTrans).gameObject.GetOrAddComponent<UIPrepareRanger>().Init(_data, _canvasTrans, this);
     }
     
     public void UseBattleEntity()
@@ -43,6 +32,12 @@ public class UISlot_CanUseRanger : UIBase
     public void UpdateState()
     {
 
+    }
+
+    public override void OnChanging()
+    {
+        if (GetImage((int)Images.Image_Illust).gameObject.activeSelf)
+            GetImage((int)Images.Image_Illust).gameObject.SetActive(false);
     }
 
     private enum Images
@@ -57,6 +52,6 @@ public class UISlot_CanUseRanger : UIBase
 
     public enum Objects
     {
-        Bundle_Used,
+        RangerTrans
     } 
 }

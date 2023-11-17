@@ -8,6 +8,7 @@ public class Define
     public static readonly int currentBattleEntityMaxLevel = 5;
     public static readonly int userUID = 0;
     public static readonly Vector2 prepareEnemyOffset = new Vector2(0, -40);
+    public static readonly Vector2 prepareRangerOffset = new Vector2(0, -60);
     public static readonly float attackAnimationTime = 1;
     public static readonly float skillAnimationTime = 1;
 

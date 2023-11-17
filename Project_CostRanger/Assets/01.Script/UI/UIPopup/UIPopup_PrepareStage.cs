@@ -5,7 +5,12 @@ using UnityEngine;
 public class UIPopup_PrepareStage : UIPopup
 {
     private List<UISlot_CanUseRanger> canUseRangerSlots;
+    public List<UISlot_UseRanger> batchOne_UseRangerSlots;
+    public List<UISlot_UseRanger> batchTwo_UseRangerSlots;
     private Transform canUseRangerSlotParent;
+
+    bool tempBool;
+
     public override bool Init()
     {
         Managers.UI.SetCanvas(gameObject, true);
@@ -13,7 +18,7 @@ public class UIPopup_PrepareStage : UIPopup
         canUseRangerSlots = new List<UISlot_CanUseRanger>();
         canUseRangerSlotParent = Util.FindChild(gameObject, _name: "Content_CanUseSlot", _recursive: true).transform;
 
-        BindEvent(GetButton((int)Buttons.Button_Back).gameObject, () => { Managers.UI.ClosePopupUI(this); });
+        BindEvent(GetButton((int)Buttons.Button_Back).gameObject, () => { Managers.UI.ClosePopupUI(this); Managers.Game.prepareStageSystem = null; });
         BindEvent(GetButton((int)Buttons.Button_Start).gameObject, OnClick_Start);
 
         Managers.Event.OnVoidEvent -= RedrawUI;
@@ -40,6 +45,7 @@ public class UIPopup_PrepareStage : UIPopup
         if (_type != Define.VoidEventType.OnChangePrepare) return;
 
         RedrawCanUseSlot();
+        RedrawUseSlot();
     }
 
     public void RedrawCanUseSlot()
@@ -51,13 +57,39 @@ public class UIPopup_PrepareStage : UIPopup
 
         canUseRangerSlots.Clear();
         //여기서 전부 다 다시 소환하는 게 아니라 사용하고 있는 녀석이라면 스킵을 해야함
-        //PrepareSystem에서 사용하고 있는 녀석인지 체크를 하면 좋을 것 같음
+
         for (int i = 0; i < Managers.Game.playerData.hasRangers.Count; i++)
         {
+            tempBool = false;
+
+            for (int j = 0; j < Managers.Game.prepareStageSystem.rangers.Length; j++)
+            {
+                if (Managers.Game.prepareStageSystem.rangers[j] != null && Managers.Game.prepareStageSystem.rangers[j].UID == Managers.Game.playerData.hasRangers[i].UID)
+                    tempBool = true;
+            }
+
+            if (tempBool) continue;
             UISlot_CanUseRanger slot = Managers.Resource.Instantiate("UISlot_CanUseRanger", canUseRangerSlotParent).GetOrAddComponent<UISlot_CanUseRanger>();
-            slot.Init(Managers.Game.playerData.hasRangers[i], transform);
+            slot.Init(Managers.Data.GetRangerControllerData(Managers.Game.playerData.hasRangers[i].UID), transform);
             canUseRangerSlots.Add(slot);
         }
+    }
+
+    public void RedrawUseSlot()
+    {
+        if(Managers.Game.prepareStageSystem.batch == Define.Batch.One)
+        {
+            for (int i = 0; i < batchOne_UseRangerSlots.Count; i++)
+            {
+                batchOne_UseRangerSlots[i].RedrawUI(Managers.Game.prepareStageSystem.rangers[i], transform);
+            }
+        }
+    }
+
+
+    private void OnDisable()
+    {
+        Managers.Event.OnVoidEvent -= RedrawUI;
     }
 
     private enum Buttons

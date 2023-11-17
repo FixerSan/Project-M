@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
         {
             Managers.Data.LoadPreData(() =>
             {
-                Managers.Screen.SetCameraPosition(Vector2.zero);
+                Managers.Screen.SetCameraPosition(new Vector3(0,0,-10f));
                 Managers.Scene.LoadScene(Define.Scene.Login);
             });
         });
@@ -150,6 +150,7 @@ public class LoginSystem
         _callback?.Invoke(SignUpEvent.SuccessSignUp);
     }
 }
+
 [System.Serializable]
 public class PrepareStageSystem
 {
@@ -173,6 +174,20 @@ public class PrepareStageSystem
     public void SetupCanUseRanger()
     {
 
+    }
+
+    public void SetUseRanger(int _rangerIndex, int _slotIndex)
+    {
+        rangers[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
+
+        UpdataUI();
+    }
+
+    public void CancelUseRanger(int _slotIndex)
+    {
+        rangers[_slotIndex] = null;
+
+        UpdataUI();
     }
 
     //적 정보 대로 생성
