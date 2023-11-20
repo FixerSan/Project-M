@@ -151,7 +151,6 @@ public class LoginSystem
     }
 }
 
-[System.Serializable]
 public class PrepareStageSystem
 {
     public StageData stageData;
@@ -164,16 +163,9 @@ public class PrepareStageSystem
     {
         stageData = _stageData;
         //저장된 레인저 프리셋 설정
-        SetupCanUseRanger(); //저장된 레인저 프리셋으로 인 해 사용되는 레인저를 제외한 
         SetupEnemy();
 
         UpdataUI();
-    }
-
-    //저장된 레인저 프리셋안에 들어가 있는 레인저를 제외한 나머지 레인저들의 카드를 생성
-    public void SetupCanUseRanger()
-    {
-
     }
 
     public void SetUseRanger(int _rangerIndex, int _slotIndex)
@@ -185,6 +177,7 @@ public class PrepareStageSystem
 
     public void CancelUseRanger(int _slotIndex)
     {
+        if (_slotIndex == -1) return;
         rangers[_slotIndex] = null;
 
         UpdataUI();

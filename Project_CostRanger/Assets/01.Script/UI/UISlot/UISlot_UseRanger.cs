@@ -43,9 +43,10 @@ public class UISlot_UseRanger : UISlot_PrepareRanger
     {
         ranger = _eventData.pointerDrag.GetComponent<UIPrepareRanger>();
         if (ranger == null) return;
-   
-        Managers.Game.prepareStageSystem.SetUseRanger(ranger.data.UID, slotIndex);
+
+        transform.SetAsFirstSibling();
         Managers.Game.prepareStageSystem.CancelUseRanger(ranger.slot.slotIndex);
+        Managers.Game.prepareStageSystem.SetUseRanger(ranger.data.UID, slotIndex);
     }
 
     public override void OnChanging()

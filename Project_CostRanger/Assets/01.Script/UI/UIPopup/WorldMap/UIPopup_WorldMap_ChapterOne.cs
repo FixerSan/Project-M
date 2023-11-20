@@ -14,7 +14,6 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
         { 
             Managers.Game.StartPrepare(0);
             Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
-            Debug.Log("눌리긴 했음");
         });
 
         return true;

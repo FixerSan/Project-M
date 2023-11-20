@@ -19,6 +19,7 @@ public class UISlot_CanUseRanger : UISlot_PrepareRanger
         data = _data;
         canvasTrans = _canvasTrans;
         contentTrans = transform.parent;
+        slotIndex = -1; //사용가능한 레인저를 보여주는 슬롯인 이 객체의 인덱스는 -1로 설정
         BindObject(typeof(Objects));
         BindImage(typeof(Images));
         GetObject((int)Objects.RangerTrans).gameObject.GetOrAddComponent<UIPrepareRanger>().Init(_data, _canvasTrans, this);
