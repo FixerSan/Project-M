@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
-using static UISlot_CanUseRanger;
 
 public class UISlot_UseRanger : UISlot_PrepareRanger
 {
@@ -12,16 +11,8 @@ public class UISlot_UseRanger : UISlot_PrepareRanger
     public override bool Init()
     {
         if (!base.Init()) return false;
-        BindEvent(gameObject, OnClick_CancelUse);
         BindEvent(gameObject, _dropCallback: OnDrop, _type: UIEventType.Drop);
         return true;
-    }
-
-    public void OnClick_CancelUse()
-    {
-        if (Managers.Game.prepareStageSystem.rangers[slotIndex] == null) return;
-
-        Managers.Game.prepareStageSystem.CancelUseRanger(slotIndex);
     }
 
     public void RedrawUI(RangerControllerData _data, Transform _canvasTrans)
@@ -34,6 +25,7 @@ public class UISlot_UseRanger : UISlot_PrepareRanger
         go.transform.SetParent(transform);
         go.transform.localPosition = Vector3.zero; 
         go.transform.localScale = Vector3.one;
+
         ranger = go.GetOrAddComponent<UIPrepareRanger>();
         ranger.Init(_data, _canvasTrans, this);
     }

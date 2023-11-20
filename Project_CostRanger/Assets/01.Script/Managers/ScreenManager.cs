@@ -25,7 +25,7 @@ public class ScreenManager
         cameraController = _cameraController;
     }
 
-    public void SetCameraPosition(Vector2 _vector2 )
+    public void SetCameraPosition(Vector3 _vector2 )
     {
         CameraController.SetPosition(_vector2);
     }

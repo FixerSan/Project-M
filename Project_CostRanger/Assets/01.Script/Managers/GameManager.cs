@@ -44,12 +44,17 @@ public class GameManager : Singleton<GameManager>
     public void StartBattleStage(Action<Define.StartBattleStageEvent> _callback)
     {
         //여기서 검증한 후 시작할 수 없는 상황이면 콜백
-        //battleInfo = new BattleInfo(Managers.Data.GetStageData(_UID));
+        if(prepareStageSystem.rangers.NullCount() == prepareStageSystem.rangers.Length)
+        {
+            _callback?.Invoke(StartBattleStageEvent.RangerIsNotExist);
+            return;
+        }
+
         if (battleStageSystem == null)
             battleStageSystem = new BattleStageSystem();
 
-        battleStageSystem.Init();
-        
+        battleStageSystem.Init(prepareStageSystem);
+        _callback?.Invoke(StartBattleStageEvent.SuccessStart);
     }
 
     public void StartPrepare(int _stageUID)
@@ -82,8 +87,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (battleInfo != null)
-            battleInfo.Update();
+        if (battleStageSystem != null)
+            battleStageSystem.Update();
     }
 
     public void OnApplicationPause(bool pause)
@@ -231,7 +236,7 @@ public class BattleStageSystem
     public float time;
 
 
-    public void Init()
+    public void Init(PrepareStageSystem _prepareSystem)
     {
         //여기서 프리페어 시스템 정보를 적용시킬 것임
         nowUseCost = 0;
@@ -250,27 +255,37 @@ public class BattleStageSystem
         enemybattleForce = 0;
 
         time = 0;
-        SetEnemy();
-    }
-
-    public void SetEnemy()
-    {
-
     }
 
     public void StartStage()
     {
+        Managers.Game.state = GameState.BattleProgress;
+    }
 
+    public void Update()
+    {
+        if (Managers.Game.state != GameState.BattleProgress) return;
+        CheckTime();
+    }
+
+    public void CheckTime()
+    {
+        time -= Time.deltaTime;
+        if (time <= 0)
+        {
+            time = 0;
+            Lose();
+        }
     }
 
     public void Victory()
     {
-
+        Managers.Game.state = GameState.BattleAfter;
     }
 
     public void Lose()
     {
-
+        Managers.Game.state = GameState.BattleAfter;
     }
 
     public BattleStageSystem()
@@ -468,7 +483,7 @@ public class BattleInfo
         armybattleForce = 0;
 
         UpdateUI();
-    }
+    }   
 
     //배틀 포인트 정리
     private void SetArmyBattleForceValue()

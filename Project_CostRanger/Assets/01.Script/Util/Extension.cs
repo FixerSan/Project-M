@@ -60,12 +60,12 @@ public static class Extension
         return -1;
     }
 
-    public static int NotNullCount<T>(this T[] _array) where T : class
+    public static int NullCount<T>(this T[] _array) where T : class
     {
         int count = 0;
         for (int i = 0; i < _array.Length; i++)
         {
-            if (_array[i] != null)
+            if (_array[i] == null)
                 count++;
         }
         return count; 

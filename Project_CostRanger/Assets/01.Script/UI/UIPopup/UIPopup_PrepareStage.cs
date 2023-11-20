@@ -34,9 +34,12 @@ public class UIPopup_PrepareStage : UIPopup
         {
             if(callback == Define.StartBattleStageEvent.RangerIsNotExist)
             {
-
+                //레인저가 없다고 뜨기
+                Debug.Log("레인저가 하나는 필요해");
                 return;
             }
+
+            Managers.Scene.LoadScene(Define.Scene.Stage);
         });
     }
 

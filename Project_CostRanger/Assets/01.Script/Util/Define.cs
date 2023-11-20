@@ -12,6 +12,8 @@ public class Define
     public static readonly float attackAnimationTime = 1;
     public static readonly float skillAnimationTime = 1;
 
+    public static readonly float sceneStartDelay = 3;
+
     public enum GameState
     {
         BattleBefore,

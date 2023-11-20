@@ -18,18 +18,32 @@ public class UIPrepareRanger : UIBase
         data = _data;
         canvasTrans = _canvasTrans;
         slot = _slot;
+
         GameObject go = Managers.UI.ShowPrepareRanger(_data.name);
         spriteTrans = go.transform;
         go.transform.SetParent(transform);
         go.transform.localPosition = Define.prepareRangerOffset;
         go.transform.localScale = new Vector3(108, 108, 108);
 
+        BindEvent(gameObject, OnClick_CancelUse);
         BindEvent(gameObject, _dragCallback: OnDrag, _type: UIEventType.Drag);
         BindEvent(gameObject, _dragCallback: OnEndDrag, _type: UIEventType.EndDrag);
+        if(slot is UISlot_CanUseRanger)
+            spriteTrans.gameObject.SetActive(false);
+    }
+
+    public void OnClick_CancelUse()
+    {
+        if (slot.slotIndex == -1) return;
+        if (Managers.Game.prepareStageSystem.rangers[slot.slotIndex] == null) return;
+
+        Managers.Game.prepareStageSystem.CancelUseRanger(slot.slotIndex);
     }
 
     public void OnDrag(PointerEventData _eventData)
     {
+        if (!spriteTrans.gameObject.activeSelf)
+            spriteTrans.gameObject.SetActive(true);
         slot.OnChanging();
         gameObject.SetActive(true);
         worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
