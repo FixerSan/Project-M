@@ -107,4 +107,9 @@ public class SceneManager
             loadCallback = null;
         });
     }
+
+    public T GetActiveScene<T>()where T : BaseScene
+    {
+        return SceneTrans.GetComponent<T>() as T;
+    }
 }

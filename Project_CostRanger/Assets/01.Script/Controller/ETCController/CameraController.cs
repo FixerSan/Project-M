@@ -66,11 +66,11 @@ public class CameraController : MonoBehaviour
     //{
     //    if (target == null) return;
     //    nextPos = new Vector3(target.transform.position.x + offset.x, target.transform.position.y + offset.y, -10);
-    //    nextPos = Vector3.Lerp(Trans.position, nextPos, delayTime * Time.deltaTime);
+    //    nextPos = Vector3.Lerp(EnemyTrans.position, nextPos, delayTime * Time.deltaTime);
     //    nextPos = new Vector3(Mathf.Clamp(nextPos.x, min.x, max.x), Mathf.Clamp(nextPos.y, min.y, max.y), -10);
     //    if (isShake)
     //        nextPos = nextPos + (Vector3)UnityEngine.Random.insideUnitCircle * shakeForce * Time.deltaTime;
-    //    Trans.position = nextPos;
+    //    EnemyTrans.position = nextPos;
     //    listener.transform.position = target.transform.position;
     //}
 

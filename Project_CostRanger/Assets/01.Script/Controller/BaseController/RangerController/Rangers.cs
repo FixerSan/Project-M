@@ -57,7 +57,7 @@ public abstract class Ranger
     public virtual IEnumerator AttackRoutine()
     {
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
-        Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
+        //Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
         //Managers.Game.battleInfo.UpdateMVPPoints();
         yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
         controller.ChangeState(Define.RangerState.Follow);

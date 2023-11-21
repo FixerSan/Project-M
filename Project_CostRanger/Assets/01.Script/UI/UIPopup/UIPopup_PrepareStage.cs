@@ -38,8 +38,6 @@ public class UIPopup_PrepareStage : UIPopup
                 Debug.Log("레인저가 하나는 필요해");
                 return;
             }
-
-            Managers.Scene.LoadScene(Define.Scene.Stage);
         });
     }
 
