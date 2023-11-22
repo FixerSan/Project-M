@@ -38,9 +38,11 @@ namespace RangerStates
 
             public override void UpdateState(RangerController _entity)
             {
+                if (_entity.ranger.CheckCanUseSkill()) return;
                 if (_entity.ranger.CheckAttack()) return;
                 if (_entity.ranger.CheckFollow()) return;
                 _entity.ranger.CheckAttackCooltime();
+                _entity.ranger.CheckSkillCooltime();
             }
         }
 
@@ -76,9 +78,11 @@ namespace RangerStates
 
             public override void UpdateState(RangerController _entity)
             {
+                if (_entity.ranger.CheckCanUseSkill()) return;
                 if (_entity.ranger.CheckAttack()) return;
-                _entity.ranger.Follow();
                 _entity.ranger.CheckAttackCooltime();
+                _entity.ranger.CheckSkillCooltime();
+                _entity.ranger.Follow();
             }
         }
 
@@ -96,7 +100,7 @@ namespace RangerStates
 
             public override void UpdateState(RangerController _entity)
             {
-
+                _entity.ranger.CheckSkillCooltime();
             }
         }
 
@@ -104,7 +108,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                _entity.ranger.Skill();
             }
 
             public override void ExitState(RangerController _entity)
@@ -114,7 +118,7 @@ namespace RangerStates
 
             public override void UpdateState(RangerController _entity)
             {
-
+                _entity.ranger.CheckAttackCooltime();
             }
         }
 

@@ -285,7 +285,7 @@ public class BattleStageSystem
     public void CheckTime()
     {
         time -= Time.deltaTime;
-        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattle);
+        RedrawUI();
         if (time <= 0)
         {
             time = 0;
@@ -293,9 +293,24 @@ public class BattleStageSystem
         }
     }
 
+    public void SetAutoSkill(bool _setBool)
+    {
+        isAutoSkill = _setBool;
+        RedrawUI();
+    }
+
+    public void SetFastSpeed(bool _setBool)
+    {
+        isFastSpeed = _setBool;
+        if (isFastSpeed) Time.timeScale = 1.5f;
+        else Time.timeScale = 1.0f;
+        RedrawUI();
+    }
+
     public void Victory()
     {
         Managers.Game.state = GameState.BattleAfter;
+        Managers.Stage.ClearReward(currentStageData.UID);
     }
 
     public void Lose()
@@ -305,7 +320,7 @@ public class BattleStageSystem
 
     public void RedrawUI()
     {
-        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattle);
+        Managers.Event.InvokeVoidEvent(VoidEventType.OnChangeBattle);
     }
 
     public BattleStageSystem()

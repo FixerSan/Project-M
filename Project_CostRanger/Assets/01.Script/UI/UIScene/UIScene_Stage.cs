@@ -10,25 +10,44 @@ public class UIScene_Stage : UIScene
     {
         if(!base.Init()) return false;
         BindText(typeof(Texts));
+        BindButton(typeof(Buttons));
 
-        Managers.Event.AddVoidEvent(RedrawUI);
+        BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
+        BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
+
+        Managers.Event.AddVoidEvent(Define.VoidEventType.OnChangeBattle ,RedrawUI);
         return true;
     }
 
-    public void RedrawUI(Define.VoidEventType _eventType)
+    public void RedrawUI()
     {
-        if (_eventType != Define.VoidEventType.OnChangeBattle) return;
-
         GetText((int)Texts.Text_Timer).text = $"{(int)Managers.Game.battleStageSystem.time}";
+        GetButton((int)Buttons.Button_FastSpeed).interactable = !Managers.Game.battleStageSystem.isFastSpeed;
+        GetButton((int)Buttons.Button_AutoSkill).interactable = !Managers.Game.battleStageSystem.isAutoSkill;
     }
+    public void OnClick_FastSpeed()
+    {
+        Managers.Game.battleStageSystem.SetFastSpeed(!Managers.Game.battleStageSystem.isFastSpeed);
+    }
+
+    public void OnClick_AutoSkill()
+    {
+        Managers.Game.battleStageSystem.SetAutoSkill(!Managers.Game.battleStageSystem.isAutoSkill);
+    }
+
 
     public void OnDisable()
     {
-        Managers.Event.RemoveVoidEvent(RedrawUI);
+        Managers.Event.RemoveVoidEvent(Define.VoidEventType.OnChangeBattle, RedrawUI);
     }
 
     private enum Texts
     {
         Text_Timer
+    }
+
+    private enum Buttons
+    {
+        Button_FastSpeed, Button_AutoSkill
     }
 }

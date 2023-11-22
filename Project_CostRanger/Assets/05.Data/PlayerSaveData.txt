@@ -4,25 +4,29 @@
             "ID": "Fixer1302",
             "passward": "1234",
             "name": "Fixer",
-            "hasRangerUID": "0"
+            "hasRangerUID": "0",
+            "lastClearStageUID": -1
         },
         {
             "ID": "GangSan1302",
             "passward": "123",
             "name": "GangSan",
-            "hasRangerUID": ""
+            "hasRangerUID": "",
+            "lastClearStageUID": 0
         },
         {
             "ID": "dygp25",
             "passward": "@Dltkdtls1225",
             "name": "Yoheigh",
-            "hasRangerUID": ""
+            "hasRangerUID": "",
+            "lastClearStageUID": 0
         },
         {
             "ID": "sksk",
             "passward": "sksk",
             "name": "sksk",
-            "hasRangerUID": ""
+            "hasRangerUID": "",
+            "lastClearStageUID": 0
         }
     ]
 }

@@ -10,14 +10,40 @@ public class EventManager
     public Action<VoidEventType> OnVoidEvent;
     public Action<IntEventType, int> OnIntEvent;
 
-    public void AddVoidEvent(Action<VoidEventType> _callback)
+    public Dictionary<VoidEventType, Action> voidEvents;
+
+    public EventManager() 
     {
-        OnVoidEvent -= _callback;
-        OnVoidEvent += _callback;
+        voidEvents = new Dictionary<VoidEventType, Action>();
+    }   
+
+    public void AddVoidEvent(VoidEventType _type, Action _eventAction)
+    {
+        if (voidEvents.TryGetValue(_type, out Action eventAction))
+        {
+            eventAction -= _eventAction;
+            eventAction += _eventAction;
+        }
+
+        else
+        {
+            voidEvents.Add(_type, new Action(_eventAction));
+        }
+    }
+    public void InvokeVoidEvent(VoidEventType _type)
+    {
+        if (voidEvents.TryGetValue(_type, out Action eventAction))
+            eventAction.Invoke();
     }
 
-    public void RemoveVoidEvent(Action<VoidEventType> _callback)
+    public void RemoveVoidEvent(VoidEventType _type, Action _eventAction)
     {
-        OnVoidEvent -= _callback;
+        if (voidEvents.TryGetValue(_type, out Action eventAction))
+        {
+            eventAction -= _eventAction;
+            if(eventAction == null)
+                voidEvents.Remove(_type);
+        }
     }
+
 }

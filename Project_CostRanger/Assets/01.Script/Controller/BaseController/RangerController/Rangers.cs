@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
@@ -86,8 +87,55 @@ public abstract class Ranger
         //Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
         //Managers.Game.battleInfo.UpdateMVPPoints();
         yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
+        controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
         controller.ChangeState(Define.RangerState.Idle);
         controller.routines.Remove("attack");
+    }
+
+    public virtual void CheckSkillCooltime()
+    {
+        if (controller.status.CheckSkillCooltime > 0)
+        {
+            controller.status.CheckSkillCooltime -= Time.deltaTime;
+            if (controller.status.CheckSkillCooltime <= 0)
+                controller.status.CheckSkillCooltime = 0;
+        }
+    }
+
+    public virtual void UseSkill()
+    {
+        if (controller.status.CheckSkillCooltime == 0)
+        {
+            controller.ChangeState(RangerState.SkillCast);
+        }
+    }
+
+    public virtual bool CheckCanUseSkill()
+    {
+        if (!Managers.Game.battleStageSystem.isAutoSkill) return false;
+        if (controller.status.CheckSkillCooltime == 0)
+        {
+            controller.ChangeState(RangerState.SkillCast);
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual void Skill()
+    {
+        controller.routines.Add("skill", controller.StartCoroutine(SkillRoutine()));
+    }
+
+    //스킬 처리 루틴
+    public virtual IEnumerator SkillRoutine()
+    {
+        controller.Stop();
+        Debug.Log("스킬 사용됨");
+        yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임
+        controller.ChangeState(Define.RangerState.Idle);
+        controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+        controller.routines.Remove("skill");
     }
 }
 

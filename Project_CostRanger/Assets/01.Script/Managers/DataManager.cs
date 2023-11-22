@@ -128,14 +128,14 @@ public class DataManager
         }
 
         //플레이어 데이터 생성 후 리턴
-        PlayerData data = new PlayerData(saveData.ID, saveData.name, hasRangers);
+        PlayerData data = new PlayerData(saveData.ID, saveData.name, hasRangers, saveData.lastClearStageUID);
         return data;
     }
 
     //플레이에 세이브 데이터 생성
     public void CreatePlayerSaveData(string _ID, string _passward, string _name, string _hasRangerUID)
     {
-        PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, _hasRangerUID);
+        PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, _hasRangerUID, -1);
         playerSaveDatas.TryAdd(playerSaveData.ID, playerSaveData);
     }
 
@@ -146,7 +146,7 @@ public class DataManager
         if (_playerData == null) return;
 
         //처음 플레이한 플레이어가 아닐 경우
-        if(playerSaveDatas.TryGetValue(_playerData.ID, out PlayerSaveData saveDate))
+        if(playerSaveDatas.TryGetValue(_playerData.ID, out PlayerSaveData saveData))
         {
             //기존 데이터에 바뀐 데이터를 업데이트
             string hasRangerUIDs = string.Empty;
@@ -159,24 +159,25 @@ public class DataManager
                 }
                 hasRangerUIDs += (_playerData.hasRangers[i].UID);
             }
-            saveDate.name = _playerData.name;
-            saveDate.hasRangerUID = hasRangerUIDs;
+            saveData.name = _playerData.name;
+            saveData.hasRangerUID = hasRangerUIDs;
+            saveData.lastClearStageUID = _playerData.lastClearStageUID;
         }
 
         //데이터를 저장할 배열 재생성
-        PlayerSaveData[] saveDatas = new PlayerSaveData[playerSaveDatas.Count];
+        PlayerSaveData[] saveDataArray = new PlayerSaveData[playerSaveDatas.Count];
         int count = 0;
 
         //배열의 저장
         foreach (var data in playerSaveDatas)
         {
-            saveDatas[count] = data.Value;
+            saveDataArray[count] = data.Value;
             count++;
         }
 
         //저장한 배열로 제이슨 데이터 생성 및 파일 저장
-        PlayerSaveDatas saveData = new PlayerSaveDatas(saveDatas);
-        string saveDataJson = JsonUtility.ToJson(saveData, true);
+        PlayerSaveDatas saveDatas = new PlayerSaveDatas(saveDataArray);
+        string saveDataJson = JsonUtility.ToJson(saveDatas, true);
         File.WriteAllText(PLAYERSAVEDATAPATH, saveDataJson);
     }
 
@@ -283,12 +284,14 @@ public class PlayerData : Data
     public string ID;
     public string name;
     public List<RangerInfoData> hasRangers;
+    public int lastClearStageUID;
 
-    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasRangers)
+    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasRangers, int _lastClearStageUID)
     {
         ID = _ID;
         name = _name;
         hasRangers = _hasRangers;
+        lastClearStageUID = _lastClearStageUID;
     }
 }
 
@@ -299,13 +302,15 @@ public class PlayerSaveData : Data
     public string passward;
     public string name;
     public string hasRangerUID;
+    public int lastClearStageUID;
 
-    public PlayerSaveData(string _ID, string _passward , string _name,  string _hasRangerUID)
+    public PlayerSaveData(string _ID, string _passward , string _name,  string _hasRangerUID, int _lastClearStageUID)
     {
         ID = _ID;
         passward = _passward;
         name = _name;
         hasRangerUID = _hasRangerUID;
+        lastClearStageUID = _lastClearStageUID;
     }
 }
 
@@ -475,5 +480,23 @@ public class StageDatas : Data
     public StageDatas(StageData[] _stageDatas)
     {
         stageDatas = _stageDatas;
+    }
+}
+
+[Serializable]
+public class ClearRewardData : Data
+{
+    public int gold;
+    public int exp;
+    public string getRangerUIDs;
+}
+
+[Serializable]
+public class ClearRewardDatas : Data
+{
+    public ClearRewardData[] clearRewardDatas;
+    public ClearRewardDatas(ClearRewardData[] _clearRewardDatas)
+    {
+        clearRewardDatas = _clearRewardDatas;
     }
 }
