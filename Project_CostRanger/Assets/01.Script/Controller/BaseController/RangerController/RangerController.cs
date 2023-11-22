@@ -1,5 +1,7 @@
+using EnemyStates.Base;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using static Define;
 
@@ -19,7 +21,8 @@ public class RangerController : BaseController
 
     //Ranger ETC
     public Rigidbody2D rb;
-    public Dictionary<string, Coroutine> routines;
+    public Animator animator;
+    public Dictionary<RangerState, int> animationHash;
     public EnemyController attackTarget;
 
     public void Init(Ranger _ranger, RangerControllerData _data, RangerStatus _status, Dictionary<RangerState, State<RangerController>> _states)
@@ -28,31 +31,40 @@ public class RangerController : BaseController
         data = _data;
         status = _status;
         states = _states;
-        stateMachine = new StateMachine<RangerController>(this, states[RangerState.Idle]);
+        stateMachine = new StateMachine<RangerController>(this, states[RangerState.Stay]);
 
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.isKinematic = true;
+        rb.gravityScale = 0;
+
+        animator = Util.FindChild<Animator>(gameObject, "UnitRoot");
+        animationHash = new Dictionary<RangerState, int>();
+        ranger.AddAnimationHash();
 
         routines = new Dictionary<string, Coroutine>();
 
         isDead = false;
         isInit = true;
-
     }
 
     public void ChangeState(RangerState _nextState, bool _isChangeSameState = false)
     {
         if (!isInit) return;
+        int hash;
         if (currentState == _nextState)
         {
             if (_isChangeSameState)
+            {
                 stateMachine.ChangeState(states[_nextState]);
+                if(animationHash.TryGetValue(_nextState, out hash))
+                    animator.Play(hash);
+            }
             return;
         }
         currentState = _nextState;
         setState = _nextState;
         stateMachine.ChangeState(states[_nextState]);
+        if (animationHash.TryGetValue(_nextState, out hash))
+            animator.Play(hash);
     }
 
     private void Update()
@@ -70,24 +82,54 @@ public class RangerController : BaseController
 
     public override void Hit(float _damage)
     {
-
+        GetDamage(_damage);
     }
 
     public override void GetDamage(float _damage)
     {
-
+        status.CurrentHP -= _damage;
     }
 
-    public void SetAttackTarget(EnemyController _attackTarget)
+    public override void Die()
     {
-        attackTarget = _attackTarget;
+        StopAllCoroutines();
+    }
+
+    public void FindAttackTarget()
+    {
+        for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+        {
+            if (attackTarget == null)
+            {
+                attackTarget = Managers.Object.Enemies[i];
+                continue;
+            }
+
+            if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position))
+                attackTarget = Managers.Object.Enemies[i];
+        }
+    }
+
+    public void Stop()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public override void CheckDie()
+    {
+        if (status.CurrentHP <= 0)
+        {
+            status.CurrentHP = 0;
+            ChangeState(RangerState.Die);
+        }
     }
 }
 
 public class RangerStatus : ControllerStatus
 {
-    public RangerStatus(RangerControllerData _data)
+    public RangerStatus(BaseController _controller, RangerControllerData _data)
     {
+        controller = _controller; 
         //°ø°Ý·Â
         defaultAttackForce = _data.attackForce;
         currentAttackForce = _data.attackForce;

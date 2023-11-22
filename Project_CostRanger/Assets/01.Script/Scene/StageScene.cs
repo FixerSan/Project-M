@@ -8,6 +8,7 @@ public class StageScene : BaseScene
 {
     private WaitForSeconds sceneStartDelay;
     private Dictionary<int, Transform> enemySpawnTranses;
+    private Dictionary<int, Transform> rangerSpawnTranses;
     
     public override void Init(Action _callback)
     {
@@ -17,6 +18,7 @@ public class StageScene : BaseScene
         Managers.Object.Enemies.Clear();
         sceneStartDelay = new WaitForSeconds(Define.sceneStartDelay);
         enemySpawnTranses = new Dictionary<int, Transform>();
+        rangerSpawnTranses= new Dictionary<int, Transform>();
 
         SceneEvent(0);
     }
@@ -35,17 +37,38 @@ public class StageScene : BaseScene
 
     private void SceneEventZero()
     {
+        Transform transforms = GameObject.Find("EnemySpawnTransforms").transform;
+        string[] stringArray = Enum.GetNames(typeof(EnemyTrans)); 
+
         //적 컨트롤러 생성 위치 캐싱
-        GameObject go = GameObject.Find("EnemySpawnTransforms");
-        if(go == null)
+        if(transforms == null)
         {
             Debug.Log("적 생성 위치가 존재하지 않음");
             return;
         }
-        string[] stringArray = Enum.GetNames(typeof(EnemyTrans)); 
         for (int i = 0; i < stringArray.Length; i++)
-            enemySpawnTranses.Add(i, go.transform.Find(stringArray[i]));
-        
+            enemySpawnTranses.Add(i, transforms.Find(stringArray[i]));
+
+        //레인저 컨트롤러 생성 위치 캐싱
+        switch(Managers.Game.battleStageSystem.batch)
+        {
+            case Define.Batch.One:
+                transforms = GameObject.Find("RangerSpawnTransforms_BatchOne").transform;
+                break;
+            case Define.Batch.Two:
+                transforms = GameObject.Find("RangerSpawnTransforms_BatchTwo").transform;
+                break;
+        }
+
+        stringArray = Enum.GetNames(typeof(RangerTrans));
+        for (int i = 0; i < stringArray.Length; i++)
+            rangerSpawnTranses.Add(i, transforms.Find(stringArray[i]));
+
+        //레인저 컨트롤러 생성
+        for (int i = 0; i < Managers.Game.battleStageSystem.rangerControllerData.Length; i++)
+            if (Managers.Game.battleStageSystem.rangerControllerData[i] != null)
+                Managers.Object.SpawnRanger(Managers.Game.battleStageSystem.rangerControllerData[i].UID, rangerSpawnTranses[i].position);
+
         //적 컨트롤러 생성
         string[] enemyUIDArray = Managers.Game.battleStageSystem.currentStageData.enemyUIDs.Split(",");
         for (int i = 0; i < enemyUIDArray.Length; i++)
@@ -53,6 +76,8 @@ public class StageScene : BaseScene
                 Managers.Object.SpawnEnemy(enemyUID, enemySpawnTranses[i].position);
 
 
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+            Managers.Object.Rangers[i].ChangeDirection(Define.Direction.Right);
         StartCoroutine(SceneEventZeroRoutine());
     }
 
@@ -60,6 +85,8 @@ public class StageScene : BaseScene
     {
         yield return sceneStartDelay;
         Managers.Game.battleStageSystem.StartStage();
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+            Managers.Object.Rangers[i].ChangeState(Define.RangerState.Idle);
     }
 
     public override void Clear()
@@ -67,17 +94,26 @@ public class StageScene : BaseScene
 
     }
 
+    private enum RangerTrans
+    {
+        Trans_RangerOne,
+        Trans_RangerTwo,
+        Trans_RangerThree,
+        Trans_RangerFour,
+        Trans_RangerFive,
+        Trans_RangerSix
+    }
 
     private enum EnemyTrans
     {
         Trans_EnemyOne = 0,
-        trans_EnemyTwo = 1,
-        trans_EnemyThree = 2,
-        trans_EnemyFour = 3,
-        trans_EnemyFive = 4,
-        trans_EnemySix = 5,
-        trans_EnemySeven = 6,
-        trans_EnemyEight = 7,
-        trans_EnemyNine = 8,
+        Trans_EnemyTwo = 1,
+        Trans_EnemyThree = 2,
+        Trans_EnemyFour = 3,
+        Trans_EnemyFive = 4,
+        Trans_EnemySix = 5,
+        Trans_EnemySeven = 6,
+        Trans_EnemyEight = 7,
+        Trans_EnemyNine = 8,
     }
 }

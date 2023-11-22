@@ -71,6 +71,17 @@ public static class Extension
         return count; 
     }
 
+    public static List<T> ArrayToList<T>(this T[] _array) where T : class
+    {
+        List<T> list = new List<T>();
+        for (int i = 0; i < _array.Length; i++)
+        {
+            if (_array[i] != null)
+                list.Add(_array[i]);
+        }
+        return list;
+    }
+
     #endregion
     #region SpriteRenderer
     public static void FadeOut(this SpriteRenderer _spriteRenderer, float _fadeOutTime, System.Action _callback = null)

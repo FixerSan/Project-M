@@ -56,10 +56,10 @@ public class ObjectManager
         {
             if (enemyTrnas == null)
             {
-                GameObject go = GameObject.Find("@enemyTrnas");
+                GameObject go = GameObject.Find("@EnemyTrnas");
                 if (go == null)
                 {
-                    go = new GameObject(name: "@enemyTrnas");
+                    go = new GameObject(name: "@EnemyTrnas");
                     go.transform.SetParent(EntityTrans);
                 }
                 enemyTrnas = go.transform;
@@ -74,7 +74,7 @@ public class ObjectManager
     {
         RangerControllerData data = Managers.Data.GetRangerControllerData(_UID);
         RangerController controller = Managers.Resource.Instantiate(data.name, RangerTrans).GetOrAddComponent<RangerController>();
-        RangerStatus status = new RangerStatus(data);
+        RangerStatus status = new RangerStatus(controller, data);
         Ranger ranger = null;
         Dictionary<RangerState, State<RangerController>> states = new Dictionary<RangerState, State<RangerController>>();
 
@@ -82,7 +82,8 @@ public class ObjectManager
         switch (rangerEnum)
         {
             case Define.Ranger.TestRanger:
-                ranger = new Rangers.TestRanger();
+                ranger = new Rangers.TestRanger(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
                 states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
                 states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
                 states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
@@ -92,7 +93,7 @@ public class ObjectManager
                 states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
                 break;
         }
-
+        controller.SetPosition(_position);
         controller.Init(ranger, data, status, states);
         Rangers.Add(controller);
         return controller;
@@ -101,8 +102,8 @@ public class ObjectManager
     public EnemyController SpawnEnemy(int _UID, Vector2 _position = new Vector2())
     {
         EnemyControllerData data = Managers.Data.GetEnemyControllerData(_UID);
-        EnemyController controller = Managers.Resource.Instantiate(data.name, RangerTrans).GetOrAddComponent<EnemyController>();
-        EnemyStatus status = new EnemyStatus(data);
+        EnemyController controller = Managers.Resource.Instantiate(data.name, EnemyTrnas).GetOrAddComponent<EnemyController>();
+        EnemyStatus status = new EnemyStatus(controller,data);
         Enemy enemy = null;
         Dictionary<EnemyState, State<EnemyController>> states = new Dictionary<EnemyState, State<EnemyController>>();
 
@@ -111,6 +112,7 @@ public class ObjectManager
         {
             case Define.Enemy.TestEnemyZero:
                 enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
                 states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
                 states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
                 states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
@@ -119,8 +121,105 @@ public class ObjectManager
                 states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
                 states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
                 break;
-        }
 
+            case Define.Enemy.TestEnemyOne:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemyTwo:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemyThree:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemyFour:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemyFive:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemySix:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemySeven:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+            case Define.Enemy.TestEnemyEight:
+                enemy = new Enemies.TestEnemy(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+                break;
+
+        }
+        controller.SetPosition(_position);
         controller.Init(enemy, data, status, states);
         Enemies.Add(controller);
         return controller;

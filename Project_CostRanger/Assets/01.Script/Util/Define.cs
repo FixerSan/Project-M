@@ -10,6 +10,7 @@ public class Define
     public static readonly Vector2 prepareEnemyOffset = new Vector2(0, -40);
     public static readonly Vector2 prepareRangerOffset = new Vector2(0, -60);
     public static readonly float attackAnimationTime = 1;
+    public static readonly float normalAttackAnimationTime = 0.417f;
     public static readonly float skillAnimationTime = 1;
 
     public static readonly float sceneStartDelay = 3;
@@ -59,17 +60,17 @@ public class Define
 
     public enum RangerState
     {
-        Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
+        Stay, Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
     public enum Enemy
     {
-        TestEnemyZero
+        TestEnemyZero, TestEnemyOne, TestEnemyTwo, TestEnemyThree , TestEnemyFour , TestEnemyFive , TestEnemySix , TestEnemySeven , TestEnemyEight
     }
 
     public enum EnemyState
     {
-        Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
+        Stay, Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
     public enum Specialty
@@ -84,7 +85,7 @@ public class Define
 
     public enum VoidEventType
     {
-        OnChangePrepare, OnChangeControllerStatus
+        OnChangePrepare, OnChangeControllerStatus, OnChangeBattle
     }
     public enum IntEventType
     {

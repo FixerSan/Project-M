@@ -6,6 +6,24 @@ namespace EnemyStates
 {
     namespace Base
     {
+        public class Stay : State<EnemyController>
+        {
+            public override void EnterState(EnemyController _entity)
+            {
+
+            }
+
+            public override void ExitState(EnemyController _entity)
+            {
+
+            }
+
+            public override void UpdateState(EnemyController _entity)
+            {
+
+            }
+        }
+
         public class Idle : State<EnemyController>
         {
             public override void EnterState(EnemyController _entity)

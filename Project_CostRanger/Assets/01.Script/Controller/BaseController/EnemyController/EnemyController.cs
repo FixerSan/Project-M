@@ -11,7 +11,6 @@ public class EnemyController : BaseController
 
     //Enemy Stage
     public EnemyState setState;
-    public Direction direction;
     private EnemyState currentState;
     public Dictionary<EnemyState, State<EnemyController>> states;
     public StateMachine<EnemyController> stateMachine;
@@ -20,8 +19,7 @@ public class EnemyController : BaseController
 
     //Enemy ETC
     public Rigidbody2D rb;
-    public Dictionary<string, Coroutine> routines;
-    public RangerController attackTarget;
+    public BaseController attackTarget;
 
     public void Init(Enemy _enemy, EnemyControllerData _data, EnemyStatus _status, Dictionary<EnemyState, State<EnemyController>> _states)
     {
@@ -29,7 +27,7 @@ public class EnemyController : BaseController
         data = _data;
         status = _status;
         states = _states;
-        stateMachine = new StateMachine<EnemyController>(this, states[EnemyState.Idle]);
+        stateMachine = new StateMachine<EnemyController>(this, states[EnemyState.Stay]);
 
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -53,13 +51,6 @@ public class EnemyController : BaseController
         currentState = _nextState;
         setState = _nextState;
         stateMachine.ChangeState(states[_nextState]);
-    }
-
-    public void ChangeDirection(Define.Direction _direction)
-    {
-        if (direction == _direction) return;
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
-        direction = _direction;
     }
 
     private void Update()
@@ -90,15 +81,31 @@ public class EnemyController : BaseController
         enemy.Follow();
     }
 
-    public void SetAttackTarget(RangerController _attackTarget)
+    public void SetAttackTarget(BaseController _attackTarget)
     {
         attackTarget = _attackTarget;
+    }
+
+    public override void Die()
+    {
+        StopAllCoroutines();
+    }
+
+    public override void CheckDie()
+    {
+        if (status.CurrentHP <= 0)
+        {
+            status.CurrentHP = 0;
+            ChangeState(EnemyState.Die);
+        }
     }
 }
 public class EnemyStatus : ControllerStatus
 {
-    public EnemyStatus(EnemyControllerData _data)
+    public EnemyStatus(BaseController _controller,EnemyControllerData _data)
     {
+        controller = _controller;
+
         //°ø°Ý·Â
         defaultAttackForce = _data.attackForce;
         currentAttackForce = _data.attackForce;

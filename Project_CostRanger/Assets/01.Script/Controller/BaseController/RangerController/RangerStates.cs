@@ -6,11 +6,11 @@ namespace RangerStates
 {
     namespace Base
     {
-        public class Idle : State<RangerController>
+        public class Stay : State<RangerController>
         {
             public override void EnterState(RangerController _entity)
             {
-                Debug.Log("¾ÆÀÌµé µé¾î¿È");
+
             }
 
             public override void ExitState(RangerController _entity)
@@ -21,6 +21,26 @@ namespace RangerStates
             public override void UpdateState(RangerController _entity)
             {
 
+            }
+        }
+
+        public class Idle : State<RangerController>
+        {
+            public override void EnterState(RangerController _entity)
+            {
+
+            }
+
+            public override void ExitState(RangerController _entity)
+            {
+
+            }
+
+            public override void UpdateState(RangerController _entity)
+            {
+                if (_entity.ranger.CheckAttack()) return;
+                if (_entity.ranger.CheckFollow()) return;
+                _entity.ranger.CheckAttackCooltime();
             }
         }
 
@@ -46,7 +66,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-                Debug.Log("ÆÈ·Î¿ì µé¾î¿È");
+
             }
 
             public override void ExitState(RangerController _entity)
@@ -56,7 +76,9 @@ namespace RangerStates
 
             public override void UpdateState(RangerController _entity)
             {
-
+                if (_entity.ranger.CheckAttack()) return;
+                _entity.ranger.Follow();
+                _entity.ranger.CheckAttackCooltime();
             }
         }
 
@@ -64,7 +86,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                _entity.ranger.Attack();
             }
 
             public override void ExitState(RangerController _entity)
@@ -100,7 +122,7 @@ namespace RangerStates
         {
             public override void EnterState(RangerController _entity)
             {
-
+                _entity.Die();
             }
 
             public override void ExitState(RangerController _entity)

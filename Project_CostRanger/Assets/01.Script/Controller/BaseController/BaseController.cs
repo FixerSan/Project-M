@@ -5,13 +5,31 @@ using UnityEngine;
 public abstract class BaseController : MonoBehaviour
 {
     public ControllerStatus status;
+    public Dictionary<string, Coroutine> routines;
+    public Define.Direction direction;
 
     public abstract void Hit(float _damage);
     public abstract void GetDamage(float _damage);
+
+    public void SetPosition(Vector3 _position)
+    {
+        transform.position = _position;
+    }
+
+    public void ChangeDirection(Define.Direction _direction)
+    {
+        if (direction == _direction) return;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        direction = _direction;
+    }
+
+    public abstract void CheckDie();
+    public abstract void Die();
 }
 
 public abstract class ControllerStatus
 {
+    protected BaseController controller;
     //°ø°Ý·Â
     public float defaultAttackForce;
     protected float currentAttackForce;
@@ -133,7 +151,9 @@ public abstract class ControllerStatus
 
         set
         {
+            if (currentHP == 0) return;
             currentHP = value;
+            controller.CheckDie();
         }
     }
 

@@ -63,9 +63,9 @@ public class UIPopup_PrepareStage : UIPopup
         {
             tempBool = false;
 
-            for (int j = 0; j < Managers.Game.prepareStageSystem.rangers.Length; j++)
+            for (int j = 0; j < Managers.Game.prepareStageSystem.rangerControllerData.Length; j++)
             {
-                if (Managers.Game.prepareStageSystem.rangers[j] != null && Managers.Game.prepareStageSystem.rangers[j].UID == Managers.Game.playerData.hasRangers[i].UID)
+                if (Managers.Game.prepareStageSystem.rangerControllerData[j] != null && Managers.Game.prepareStageSystem.rangerControllerData[j].UID == Managers.Game.playerData.hasRangers[i].UID)
                     tempBool = true;
             }
 
@@ -82,7 +82,7 @@ public class UIPopup_PrepareStage : UIPopup
         {
             for (int i = 0; i < batchOne_UseRangerSlots.Count; i++)
             {
-                batchOne_UseRangerSlots[i].RedrawUI(Managers.Game.prepareStageSystem.rangers[i], transform);
+                batchOne_UseRangerSlots[i].RedrawUI(Managers.Game.prepareStageSystem.rangerControllerData[i], transform);
             }
         }
     }

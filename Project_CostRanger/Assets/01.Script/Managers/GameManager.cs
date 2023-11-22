@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
 using static Define;
 
@@ -43,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     public void StartBattleStage(Action<Define.StartBattleStageEvent> _callback)
     {
         //여기서 검증한 후 시작할 수 없는 상황이면 콜백
-        if(prepareStageSystem.rangers.NullCount() == prepareStageSystem.rangers.Length)
+        if(prepareStageSystem.rangerControllerData.NullCount() == prepareStageSystem.rangerControllerData.Length)
         {
             _callback?.Invoke(StartBattleStageEvent.RangerIsNotExist);
             return;
@@ -158,7 +159,7 @@ public class LoginSystem
 public class PrepareStageSystem
 {
     public StageData stageData;
-    public RangerControllerData[] rangers;
+    public RangerControllerData[] rangerControllerData;
     public EnemyControllerData[] enemies;
     public Batch batch;
 
@@ -169,22 +170,22 @@ public class PrepareStageSystem
         //저장된 레인저 프리셋 설정
         SetupEnemy();
 
-        UpdataUI();
+        RedrawUI();
     }
 
     public void SetUseRanger(int _rangerIndex, int _slotIndex)
     {
-        rangers[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
+        rangerControllerData[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
 
-        UpdataUI();
+        RedrawUI();
     }
 
     public void CancelUseRanger(int _slotIndex)
     {
         if (_slotIndex == -1) return;
-        rangers[_slotIndex] = null;
+        rangerControllerData[_slotIndex] = null;
 
-        UpdataUI();
+        RedrawUI();
     }
 
     //적 정보 대로 생성
@@ -197,14 +198,14 @@ public class PrepareStageSystem
                 enemies[i] = Managers.Data.GetEnemyControllerData(enemyUID);
     }
 
-    public void UpdataUI()
+    public void RedrawUI()
     {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangePrepare);
     }
 
     public PrepareStageSystem()
     {
-        rangers = new RangerControllerData[6];
+        rangerControllerData = new RangerControllerData[6];
         enemies = new EnemyControllerData[9];
     }
 }
@@ -212,6 +213,9 @@ public class BattleStageSystem
 {
     public StageData currentStageData;
     public StageScene scene;
+    public Batch batch;
+
+    public RangerControllerData[] rangerControllerData;
 
     //현재 진행중인 스테이지중 플레이어의 상태
     public int canUseCost;
@@ -242,6 +246,8 @@ public class BattleStageSystem
     {
         currentStageData = _prepareSystem.stageData;
         scene = Managers.Scene.GetActiveScene<StageScene>();
+        batch = _prepareSystem.batch;
+        rangerControllerData = _prepareSystem.rangerControllerData;
 
         //여기서 프리페어 시스템 정보를 적용시킬 것임
         nowUseCost = 0;
@@ -279,6 +285,7 @@ public class BattleStageSystem
     public void CheckTime()
     {
         time -= Time.deltaTime;
+        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattle);
         if (time <= 0)
         {
             time = 0;
@@ -294,6 +301,11 @@ public class BattleStageSystem
     public void Lose()
     {
         Managers.Game.state = GameState.BattleAfter;
+    }
+
+    public void RedrawUI()
+    {
+        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattle);
     }
 
     public BattleStageSystem()

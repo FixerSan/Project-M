@@ -30,12 +30,14 @@ public class UIPrepareRanger : UIBase
         BindEvent(gameObject, _dragCallback: OnEndDrag, _type: UIEventType.EndDrag);
         if(slot is UISlot_CanUseRanger)
             spriteTrans.gameObject.SetActive(false);
+
+        spriteTrans.eulerAngles = new Vector3(0, 180, 0);
     }
 
     public void OnClick_CancelUse()
     {
         if (slot.slotIndex == -1) return;
-        if (Managers.Game.prepareStageSystem.rangers[slot.slotIndex] == null) return;
+        if (Managers.Game.prepareStageSystem.rangerControllerData[slot.slotIndex] == null) return;
 
         Managers.Game.prepareStageSystem.CancelUseRanger(slot.slotIndex);
     }
