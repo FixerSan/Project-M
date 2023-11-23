@@ -30,6 +30,7 @@ public class EventManager
             voidEvents.Add(_type, new Action(_eventAction));
         }
     }
+
     public void InvokeVoidEvent(VoidEventType _type)
     {
         if (voidEvents.TryGetValue(_type, out Action eventAction))

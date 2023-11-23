@@ -85,8 +85,6 @@ public class StageScene : BaseScene
     {
         yield return sceneStartDelay;
         Managers.Game.battleStageSystem.StartStage();
-        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
-            Managers.Object.Rangers[i].ChangeState(Define.RangerState.Idle);
     }
 
     public override void Clear()

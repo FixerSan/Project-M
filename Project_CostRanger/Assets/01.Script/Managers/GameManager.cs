@@ -273,7 +273,10 @@ public class BattleStageSystem
         Managers.Game.state = GameState.BattleProgress;
 
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
-            Managers.Object.Enemies[i].ChangeState(Define.EnemyState.Follow);
+            Managers.Object.Enemies[i].ChangeState(Define.EnemyState.Idle);
+
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+            Managers.Object.Rangers[i].ChangeState(Define.RangerState.Idle);
     }
 
     public void Update()
