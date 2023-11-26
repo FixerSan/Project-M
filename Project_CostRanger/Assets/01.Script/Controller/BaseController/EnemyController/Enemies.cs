@@ -11,19 +11,130 @@ public abstract class Enemy
     protected WaitForSeconds skillWaitForSeconds;
 
 
-    public virtual void Follow()
+    public virtual void AddAnimationHash()
+    {
+        controller.animationHash.Add(EnemyState.Idle, Animator.StringToHash("0_idle"));
+        controller.animationHash.Add(EnemyState.Follow, Animator.StringToHash("1_Run"));
+        controller.animationHash.Add(EnemyState.Attack, Animator.StringToHash("2_Attack_Normal"));
+        controller.animationHash.Add(EnemyState.Die, Animator.StringToHash("4_Death"));
+        controller.animationHash.Add(EnemyState.SkillCast, Animator.StringToHash("5_Skill_Normal"));
+    }
+
+    public virtual bool CheckFollow()
+    {
+        if (controller.attackTarget == null)
+            controller.FindAttackTarget();
+
+        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) > controller.status.CurrentAttackDistance)
         {
-            if (controller.attackTarget != null)
-            {
-                if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < controller.status.CurrentAttackDistance)
-                    return;
-                Vector2 dir = (controller.attackTarget.transform.position - controller.transform.position).normalized;
-            if (dir.x <= 0) controller.ChangeDirection(Define.Direction.Left);
-            else controller.ChangeDirection(Define.Direction.Right);
-            controller.transform.Translate((dir * controller.status.CurrentMoveSpeed) * Time.deltaTime);
-            }
+            controller.ChangeState(Define.EnemyState.Follow);
+            return true;
         }
 
+        controller.Stop();
+        return false;
+    }
+
+    //추적
+    public virtual void Follow()
+    {
+        if (controller.attackTarget == null)
+            controller.FindAttackTarget();
+
+        Vector2 dir = (controller.attackTarget.transform.position - controller.transform.position).normalized;
+        controller.rb.velocity = dir * controller.status.CurrentMoveSpeed * Time.fixedDeltaTime * 10;
+    }
+
+    public virtual void CheckAttackCooltime()
+    {
+        //공격 쿨타임이 있을 때 쿨타임 감소
+        if (controller.status.CheckAttackCooltime > 0)
+        {
+            controller.status.CheckAttackCooltime -= Time.deltaTime;
+            if (controller.status.CheckAttackCooltime <= 0)
+                controller.status.CheckAttackCooltime = 0;
+        }
+    }
+
+    //공격 가능한지 체크
+    public virtual bool CheckAttack()
+    {
+        //예외 처리
+        if (controller.attackTarget == null) return false;
+        if (controller.status.CheckAttackCooltime > 0) return false;
+
+        //공격 가능한 거리인지 체크 후 가능하면 공격 상태로 변환
+        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) <= controller.status.CurrentAttackDistance)
+        {
+            controller.ChangeState(Define.EnemyState.Attack);
+            return true;
+        }
+        return false;
+    }
+
+    //공격 처리
+    public virtual void Attack()
+    {
+        controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));
+    }
+
+    //공격 처리 루틴
+    public virtual IEnumerator AttackRoutine()
+    {
+        controller.Stop();
+        controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+        //Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
+        //Managers.Game.battleInfo.UpdateMVPPoints();
+        yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
+        controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+        controller.ChangeState(Define.EnemyState.Idle);
+        controller.routines.Remove("attack");
+    }
+
+    public virtual void CheckSkillCooltime()
+    {
+        if (controller.status.CheckSkillCooltime > 0)
+        {
+            controller.status.CheckSkillCooltime -= Time.deltaTime;
+            if (controller.status.CheckSkillCooltime <= 0)
+                controller.status.CheckSkillCooltime = 0;
+        }
+    }
+
+    public virtual void UseSkill()
+    {
+        if (controller.status.CheckSkillCooltime == 0)
+        {
+            controller.ChangeState(EnemyState.SkillCast);
+        }
+    }
+
+    public virtual bool CheckCanUseSkill()
+    {
+        if (controller.status.CheckSkillCooltime == 0)
+        {
+            controller.ChangeState(EnemyState.SkillCast);
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual void Skill()
+    {
+        controller.routines.Add("skill", controller.StartCoroutine(SkillRoutine()));
+    }
+
+    //스킬 처리 루틴
+    public virtual IEnumerator SkillRoutine()
+    {
+        controller.Stop();
+        Debug.Log("스킬 사용됨");
+        yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임
+        controller.ChangeState(Define.EnemyState.Idle);
+        controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+        controller.routines.Remove("skill");
+    }
 }
 
 namespace Enemies

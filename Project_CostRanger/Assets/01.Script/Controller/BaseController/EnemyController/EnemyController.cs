@@ -19,7 +19,9 @@ public class EnemyController : BaseController
 
     //Enemy ETC
     public Rigidbody2D rb;
-    public BaseController attackTarget;
+    public Animator animator;
+    public Dictionary<EnemyState, int> animationHash;
+    public RangerController attackTarget;
 
     public void Init(Enemy _enemy, EnemyControllerData _data, EnemyStatus _status, Dictionary<EnemyState, State<EnemyController>> _states)
     {
@@ -30,10 +32,15 @@ public class EnemyController : BaseController
         stateMachine = new StateMachine<EnemyController>(this, states[EnemyState.Stay]);
 
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.isKinematic = true;
+        rb.gravityScale = 0;
+
+        animator = Util.FindChild<Animator>(gameObject, _recursive:true);
+        animationHash = new Dictionary<EnemyState, int>();
+        enemy.AddAnimationHash();
+
 
         routines = new Dictionary<string, Coroutine>();
+
         direction = Direction.Left;
         isDead = false;
         isInit = true;
@@ -42,15 +49,22 @@ public class EnemyController : BaseController
     public void ChangeState(EnemyState _nextState, bool _isChangeSameState = false)
     {
         if (!isInit) return;
+        int hash;
         if (currentState == _nextState)
         {
             if (_isChangeSameState)
+            {
                 stateMachine.ChangeState(states[_nextState]);
+                if (animationHash.TryGetValue(_nextState, out hash))
+                    animator.Play(hash);
+            }
             return;
         }
         currentState = _nextState;
         setState = _nextState;
         stateMachine.ChangeState(states[_nextState]);
+        if (animationHash.TryGetValue(_nextState, out hash))
+            animator.Play(hash);
     }
 
     private void Update()
@@ -75,13 +89,32 @@ public class EnemyController : BaseController
     {
 
     }
+    public void FindAttackTarget()
+    {
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+        {
+            if (attackTarget == null)
+            {
+                attackTarget = Managers.Object.Rangers[i];
+                continue;
+            }
+
+            if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position))
+                attackTarget = Managers.Object.Rangers[i];
+        }
+    }
+
+    public void Stop()
+    {
+        rb.velocity = Vector2.zero;
+    }
 
     public void Follow()
     {
         enemy.Follow();
     }
 
-    public void SetAttackTarget(BaseController _attackTarget)
+    public void SetAttackTarget(RangerController _attackTarget)
     {
         attackTarget = _attackTarget;
     }

@@ -42,6 +42,7 @@ public class RangerController : BaseController
 
         routines = new Dictionary<string, Coroutine>();
 
+        direction = Direction.Left;
         isDead = false;
         isInit = true;
     }
@@ -100,7 +101,7 @@ public class RangerController : BaseController
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
             if (attackTarget == null)
-            {
+            {   
                 attackTarget = Managers.Object.Enemies[i];
                 continue;
             }

@@ -38,7 +38,11 @@ namespace EnemyStates
 
             public override void UpdateState(EnemyController _entity)
             {
-
+                if (_entity.enemy.CheckCanUseSkill()) return;
+                if (_entity.enemy.CheckAttack()) return;
+                if (_entity.enemy.CheckFollow()) return;
+                _entity.enemy.CheckAttackCooltime();
+                _entity.enemy.CheckSkillCooltime();
             }
         }
 
@@ -74,7 +78,11 @@ namespace EnemyStates
 
             public override void UpdateState(EnemyController _entity)
             {
-                _entity.Follow();
+                if (_entity.enemy.CheckCanUseSkill()) return;
+                if (_entity.enemy.CheckAttack()) return;
+                _entity.enemy.CheckAttackCooltime();
+                _entity.enemy.CheckSkillCooltime();
+                _entity.enemy.Follow();
             }
         }
 
@@ -82,17 +90,17 @@ namespace EnemyStates
         {
             public override void EnterState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+                _entity.enemy.Attack();
             }
 
             public override void ExitState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
 
             public override void UpdateState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+                _entity.enemy.CheckSkillCooltime();
             }
         }
 
@@ -100,17 +108,17 @@ namespace EnemyStates
         {
             public override void EnterState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+                _entity.enemy.Skill();
             }
 
             public override void ExitState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
 
             public override void UpdateState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+                _entity.enemy.CheckAttackCooltime();
             }
         }
 
@@ -118,17 +126,17 @@ namespace EnemyStates
         {
             public override void EnterState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+                _entity.Die();
             }
 
             public override void ExitState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
 
             public override void UpdateState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
         }
 
@@ -136,17 +144,17 @@ namespace EnemyStates
         {
             public override void EnterState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
 
             public override void ExitState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
 
             public override void UpdateState(EnemyController _entity)
             {
-                throw new System.NotImplementedException();
+
             }
         }
     }
