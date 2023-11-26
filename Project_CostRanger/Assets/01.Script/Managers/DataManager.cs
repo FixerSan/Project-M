@@ -192,14 +192,14 @@ public class DataManager
         }
 
         //플레이어 데이터 생성 후 리턴
-        PlayerData data = new PlayerData(saveData.ID, saveData.name, hasRangers, saveData.lastClearStageUID);
+        PlayerData data = new PlayerData(saveData.ID, saveData.name, saveData.level, saveData.exp, saveData.gold, saveData.gem, saveData.upgradeCost, hasRangers, saveData.lastClearStageUID);
         return data;
     }
 
     //플레이에 세이브 데이터 생성
     public void CreatePlayerSaveData(string _ID, string _passward, string _name, string _hasRangerUID)
     {
-        PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, _hasRangerUID, -1);
+        PlayerSaveData playerSaveData = new PlayerSaveData(_ID, _passward, _name, 1, 0, 0, 100, 0, _hasRangerUID, -1);
         playerSaveDatas.TryAdd(playerSaveData.ID, playerSaveData);
     }
 
@@ -298,13 +298,23 @@ public class PlayerData : Data
 {
     public string ID;
     public string name;
+    public int level;
+    public int exp;
+    public int gold;
+    public int gem;
+    public int upgradeCost;
     public List<RangerInfoData> hasRangers;
     public int lastClearStageUID;
 
-    public PlayerData(string _ID, string _name, List<RangerInfoData> _hasRangers, int _lastClearStageUID)
+    public PlayerData(string _ID, string _name, int _level, int _exp, int _gold, int _gem, int _upgradeCost, List<RangerInfoData> _hasRangers, int _lastClearStageUID)
     {
         ID = _ID;
         name = _name;
+        level = _level;
+        exp = _exp;
+        gold = _gold;
+        gem = _gem;
+        upgradeCost = _upgradeCost;
         hasRangers = _hasRangers;
         lastClearStageUID = _lastClearStageUID;
     }
@@ -316,14 +326,24 @@ public class PlayerSaveData : Data
     public string ID;
     public string passward;
     public string name;
+    public int level;
+    public int exp;
+    public int gold;
+    public int gem;
+    public int upgradeCost;
     public string hasRangerUID;
     public int lastClearStageUID;
 
-    public PlayerSaveData(string _ID, string _passward , string _name,  string _hasRangerUID, int _lastClearStageUID)
+    public PlayerSaveData(string _ID, string _passward , string _name, int _level, int _exp, int _gold, int _gem, int _upgradeCost, string _hasRangerUID, int _lastClearStageUID)
     {
         ID = _ID;
         passward = _passward;
         name = _name;
+        level = _level;
+        exp = _exp;
+        gold = _gold;
+        gem = _gem;
+        upgradeCost = _upgradeCost;
         hasRangerUID = _hasRangerUID;
         lastClearStageUID = _lastClearStageUID;
     }

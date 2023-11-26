@@ -86,7 +86,7 @@ public class Define
 
     public enum VoidEventType
     {
-        OnChangePrepare, OnChangeControllerStatus, OnChangeBattle
+        OnChangePrepare, OnChangeControllerStatus, OnChangeBattle, OnChangePlayerInfo
     }
     public enum IntEventType
     {

@@ -198,6 +198,7 @@ public class PrepareStageSystem
 
     public void SetSpecialty()
     {
+        return;
         specialties.Clear();
         for (int i = 0; i < rangerControllerData.Length; i++)
         {

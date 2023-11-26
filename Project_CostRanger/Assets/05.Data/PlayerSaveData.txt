@@ -4,6 +4,11 @@
             "ID": "Fixer1302",
             "passward": "1234",
             "name": "Fixer",
+            "level": 999,
+            "exp": 0,
+            "gold": 123456789,
+            "gem": 123456789,
+            "upgradeCost": 0,
             "hasRangerUID": "0",
             "lastClearStageUID": -1
         },
@@ -11,6 +16,11 @@
             "ID": "GangSan1302",
             "passward": "123",
             "name": "GangSan",
+            "level": 0,
+            "exp": 0,
+            "gold": 0,
+            "gem": 0,
+            "upgradeCost": 0,
             "hasRangerUID": "",
             "lastClearStageUID": 0
         },
@@ -18,6 +28,11 @@
             "ID": "dygp25",
             "passward": "@Dltkdtls1225",
             "name": "Yoheigh",
+            "level": 0,
+            "exp": 0,
+            "gold": 0,
+            "gem": 0,
+            "upgradeCost": 0,
             "hasRangerUID": "",
             "lastClearStageUID": 0
         },
@@ -25,6 +40,11 @@
             "ID": "sksk",
             "passward": "sksk",
             "name": "sksk",
+            "level": 0,
+            "exp": 0,
+            "gold": 0,
+            "gem": 0,
+            "upgradeCost": 0,
             "hasRangerUID": "",
             "lastClearStageUID": 0
         }
