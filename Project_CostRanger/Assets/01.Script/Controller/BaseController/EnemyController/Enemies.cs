@@ -6,7 +6,7 @@ using static Define;
 public abstract class Enemy
 {
     protected EnemyController controller;
-    public List<Define.Specialty> specialties;
+    public List<Define.SpecialtyType> specialties;
     protected WaitForSeconds attackWaitForSeceonds;
     protected WaitForSeconds skillWaitForSeconds;
 
@@ -35,7 +35,7 @@ namespace Enemies
             controller = _controller;
             attackWaitForSeceonds = new WaitForSeconds(Define.attackAnimationTime);
             skillWaitForSeconds = new WaitForSeconds(Define.skillAnimationTime);
-            specialties = new List<Define.Specialty>();
+            specialties = new List<Define.SpecialtyType>();
         }
     }
 }

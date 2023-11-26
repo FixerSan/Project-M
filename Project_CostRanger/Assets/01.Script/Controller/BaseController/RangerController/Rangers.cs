@@ -8,7 +8,7 @@ using static Define;
 public abstract class Ranger 
 {
     protected RangerController controller;
-    public List<Define.Specialty> specialties;
+    public List<Define.SpecialtyType> specialties;
     protected WaitForSeconds attackWaitForSeceonds;
     protected WaitForSeconds skillWaitForSeconds;
 
@@ -148,7 +148,7 @@ namespace Rangers
             controller = _controller;
             attackWaitForSeceonds = new WaitForSeconds(Define.normalAttackAnimationTime);
             skillWaitForSeconds = new WaitForSeconds(Define.skillAnimationTime);
-            specialties = new List<Define.Specialty>();
+            specialties = new List<Define.SpecialtyType>();
         }
     }
 }

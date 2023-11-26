@@ -16,7 +16,6 @@ public class GameManager : Singleton<GameManager>
     public BattleStageSystem battleStageSystem;
     public PlayerData playerData;
 
-
     public void Awake()
     {
         StartGame();
@@ -161,7 +160,18 @@ public class PrepareStageSystem
     public StageData stageData;
     public RangerControllerData[] rangerControllerData;
     public EnemyControllerData[] enemies;
+
+    public Dictionary<SpecialtyType ,Specialty> specialties;
     public Batch batch;
+
+    private SpecialtyType tempSpecialtyType;
+
+    public PrepareStageSystem()
+    {
+        rangerControllerData = new RangerControllerData[6];
+        enemies = new EnemyControllerData[9];
+        specialties = new Dictionary<SpecialtyType, Specialty>();
+    }
 
     //초기 설정
     public void Init(StageData _stageData)
@@ -169,23 +179,48 @@ public class PrepareStageSystem
         stageData = _stageData;
         //저장된 레인저 프리셋 설정
         SetupEnemy();
-
         RedrawUI();
     }
 
     public void SetUseRanger(int _rangerIndex, int _slotIndex)
     {
         rangerControllerData[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
-
+        SetSpecialty();
         RedrawUI();
     }
-
     public void CancelUseRanger(int _slotIndex)
     {
         if (_slotIndex == -1) return;
         rangerControllerData[_slotIndex] = null;
-
+        SetSpecialty();
         RedrawUI();
+    }
+
+    public void SetSpecialty()
+    {
+        specialties.Clear();
+        for (int i = 0; i < rangerControllerData.Length; i++)
+        {
+            if (rangerControllerData[i] != null)
+            {
+                tempSpecialtyType = Util.ParseEnum<SpecialtyType>(rangerControllerData[i].specialtyOne);
+                if (!specialties.ContainsKey(tempSpecialtyType))
+                    CreateSpecialty(tempSpecialtyType);
+                specialties[tempSpecialtyType].AddCount();
+
+                tempSpecialtyType = Util.ParseEnum<SpecialtyType>(rangerControllerData[i].specialtyTwo);
+                if (!specialties.ContainsKey(tempSpecialtyType))
+                    CreateSpecialty(tempSpecialtyType);
+                specialties[tempSpecialtyType].AddCount();
+            }
+        }
+    }
+
+    public void CreateSpecialty(SpecialtyType type)
+    {
+        Specialty specialty = null;
+        if (type == SpecialtyType.Test) specialty = new Specialties.Test();
+        specialties.Add(type, specialty);
     }
 
     //적 정보 대로 생성
@@ -203,11 +238,6 @@ public class PrepareStageSystem
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangePrepare);
     }
 
-    public PrepareStageSystem()
-    {
-        rangerControllerData = new RangerControllerData[6];
-        enemies = new EnemyControllerData[9];
-    }
 }
 public class BattleStageSystem
 {
@@ -216,6 +246,7 @@ public class BattleStageSystem
     public Batch batch;
 
     public RangerControllerData[] rangerControllerData;
+    public List<Specialty> specialties;
 
     //현재 진행중인 스테이지중 플레이어의 상태
     public int canUseCost;
@@ -241,6 +272,32 @@ public class BattleStageSystem
     public bool isFastSpeed;
     public float time;
 
+    public BattleStageSystem()
+    {
+        //현재 진행중인 스테이지중 플레이어의 상태
+        nowUseCost = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        allDamage = 0;
+
+        //데미지의 맞춰 정렬된 플레이어 엔티티들
+        battleMVPPoints = new List<RangerController>();
+        specialties = new List<Specialty>();
+
+        //현재 진행중인 스테이지중 적의 상태
+        nowEnemyCount = 0;
+        enemyCurrentHP = 0;
+        enemyMaxHP = 0;
+        enemyAttackForce = 0;
+        enemybattleForce = 0;
+
+        //게임 진행 설정 및 정보
+        isAutoSkill = false;
+        isFastSpeed = false;
+        time = 0;
+    }
 
     public void Init(PrepareStageSystem _prepareSystem)
     {
@@ -248,6 +305,7 @@ public class BattleStageSystem
         scene = Managers.Scene.GetActiveScene<StageScene>();
         batch = _prepareSystem.batch;
         rangerControllerData = _prepareSystem.rangerControllerData;
+        specialties.Clear();
 
         //여기서 프리페어 시스템 정보를 적용시킬 것임
         nowUseCost = 0;
@@ -326,29 +384,4 @@ public class BattleStageSystem
         Managers.Event.InvokeVoidEvent(VoidEventType.OnChangeBattle);
     }
 
-    public BattleStageSystem()
-    {
-        //현재 진행중인 스테이지중 플레이어의 상태
-        nowUseCost = 0;
-        armyCurrentHP = 0;
-        armyMaxHP = 0;
-        armyAttackForce = 0;
-        armybattleForce = 0;
-        allDamage = 0;
-
-        //데미지의 맞춰 정렬된 플레이어 엔티티들
-        battleMVPPoints = new List<RangerController>();
-
-        //현재 진행중인 스테이지중 적의 상태
-        nowEnemyCount = 0;
-        enemyCurrentHP = 0;
-        enemyMaxHP = 0;
-        enemyAttackForce = 0;
-        enemybattleForce = 0;
-
-        //게임 진행 설정 및 정보
-        isAutoSkill = false;
-        isFastSpeed = false;
-        time = 0;
-    }
 }

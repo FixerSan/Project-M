@@ -71,6 +71,17 @@ public static class Extension
         return count; 
     }
 
+    public static int NotNullCount<T>(this T[] _array) where T : class
+    {
+        int count = 0;
+        for (int i = 0; i < _array.Length; i++)
+        {
+            if (_array[i] != null)
+                count++;
+        }
+        return count;
+    }
+
     public static List<T> ArrayToList<T>(this T[] _array) where T : class
     {
         List<T> list = new List<T>();

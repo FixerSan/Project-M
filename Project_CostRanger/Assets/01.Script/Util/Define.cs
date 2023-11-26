@@ -74,9 +74,9 @@ public class Define
         Stay, Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
-    public enum Specialty
+    public enum SpecialtyType
     {
-
+        Test
     }
 
     public enum StageState
