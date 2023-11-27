@@ -1,0 +1,79 @@
+{
+"globalData":[
+ {
+  "name": "상시 뽑기",
+  "description": "매번 오는 기회가 맞습니다",
+  "commonProbability": 70,
+  "rareProbability": 20,
+  "epicProbability": 7,
+  "legendaryProbability": 3
+ }
+],
+"poolDatas":[
+ {
+  "UID": 1,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 2,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 3,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 4,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 5,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 6,
+  "rarityPool": "Common",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 7,
+  "rarityPool": "Rare",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 8,
+  "rarityPool": "Rare",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 9,
+  "rarityPool": "Rare",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 10,
+  "rarityPool": "Epic",
+  "pickupProbability": 0
+ },
+ {
+  "UID": 11,
+  "rarityPool": "Legendary",
+  "pickupProbability": 30
+ },
+ {
+  "UID": 12,
+  "rarityPool": "Legendary",
+  "pickupProbability": 20
+ },
+ {
+  "UID": 13,
+  "rarityPool": "Legendary",
+  "pickupProbability": 0
+ }
+]
+}

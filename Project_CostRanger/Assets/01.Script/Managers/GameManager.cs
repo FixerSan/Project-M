@@ -28,8 +28,8 @@ public class GameManager : Singleton<GameManager>
         {
             Managers.Data.LoadPreData(() =>
             {
-                Managers.Screen.SetCameraPosition(new Vector3(0,0,-10f));
-                Managers.Scene.LoadScene(Define.Scene.Login);
+                // Managers.Screen.SetCameraPosition(new Vector3(0,0,-10f));
+                // Managers.Scene.LoadScene(Define.Scene.Login);
             });
         });
     }
