@@ -26,6 +26,9 @@ public abstract class Ranger
         if (controller.attackTarget == null || controller.attackTarget.currentState == EnemyState.Die)
             controller.FindAttackTarget();
 
+        if (controller.attackTarget == null)
+            return false;
+
         if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) > controller.status.CurrentAttackDistance)
         {
             controller.ChangeState(Define.RangerState.Follow);
@@ -79,7 +82,7 @@ public abstract class Ranger
     //傍拜 贸府
     public virtual void Attack()
     {
-        controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));
+        controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));  
     }
 
     //傍拜 贸府 风凭

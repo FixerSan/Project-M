@@ -92,6 +92,7 @@ public class EnemyController : BaseController
 
     public void FindAttackTarget()
     {
+        attackTarget = null;
         for (int i = 0; i < Managers.Object.Rangers.Count; i++)
         {
             if (attackTarget == null)
@@ -100,9 +101,12 @@ public class EnemyController : BaseController
                 continue;
             }
 
-            if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position))
+            if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position) && Managers.Object.Rangers[i].currentState != RangerState.Die)
                 attackTarget = Managers.Object.Rangers[i];
         }
+
+        if (attackTarget.currentState == RangerState.Die)
+            attackTarget = null;
     }
 
     public void Stop()
@@ -123,6 +127,7 @@ public class EnemyController : BaseController
     public override void Die()
     {
         Stop();
+        Managers.Event.InvokeVoidEvent(VoidEventType.OnEnemyDead);
         StopAllCoroutines();
     }
 

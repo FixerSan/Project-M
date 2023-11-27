@@ -52,15 +52,6 @@ public class StageManager
         //조건에 맞는 리워드 함수 호출
     }
 
-    public void GetClearRewardInfo(int _UID)
-    {
-        switch(_UID)
-        {
-            case 0:
-                break;
-        }
-    }
-
     public void ClearReward(int _UID)
     {
         switch (_UID)

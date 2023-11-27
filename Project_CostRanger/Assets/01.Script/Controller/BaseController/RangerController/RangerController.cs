@@ -94,6 +94,7 @@ public class RangerController : BaseController
     public override void Die()
     {
         Stop();
+        Managers.Event.InvokeVoidEvent(VoidEventType.OnPlayerDead);
         StopAllCoroutines();
     }
 
@@ -102,7 +103,7 @@ public class RangerController : BaseController
         attackTarget = null;
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
-            if (attackTarget == null && Managers.Object.Enemies[i].currentState != EnemyState.Die)
+            if (attackTarget == null)
             {   
                 attackTarget = Managers.Object.Enemies[i];
                 continue;
@@ -111,6 +112,9 @@ public class RangerController : BaseController
             if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position) && Managers.Object.Enemies[i].currentState != EnemyState.Die)
                 attackTarget = Managers.Object.Enemies[i];
         }
+
+        if (attackTarget.currentState == EnemyState.Die)
+            attackTarget = null;
     }
 
     public void Stop()
