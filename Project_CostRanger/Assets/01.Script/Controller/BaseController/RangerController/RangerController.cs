@@ -93,20 +93,22 @@ public class RangerController : BaseController
 
     public override void Die()
     {
+        Stop();
         StopAllCoroutines();
     }
 
     public void FindAttackTarget()
     {
+        attackTarget = null;
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
-            if (attackTarget == null)
+            if (attackTarget == null && Managers.Object.Enemies[i].currentState != EnemyState.Die)
             {   
                 attackTarget = Managers.Object.Enemies[i];
                 continue;
             }
 
-            if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position))
+            if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position) && Managers.Object.Enemies[i].currentState != EnemyState.Die)
                 attackTarget = Managers.Object.Enemies[i];
         }
     }
@@ -118,11 +120,8 @@ public class RangerController : BaseController
 
     public override void CheckDie()
     {
-        if (status.CurrentHP <= 0)
-        {
-            status.CurrentHP = 0;
+        if (status.CurrentHP == 0)
             ChangeState(RangerState.Die);
-        }
     }
 }
 

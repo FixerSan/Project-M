@@ -11,7 +11,7 @@ public class EnemyController : BaseController
 
     //Enemy Stage
     public EnemyState setState;
-    private EnemyState currentState;
+    public EnemyState currentState;
     public Dictionary<EnemyState, State<EnemyController>> states;
     public StateMachine<EnemyController> stateMachine;
     public bool isDead;
@@ -82,13 +82,14 @@ public class EnemyController : BaseController
 
     public override void Hit(float _damage)
     {
-
+        GetDamage(_damage);
     }
 
     public override void GetDamage(float _damage)
     {
-
+        status.CurrentHP -= _damage;
     }
+
     public void FindAttackTarget()
     {
         for (int i = 0; i < Managers.Object.Rangers.Count; i++)
@@ -121,16 +122,14 @@ public class EnemyController : BaseController
 
     public override void Die()
     {
+        Stop();
         StopAllCoroutines();
     }
 
     public override void CheckDie()
     {
-        if (status.CurrentHP <= 0)
-        {
-            status.CurrentHP = 0;
+        if (status.CurrentHP == 0)
             ChangeState(EnemyState.Die);
-        }
     }
 }
 public class EnemyStatus : ControllerStatus
@@ -138,7 +137,6 @@ public class EnemyStatus : ControllerStatus
     public EnemyStatus(BaseController _controller,EnemyControllerData _data)
     {
         controller = _controller;
-
         //공격력
         defaultAttackForce = _data.attackForce;
         currentAttackForce = _data.attackForce;
@@ -175,5 +173,9 @@ public class EnemyStatus : ControllerStatus
         //스킬 쿨타임
         defaultSkillCooltime = _data.skillCooltime;
         currentSkillCooltime = _data.skillCooltime;
+
+        //각 계산 시간
+        checkAttackCooltime = 0;
+        checkSkillCooltime = _data.skillCooltime;
     }
 }

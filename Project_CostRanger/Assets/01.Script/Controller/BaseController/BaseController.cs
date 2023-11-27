@@ -153,6 +153,8 @@ public abstract class ControllerStatus
         {
             if (currentHP == 0) return;
             currentHP = value;
+            if (currentHP <= 0)
+                currentHP = 0;
             controller.CheckDie();
         }
     }
