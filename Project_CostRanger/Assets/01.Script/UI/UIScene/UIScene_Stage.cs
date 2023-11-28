@@ -15,11 +15,10 @@ public class UIScene_Stage : UIScene
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
         BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
 
-        Managers.Event.AddVoidEvent(Define.VoidEventType.OnChangeBattle ,RedrawUI);
         return true;
     }
 
-    public void RedrawUI()
+    public override void RedrawUI()
     {
         GetText((int)Texts.Text_Timer).text = $"{(int)Managers.Game.battleStageSystem.time}";
         GetButton((int)Buttons.Button_FastSpeed).interactable = !Managers.Game.battleStageSystem.isFastSpeed;
@@ -33,12 +32,6 @@ public class UIScene_Stage : UIScene
     public void OnClick_AutoSkill()
     {
         Managers.Game.battleStageSystem.SetAutoSkill(!Managers.Game.battleStageSystem.isAutoSkill);
-    }
-
-
-    public void OnDisable()
-    {
-        Managers.Event.RemoveVoidEvent(Define.VoidEventType.OnChangeBattle, RedrawUI);
     }
 
     private enum Texts

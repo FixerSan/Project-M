@@ -68,8 +68,9 @@ public class RangerController : BaseController
             animator.Play(hash);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!isInit) return;
         stateMachine.UpdateState();
         CheckChangeState();

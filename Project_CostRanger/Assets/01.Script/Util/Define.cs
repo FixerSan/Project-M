@@ -14,7 +14,6 @@ public class Define
     public static readonly float normalAttackAnimationTime = 0.417f;
     public static readonly float skillAnimationTime = 1;
     public static readonly float normalSkillAnimationTime = 0.5f;
-
     public static readonly float sceneStartDelay = 3;
 
     public enum GameState
@@ -124,6 +123,11 @@ public class Define
         Drag,
         EndDrag,
         Drop
+    }
+
+    public enum UIType
+    {
+        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage
     }
 
     public enum SpeakerType

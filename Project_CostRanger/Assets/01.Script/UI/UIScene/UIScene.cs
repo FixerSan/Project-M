@@ -10,4 +10,9 @@ public class UIScene : UIBase
         Managers.UI.SetCanvas(gameObject, true);
         return true;
     }
+
+    public virtual void RedrawUI()
+    {
+
+    }
 }

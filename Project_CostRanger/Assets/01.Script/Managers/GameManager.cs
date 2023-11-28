@@ -46,6 +46,8 @@ public class GameManager : Singleton<GameManager>
         if (prepareStageSystem == null)
             prepareStageSystem = new PrepareStageSystem();
 
+        Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
+
         state = GameState.BattleBefore;
         prepareStageSystem.Init(Managers.Data.GetStageData(_stageUID));
     }
@@ -185,6 +187,11 @@ public class PrepareStageSystem
 
         //저장된 레인저 프리셋 설정
         SetupEnemy();
+        //RedrawUI();
+    }
+
+    public void OnChangePrepare()
+    {
         RedrawUI();
     }
 
@@ -242,7 +249,7 @@ public class PrepareStageSystem
 
     public void RedrawUI()
     {
-        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangePrepare);
+        Managers.UI.activePopups[UIType.UIPopup_PrepareStage].RedrawUI();
     }
 
 }
@@ -414,6 +421,8 @@ public class BattleStageSystem
 
     public void Victory()
     {
+        SetFastSpeed(false);
+        SetAutoSkill(false);
         Managers.Game.state = GameState.BattleAfter;
         Managers.Object.ClearRangers();
         Managers.Object.ClearEnemies();
@@ -428,12 +437,14 @@ public class BattleStageSystem
 
     public void Lose()
     {
+        SetFastSpeed(false);
+        SetAutoSkill(false);
         Managers.Game.state = GameState.BattleAfter;
     }
 
     public void RedrawUI()
     {
-        Managers.Event.InvokeVoidEvent(VoidEventType.OnChangeBattle);
+        Managers.UI.SceneUI.RedrawUI();
     }
 
     ~BattleStageSystem()

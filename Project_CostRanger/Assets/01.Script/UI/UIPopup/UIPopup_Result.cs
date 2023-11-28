@@ -30,6 +30,11 @@ public class UIPopup_Result : UIPopup
         Managers.Scene.LoadScene(Define.Scene.Main);
     }
 
+    public override void RedrawUI()
+    {
+
+    }
+
     private enum Texts
     {
         Text_Result
