@@ -82,52 +82,6 @@ public class CameraController : MonoBehaviour
         };
     }
 
-    public IEnumerator FadeIn(float _fadeTime, Action _callback = null)
-    {
-        Managers.UI.BlackPanel.gameObject.SetActive(true);
-        Managers.UI.BlackPanel.alpha = 0;
-        while (Managers.UI.BlackPanel.alpha < 1)
-        {
-            Managers.UI.BlackPanel.alpha = Managers.UI.BlackPanel.alpha + Time.deltaTime / _fadeTime;
-            yield return null;
-        }
-        Managers.UI.BlackPanel.alpha = 1;
-        _callback?.Invoke();
-    }
-
-    public IEnumerator FadeOut(float _fadeTime, Action _callback = null)
-    {
-        Managers.UI.BlackPanel.gameObject.SetActive(true);
-        Managers.UI.BlackPanel.alpha = 1;
-        while (Managers.UI.BlackPanel.alpha > 0)
-        {
-            Managers.UI.BlackPanel.alpha = Managers.UI.BlackPanel.alpha - Time.deltaTime / _fadeTime;
-            yield return null;
-        }
-        Managers.UI.BlackPanel.alpha = 0;
-        Managers.UI.BlackPanel.gameObject.SetActive(false);
-        _callback?.Invoke();
-    }
-
-    public IEnumerator FadeInOut(float _totalTile, Action _callback = null)
-    {
-        yield return StartCoroutine(FadeIn(_totalTile * 0.5f));
-        yield return StartCoroutine(FadeOut(_totalTile * 0.5f));
-        _callback?.Invoke();
-    }
-
-    public IEnumerator SkillScreenRoutine(Action _callback = null)
-    {
-        Managers.Screen.isSkillCasting = true;
-        float currentTime = Time.timeScale;
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(1);
-        Time.timeScale = currentTime;
-        Managers.UI.SkillScreen.gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(0.5f);
-        _callback?.Invoke();
-    }
-
 
 
     private void Update()

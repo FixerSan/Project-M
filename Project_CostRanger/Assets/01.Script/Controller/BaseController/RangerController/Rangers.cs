@@ -117,6 +117,7 @@ public abstract class Ranger
 
     public virtual bool CheckCanUseSkill()
     {
+        if (!Managers.Game.battleStageSystem.isCanUseSkill) return false;
         if (!Managers.Game.battleStageSystem.isAutoSkill) return false;
         if (controller.status.CheckSkillCooltime == 0)
         {
@@ -135,6 +136,7 @@ public abstract class Ranger
     //스킬 처리 루틴
     public virtual IEnumerator SkillRoutine()
     {
+        Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
         controller.Stop();
         Debug.Log("스킬 사용됨");
         yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임

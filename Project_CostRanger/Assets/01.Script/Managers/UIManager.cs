@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 public class UIManager 
 {
@@ -40,27 +41,6 @@ public class UIManager
             return blackPanel;
         }
     }
-
-    private CanvasGroup skillScreen;
-    public CanvasGroup SkillScreen
-    {
-        get
-        {
-            if (skillScreen == null)
-            {
-                GameObject go = GameObject.Find("@SkillScreen");
-                if (go == null)
-                {
-                    go = Managers.Resource.Instantiate("SkillScreen");
-                    go.name = "@SkillScreen";
-                    UnityEngine.Object.DontDestroyOnLoad(go);
-                    blackPanel = go.GetOrAddComponent<CanvasGroup>();
-                }
-            }
-            return blackPanel;
-        }
-    }
-
     public GameObject Root
     {
         get
@@ -73,6 +53,30 @@ public class UIManager
             return root;
         }
     }                                   // UI 위치 선언
+
+    private UISkillScreen_Ranger rangerSkillScreen;
+    public UISkillScreen_Ranger RangerSkillScreen
+    {
+        get
+        {
+            if(rangerSkillScreen == null)
+                rangerSkillScreen = Managers.Resource.Instantiate(typeof(UISkillScreen_Ranger).Name).GetOrAddComponent<UISkillScreen_Ranger>();
+            return rangerSkillScreen;
+        }
+    }
+
+    private UISkillScreen_Enemy enemySkillScreen;
+    public UISkillScreen_Enemy EnemySkillScreen
+    {
+        get
+        {
+            if (enemySkillScreen = null)
+                enemySkillScreen = Managers.Resource.Instantiate(typeof(UISkillScreen_Enemy).Name).GetOrAddComponent<UISkillScreen_Enemy>();
+            return enemySkillScreen;
+        }
+    }
+
+
 
     // 이벤트 시스템 설정
     public void SetEventSystem()
@@ -255,6 +259,28 @@ public class UIManager
         return go;
     }
 
+
+    public void SetRangerSkillScreen(int _rangerUID, Action _callback = null)
+    {
+        RangerSkillScreen.gameObject.SetActive(true);
+        RangerSkillScreen.ApplyRangerSkill(Managers.Data.GetRangerInfoData(_rangerUID), _callback);
+    }
+
+    public void SetEnemySkillScreen(int _enemyUID, Action _callback = null)
+    {
+        EnemySkillScreen.gameObject.SetActive(true);
+        EnemySkillScreen.ApplyEnemySkill(Managers.Data.GetEnemyInfoData(_enemyUID), _callback);
+    }
+
+    public void CloseRangerSkillScreen()
+    {
+        RangerSkillScreen.gameObject.SetActive(false);
+    }
+
+    public void CloseEnemySkillScreen()
+    {
+        EnemySkillScreen.gameObject.SetActive(false);
+    }
 
     // 팝업 카운트 반환
     public int GetPopupCount()

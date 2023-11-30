@@ -1,10 +1,7 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UIElements;
 using static Define;
 
 public class GameManager : Singleton<GameManager>
@@ -284,6 +281,7 @@ public class BattleStageSystem
     //게임 진행 설정 및 정보
     public bool isAutoSkill;
     public bool isFastSpeed;
+    public bool isCanUseSkill;
     public float time;
 
     private bool tempBool;
@@ -312,6 +310,7 @@ public class BattleStageSystem
         //게임 진행 설정 및 정보
         isAutoSkill = false;
         isFastSpeed = false;
+        isCanUseSkill = true;
         time = 0;
 
         Managers.Event.AddUpdate(Update);
@@ -344,6 +343,10 @@ public class BattleStageSystem
         enemybattleForce = 0;
 
         time = 60;
+
+        isAutoSkill = false;
+        isFastSpeed = false;
+        isCanUseSkill = true;
     }
 
     public void StartStage()
@@ -388,6 +391,27 @@ public class BattleStageSystem
         RedrawUI();
     }
 
+    public void UseRangerSkill(int _rangerUID)
+    {
+        isCanUseSkill = false;
+        Time.timeScale = 0;
+        Managers.Screen.PlayRangerSkillDirecting(_rangerUID, () => 
+        {
+            Managers.Screen.StopRangerSkillDirecting();
+            isCanUseSkill = true;
+            SetFastSpeed(isFastSpeed);
+        });
+    }
+
+    public void UseEnemySkill(int _enemyUID)
+    {
+        isCanUseSkill = false;
+        Managers.Screen.PlayEnemySkillDirecting(_enemyUID, () =>
+        {
+            Managers.Screen.StopEnemySkillDirecting();
+            isCanUseSkill = true;
+        });
+    }
 
     public void CheckVictory()
     {

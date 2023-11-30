@@ -15,6 +15,7 @@ public class Define
     public static readonly float skillAnimationTime = 1;
     public static readonly float normalSkillAnimationTime = 0.5f;
     public static readonly float sceneStartDelay = 3;
+    public static readonly float skillScreenTime = 1;
 
     public enum GameState
     {
