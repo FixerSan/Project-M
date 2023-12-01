@@ -17,11 +17,39 @@ public class UIPopup_GachaResult : UIPopup
 
         return true;
     }
+    
+    public void RedrawGacahaSlot(int[] _obtainedList)
+    {
+        foreach(var slot in gachaInfoSlots)
+        {
+            slot.gameObject.SetActive(false);
+        }
 
+        for (int i = 0; i < _obtainedList.Length; i++)
+        {
+            bool isAlreadyObtained = false;
+
+            for (int j = 0, jmax = Managers.Data.playerData.hasRangers.Count; j < jmax; i++)
+            {
+                if (Managers.Data.playerData.hasRangers[i] != null && Managers.Data.playerData.hasRangers[i].UID == _obtainedList[i])
+                {
+                    isAlreadyObtained = true;
+                    break;
+                }
+            }
+            
+            gachaInfoSlots[i].Redraw(_obtainedList[i], isAlreadyObtained);
+        }
+    }
+
+    public void OnClick_Next()
+    {
+        Managers.UI.ClosePopupUI(this);
+    }
 
     public enum Buttons
     {
-
+        Button_Next
     }
 
     public enum Texts

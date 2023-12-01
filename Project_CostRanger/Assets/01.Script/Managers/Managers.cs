@@ -19,6 +19,7 @@ public class Managers : Singleton<Managers>
     private SceneManager scene;
     private BattleManager battle;
     private StageManager stage;
+    private GachaSystem gacha;
 
     // 각각의 매니저들에 대한 public 프로퍼티를 추가
     public static ResourceManager Resource { get { return Instance?.resource; } }
@@ -32,6 +33,7 @@ public class Managers : Singleton<Managers>
     public static ScreenManager Screen { get { return Instance?.screen; } }
     public static SceneManager Scene { get { return Instance?.scene; } }
     public static BattleManager Battle { get { return Instance?.battle; } }
+    public static GachaSystem Gacha { get { return Instance?.gacha; } }
 
     public static StageManager Stage { get { return Instance?.stage; } }
 
@@ -75,6 +77,7 @@ public class Managers : Singleton<Managers>
         scene = new SceneManager();
         battle = new BattleManager();
         stage = new StageManager();
+        gacha = new GachaSystem();
 
         routine = CoroutineManager.Instance;
         game = GameManager.Instance;

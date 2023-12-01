@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System;
 using UnityEditor.Rendering;
 
-public class GachaSystem : MonoBehaviour
+public class GachaSystem
 {
     // 현재 탭에서 접근할 가챠 테이블
     private GachaTable[] gachaTables;
@@ -53,9 +53,10 @@ public class GachaSystem : MonoBehaviour
         if (isEnable)
         {
             StartGachaAll(_gachaCount);
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     // 뽑기 실행 ( 레어도 확정부터 유닛 뽑기까지 )
@@ -71,17 +72,15 @@ public class GachaSystem : MonoBehaviour
             {
                 // 처음 값이 0일 경우 예외
                 if (currentTable.globalProbabilities[i] == 0)
-                {
                     continue;
-                }
+
             }
             else
             {
                 // 이전 값과 현재 값이 같을 경우 예외
                 if (currentTable.globalProbabilities[i - 1] == currentTable.globalProbabilities[i])
-                {
                     continue;
-                }
+
             }
 
             if (randomSeed <= currentTable.globalProbabilities[i])
