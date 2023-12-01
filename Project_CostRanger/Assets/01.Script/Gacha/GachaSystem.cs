@@ -88,7 +88,7 @@ public class GachaSystem
                 // Debug.Log($"1. 나온 숫자 : {randomSeed}, 얻은 확률 : {currentTable.globalProbabilities[i]}");
                 StartGachaByRarity((RangerRarity)rarities.GetValue(i));
                 break;
-            }
+            } 
 
         }
     }
