@@ -8,6 +8,7 @@ public abstract class BaseController : MonoBehaviour
     public Dictionary<string, Coroutine> routines;
     public Define.Direction direction;
     private Vector3 localScale = Vector3.zero;
+    public Transform hpBarTrans;
 
     public abstract void Hit(float _damage);
     public abstract void GetDamage(float _damage);
@@ -29,10 +30,26 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        localScale.x = Mathf.Lerp(1.5f, 1f, (transform.position.y + 2) / 4);
-        localScale.y = Mathf.Lerp(1.5f, 1f, (transform.position.y + 2) / 4);
-        localScale.z = Mathf.Lerp(1.5f, 1f, (transform.position.y + 2) / 4);
+        CheckScale();
+    }
+
+    public void CheckScale()
+    {
+        localScale.x = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
+        localScale.y = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
+        localScale.z = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
         transform.localScale = localScale;
+    }
+
+    public void SetHPBar()
+    {
+        hpBarTrans = Util.FindChild<Transform>(gameObject, "Trans_HPbar");
+        Managers.UI.SetHPbar(this);
+    }
+
+    public void ReleseHPbar()
+    {
+        Managers.UI.ReleseHPBar(this);
     }
 }
 

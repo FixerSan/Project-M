@@ -45,6 +45,8 @@ public class RangerController : BaseController
         direction = Direction.Left;
         isDead = false;
         isInit = true;
+
+        SetHPBar();
     }
 
     public void ChangeState(RangerState _nextState, bool _isChangeSameState = false)
@@ -95,6 +97,7 @@ public class RangerController : BaseController
     public override void Die()
     {
         Stop();
+        ReleseHPbar();
         Managers.Event.InvokeVoidEvent(VoidEventType.OnPlayerDead);
         StopAllCoroutines();
     }

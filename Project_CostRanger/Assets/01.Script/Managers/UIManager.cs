@@ -16,6 +16,7 @@ public class UIManager
     private int toastOrder = 500;                               // 인스턴트 메세지 그려지는 여유 선언
 
     public Dictionary<Define.UIType, UIPopup> activePopups = new Dictionary<Define.UIType, UIPopup>();
+    public Dictionary<BaseController, UIHPBar> hpBars = new Dictionary<BaseController, UIHPBar>();
     private Stack<UIPopup> popupStack = new Stack<UIPopup>();   // 팝업 스택
     private Queue<UIToast> toastStack = new Queue<UIToast>();   // 인스턴트 메세지 스택
     private EventSystem eventSystem = null;                     // 이벤트 시스템 선언
@@ -286,6 +287,34 @@ public class UIManager
     public int GetPopupCount()
     {
         return popupStack.Count;
+    }
+
+    //HP바 생성
+    public void SetHPbar(BaseController _controller)
+    {
+        UIHPBar hpBar = Managers.Resource.Instantiate("UIHPBar").GetOrAddComponent<UIHPBar>();
+        hpBar.transform.SetParent(Root.transform);
+        hpBar.Init(_controller);
+
+        hpBars.Add(_controller, hpBar);
+    }
+
+    //HP바 삭제
+    public void ReleseHPBar(BaseController _controller)
+    {
+        if(hpBars.TryGetValue(_controller, out UIHPBar _hpBar))
+        {
+            Managers.Resource.Destroy(_hpBar.gameObject);
+            hpBars.Remove(_controller);
+        }
+    }
+
+    public void ReleseAllHPBar()
+    {
+        foreach (var item in hpBars)
+            Managers.Resource.Destroy(item.Value.gameObject);
+
+        hpBars.Clear();
     }
 
     // 초기화

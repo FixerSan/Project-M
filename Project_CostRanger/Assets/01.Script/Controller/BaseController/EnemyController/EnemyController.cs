@@ -44,6 +44,8 @@ public class EnemyController : BaseController
         direction = Direction.Left;
         isDead = false;
         isInit = true;
+
+        SetHPBar();
     }
 
     public void ChangeState(EnemyState _nextState, bool _isChangeSameState = false)
@@ -128,6 +130,7 @@ public class EnemyController : BaseController
     public override void Die()
     {
         Stop();
+        ReleseHPbar();
         Managers.Event.InvokeVoidEvent(VoidEventType.OnEnemyDead);
         StopAllCoroutines();
     }

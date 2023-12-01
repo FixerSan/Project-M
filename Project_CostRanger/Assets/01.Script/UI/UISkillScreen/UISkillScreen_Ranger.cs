@@ -22,8 +22,12 @@ public class UISkillScreen_Ranger : UIBase
     public IEnumerator ApplyRangerSkillRoutine(RangerInfoData _data, Action _callback = null)
     {
         TMP_Text text = GetText((int)Texts.Text_Sentence);
-        text.text = _data.sentence;
-        GetImage((int)Images.Image_Illust).sprite = Managers.Resource.Load<Sprite>(_data.name);
+        text.text = "Blah Blah";
+
+        Managers.Resource.Load<Sprite>(_data.name, (_sprite) => 
+        {
+            GetImage((int)Images.Image_Illust).sprite = _sprite;
+        });
         yield return new WaitForSecondsRealtime(Define.skillScreenTime);
         _callback.Invoke();
     }

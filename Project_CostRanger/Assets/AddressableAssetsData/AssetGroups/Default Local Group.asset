@@ -152,6 +152,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 34f08f28bcf41ea44a3fea1d395b765c
+    m_Address: UIHPBar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: cf438075781d8834ca26b3e6e8bfa158
+    m_Address: TestRanger.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:

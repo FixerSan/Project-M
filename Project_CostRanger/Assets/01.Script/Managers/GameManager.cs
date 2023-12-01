@@ -178,13 +178,13 @@ public class PrepareStageSystem
     {
         stageData = _stageData;
 
-        Array.Clear(rangerControllerData, 0 , rangerControllerData.Length);
-        Array.Clear(enemies, 0 , enemies.Length);
+        rangerControllerData = new RangerControllerData[6];
+        enemies = new EnemyControllerData[9]; 
         specialties.Clear();
 
         //저장된 레인저 프리셋 설정
         SetupEnemy();
-        //RedrawUI();
+        RedrawUI();
     }
 
     public void OnChangePrepare()
@@ -447,6 +447,7 @@ public class BattleStageSystem
     {
         SetFastSpeed(false);
         SetAutoSkill(false);
+        Managers.UI.ReleseAllHPBar();
         Managers.Game.state = GameState.BattleAfter;
         Managers.Object.ClearRangers();
         Managers.Object.ClearEnemies();
@@ -463,7 +464,16 @@ public class BattleStageSystem
     {
         SetFastSpeed(false);
         SetAutoSkill(false);
+        Managers.UI.ReleseAllHPBar();
         Managers.Game.state = GameState.BattleAfter;
+        Managers.Object.ClearRangers();
+        Managers.Object.ClearEnemies();
+        Managers.Screen.FadeIn(0.25f, () =>
+        {
+            UIPopup_Result ui = Managers.UI.ShowPopupUI<UIPopup_Result>();
+            ui.Init(GameResult.Lose, currentStageData.UID);
+            Managers.Screen.FadeOut(0.25f);
+        });
     }
 
     public void RedrawUI()
