@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIPopup_WorldText : UIBase
 {
@@ -11,9 +12,11 @@ public class UIPopup_WorldText : UIBase
         Managers.UI.SetCanvas(gameObject, _isToast: true);
         BindText(typeof(Texts));
         GetText((int)Texts.Text_Damage).text = _description;
-        GetText((int)Texts.Text_Damage).transform.position = Camera.main.WorldToScreenPoint(_position);
-        
-        switch(_type)
+        GetText((int)Texts.Text_Damage).rectTransform.position = _position;
+
+
+
+        switch (_type)
         {
             case Define.TextType.Damage:
                     GetText((int)Texts.Text_Damage).color = Color.red;
@@ -37,9 +40,10 @@ public class UIPopup_WorldText : UIBase
 
     IEnumerator FadeOut()
     {
+        Vector3 dir = new Vector3(Random.Range(-1f, 1f), 1, 1).normalized;
         while (GetText((int)Texts.Text_Damage).color.a > 0)
         {
-            GetText((int)Texts.Text_Damage).transform.position += Vector3.up * Time.deltaTime;
+            GetText((int)Texts.Text_Damage).rectTransform.position += dir * (Time.deltaTime / fadeTime);
             GetText((int)Texts.Text_Damage).color = new Color(GetText((int)Texts.Text_Damage).color.r, GetText((int)Texts.Text_Damage).color.g, GetText((int)Texts.Text_Damage).color.b, GetText((int)Texts.Text_Damage).color.a - Time.deltaTime / fadeTime);
             yield return null;
         }

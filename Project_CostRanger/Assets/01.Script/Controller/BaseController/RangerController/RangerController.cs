@@ -46,6 +46,8 @@ public class RangerController : BaseController
         isDead = false;
         isInit = true;
 
+        worldTextTrans = Util.FindChild<Transform>(gameObject, "Trans_WorldTest");
+
         SetHPBar();
     }
 
@@ -108,17 +110,25 @@ public class RangerController : BaseController
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
             if (attackTarget == null)
-            {   
-                attackTarget = Managers.Object.Enemies[i];
-                continue;
+            {
+                if (Managers.Object.Enemies[i].currentState != EnemyState.Die)
+                    attackTarget = Managers.Object.Enemies[i];
             }
-
-            if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position) && Managers.Object.Enemies[i].currentState != EnemyState.Die)
-                attackTarget = Managers.Object.Enemies[i];
+            else
+                break;
         }
 
-        if (attackTarget.currentState == EnemyState.Die)
-            attackTarget = null;
+        if(attackTarget != null)
+        {
+            for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+            {
+                if (Managers.Object.Enemies[i].currentState != EnemyState.Die)
+                {
+                    if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position))
+                        attackTarget = Managers.Object.Enemies[i];
+                }
+            }
+        }
     }
 
     public void Stop()

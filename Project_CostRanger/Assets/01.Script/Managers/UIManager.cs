@@ -18,7 +18,8 @@ public class UIManager
     public Dictionary<Define.UIType, UIPopup> activePopups = new Dictionary<Define.UIType, UIPopup>();
     public Dictionary<BaseController, UIHPBar> hpBars = new Dictionary<BaseController, UIHPBar>();
     private Stack<UIPopup> popupStack = new Stack<UIPopup>();   // 팝업 스택
-    private Queue<UIToast> toastStack = new Queue<UIToast>();   // 인스턴트 메세지 스택
+    private Queue<UIToast> toastQueue = new Queue<UIToast>();   // 인스턴트 메세지 스택
+    private Queue<UIPopup_WorldText> worldTextQueue = new Queue<UIPopup_WorldText>();   // 인스턴트 메세지 스택
     private EventSystem eventSystem = null;                     // 이벤트 시스템 선언
     private UIScene sceneUI = null;                             // SceneUI 선언
     public UIScene SceneUI { get { return sceneUI; } }          // SceneUI 프로퍼티 선언
@@ -123,10 +124,19 @@ public class UIManager
         if (string.IsNullOrEmpty(_description))
             return null;
 
-        GameObject go = Managers.Resource.Instantiate("UIPopup_WorldText", Root.transform, true);
+        GameObject go = Managers.Resource.Instantiate("UIPopup_WorldText", Root.transform);
         UIPopup_WorldText text = go.GetOrAddComponent<UIPopup_WorldText>();
+        worldTextQueue.Enqueue(text);
         text.Init(_description, _position, _type);
         return text;
+    }
+
+    public void CloseAllWorldText()
+    {
+        while (worldTextQueue.Count > 0)
+        {
+            Managers.Resource.Destroy(worldTextQueue.Dequeue().gameObject);
+        }
     }
 
     // SceneUI 생성
@@ -215,7 +225,7 @@ public class UIManager
         GameObject go = Managers.Resource.Instantiate($"{name}", _pooling: true);
         UIToast popup = go.GetOrAddComponent<UIToast>();
         popup.SetInfo(_description);
-        toastStack.Enqueue(popup);
+        toastQueue.Enqueue(popup);
         go.transform.SetParent(Root.transform);
         return popup;
     }
@@ -223,12 +233,12 @@ public class UIManager
     // 인스턴트 메세지 삭제 기능
     public void CloseToastUI()
     {
-        if(toastStack.Count == 0)
+        if(toastQueue.Count == 0)
         {
             return;
         }
 
-        UIToast toast = toastStack.Dequeue();
+        UIToast toast = toastQueue.Dequeue();
         toast.Refresh();
         Managers.Resource.Destroy(toast.gameObject);
         toast = null;
@@ -238,9 +248,9 @@ public class UIManager
     // 팝업 전부 삭제
     public void CloseAllToastUI()
     {
-        while (toastStack.Count > 0)
+        while (toastQueue.Count > 0)
         {
-            Managers.Resource.Destroy(toastStack.Dequeue().gameObject);
+            Managers.Resource.Destroy(toastQueue.Dequeue().gameObject);
         }
     }
 

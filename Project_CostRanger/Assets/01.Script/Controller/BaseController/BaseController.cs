@@ -9,6 +9,7 @@ public abstract class BaseController : MonoBehaviour
     public Define.Direction direction;
     private Vector3 localScale = Vector3.zero;
     public Transform hpBarTrans;
+    public Transform worldTextTrans;
 
     public abstract void Hit(float _damage);
     public abstract void GetDamage(float _damage);

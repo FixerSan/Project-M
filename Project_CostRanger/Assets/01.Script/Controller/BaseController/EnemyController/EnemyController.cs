@@ -44,6 +44,7 @@ public class EnemyController : BaseController
         direction = Direction.Left;
         isDead = false;
         isInit = true;
+        worldTextTrans = Util.FindChild<Transform>(gameObject, "Trans_WorldTest");
 
         SetHPBar();
     }
@@ -100,16 +101,24 @@ public class EnemyController : BaseController
         {
             if (attackTarget == null)
             {
-                attackTarget = Managers.Object.Rangers[i];
-                continue;
+                if (Managers.Object.Rangers[i].currentState != RangerState.Die)
+                    attackTarget = Managers.Object.Rangers[i];
             }
-
-            if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position) && Managers.Object.Rangers[i].currentState != RangerState.Die)
-                attackTarget = Managers.Object.Rangers[i];
+            else
+                break;
         }
 
-        if (attackTarget.currentState == RangerState.Die)
-            attackTarget = null;
+        if (attackTarget != null)
+        {
+            for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+            {
+                if (Managers.Object.Rangers[i].currentState != RangerState.Die)
+                {
+                    if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position))
+                        attackTarget = Managers.Object.Rangers[i];
+                }
+            }
+        }
     }
 
     public void Stop()

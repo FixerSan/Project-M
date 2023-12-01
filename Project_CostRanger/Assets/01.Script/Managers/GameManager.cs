@@ -448,6 +448,8 @@ public class BattleStageSystem
         SetFastSpeed(false);
         SetAutoSkill(false);
         Managers.UI.ReleseAllHPBar();
+        Managers.UI.CloseAllToastUI();
+        Managers.UI.CloseAllWorldText();
         Managers.Game.state = GameState.BattleAfter;
         Managers.Object.ClearRangers();
         Managers.Object.ClearEnemies();
@@ -465,6 +467,8 @@ public class BattleStageSystem
         SetFastSpeed(false);
         SetAutoSkill(false);
         Managers.UI.ReleseAllHPBar();
+        Managers.UI.CloseAllToastUI();
+        Managers.UI.CloseAllWorldText();
         Managers.Game.state = GameState.BattleAfter;
         Managers.Object.ClearRangers();
         Managers.Object.ClearEnemies();
