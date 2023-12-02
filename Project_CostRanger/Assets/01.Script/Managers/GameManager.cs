@@ -1,10 +1,7 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UIElements;
 using static Define;
 
 public class GameManager : Singleton<GameManager>
@@ -40,6 +37,17 @@ public class GameManager : Singleton<GameManager>
         Managers.Data.SavePlayerData(Managers.Game.playerData);
     }
 
+
+    public void StartPrepare(int _stageUID)
+    {
+        if (prepareStageSystem == null)
+            prepareStageSystem = new PrepareStageSystem();
+
+        Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
+
+        state = GameState.BattleBefore;
+        prepareStageSystem.Init(Managers.Data.GetStageData(_stageUID));
+    }
     public void StartBattleStage(Action<Define.StartBattleStageEvent> _callback)
     {
         //여기서 검증한 후 시작할 수 없는 상황이면 콜백
@@ -54,14 +62,6 @@ public class GameManager : Singleton<GameManager>
 
         battleStageSystem.Init(prepareStageSystem);
         Managers.Scene.LoadScene(Define.Scene.Stage);
-    }
-
-    public void StartPrepare(int _stageUID)
-    {
-        if (prepareStageSystem == null)
-            prepareStageSystem = new PrepareStageSystem();
-
-        prepareStageSystem.Init(Managers.Data.GetStageData(_stageUID));
     }
 
     public void EndBattleStage()
@@ -84,11 +84,11 @@ public class GameManager : Singleton<GameManager>
         loginSystem.SignUp(_ID, _name, _passward, _passwardReCheck, _callback);
     }
 
-    private void Update()
-    {
-        if (battleStageSystem != null)
-            battleStageSystem.Update();
-    }
+    //private void Update()
+    //{
+    //    if (battleStageSystem != null)
+    //        battleStageSystem.Update();
+    //}
 
     public void OnApplicationPause(bool pause)
     {
@@ -177,8 +177,18 @@ public class PrepareStageSystem
     public void Init(StageData _stageData)
     {
         stageData = _stageData;
+
+        rangerControllerData = new RangerControllerData[6];
+        enemies = new EnemyControllerData[9]; 
+        specialties.Clear();
+
         //저장된 레인저 프리셋 설정
         SetupEnemy();
+        RedrawUI();
+    }
+
+    public void OnChangePrepare()
+    {
         RedrawUI();
     }
 
@@ -236,7 +246,7 @@ public class PrepareStageSystem
 
     public void RedrawUI()
     {
-        Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangePrepare);
+        Managers.UI.activePopups[UIType.UIPopup_PrepareStage].RedrawUI();
     }
 
 }
@@ -271,7 +281,10 @@ public class BattleStageSystem
     //게임 진행 설정 및 정보
     public bool isAutoSkill;
     public bool isFastSpeed;
+    public bool isCanUseSkill;
     public float time;
+
+    private bool tempBool;
 
     public BattleStageSystem()
     {
@@ -297,7 +310,12 @@ public class BattleStageSystem
         //게임 진행 설정 및 정보
         isAutoSkill = false;
         isFastSpeed = false;
+        isCanUseSkill = true;
         time = 0;
+
+        Managers.Event.AddUpdate(Update);
+        Managers.Event.AddVoidEvent(VoidEventType.OnPlayerDead, CheckLose);
+        Managers.Event.AddVoidEvent(VoidEventType.OnEnemyDead, CheckVictory);
     }
 
     public void Init(PrepareStageSystem _prepareSystem)
@@ -306,8 +324,10 @@ public class BattleStageSystem
         scene = Managers.Scene.GetActiveScene<StageScene>();
         batch = _prepareSystem.batch;
         rangerControllerData = _prepareSystem.rangerControllerData;
-        specialties.Clear();
 
+        battleMVPPoints.Clear();
+        specialties.Clear();    
+        
         //여기서 프리페어 시스템 정보를 적용시킬 것임
         nowUseCost = 0;
         armyCurrentHP = 0;
@@ -316,8 +336,6 @@ public class BattleStageSystem
         armybattleForce = 0;
         allDamage = 0;
 
-        battleMVPPoints.Clear();
-
         nowEnemyCount = 0;
         enemyCurrentHP = 0;
         enemyMaxHP = 0;
@@ -325,6 +343,10 @@ public class BattleStageSystem
         enemybattleForce = 0;
 
         time = 60;
+
+        isAutoSkill = false;
+        isFastSpeed = false;
+        isCanUseSkill = true;
     }
 
     public void StartStage()
@@ -364,25 +386,109 @@ public class BattleStageSystem
     public void SetFastSpeed(bool _setBool)
     {
         isFastSpeed = _setBool;
-        if (isFastSpeed) Time.timeScale = 1.5f;
+        if (isFastSpeed) Time.timeScale = Define.fastSpeed;
         else Time.timeScale = 1.0f;
         RedrawUI();
     }
 
+    public void UseRangerSkill(int _rangerUID)
+    {
+        isCanUseSkill = false;
+        Time.timeScale = 0;
+        Managers.Screen.PlayRangerSkillDirecting(_rangerUID, () => 
+        {
+            Managers.Screen.StopRangerSkillDirecting();
+            isCanUseSkill = true;
+            SetFastSpeed(isFastSpeed);
+        });
+    }
+
+    public void UseEnemySkill(int _enemyUID)
+    {
+        isCanUseSkill = false;
+        Managers.Screen.PlayEnemySkillDirecting(_enemyUID, () =>
+        {
+            Managers.Screen.StopEnemySkillDirecting();
+            isCanUseSkill = true;
+        });
+    }
+
+    public void CheckVictory()
+    {
+        tempBool = true;
+        for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+        {
+            if (!tempBool)
+                break;
+            if (Managers.Object.Enemies[i].currentState != EnemyState.Die)
+                tempBool = false;
+        }
+
+        if (tempBool)
+            Victory();
+    }
+
+    public void CheckLose()
+    {
+        tempBool = true;
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+        {
+            if (!tempBool)
+                break;
+            if (Managers.Object.Rangers[i].currentState != RangerState.Die)
+                tempBool = false;
+        }
+
+        if (tempBool)
+            Victory();
+    }
+
     public void Victory()
     {
+        SetFastSpeed(false);
+        SetAutoSkill(false);
+        Managers.UI.ReleseAllHPBar();
+        Managers.UI.CloseAllToastUI();
+        Managers.UI.CloseAllWorldText();
         Managers.Game.state = GameState.BattleAfter;
+        Managers.Object.ClearRangers();
+        Managers.Object.ClearEnemies();
         Managers.Stage.ClearReward(currentStageData.UID);
+        Managers.Screen.FadeIn(0.25f, () => 
+        {
+            UIPopup_Result ui = Managers.UI.ShowPopupUI<UIPopup_Result>();
+            ui.Init(GameResult.Victory, currentStageData.UID);
+            Managers.Screen.FadeOut(0.25f);
+        });
     }
 
     public void Lose()
     {
+        SetFastSpeed(false);
+        SetAutoSkill(false);
+        Managers.UI.ReleseAllHPBar();
+        Managers.UI.CloseAllToastUI();
+        Managers.UI.CloseAllWorldText();
         Managers.Game.state = GameState.BattleAfter;
+        Managers.Object.ClearRangers();
+        Managers.Object.ClearEnemies();
+        Managers.Screen.FadeIn(0.25f, () =>
+        {
+            UIPopup_Result ui = Managers.UI.ShowPopupUI<UIPopup_Result>();
+            ui.Init(GameResult.Lose, currentStageData.UID);
+            Managers.Screen.FadeOut(0.25f);
+        });
     }
 
     public void RedrawUI()
     {
-        Managers.Event.InvokeVoidEvent(VoidEventType.OnChangeBattle);
+        Managers.UI.SceneUI.RedrawUI();
     }
 
+    ~BattleStageSystem()
+    {
+        Managers.Event.RemoveUpdate(Update);
+        Managers.Event.RemoveVoidEvent(VoidEventType.OnPlayerDead, CheckLose);
+        Managers.Event.RemoveVoidEvent(VoidEventType.OnEnemyDead, CheckVictory);
+    }
 }

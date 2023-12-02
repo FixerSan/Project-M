@@ -18,7 +18,7 @@ public class UIPopup_SignUp : UIPopup
 
     public void OnClick_SignUp_Close()
     {
-        Managers.UI.ClosePopupUI(this);
+        ClosePopupUP();
     }
 
     public void OnClick_SignUp_Complete()
@@ -45,6 +45,10 @@ public class UIPopup_SignUp : UIPopup
         });
     }
 
+    public override void RedrawUI()
+    {
+
+    }
 
     private enum InputFields
     {

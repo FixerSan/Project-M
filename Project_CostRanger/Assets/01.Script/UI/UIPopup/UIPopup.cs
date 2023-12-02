@@ -23,4 +23,14 @@ public class UIPopup : UIBase
     {
 
     }
+
+    private void OnDisable()
+    {
+
+    }
+
+    public virtual void RedrawUI()
+    {
+
+    }
 }

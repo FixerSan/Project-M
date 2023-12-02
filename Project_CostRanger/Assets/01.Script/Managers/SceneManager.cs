@@ -25,23 +25,51 @@ public class SceneManager
     private bool isLoading = false;
     private Action loadCallback;
 
-    public void LoadScene(Define.Scene _scene, Action _loadCallback = null)
+    public void LoadScene(Define.Scene _scene, bool _isHasFade = true, Action _loadCallback = null)
     {
-        if (isLoading) return;
-        isLoading = true;
-        loadCallback = _loadCallback;
-        string sceneName = _scene.ToString();
-        Managers.Pool.Clear();
-
-        RemoveScene(currentScene, () =>
+        if(!_isHasFade)
         {
-            currentScene = _scene;
-            AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
-            async.completed += (_) => 
-            { 
-                AddScene(sceneName);
-                isLoading = false;
-            };
+            if (isLoading) return;
+            isLoading = true;
+            loadCallback = _loadCallback;
+            string sceneName = _scene.ToString();
+            Managers.Pool.Clear();
+            Managers.UI.CloseAllPopupUI();
+
+            RemoveScene(currentScene, () =>
+            {
+                currentScene = _scene;
+                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
+                async.completed += (_) =>
+                {
+                    AddScene(sceneName);
+                    isLoading = false;
+                    Managers.Screen.FadeOut(0.25f);
+                };
+            });
+            return;
+        }
+
+        Managers.Screen.FadeIn(0.25f, () => 
+        {
+            if (isLoading) return;
+            isLoading = true;
+            loadCallback = _loadCallback;
+            string sceneName = _scene.ToString();
+            Managers.Pool.Clear();
+            Managers.UI.CloseAllPopupUI();
+
+            RemoveScene(currentScene, () =>
+            {
+                currentScene = _scene;
+                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
+                async.completed += (_) =>
+                {
+                    AddScene(sceneName);
+                    isLoading = false;
+                    Managers.Screen.FadeOut(0.25f);
+                };
+            });
         });
     }
 

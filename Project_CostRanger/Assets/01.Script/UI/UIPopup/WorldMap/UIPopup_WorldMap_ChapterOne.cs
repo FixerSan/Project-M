@@ -27,7 +27,6 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
         BindEvent(GetButton((int)Buttons.Button_StageOne).gameObject, () => 
         { 
             Managers.Game.StartPrepare(0);
-            Managers.UI.ShowPopupUI<UIPopup_PrepareStage>();
         });
 
 
@@ -49,6 +48,11 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
     {
         scrollbar.value += (-1) * _data.delta.x * dragForce;
         scrollbar.value = Mathf.Clamp(scrollbar.value, 0, 1);
+    }
+
+    public override void RedrawUI()
+    {
+
     }
 
     private enum Buttons

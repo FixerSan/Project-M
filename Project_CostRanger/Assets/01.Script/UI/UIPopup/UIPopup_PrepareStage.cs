@@ -21,9 +21,6 @@ public class UIPopup_PrepareStage : UIPopup
         BindEvent(GetButton((int)Buttons.Button_Back).gameObject, () => { Managers.UI.ClosePopupUI(this); Managers.Game.prepareStageSystem = null; });
         BindEvent(GetButton((int)Buttons.Button_Start).gameObject, OnClick_Start);
 
-        Managers.Event.OnVoidEvent -= RedrawUI;
-        Managers.Event.OnVoidEvent += RedrawUI;
-
         RedrawCanUseSlot();
         return true;
     }
@@ -38,13 +35,12 @@ public class UIPopup_PrepareStage : UIPopup
                 Debug.Log("레인저가 하나는 필요해");
                 return;
             }
+            ClosePopupUP();
         });
     }
 
-    public void RedrawUI(Define.VoidEventType _type)
+    public override void RedrawUI()
     {
-        if (_type != Define.VoidEventType.OnChangePrepare) return;
-
         RedrawCanUseSlot();
         RedrawUseSlot();
     }
@@ -88,10 +84,6 @@ public class UIPopup_PrepareStage : UIPopup
     }
 
 
-    private void OnDisable()
-    {
-        Managers.Event.OnVoidEvent -= RedrawUI;
-    }
 
     private enum Buttons
     {

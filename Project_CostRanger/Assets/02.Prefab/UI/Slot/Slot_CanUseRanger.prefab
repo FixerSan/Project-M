@@ -141,6 +141,8 @@ MonoBehaviour:
     UID: 0
     name: 
     cost: 0
+    specialtyOne: 
+    specialtyTwo: 
     attackForce: 0
     attackSpeed: 0
     attackDistance: 0

@@ -55,7 +55,7 @@ public class UIPrepareRanger : UIBase
 
     public void OnEndDrag(PointerEventData _eventData)
     {
-        Managers.Event.OnVoidEvent(VoidEventType.OnChangePrepare);
+        Managers.Game.prepareStageSystem.OnChangePrepare();
         Managers.Resource.Destroy(gameObject);
     }
 

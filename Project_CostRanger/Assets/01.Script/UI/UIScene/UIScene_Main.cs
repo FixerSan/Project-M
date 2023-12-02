@@ -13,12 +13,11 @@ public class UIScene_Main : UIScene
         BindText(typeof(Texts));
         BindEvent(GetButton((int)Buttons.Button_Battle).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_WorldMap_ChapterOne>(); });
 
-        Managers.Event.AddVoidEvent(Define.VoidEventType.OnChangePlayerInfo, Redraw);
-        Redraw();
+        RedrawUI();
         return true;
     }
 
-    public void Redraw()
+    public override void RedrawUI()
     {
         GetText((int)Texts.Text_Name).text = $"{Managers.Game.playerData.name}";
         GetText((int)Texts.Text_Level).text = $"LV.{Managers.Game.playerData.level}";
@@ -35,10 +34,5 @@ public class UIScene_Main : UIScene
     private enum Texts
     {
         Text_Name, Text_Level, Text_Gem, Text_Gold, Text_EXP
-    }
-
-    private void OnDisable()
-    {
-        Managers.Event.RemoveVoidEvent(Define.VoidEventType.OnChangePlayerInfo, Redraw);
     }
 }

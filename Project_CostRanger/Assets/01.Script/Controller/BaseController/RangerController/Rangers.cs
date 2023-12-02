@@ -23,8 +23,11 @@ public abstract class Ranger
 
     public virtual bool CheckFollow()
     {
-        if (controller.attackTarget == null)
+        if (controller.attackTarget == null || controller.attackTarget.currentState == EnemyState.Die)
             controller.FindAttackTarget();
+
+        if (controller.attackTarget == null)
+            return false;
 
         if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) > controller.status.CurrentAttackDistance)
         {
@@ -61,6 +64,9 @@ public abstract class Ranger
     public virtual bool CheckAttack()
     {
         //예외 처리
+        if (controller.attackTarget == null || controller.attackTarget.currentState == EnemyState.Die)
+            controller.FindAttackTarget();
+
         if (controller.attackTarget == null) return false;
         if (controller.status.CheckAttackCooltime > 0) return false;
 
@@ -76,7 +82,7 @@ public abstract class Ranger
     //공격 처리
     public virtual void Attack()
     {
-        controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));
+        controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));  
     }
 
     //공격 처리 루틴
@@ -84,8 +90,7 @@ public abstract class Ranger
     {
         controller.Stop();
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
-        //Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
-        //Managers.Game.battleInfo.UpdateMVPPoints();
+        Managers.Battle.AttackCalculation(controller, controller.attackTarget);
         yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
         controller.ChangeState(Define.RangerState.Idle);
@@ -112,6 +117,7 @@ public abstract class Ranger
 
     public virtual bool CheckCanUseSkill()
     {
+        if (!Managers.Game.battleStageSystem.isCanUseSkill) return false;
         if (!Managers.Game.battleStageSystem.isAutoSkill) return false;
         if (controller.status.CheckSkillCooltime == 0)
         {
@@ -130,6 +136,7 @@ public abstract class Ranger
     //스킬 처리 루틴
     public virtual IEnumerator SkillRoutine()
     {
+        Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
         controller.Stop();
         Debug.Log("스킬 사용됨");
         yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임

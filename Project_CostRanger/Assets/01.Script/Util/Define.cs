@@ -10,11 +10,12 @@ public class Define
     public static readonly Vector2 prepareEnemyOffset = new Vector2(0, -40);
     public static readonly Vector2 prepareRangerOffset = new Vector2(0, -60);
     public static readonly float attackAnimationTime = 1;
+    public static readonly float fastSpeed = 3;
     public static readonly float normalAttackAnimationTime = 0.417f;
     public static readonly float skillAnimationTime = 1;
     public static readonly float normalSkillAnimationTime = 0.5f;
-
     public static readonly float sceneStartDelay = 3;
+    public static readonly float skillScreenTime = 1;
 
     public enum GameState
     {
@@ -86,7 +87,7 @@ public class Define
 
     public enum VoidEventType
     {
-        OnChangePrepare, OnChangeControllerStatus, OnChangeBattle, OnChangePlayerInfo
+        OnChangePrepare, OnChangeControllerStatus, OnChangeBattle, OnChangePlayerInfo, OnPlayerDead, OnEnemyDead
     }
     public enum IntEventType
     {
@@ -123,6 +124,11 @@ public class Define
         Drag,
         EndDrag,
         Drop
+    }
+
+    public enum UIType
+    {
+        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage
     }
 
     public enum SpeakerType

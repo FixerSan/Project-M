@@ -439,6 +439,7 @@ public class RangerInfoData : Data
     public string name;                 //이름
     public int cost;                    //코스트
     public string description;
+    public string sentence;
 }
 
 [System.Serializable]
@@ -474,6 +475,7 @@ public class EnemyInfoData : Data
     public string name;                 //이름
     public int cost;                    //코스트
     public string description;
+    public string sentence;
 }
 
 [System.Serializable]

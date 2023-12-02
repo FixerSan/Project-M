@@ -8,14 +8,18 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 public class UIManager 
 {
     private int order = 10;                                     // 그려지는 순서 여유 선언
     private int toastOrder = 500;                               // 인스턴트 메세지 그려지는 여유 선언
 
+    public Dictionary<Define.UIType, UIPopup> activePopups = new Dictionary<Define.UIType, UIPopup>();
+    public Dictionary<BaseController, UIHPBar> hpBars = new Dictionary<BaseController, UIHPBar>();
     private Stack<UIPopup> popupStack = new Stack<UIPopup>();   // 팝업 스택
-    private Queue<UIToast> toastStack = new Queue<UIToast>();   // 인스턴트 메세지 스택
+    private Queue<UIToast> toastQueue = new Queue<UIToast>();   // 인스턴트 메세지 스택
+    private Queue<UIPopup_WorldText> worldTextQueue = new Queue<UIPopup_WorldText>();   // 인스턴트 메세지 스택
     private EventSystem eventSystem = null;                     // 이벤트 시스템 선언
     private UIScene sceneUI = null;                             // SceneUI 선언
     public UIScene SceneUI { get { return sceneUI; } }          // SceneUI 프로퍼티 선언
@@ -39,27 +43,6 @@ public class UIManager
             return blackPanel;
         }
     }
-
-    private CanvasGroup skillScreen;
-    public CanvasGroup SkillScreen
-    {
-        get
-        {
-            if (skillScreen == null)
-            {
-                GameObject go = GameObject.Find("@SkillScreen");
-                if (go == null)
-                {
-                    go = Managers.Resource.Instantiate("SkillScreen");
-                    go.name = "@SkillScreen";
-                    UnityEngine.Object.DontDestroyOnLoad(go);
-                    blackPanel = go.GetOrAddComponent<CanvasGroup>();
-                }
-            }
-            return blackPanel;
-        }
-    }
-
     public GameObject Root
     {
         get
@@ -72,6 +55,30 @@ public class UIManager
             return root;
         }
     }                                   // UI 위치 선언
+
+    private UISkillScreen_Ranger rangerSkillScreen;
+    public UISkillScreen_Ranger RangerSkillScreen
+    {
+        get
+        {
+            if(rangerSkillScreen == null)
+                rangerSkillScreen = Managers.Resource.Instantiate(typeof(UISkillScreen_Ranger).Name).GetOrAddComponent<UISkillScreen_Ranger>();
+            return rangerSkillScreen;
+        }
+    }
+
+    private UISkillScreen_Enemy enemySkillScreen;
+    public UISkillScreen_Enemy EnemySkillScreen
+    {
+        get
+        {
+            if (enemySkillScreen = null)
+                enemySkillScreen = Managers.Resource.Instantiate(typeof(UISkillScreen_Enemy).Name).GetOrAddComponent<UISkillScreen_Enemy>();
+            return enemySkillScreen;
+        }
+    }
+
+
 
     // 이벤트 시스템 설정
     public void SetEventSystem()
@@ -117,10 +124,19 @@ public class UIManager
         if (string.IsNullOrEmpty(_description))
             return null;
 
-        GameObject go = Managers.Resource.Instantiate("UIPopup_WorldText", Root.transform, true);
+        GameObject go = Managers.Resource.Instantiate("UIPopup_WorldText", Root.transform);
         UIPopup_WorldText text = go.GetOrAddComponent<UIPopup_WorldText>();
+        worldTextQueue.Enqueue(text);
         text.Init(_description, _position, _type);
         return text;
+    }
+
+    public void CloseAllWorldText()
+    {
+        while (worldTextQueue.Count > 0)
+        {
+            Managers.Resource.Destroy(worldTextQueue.Dequeue().gameObject);
+        }
     }
 
     // SceneUI 생성
@@ -141,6 +157,11 @@ public class UIManager
         return _sceneUI;
     }
 
+    public void ClearScene(UIScene _scene)
+    {
+        sceneUI = null;
+    }
+
     // 팝업 생성
     public T ShowPopupUI<T>(string _name = null, bool _pooling = false) where T : UIPopup
     {
@@ -153,6 +174,7 @@ public class UIManager
         if (_pooling) Managers.Pool.CreatePool(go);
         T popup = go.GetOrAddComponent<T>();
         popupStack.Push(popup);
+        activePopups.Add(Util.ParseEnum<Define.UIType>(_name), popup);
         go.transform.SetParent(Root.transform);
         return popup;
     }
@@ -180,6 +202,8 @@ public class UIManager
             return;
 
         UIPopup popup = popupStack.Pop();
+        if(activePopups.ContainsKey(Util.ParseEnum<Define.UIType>(popup.GetType().Name)))
+            activePopups.Remove(Util.ParseEnum<Define.UIType>(popup.GetType().Name));
         Managers.Resource.Destroy(popup.gameObject);
         popup = null;
         order--;
@@ -201,7 +225,7 @@ public class UIManager
         GameObject go = Managers.Resource.Instantiate($"{name}", _pooling: true);
         UIToast popup = go.GetOrAddComponent<UIToast>();
         popup.SetInfo(_description);
-        toastStack.Enqueue(popup);
+        toastQueue.Enqueue(popup);
         go.transform.SetParent(Root.transform);
         return popup;
     }
@@ -209,12 +233,12 @@ public class UIManager
     // 인스턴트 메세지 삭제 기능
     public void CloseToastUI()
     {
-        if(toastStack.Count == 0)
+        if(toastQueue.Count == 0)
         {
             return;
         }
 
-        UIToast toast = toastStack.Dequeue();
+        UIToast toast = toastQueue.Dequeue();
         toast.Refresh();
         Managers.Resource.Destroy(toast.gameObject);
         toast = null;
@@ -224,9 +248,9 @@ public class UIManager
     // 팝업 전부 삭제
     public void CloseAllToastUI()
     {
-        while (toastStack.Count > 0)
+        while (toastQueue.Count > 0)
         {
-            Managers.Resource.Destroy(toastStack.Dequeue().gameObject);
+            Managers.Resource.Destroy(toastQueue.Dequeue().gameObject);
         }
     }
 
@@ -247,10 +271,60 @@ public class UIManager
     }
 
 
+    public void SetRangerSkillScreen(int _rangerUID, Action _callback = null)
+    {
+        RangerSkillScreen.gameObject.SetActive(true);
+        RangerSkillScreen.ApplyRangerSkill(Managers.Data.GetRangerInfoData(_rangerUID), _callback);
+    }
+
+    public void SetEnemySkillScreen(int _enemyUID, Action _callback = null)
+    {
+        EnemySkillScreen.gameObject.SetActive(true);
+        EnemySkillScreen.ApplyEnemySkill(Managers.Data.GetEnemyInfoData(_enemyUID), _callback);
+    }
+
+    public void CloseRangerSkillScreen()
+    {
+        RangerSkillScreen.gameObject.SetActive(false);
+    }
+
+    public void CloseEnemySkillScreen()
+    {
+        EnemySkillScreen.gameObject.SetActive(false);
+    }
+
     // 팝업 카운트 반환
     public int GetPopupCount()
     {
         return popupStack.Count;
+    }
+
+    //HP바 생성
+    public void SetHPbar(BaseController _controller)
+    {
+        UIHPBar hpBar = Managers.Resource.Instantiate("UIHPBar").GetOrAddComponent<UIHPBar>();
+        hpBar.transform.SetParent(Root.transform);
+        hpBar.Init(_controller);
+
+        hpBars.Add(_controller, hpBar);
+    }
+
+    //HP바 삭제
+    public void ReleseHPBar(BaseController _controller)
+    {
+        if(hpBars.TryGetValue(_controller, out UIHPBar _hpBar))
+        {
+            Managers.Resource.Destroy(_hpBar.gameObject);
+            hpBars.Remove(_controller);
+        }
+    }
+
+    public void ReleseAllHPBar()
+    {
+        foreach (var item in hpBars)
+            Managers.Resource.Destroy(item.Value.gameObject);
+
+        hpBars.Clear();
     }
 
     // 초기화

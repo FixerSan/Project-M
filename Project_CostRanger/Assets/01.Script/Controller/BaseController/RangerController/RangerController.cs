@@ -45,6 +45,10 @@ public class RangerController : BaseController
         direction = Direction.Left;
         isDead = false;
         isInit = true;
+
+        worldTextTrans = Util.FindChild<Transform>(gameObject, "Trans_WorldTest");
+
+        SetHPBar();
     }
 
     public void ChangeState(RangerState _nextState, bool _isChangeSameState = false)
@@ -68,8 +72,9 @@ public class RangerController : BaseController
             animator.Play(hash);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!isInit) return;
         stateMachine.UpdateState();
         CheckChangeState();
@@ -93,21 +98,36 @@ public class RangerController : BaseController
 
     public override void Die()
     {
+        Stop();
+        ReleseHPbar();
+        Managers.Event.InvokeVoidEvent(VoidEventType.OnPlayerDead);
         StopAllCoroutines();
     }
 
     public void FindAttackTarget()
     {
+        attackTarget = null;
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
             if (attackTarget == null)
-            {   
-                attackTarget = Managers.Object.Enemies[i];
-                continue;
+            {
+                if (Managers.Object.Enemies[i].currentState != EnemyState.Die)
+                    attackTarget = Managers.Object.Enemies[i];
             }
+            else
+                break;
+        }
 
-            if(Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position))
-                attackTarget = Managers.Object.Enemies[i];
+        if(attackTarget != null)
+        {
+            for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+            {
+                if (Managers.Object.Enemies[i].currentState != EnemyState.Die)
+                {
+                    if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Enemies[i].transform.position))
+                        attackTarget = Managers.Object.Enemies[i];
+                }
+            }
         }
     }
 
@@ -118,11 +138,8 @@ public class RangerController : BaseController
 
     public override void CheckDie()
     {
-        if (status.CurrentHP <= 0)
-        {
-            status.CurrentHP = 0;
+        if (status.CurrentHP == 0)
             ChangeState(RangerState.Die);
-        }
     }
 }
 

@@ -5,31 +5,27 @@ using UnityEngine.UI;
 
 public class UIHPBar : MonoBehaviour
 {
-    //private BattleEntityController controller;
-    //private Image hpSlider;
-    //private Transform bundle;
-    //public Vector3 offset;
+    private BaseController controller;
+    private Image hpSlider;
+    private Transform bundle;
+    public Vector3 offset;
 
-    //public void Init(BattleEntityController _controller)
-    //{
-    //    controller = _controller;
-    //    hpSlider = Util.FindChild<Image>(gameObject, "Image_HP", true);
-    //    bundle = Util.FindChild<Transform>(gameObject, "Bundle_HPSlider", true);
+    public void Init(BaseController _controller)
+    {
+        controller = _controller;
+        hpSlider = Util.FindChild<Image>(gameObject, "Image_HP", true);
+        bundle = Util.FindChild<Transform>(gameObject, "Bundle_HPSlider", true);
 
-    //    if (controller.entityType == Define.BattleEntityType.Army)
-    //        hpSlider.color = Color.green;
-    //    else
-    //        hpSlider.color = Color.red;
-    //}
+        if (controller as RangerController)
+            hpSlider.color = Color.green;
+        else
+            hpSlider.color = Color.red;
+    }
 
-    //public void FixedUpdate()
-    //{
-    //    if (controller == null || controller.state == Define.BattleEntityState.Die)
-    //    {
-    //        Managers.Resource.Destroy(gameObject);
-    //        return;
-    //    }
-    //    hpSlider.fillAmount = (float)controller.battleEntityStatus.CurrentHP / (float)controller.battleEntityStatus.maxHP;
-    //    bundle.position = Managers.Screen.CameraController.Camera.WorldToScreenPoint(controller.transform.position + offset);
-    //}
+    public void Update()
+    {
+        hpSlider.fillAmount = (float)controller.status.CurrentHP / (float)controller.status.CurrentMaxHP;
+        bundle.transform.position = Camera.main.WorldToScreenPoint(controller.hpBarTrans.position);
+        bundle.localScale = controller.transform.localScale;
+    }
 }

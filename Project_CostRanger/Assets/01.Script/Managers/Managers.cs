@@ -54,6 +54,11 @@ public class Managers : Singleton<Managers>
         Init();
     }
 
+    public void Update()
+    {
+        Event.Update();
+    }
+
     //초기화
     public void Init()
     {

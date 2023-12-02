@@ -14,7 +14,7 @@
   "criticalProbability": 10,
   "defenseForce": 70,
   "moveSpeed": 7,
-  "skillCooltime": 1
+  "skillCooltime": 5
  },
  {
   "UID": 111010,

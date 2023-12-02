@@ -7,6 +7,9 @@ public abstract class BaseController : MonoBehaviour
     public ControllerStatus status;
     public Dictionary<string, Coroutine> routines;
     public Define.Direction direction;
+    private Vector3 localScale = Vector3.zero;
+    public Transform hpBarTrans;
+    public Transform worldTextTrans;
 
     public abstract void Hit(float _damage);
     public abstract void GetDamage(float _damage);
@@ -25,6 +28,30 @@ public abstract class BaseController : MonoBehaviour
 
     public abstract void CheckDie();
     public abstract void Die();
+
+    protected virtual void Update()
+    {
+        CheckScale();
+    }
+
+    public void CheckScale()
+    {
+        localScale.x = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
+        localScale.y = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
+        localScale.z = Mathf.Lerp(1.5f, 1f, (transform.position.y + 4) / 2);
+        transform.localScale = localScale;
+    }
+
+    public void SetHPBar()
+    {
+        hpBarTrans = Util.FindChild<Transform>(gameObject, "Trans_HPbar");
+        Managers.UI.SetHPbar(this);
+    }
+
+    public void ReleseHPbar()
+    {
+        Managers.UI.ReleseHPBar(this);
+    }
 }
 
 public abstract class ControllerStatus
@@ -153,6 +180,8 @@ public abstract class ControllerStatus
         {
             if (currentHP == 0) return;
             currentHP = value;
+            if (currentHP <= 0)
+                currentHP = 0;
             controller.CheckDie();
         }
     }

@@ -11,7 +11,7 @@ public class EnemyController : BaseController
 
     //Enemy Stage
     public EnemyState setState;
-    private EnemyState currentState;
+    public EnemyState currentState;
     public Dictionary<EnemyState, State<EnemyController>> states;
     public StateMachine<EnemyController> stateMachine;
     public bool isDead;
@@ -44,6 +44,9 @@ public class EnemyController : BaseController
         direction = Direction.Left;
         isDead = false;
         isInit = true;
+        worldTextTrans = Util.FindChild<Transform>(gameObject, "Trans_WorldTest");
+
+        SetHPBar();
     }
 
     public void ChangeState(EnemyState _nextState, bool _isChangeSameState = false)
@@ -67,8 +70,9 @@ public class EnemyController : BaseController
             animator.Play(hash);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!isInit) return;
         stateMachine.UpdateState();
         CheckChangeState();
@@ -82,25 +86,38 @@ public class EnemyController : BaseController
 
     public override void Hit(float _damage)
     {
-
+        GetDamage(_damage);
     }
 
     public override void GetDamage(float _damage)
     {
-
+        status.CurrentHP -= _damage;
     }
+
     public void FindAttackTarget()
     {
+        attackTarget = null;
         for (int i = 0; i < Managers.Object.Rangers.Count; i++)
         {
             if (attackTarget == null)
             {
-                attackTarget = Managers.Object.Rangers[i];
-                continue;
+                if (Managers.Object.Rangers[i].currentState != RangerState.Die)
+                    attackTarget = Managers.Object.Rangers[i];
             }
+            else
+                break;
+        }
 
-            if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position))
-                attackTarget = Managers.Object.Rangers[i];
+        if (attackTarget != null)
+        {
+            for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+            {
+                if (Managers.Object.Rangers[i].currentState != RangerState.Die)
+                {
+                    if (Vector2.Distance(transform.position, attackTarget.transform.position) > Vector2.Distance(transform.position, Managers.Object.Rangers[i].transform.position))
+                        attackTarget = Managers.Object.Rangers[i];
+                }
+            }
         }
     }
 
@@ -121,16 +138,16 @@ public class EnemyController : BaseController
 
     public override void Die()
     {
+        Stop();
+        ReleseHPbar();
+        Managers.Event.InvokeVoidEvent(VoidEventType.OnEnemyDead);
         StopAllCoroutines();
     }
 
     public override void CheckDie()
     {
-        if (status.CurrentHP <= 0)
-        {
-            status.CurrentHP = 0;
+        if (status.CurrentHP == 0)
             ChangeState(EnemyState.Die);
-        }
     }
 }
 public class EnemyStatus : ControllerStatus
@@ -138,7 +155,6 @@ public class EnemyStatus : ControllerStatus
     public EnemyStatus(BaseController _controller,EnemyControllerData _data)
     {
         controller = _controller;
-
         //공격력
         defaultAttackForce = _data.attackForce;
         currentAttackForce = _data.attackForce;
@@ -175,5 +191,9 @@ public class EnemyStatus : ControllerStatus
         //스킬 쿨타임
         defaultSkillCooltime = _data.skillCooltime;
         currentSkillCooltime = _data.skillCooltime;
+
+        //각 계산 시간
+        checkAttackCooltime = 0;
+        checkSkillCooltime = _data.skillCooltime;
     }
 }

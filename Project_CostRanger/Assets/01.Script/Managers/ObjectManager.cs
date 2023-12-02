@@ -224,4 +224,19 @@ public class ObjectManager
         Enemies.Add(controller);
         return controller;
     }
+
+    public void ClearRangers()
+    {
+        for (int i = Rangers.Count-1; i > -1; i--)
+            Managers.Resource.Destroy(Rangers[i].gameObject);
+        Rangers.Clear();
+    }
+
+    public void ClearEnemies()
+    {
+        for (int i = Enemies.Count - 1; i > -1; i--)
+            Managers.Resource.Destroy(Enemies[i].gameObject);
+        Rangers.Clear();
+
+    }
 }

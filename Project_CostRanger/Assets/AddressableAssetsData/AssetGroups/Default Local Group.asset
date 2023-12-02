@@ -137,6 +137,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 0e6623fa38ce8bf4a84a8faa58d67746
+    m_Address: UIPopup_Result.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: ae07718f1b783954c812c9a08c4d3d4e
+    m_Address: BlackPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 822aad31e84af4346b6f8aa26baec4d8
+    m_Address: UISkillScreen_Ranger.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 34f08f28bcf41ea44a3fea1d395b765c
+    m_Address: UIHPBar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: cf438075781d8834ca26b3e6e8bfa158
+    m_Address: TestRanger.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 10f9f119ba7641c40a3417dfa6fd8a3e
+    m_Address: UIPopup_WorldText.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:
