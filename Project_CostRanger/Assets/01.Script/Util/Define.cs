@@ -129,6 +129,9 @@ public class Define
     public enum UIType
     {
         UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage
+
+        // °¡Ã­ ¾À
+        , UIPopup_Gacha, UIPopup_GachaResult, UIPopup_GachaSlide
     }
 
     public enum SpeakerType

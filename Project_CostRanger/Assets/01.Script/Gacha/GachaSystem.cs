@@ -15,33 +15,14 @@ public class GachaSystem
     // 결과창 UI용 뽑은 개수 정리
     private Queue<string> obtainedRangers;
 
-    System.Random random;
-
-    // 테스트용 json
-    public TextAsset test_TextAsset;
-    public GachaTable test_GachaTable;
-
     public bool Init()
     {
-        random = new System.Random();
         obtainedRangers = new Queue<string>(10);
 
-        test_GachaTable = new GachaTable();
-        test_GachaTable.Init(test_TextAsset);
+        currentTable = new GachaTable();
+        currentTable.Init(Managers.Resource.Load<TextAsset>("RecruitmentRegularData"));
 
-        currentTable = test_GachaTable;
         return true;
-    }
-
-    public void Start()
-    {
-        Init();
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A)) StartGachaAll(1);
-        if (Input.GetKeyDown(KeyCode.S)) StartGachaAll(10);
     }
 
     // _gachaCount 만큼 뽑기가 가능한지 체크하고 실행
@@ -60,7 +41,7 @@ public class GachaSystem
     }
 
     // 뽑기 실행 ( 레어도 확정부터 유닛 뽑기까지 )
-    public void StartGacha()
+    public void StartGacha(int _gachaCount = 1)
     {
         // 버튼을 눌렀을 때 CompleteGacha() 실행까지 대기
         double randomSeed = UnityEngine.Random.Range(0, 100f);
@@ -88,7 +69,7 @@ public class GachaSystem
                 // Debug.Log($"1. 나온 숫자 : {randomSeed}, 얻은 확률 : {currentTable.globalProbabilities[i]}");
                 StartGachaByRarity((RangerRarity)rarities.GetValue(i));
                 break;
-            } 
+            }
 
         }
     }
@@ -174,8 +155,14 @@ public class GachaTable
     public bool Init(TextAsset textAsset)
     {
         // TextAsset textAsset = Managers.Resource.Load<TextAsset>("RegularRecruitmentData");
-        if (textAsset == null) return false;
-        data = JsonUtility.FromJson<GachaTableDatas>(textAsset.text);
+        if (textAsset == null)
+        {
+            Debug.Log(textAsset + "is null");
+            return false;
+
+        }
+        else
+            data = JsonUtility.FromJson<GachaTableDatas>(textAsset.text);
 
         // 1. 전역 확률 저장
         globalCommonProbability = data.globalData[0].commonProbability;

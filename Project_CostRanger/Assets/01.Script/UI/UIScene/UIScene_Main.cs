@@ -12,6 +12,7 @@ public class UIScene_Main : UIScene
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         BindEvent(GetButton((int)Buttons.Button_Battle).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_WorldMap_ChapterOne>(); });
+        BindEvent(GetButton((int)Buttons.Button_Gacha).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_Gacha>(); });
 
         RedrawUI();
         return true;
@@ -28,7 +29,7 @@ public class UIScene_Main : UIScene
 
     private enum Buttons
     {
-        Button_Battle
+        Button_Battle, Button_Gacha
     }
 
     private enum Texts
