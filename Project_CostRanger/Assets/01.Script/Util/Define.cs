@@ -128,7 +128,12 @@ public class Define
 
     public enum UIType
     {
-        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage
+        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage, UIPopup_StageInfo
+    }
+
+    public enum RewardType
+    {
+        Gold, EXP, Gem, UpgradeCost
     }
 
     public enum SpeakerType

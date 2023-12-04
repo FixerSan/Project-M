@@ -12,6 +12,7 @@ public abstract class UIBase : MonoBehaviour
 {
     protected Dictionary<Type, Object[]> objectDictionary = new Dictionary<Type, Object[]>();
     protected bool init = false;
+    public bool isDrawed = false;
 
     public virtual bool Init()
     {
