@@ -500,8 +500,13 @@ public class StageData : Data
 {
     public int UID;
     public string stageName;
+    public string stageNumber;    
     public int canUseCost;
-    public string enemyUIDs; 
+    public string enemyUIDs;
+    public int clearRewardGold;
+    public int clearRewardEXP;
+    public int clearRewardUpgradeCost;
+    public int clearRewardGem;
 
     public StageData(int _UID, string _stageName, int _canUseCost, string _enemyUIDs)
     {
