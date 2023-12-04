@@ -7,9 +7,11 @@ public class UIPopup_PrepareStage : UIPopup
     private List<UISlot_CanUseRanger> canUseRangerSlots;
     public List<UISlot_UseRanger> batchOne_UseRangerSlots;
     public List<UISlot_UseRanger> batchTwo_UseRangerSlots;
+    public List<UISlot_StageEnemy> enemySlot;
     private Transform canUseRangerSlotParent;
 
     bool tempBool;
+    private bool isDrawedEnemy = false;
 
     public override bool Init()
     {
@@ -43,6 +45,7 @@ public class UIPopup_PrepareStage : UIPopup
     {
         RedrawCanUseSlot();
         RedrawUseSlot();
+        DrawEnemy();
     }
 
     public void RedrawCanUseSlot()
@@ -83,7 +86,15 @@ public class UIPopup_PrepareStage : UIPopup
         }
     }
 
-
+    public void DrawEnemy()
+    {
+        if (isDrawedEnemy) return;
+        isDrawedEnemy = true;
+        for (int i = 0; i < enemySlot.Count; i++)
+        {
+            enemySlot[i].SetEnemy();
+        }
+    }
 
     private enum Buttons
     {
