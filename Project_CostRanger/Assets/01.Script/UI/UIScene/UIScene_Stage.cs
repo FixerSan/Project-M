@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class UIScene_Stage : UIScene
 {
@@ -11,10 +9,18 @@ public class UIScene_Stage : UIScene
         if(!base.Init()) return false;
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
+        BindImage(typeof(Images));
 
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
         BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
 
+
+
+
+
+
+
+        RedrawUI();
         return true;
     }
 
@@ -23,7 +29,10 @@ public class UIScene_Stage : UIScene
         GetText((int)Texts.Text_Timer).text = $"{(int)Managers.Game.battleStageSystem.time}";
         GetButton((int)Buttons.Button_FastSpeed).interactable = !Managers.Game.battleStageSystem.isFastSpeed;
         GetButton((int)Buttons.Button_AutoSkill).interactable = !Managers.Game.battleStageSystem.isAutoSkill;
+        GetImage((int)Images.Image_RangersHPBar).fillAmount = Managers.Game.battleStageSystem.rangersTotalCurrentHP / Managers.Game.battleStageSystem.rangersTotalMaxHP;
+        GetImage((int)Images.Image_EnemiesHPBar).fillAmount = Managers.Game.battleStageSystem.enemiesTotalCurrentHP / Managers.Game.battleStageSystem.enemiesTotalMaxHP;
     }
+
     public void OnClick_FastSpeed()
     {
         Managers.Game.battleStageSystem.SetFastSpeed(!Managers.Game.battleStageSystem.isFastSpeed);
@@ -42,5 +51,10 @@ public class UIScene_Stage : UIScene
     private enum Buttons
     {
         Button_FastSpeed, Button_AutoSkill
+    }
+
+    private enum Images
+    {
+        Image_RangersHPBar, Image_EnemiesHPBar
     }
 }

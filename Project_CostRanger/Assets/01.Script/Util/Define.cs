@@ -49,7 +49,7 @@ public class Define
 
     public enum BattleEntityType
     {
-        Army, Enemy
+        Ranger, Enemy
     }
 
     public enum BattleEntityState

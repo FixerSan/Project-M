@@ -180,6 +180,7 @@ public abstract class ControllerStatus
         {
             if (currentHP == 0) return;
             currentHP = value;
+            Managers.Event.InvokeVoidEvent(Define.VoidEventType.OnChangeBattle);
             if (currentHP <= 0)
                 currentHP = 0;
             controller.CheckDie();
