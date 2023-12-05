@@ -19,7 +19,7 @@ public class UISlot_StageInfoEnemy : UIBase
     public void DrawSlot(EnemyInfoData _enemyInfoData)
     {
         isDrawed = true;
-        GetImage((int)Images.Image_EnemyCount).gameObject.SetActive(false);
+        GetImage((int)Images.Image_EnemyCount).gameObject.SetActive(true);
         enemyInfoData = _enemyInfoData;
         Managers.Resource.Load<Sprite>(enemyInfoData.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
     }
@@ -33,7 +33,7 @@ public class UISlot_StageInfoEnemy : UIBase
 
     private enum Images 
     {
-        Image_Illust, Image_EnemyCount
+        Image_Illust, Image_EnemyCount, Image_EnemySlot
     }
 
     private enum Texts

@@ -16,6 +16,8 @@ public class Define
     public static readonly float normalSkillAnimationTime = 0.5f;
     public static readonly float sceneStartDelay = 3;
     public static readonly float skillScreenTime = 1;
+    public static readonly Color stageinfoDrawedSlotColor = new Color(1,1,1,1);
+    public static readonly Color stageinfoNotDrawedSlotColor = new Color(1,1,1,0.5f);
 
     public enum GameState
     {

@@ -26,7 +26,7 @@ public class UIPopup_StageInfo : UIPopup
         GetText((int)Texts.Text_StageNumber).text = stageData.stageNumber;
         GetText((int)Texts.Text_StageName).text = stageData.stageName;
 
-        BindEvent(GetButton((int)Buttons.Button_Start).gameObject, OnClick_Start);
+        BindEvent(GetButton((int)Buttons.Button_Start).gameObject, OnClick_Start) ;
         BindEvent(GetButton((int)Buttons.Button_Close).gameObject, ClosePopupUP);
         DrawSlots();
     }
@@ -37,7 +37,7 @@ public class UIPopup_StageInfo : UIPopup
         string[] enemyStringArray = stageData.enemyUIDs.Split(",");
         for (int i = 0; i < enemyStringArray.Length; i++)
         {
-            if (Int32.TryParse(enemyStringArray[0], out int _enemyIndex))
+            if (Int32.TryParse(enemyStringArray[i], out int _enemyIndex))
                 enemies.Add(Managers.Data.GetEnemyInfoData(_enemyIndex));
         }
 
@@ -57,8 +57,8 @@ public class UIPopup_StageInfo : UIPopup
             }
 
             if (isAdded)
-                break;
-            enemySlots.FindEmpty().DrawSlot(enemies[i]);
+                continue;
+            enemySlots.FindNotDrawed().DrawSlot(enemies[i]);
         }
 
         if (stageData.clearRewardGold != 0)
@@ -76,6 +76,7 @@ public class UIPopup_StageInfo : UIPopup
 
     private void OnClick_Start()
     {
+        ClosePopupUP();
         Managers.Game.StartPrepare(stageData.UID);
     }
 

@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 3255277238116797797}
   - component: {fileID: 1324160683632838288}
   m_Layer: 5
-  m_Name: Image (14)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -1168,10 +1168,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 508.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9059236918514455708
 CanvasRenderer:
@@ -1566,10 +1566,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 160.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &381702268836589178
 CanvasRenderer:
@@ -1770,7 +1770,7 @@ GameObject:
   - component: {fileID: 4159410763079887646}
   - component: {fileID: 6823411306252859298}
   m_Layer: 5
-  m_Name: Image (8)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -1945,7 +1945,7 @@ GameObject:
   - component: {fileID: 5011868655537606428}
   - component: {fileID: 751597073412557216}
   m_Layer: 5
-  m_Name: Image (9)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,7 +2025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -2755,7 +2755,7 @@ GameObject:
   - component: {fileID: 2988570709534359462}
   - component: {fileID: 2028490681043767460}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2835,7 +2835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -3586,10 +3586,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 73.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8326121117216980242
 CanvasRenderer:
@@ -5073,7 +5073,7 @@ GameObject:
   - component: {fileID: 2717174051803237699}
   - component: {fileID: 6123658251430825572}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5153,7 +5153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -5271,10 +5271,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 73.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2717174052025006243
 CanvasRenderer:
@@ -5734,7 +5734,7 @@ GameObject:
   - component: {fileID: 8931285132115588365}
   - component: {fileID: 8105562009664135687}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5814,7 +5814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -5967,7 +5967,7 @@ GameObject:
   - component: {fileID: 7933718465888212191}
   - component: {fileID: 3259614139766812355}
   m_Layer: 5
-  m_Name: Image (17)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6047,7 +6047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -6088,10 +6088,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 421.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2617640277068754907
 CanvasRenderer:
@@ -6661,10 +6661,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 421.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7282261251051420106
 CanvasRenderer:
@@ -6753,10 +6753,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 508.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6520144686694322142
 CanvasRenderer:
@@ -6898,7 +6898,7 @@ GameObject:
   - component: {fileID: 6813950133031518524}
   - component: {fileID: 3267774804217165779}
   m_Layer: 5
-  m_Name: Image (16)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6978,7 +6978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -7150,7 +7150,7 @@ GameObject:
   - component: {fileID: 7205340987071048699}
   - component: {fileID: 252695157533966459}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7230,7 +7230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -7694,10 +7694,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 160.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6556252992973213586
 CanvasRenderer:
@@ -7939,10 +7939,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 421.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1794055908604984871
 CanvasRenderer:
@@ -8031,10 +8031,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 334.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3521812111247512840
 CanvasRenderer:
@@ -8235,7 +8235,7 @@ GameObject:
   - component: {fileID: 7431258301822577934}
   - component: {fileID: 2808361508745504235}
   m_Layer: 5
-  m_Name: Image (11)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8315,7 +8315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -8967,7 +8967,7 @@ GameObject:
   - component: {fileID: 1781559330588087998}
   - component: {fileID: 6001640670612583494}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9047,7 +9047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -9722,10 +9722,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 508.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4743765095822011847
 CanvasRenderer:
@@ -9791,7 +9791,7 @@ GameObject:
   - component: {fileID: 9190407431442343870}
   - component: {fileID: 7462135887066610156}
   m_Layer: 5
-  m_Name: Image (15)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9871,7 +9871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -10047,10 +10047,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 247.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1793039268350839076
 CanvasRenderer:
@@ -10215,10 +10215,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 247.5, y: -53.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4005138968653347531
 CanvasRenderer:
@@ -10782,7 +10782,7 @@ GameObject:
   - component: {fileID: 3767492545117155554}
   - component: {fileID: 7565295421811521120}
   m_Layer: 5
-  m_Name: Image (13)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10862,7 +10862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -11110,7 +11110,7 @@ GameObject:
   - component: {fileID: 6559814647748067947}
   - component: {fileID: 2766995470821689524}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11190,7 +11190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -11898,7 +11898,7 @@ GameObject:
   - component: {fileID: 798458791328433170}
   - component: {fileID: 1778610974656764286}
   m_Layer: 5
-  m_Name: Image (7)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11978,7 +11978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -12366,10 +12366,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 160.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8297027562102290981
 CanvasRenderer:
@@ -12722,7 +12722,7 @@ GameObject:
   - component: {fileID: 5576225439056254499}
   - component: {fileID: 8421196040416154333}
   m_Layer: 5
-  m_Name: Image (10)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12802,7 +12802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -13842,10 +13842,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 334.5, y: -140.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2284549394504653736
 CanvasRenderer:
@@ -13911,7 +13911,7 @@ GameObject:
   - component: {fileID: 3410366652252810198}
   - component: {fileID: 215411782011051391}
   m_Layer: 5
-  m_Name: Image (6)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13991,7 +13991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 
@@ -14385,10 +14385,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 247.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7545722517191041525
 CanvasRenderer:
@@ -15130,10 +15130,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 334.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2906334927385214098
 CanvasRenderer:
@@ -15222,10 +15222,10 @@ RectTransform:
   m_Father: {fileID: 2717174050683776768}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 73.5, y: -227.5}
+  m_SizeDelta: {x: 67, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2573559378780333911
 CanvasRenderer:
@@ -15503,7 +15503,7 @@ GameObject:
   - component: {fileID: 917907448654434998}
   - component: {fileID: 2576450007963369367}
   m_Layer: 5
-  m_Name: Image (12)
+  m_Name: Image_EnemySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15583,7 +15583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDrawed: 0
   enemyInfoData:
-    UID: 0
+    UID: -1
     name: 
     cost: 0
     description: 

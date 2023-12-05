@@ -5,7 +5,6 @@ using UnityEngine;
 using System.IO;
 public class TestController : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))

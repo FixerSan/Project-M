@@ -471,7 +471,7 @@ public class EnemyDatas
 [System.Serializable]
 public class EnemyInfoData : Data
 {
-    public int UID;                     //인덱스
+    public int UID = -1;                     //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
     public string description;
@@ -498,7 +498,7 @@ public class EnemyControllerData : Data
 [Serializable]
 public class StageData : Data
 {
-    public int UID;
+    public int UID = -1;
     public string stageName;
     public string stageNumber;    
     public int canUseCost;
