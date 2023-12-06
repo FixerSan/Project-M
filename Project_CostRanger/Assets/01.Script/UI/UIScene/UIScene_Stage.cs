@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UIScene_Stage : UIScene
 {
+    private List<UISlot_StageRanger> rangerSlots = new List<UISlot_StageRanger>();
+    private List<UISlot_StageEnemy> enemySlots = new List<UISlot_StageEnemy>();
     public override bool Init()
     {
         if(!base.Init()) return false;
@@ -14,10 +16,14 @@ public class UIScene_Stage : UIScene
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
         BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
 
-        Transform tempTrans = Util.FindChild<Transform>(gameObject, _name: "");
-
-
-
+        Transform tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSlot");
+        UISlot_StageRanger rangerSlot;
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+        {
+            rangerSlot = Managers.UI.CreateStageRangerSlot(tempTrans);
+            rangerSlot.Init(Managers.Object.Rangers[i]);
+            rangerSlots.Add(rangerSlot);
+        }
 
 
         RedrawUI();
@@ -31,6 +37,11 @@ public class UIScene_Stage : UIScene
         GetButton((int)Buttons.Button_AutoSkill).interactable = !Managers.Game.battleStageSystem.isAutoSkill;
         GetImage((int)Images.Image_RangersHPBar).fillAmount = Managers.Game.battleStageSystem.rangersTotalCurrentHP / Managers.Game.battleStageSystem.rangersTotalMaxHP;
         GetImage((int)Images.Image_EnemiesHPBar).fillAmount = Managers.Game.battleStageSystem.enemiesTotalCurrentHP / Managers.Game.battleStageSystem.enemiesTotalMaxHP;
+
+        for (int i = 0; i < rangerSlots.Count; i++)
+        {
+            rangerSlots[i].Redraw();
+        }
     }
 
     public void OnClick_FastSpeed()

@@ -327,6 +327,15 @@ public class UIManager
         hpBars.Clear();
     }
 
+    public UISlot_StageRanger CreateStageRangerSlot(Transform _parent = null)
+    {
+        UISlot_StageRanger slot = Managers.Resource.Instantiate("Slot_StageRanger").GetOrAddComponent<UISlot_StageRanger>();
+        slot.transform.SetParent(_parent);
+        slot.transform.localScale = Vector3.one;
+        return slot;
+    }
+
+
     // √ ±‚»≠
     public void Clear()
     {
