@@ -7,7 +7,7 @@ public class UIPopup_PrepareStage : UIPopup
     private List<UISlot_CanUseRanger> canUseRangerSlots;
     public List<UISlot_UseRanger> batchOne_UseRangerSlots;
     public List<UISlot_UseRanger> batchTwo_UseRangerSlots;
-    public List<UISlot_StageEnemy> enemySlot;
+    public List<UISlot_PrepareEnemy> enemySlot;
     private Transform canUseRangerSlotParent;
 
     bool tempBool;

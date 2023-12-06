@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UISlot_StageEnemy : UIBase
+public class UISlot_PrepareEnemy : UIBase
 {
     public int slotIndex;
     private GameObject enemy;

@@ -14,7 +14,7 @@ public class UIScene_Stage : UIScene
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
         BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
 
-
+        Transform tempTrans = Util.FindChild<Transform>(gameObject, _name: "");
 
 
 
