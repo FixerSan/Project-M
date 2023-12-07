@@ -23,7 +23,7 @@ public class UIPopup_PrepareStage : UIPopup
         BindEvent(GetButton((int)Buttons.Button_Back).gameObject, () => { Managers.UI.ClosePopupUI(this); Managers.Game.prepareStageSystem = null; });
         BindEvent(GetButton((int)Buttons.Button_Start).gameObject, OnClick_Start);
 
-        RedrawCanUseSlot();
+        //RedrawCanUseSlot();
         return true;
     }
 
