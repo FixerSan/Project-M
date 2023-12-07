@@ -25,6 +25,14 @@ public class UIScene_Stage : UIScene
             rangerSlots.Add(rangerSlot);
         }
 
+        UISlot_StageEnemy enemySlot;
+        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_EnemySlot");
+        for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+        {
+            enemySlot = Managers.UI.CreateStageEnemySlot(tempTrans);
+            enemySlot.Init(Managers.Object.Enemies[i]);
+            enemySlots.Add(enemySlot);
+        }
 
         RedrawUI();
         return true;
@@ -41,6 +49,11 @@ public class UIScene_Stage : UIScene
         for (int i = 0; i < rangerSlots.Count; i++)
         {
             rangerSlots[i].Redraw();
+        }
+
+        for (int i = 0; i < enemySlots.Count; i++)
+        {
+            enemySlots[i].Redraw();
         }
     }
 

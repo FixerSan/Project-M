@@ -335,6 +335,14 @@ public class UIManager
         return slot;
     }
 
+    public UISlot_StageEnemy CreateStageEnemySlot(Transform _parent = null)
+    {
+        UISlot_StageEnemy slot = Managers.Resource.Instantiate("Slot_StageRanger").GetOrAddComponent<UISlot_StageEnemy>();
+        slot.transform.SetParent(_parent);
+        slot.transform.localScale = Vector3.one;
+        return slot;
+    }
+
 
     // √ ±‚»≠
     public void Clear()
