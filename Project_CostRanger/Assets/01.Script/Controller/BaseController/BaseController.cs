@@ -59,17 +59,12 @@ public abstract class ControllerStatus
     protected BaseController controller;
     //°ø°Ý·Â
     public float defaultAttackForce;
-    protected float currentAttackForce;
+    public float plustAttackForce;
     public float CurrentAttackForce
     {
         get
         {
-            return currentAttackForce;
-        }
-
-        set
-        {
-            currentAttackForce = value;
+            return defaultAttackForce + plustAttackForce;
         }
     }
 
