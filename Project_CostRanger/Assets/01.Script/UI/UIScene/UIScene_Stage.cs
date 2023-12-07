@@ -6,6 +6,7 @@ public class UIScene_Stage : UIScene
 {
     private List<UISlot_StageRanger> rangerSlots = new List<UISlot_StageRanger>();
     private List<UISlot_StageEnemy> enemySlots = new List<UISlot_StageEnemy>();
+    private UISlot_StageRangerSkill[] rangerSkillSlot;
     public override bool Init()
     {
         if(!base.Init()) return false;
@@ -32,6 +33,19 @@ public class UIScene_Stage : UIScene
             enemySlot = Managers.UI.CreateStageEnemySlot(tempTrans);
             enemySlot.Init(Managers.Object.Enemies[i]);
             enemySlots.Add(enemySlot);
+        }
+
+        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSkillSlot");
+        rangerSkillSlot = tempTrans.GetComponentsInChildren<UISlot_StageRangerSkill>();
+        for (int i = 0; i < rangerSkillSlot.Length; i++)
+        {
+            rangerSkillSlot[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+        {
+            rangerSkillSlot[i].gameObject.SetActive(true);
+            rangerSkillSlot[i].Init(Managers.Object.Rangers[i]);
         }
 
         RedrawUI();

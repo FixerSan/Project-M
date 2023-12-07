@@ -109,7 +109,7 @@ public abstract class Ranger
 
     public virtual void UseSkill()
     {
-        if (controller.status.CheckSkillCooltime == 0)
+        if (controller.status.CheckSkillCooltime <= 0)
         {
             controller.ChangeState(RangerState.SkillCast);
         }
