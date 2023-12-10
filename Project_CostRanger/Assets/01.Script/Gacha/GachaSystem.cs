@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 using UnityEditor.Rendering;
 
 public class GachaSystem
@@ -14,13 +15,17 @@ public class GachaSystem
 
     // 결과창 UI용 뽑은 개수 정리
     private Queue<string> obtainedRangers;
+    private int[] lastObtainedRangers;
 
     public bool Init()
     {
         obtainedRangers = new Queue<string>(10);
+        lastObtainedRangers = new int[10];
 
         currentTable = new GachaTable();
         currentTable.Init(Managers.Resource.Load<TextAsset>("RecruitmentRegularData"));
+
+        Debug.Log("가챠 시스템 초기화 완료");
 
         return true;
     }
@@ -29,11 +34,10 @@ public class GachaSystem
     public bool TryGacha(int _gachaCount = 1)
     {
         // 재화 개수 검사
-        bool isEnable = _gachaCount * 120 <= Managers.Data.playerData.gem ? true : false;
+        bool isEnable = true; // _gachaCount * 120 <= Managers.Data.playerData.gem ? true : false;
 
         if (isEnable)
         {
-            StartGachaAll(_gachaCount);
             return true;
         }
 
@@ -43,7 +47,6 @@ public class GachaSystem
     // 뽑기 실행 ( 레어도 확정부터 유닛 뽑기까지 )
     public void StartGacha(int _gachaCount = 1)
     {
-        // 버튼을 눌렀을 때 CompleteGacha() 실행까지 대기
         double randomSeed = UnityEngine.Random.Range(0, 100f);
         var rarities = Enum.GetValues(typeof(RangerRarity));
 
@@ -115,7 +118,7 @@ public class GachaSystem
             {
                 // obtainedRangers.Enqueue(Managers.Data.GetRangerInfoData(rarityPool.datas[i].UID));
                 // Debug.Log($"2. 나온 숫자 : {randomSeed}, 얻은 확률 : {rarityPool.datas[i].probability}");
-                obtainedRangers.Enqueue(rarityPool.datas[i].UID.ToString() + $" {_rarity}");
+                obtainedRangers.Enqueue(rarityPool.datas[i].UID.ToString());
                 break;
             }
         }
@@ -123,15 +126,25 @@ public class GachaSystem
 
     public void CompleteGacha()
     {
+        // 마지막 가챠 배열 초기화
+        for (int i = 0; i < lastObtainedRangers.Length; i++)
+        {
+            lastObtainedRangers[i] = 0;
+        }
+
         int imax = obtainedRangers.Count;
 
         // obtainedRangers 에 등록된 만큼 완료 처리
-
-        // 해당 값으로 슬라이드쇼 해야함
         for (int i = 0; i < imax; i++)
         {
+            lastObtainedRangers[i] = Int32.Parse(obtainedRangers.Peek());
             Debug.Log($"{i + 1}번째 뽑기 : {obtainedRangers.Dequeue()} 획득!");
         }
+    }
+
+    public int[] GetGachaResult()
+    {
+        return lastObtainedRangers;
     }
 }
 

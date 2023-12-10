@@ -9,36 +9,42 @@ public class UIPopup_GachaResult : UIPopup
     public override bool Init()
     {
         if (!base.Init())
-            return base.Init();
+            return false;
 
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
 
+        BindEvent(GetButton((int)Buttons.Button_Next).gameObject, _callback: OnClick_Next);
+
+        RedrawGachaSlot(Managers.Gacha.GetGachaResult());
 
         return true;
     }
-    
-    public void RedrawGacahaSlot(int[] _obtainedList)
+
+    public void RedrawGachaSlot(int[] _obtainedList)
     {
-        foreach(var slot in gachaInfoSlots)
+        foreach (var slot in gachaInfoSlots)
         {
             slot.gameObject.SetActive(false);
         }
 
         for (int i = 0; i < _obtainedList.Length; i++)
         {
-            bool isAlreadyObtained = false;
-
-            for (int j = 0, jmax = Managers.Data.playerData.hasRangers.Count; j < jmax; i++)
+            if (_obtainedList[i] != 0)
             {
-                if (Managers.Data.playerData.hasRangers[i] != null && Managers.Data.playerData.hasRangers[i].UID == _obtainedList[i])
-                {
-                    isAlreadyObtained = true;
-                    break;
-                }
+                bool isAlreadyObtained = false;
+
+                //for (int j = 0, jmax = Managers.Data.playerData.hasRangers.Count; j < jmax; i++)
+                //{
+                //    if (Managers.Data.playerData.hasRangers[i] != null && Managers.Data.playerData.hasRangers[i].UID == _obtainedList[i])
+                //    {
+                //        isAlreadyObtained = true;
+                //        break;
+                //    }
+                //}
+
+                gachaInfoSlots[i].Redraw(_obtainedList[i], isAlreadyObtained);
             }
-            
-            gachaInfoSlots[i].Redraw(_obtainedList[i], isAlreadyObtained);
         }
     }
 

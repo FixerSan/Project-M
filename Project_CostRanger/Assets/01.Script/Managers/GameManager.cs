@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
             {
                 Managers.Screen.SetCameraPosition(new Vector3(0,0,-10f));
                 Managers.Scene.LoadScene(Define.Scene.Login);
+                Managers.Gacha.Init();
             });
         });
     }

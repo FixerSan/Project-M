@@ -2285,7 +2285,7 @@ GameObject:
   - component: {fileID: 3432283243888048354}
   - component: {fileID: 5809865797338637700}
   m_Layer: 5
-  m_Name: Button_GachaChart
+  m_Name: Button_ShowChart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2406,7 +2406,7 @@ GameObject:
   - component: {fileID: 4543994233224568270}
   - component: {fileID: 2985189548846597490}
   m_Layer: 5
-  m_Name: Image_Background
+  m_Name: Button_BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
