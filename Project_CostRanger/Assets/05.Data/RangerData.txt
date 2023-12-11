@@ -1,499 +1,4 @@
 {
-"controllersData":[
- {
-  "UID": 0,
-  "name": "TestRanger",
-  "cost": 3,
-  "hp": 500,
-  "attackType1": 1,
-  "attackType2": 1,
-  "attackForce": 50,
-  "attackSpeed": 1.2,
-  "attackDistance": 5,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 70,
-  "moveSpeed": 7,
-  "skillCooltime": 5
- },
- {
-  "UID": 111010,
-  "name": "Unemployed Knight",
-  "cost": 3,
-  "hp": 180,
-  "attackType1": 1,
-  "attackType2": 1,
-  "attackForce": 30,
-  "attackSpeed": 1,
-  "attackDistance": 2,
-  "criticalForce": 1.5,
-  "criticalProbability": 4.2,
-  "defenseForce": 10,
-  "moveSpeed": 4,
-  "skillCooltime": 1
- },
- {
-  "UID": 111011
- },
- {
-  "UID": 111012
- },
- {
-  "UID": 111013
- },
- {
-  "UID": 111014
- },
- {
-  "UID": 111015
- },
- {
-  "UID": 111020,
-  "name": "Boring Spearman",
-  "cost": 4,
-  "hp": 140,
-  "attackType1": 1,
-  "attackType2": 1,
-  "attackForce": 44,
-  "attackSpeed": 1.6,
-  "attackDistance": 7.6,
-  "criticalForce": 1.6,
-  "criticalProbability": 3.8,
-  "defenseForce": 6,
-  "moveSpeed": 6,
-  "skillCooltime": 1
- },
- {
-  "UID": 111021
- },
- {
-  "UID": 111022
- },
- {
-  "UID": 111023
- },
- {
-  "UID": 111024
- },
- {
-  "UID": 111025
- },
- {
-  "UID": 111030,
-  "name": "Dull Axeman",
-  "cost": 7,
-  "hp": 200,
-  "attackType1": 1,
-  "attackType2": 1,
-  "attackForce": 120,
-  "attackSpeed": 4.2,
-  "attackDistance": 6,
-  "criticalForce": 2,
-  "criticalProbability": 2,
-  "defenseForce": 12,
-  "moveSpeed": 3,
-  "skillCooltime": 1
- },
- {
-  "UID": 111031
- },
- {
-  "UID": 111032
- },
- {
-  "UID": 111033
- },
- {
-  "UID": 111034
- },
- {
-  "UID": 111035
- },
- {
-  "UID": 111040,
-  "name": "Strange Assassin",
-  "cost": 9,
-  "hp": 130,
-  "attackType1": 1,
-  "attackType2": 1,
-  "attackForce": 60,
-  "attackSpeed": 0.8,
-  "attackDistance": 1.6,
-  "criticalForce": 3,
-  "criticalProbability": 1.2,
-  "defenseForce": 0,
-  "moveSpeed": 9,
-  "skillCooltime": 1
- },
- {
-  "UID": 111041
- },
- {
-  "UID": 111042
- },
- {
-  "UID": 111043
- },
- {
-  "UID": 111044
- },
- {
-  "UID": 111045
- },
- {
-  "UID": 111050
- },
- {
-  "UID": 111051
- },
- {
-  "UID": 111052
- },
- {
-  "UID": 111053
- },
- {
-  "UID": 111054
- },
- {
-  "UID": 111055
- },
- {
-  "UID": 112010,
-  "name": "Goofy Hammeman",
-  "cost": 6,
-  "hp": 210,
-  "attackType1": 1,
-  "attackType2": 2,
-  "attackForce": 85,
-  "attackSpeed": 3.3,
-  "attackDistance": 6.3,
-  "criticalForce": 2,
-  "criticalProbability": 2.2,
-  "defenseForce": 15,
-  "moveSpeed": 3.5,
-  "skillCooltime": 1
- },
- {
-  "UID": 112011
- },
- {
-  "UID": 112012
- },
- {
-  "UID": 112013
- },
- {
-  "UID": 112014
- },
- {
-  "UID": 112015
- },
- {
-  "UID": 112020,
-  "name": "Scared Thug",
-  "cost": 5,
-  "hp": 100,
-  "attackType1": 1,
-  "attackType2": 2,
-  "attackForce": 48,
-  "attackSpeed": 2,
-  "attackDistance": 6.5,
-  "criticalForce": 1.5,
-  "criticalProbability": 6,
-  "defenseForce": 4,
-  "moveSpeed": 3.8,
-  "skillCooltime": 1
- },
- {
-  "UID": 112021
- },
- {
-  "UID": 112022
- },
- {
-  "UID": 112023
- },
- {
-  "UID": 112024
- },
- {
-  "UID": 112025
- },
- {
-  "UID": 112030
- },
- {
-  "UID": 112031
- },
- {
-  "UID": 112032
- },
- {
-  "UID": 112033
- },
- {
-  "UID": 112034
- },
- {
-  "UID": 112035
- },
- {
-  "UID": 112040
- },
- {
-  "UID": 112041
- },
- {
-  "UID": 112042
- },
- {
-  "UID": 112043
- },
- {
-  "UID": 112044
- },
- {
-  "UID": 112045
- },
- {
-  "UID": 112050
- },
- {
-  "UID": 112051
- },
- {
-  "UID": 112052
- },
- {
-  "UID": 112053
- },
- {
-  "UID": 112054
- },
- {
-  "UID": 112055
- },
- {
-  "UID": 121010,
-  "name": "Clumsy Archer",
-  "cost": 10,
-  "hp": 80,
-  "attackType1": 2,
-  "attackType2": 1,
-  "attackForce": 30,
-  "attackSpeed": 3,
-  "attackDistance": 15,
-  "criticalForce": 1.5,
-  "criticalProbability": 3,
-  "defenseForce": 6,
-  "moveSpeed": 6,
-  "skillCooltime": 1
- },
- {
-  "UID": 121011
- },
- {
-  "UID": 121012
- },
- {
-  "UID": 121013
- },
- {
-  "UID": 121014
- },
- {
-  "UID": 121015
- },
- {
-  "UID": 121020,
-  "name": "Lenient Ninja",
-  "cost": 8,
-  "hp": 110,
-  "attackType1": 2,
-  "attackType2": 1,
-  "attackForce": 20,
-  "attackSpeed": 1.1,
-  "attackDistance": 11,
-  "criticalForce": 1.2,
-  "criticalProbability": 15,
-  "defenseForce": 3,
-  "moveSpeed": 11,
-  "skillCooltime": 1
- },
- {
-  "UID": 121021
- },
- {
-  "UID": 121022
- },
- {
-  "UID": 121023
- },
- {
-  "UID": 121024
- },
- {
-  "UID": 121025
- },
- {
-  "UID": 121030
- },
- {
-  "UID": 121031
- },
- {
-  "UID": 121032
- },
- {
-  "UID": 121033
- },
- {
-  "UID": 121034
- },
- {
-  "UID": 121035
- },
- {
-  "UID": 121040
- },
- {
-  "UID": 121041
- },
- {
-  "UID": 121042
- },
- {
-  "UID": 121043
- },
- {
-  "UID": 121044
- },
- {
-  "UID": 121045
- },
- {
-  "UID": 121050
- },
- {
-  "UID": 121051
- },
- {
-  "UID": 121052
- },
- {
-  "UID": 121053
- },
- {
-  "UID": 121054
- },
- {
-  "UID": 121055
- },
- {
-  "UID": 122010,
-  "name": "Fiery Archer",
-  "cost": 12,
-  "hp": 68,
-  "attackType1": 2,
-  "attackType2": 2,
-  "attackForce": 52,
-  "attackSpeed": 4.5,
-  "attackDistance": 15,
-  "criticalForce": 1.5,
-  "criticalProbability": 3,
-  "defenseForce": 4,
-  "moveSpeed": 7,
-  "skillCooltime": 1
- },
- {
-  "UID": 122011
- },
- {
-  "UID": 122012
- },
- {
-  "UID": 122013
- },
- {
-  "UID": 122014
- },
- {
-  "UID": 122015
- },
- {
-  "UID": 122020
- },
- {
-  "UID": 122021
- },
- {
-  "UID": 122022
- },
- {
-  "UID": 122023
- },
- {
-  "UID": 122024
- },
- {
-  "UID": 122025
- },
- {
-  "UID": 122030
- },
- {
-  "UID": 122031
- },
- {
-  "UID": 122032
- },
- {
-  "UID": 122033
- },
- {
-  "UID": 122034
- },
- {
-  "UID": 122035
- },
- {
-  "UID": 122040
- },
- {
-  "UID": 122041
- },
- {
-  "UID": 122042
- },
- {
-  "UID": 122043
- },
- {
-  "UID": 122044
- },
- {
-  "UID": 122045
- },
- {
-  "UID": 122050
- },
- {
-  "UID": 122051
- },
- {
-  "UID": 122052
- },
- {
-  "UID": 122053
- },
- {
-  "UID": 122054
- },
- {
-  "UID": 122055
- }
-],
 "infoDatas":[
  {
   "UID": 0,
@@ -503,7 +8,10 @@
  },
  {
   "UID": 111010,
-  "level": 0
+  "name": "Unemployed Knight",
+  "cost": 3,
+  "level": 0,
+  "specialtyOn": "Knightage"
  },
  {
   "UID": 111011,
@@ -527,7 +35,10 @@
  },
  {
   "UID": 111020,
-  "level": 0
+  "name": "Boring Spearman",
+  "cost": 4,
+  "level": 0,
+  "specialtyOn": "Knightage"
  },
  {
   "UID": 111021,
@@ -551,7 +62,10 @@
  },
  {
   "UID": 111030,
-  "level": 0
+  "name": "Dull Axeman",
+  "cost": 7,
+  "level": 0,
+  "specialtyOn": "Knightage"
  },
  {
   "UID": 111031,
@@ -575,7 +89,10 @@
  },
  {
   "UID": 111040,
-  "level": 0
+  "name": "Strange Assassin",
+  "cost": 9,
+  "level": 0,
+  "specialtyOn": "Assassin Squad"
  },
  {
   "UID": 111041,
@@ -623,7 +140,10 @@
  },
  {
   "UID": 112010,
-  "level": 0
+  "name": "Goofy Hammeman",
+  "cost": 6,
+  "level": 0,
+  "specialtyOn": "Knightage"
  },
  {
   "UID": 112011,
@@ -647,7 +167,10 @@
  },
  {
   "UID": 112020,
-  "level": 0
+  "name": "Scared Thug",
+  "cost": 5,
+  "level": 0,
+  "specialtyOn": "Revolutionary Group"
  },
  {
   "UID": 112021,
@@ -743,7 +266,11 @@
  },
  {
   "UID": 121010,
-  "level": 0
+  "name": "Clumsy Archer",
+  "cost": 10,
+  "level": 0,
+  "specialtyOn": "Knightage",
+  "specialtyTwo": "Sniper Group"
  },
  {
   "UID": 121011,
@@ -767,7 +294,11 @@
  },
  {
   "UID": 121020,
-  "level": 0
+  "name": "Lenient Ninja",
+  "cost": 8,
+  "level": 0,
+  "specialtyOn": "Assassin Squad",
+  "specialtyTwo": "Bandits"
  },
  {
   "UID": 121021,
@@ -863,7 +394,11 @@
  },
  {
   "UID": 122010,
-  "level": 0
+  "name": "Fiery Archer",
+  "cost": 12,
+  "level": 0,
+  "specialtyOn": "Sniper Group",
+  "specialtyTwo": "Sorcerer Group"
  },
  {
   "UID": 122011,
@@ -980,6 +515,634 @@
  {
   "UID": 122055,
   "level": 5
+ }
+],
+"controllersData":[
+ {
+  "UID": 0,
+  "name": "TestRanger",
+  "cost": 3,
+  "Level": 0,
+  "hp": 500,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 50,
+  "attackSpeed": 1.2,
+  "attackDistance": 5,
+  "criticalForce": 1.5,
+  "criticalProbability": 10,
+  "defenseForce": 70,
+  "moveSpeed": 7,
+  "skillCooltime": 1
+ },
+ {
+  "UID": 111010,
+  "name": "Unemployed Knight",
+  "cost": 3,
+  "Level": 0,
+  "hp": 180,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 50,
+  "attackSpeed": 1,
+  "attackDistance": 2,
+  "criticalForce": 1.5,
+  "criticalProbability": 4.2,
+  "defenseForce": 10,
+  "moveSpeed": 4,
+  "skillCooltime": 5,
+  "specialtyOn": "Knightage"
+ },
+ {
+  "UID": 111011,
+  "Level": 1
+ },
+ {
+  "UID": 111012,
+  "Level": 2
+ },
+ {
+  "UID": 111013,
+  "Level": 3
+ },
+ {
+  "UID": 111014,
+  "Level": 4
+ },
+ {
+  "UID": 111015,
+  "Level": 5
+ },
+ {
+  "UID": 111020,
+  "name": "Boring Spearman",
+  "cost": 4,
+  "Level": 0,
+  "hp": 140,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 44,
+  "attackSpeed": 1.6,
+  "attackDistance": 7.6,
+  "criticalForce": 1.6,
+  "criticalProbability": 3.8,
+  "defenseForce": 6,
+  "moveSpeed": 6,
+  "skillCooltime": 9,
+  "specialtyOn": "Knightage"
+ },
+ {
+  "UID": 111021,
+  "Level": 1
+ },
+ {
+  "UID": 111022,
+  "Level": 2
+ },
+ {
+  "UID": 111023,
+  "Level": 3
+ },
+ {
+  "UID": 111024,
+  "Level": 4
+ },
+ {
+  "UID": 111025,
+  "Level": 5
+ },
+ {
+  "UID": 111030,
+  "name": "Dull Axeman",
+  "cost": 7,
+  "Level": 0,
+  "hp": 200,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 120,
+  "attackSpeed": 4.2,
+  "attackDistance": 6,
+  "criticalForce": 2,
+  "criticalProbability": 2,
+  "defenseForce": 12,
+  "moveSpeed": 3,
+  "skillCooltime": 22,
+  "specialtyOn": "Knightage"
+ },
+ {
+  "UID": 111031,
+  "Level": 1
+ },
+ {
+  "UID": 111032,
+  "Level": 2
+ },
+ {
+  "UID": 111033,
+  "Level": 3
+ },
+ {
+  "UID": 111034,
+  "Level": 4
+ },
+ {
+  "UID": 111035,
+  "Level": 5
+ },
+ {
+  "UID": 111040,
+  "name": "Strange Assassin",
+  "cost": 9,
+  "Level": 0,
+  "hp": 130,
+  "attackType1": 1,
+  "attackType2": 1,
+  "attackForce": 30,
+  "attackSpeed": 0.8,
+  "attackDistance": 1.6,
+  "criticalForce": 3,
+  "criticalProbability": 1.2,
+  "defenseForce": 0,
+  "moveSpeed": 9,
+  "skillCooltime": 12,
+  "specialtyOn": "Assassin Squad"
+ },
+ {
+  "UID": 111041,
+  "Level": 1
+ },
+ {
+  "UID": 111042,
+  "Level": 2
+ },
+ {
+  "UID": 111043,
+  "Level": 3
+ },
+ {
+  "UID": 111044,
+  "Level": 4
+ },
+ {
+  "UID": 111045,
+  "Level": 5
+ },
+ {
+  "UID": 111050,
+  "Level": 0
+ },
+ {
+  "UID": 111051,
+  "Level": 1
+ },
+ {
+  "UID": 111052,
+  "Level": 2
+ },
+ {
+  "UID": 111053,
+  "Level": 3
+ },
+ {
+  "UID": 111054,
+  "Level": 4
+ },
+ {
+  "UID": 111055,
+  "Level": 5
+ },
+ {
+  "UID": 112010,
+  "name": "Goofy Hammeman",
+  "cost": 6,
+  "Level": 0,
+  "hp": 210,
+  "attackType1": 1,
+  "attackType2": 2,
+  "attackForce": 85,
+  "attackSpeed": 3.3,
+  "attackDistance": 6.3,
+  "criticalForce": 2,
+  "criticalProbability": 2.2,
+  "defenseForce": 15,
+  "moveSpeed": 3.5,
+  "skillCooltime": 1,
+  "specialtyOn": "Knightage"
+ },
+ {
+  "UID": 112011,
+  "Level": 1
+ },
+ {
+  "UID": 112012,
+  "Level": 2
+ },
+ {
+  "UID": 112013,
+  "Level": 3
+ },
+ {
+  "UID": 112014,
+  "Level": 4
+ },
+ {
+  "UID": 112015,
+  "Level": 5
+ },
+ {
+  "UID": 112020,
+  "name": "Scared Thug",
+  "cost": 4,
+  "Level": 0,
+  "hp": 100,
+  "attackType1": 1,
+  "attackType2": 2,
+  "attackForce": 48,
+  "attackSpeed": 2,
+  "attackDistance": 6.5,
+  "criticalForce": 1.5,
+  "criticalProbability": 6,
+  "defenseForce": 4,
+  "moveSpeed": 3.8,
+  "skillCooltime": 1,
+  "specialtyOn": "Revolutionary Group"
+ },
+ {
+  "UID": 112021,
+  "Level": 1
+ },
+ {
+  "UID": 112022,
+  "Level": 2
+ },
+ {
+  "UID": 112023,
+  "Level": 3
+ },
+ {
+  "UID": 112024,
+  "Level": 4
+ },
+ {
+  "UID": 112025,
+  "Level": 5
+ },
+ {
+  "UID": 112030,
+  "Level": 0
+ },
+ {
+  "UID": 112031,
+  "Level": 1
+ },
+ {
+  "UID": 112032,
+  "Level": 2
+ },
+ {
+  "UID": 112033,
+  "Level": 3
+ },
+ {
+  "UID": 112034,
+  "Level": 4
+ },
+ {
+  "UID": 112035,
+  "Level": 5
+ },
+ {
+  "UID": 112040,
+  "Level": 0
+ },
+ {
+  "UID": 112041,
+  "Level": 1
+ },
+ {
+  "UID": 112042,
+  "Level": 2
+ },
+ {
+  "UID": 112043,
+  "Level": 3
+ },
+ {
+  "UID": 112044,
+  "Level": 4
+ },
+ {
+  "UID": 112045,
+  "Level": 5
+ },
+ {
+  "UID": 112050,
+  "Level": 0
+ },
+ {
+  "UID": 112051,
+  "Level": 1
+ },
+ {
+  "UID": 112052,
+  "Level": 2
+ },
+ {
+  "UID": 112053,
+  "Level": 3
+ },
+ {
+  "UID": 112054,
+  "Level": 4
+ },
+ {
+  "UID": 112055,
+  "Level": 5
+ },
+ {
+  "UID": 121010,
+  "name": "Clumsy Archer",
+  "cost": 10,
+  "Level": 0,
+  "hp": 80,
+  "attackType1": 2,
+  "attackType2": 1,
+  "attackForce": 30,
+  "attackSpeed": 3,
+  "attackDistance": 15,
+  "criticalForce": 1.5,
+  "criticalProbability": 3,
+  "defenseForce": 6,
+  "moveSpeed": 6,
+  "skillCooltime": 1,
+  "specialtyOn": "Knightage",
+  "specialtyTwo": "Sniper Group"
+ },
+ {
+  "UID": 121011,
+  "Level": 1
+ },
+ {
+  "UID": 121012,
+  "Level": 2
+ },
+ {
+  "UID": 121013,
+  "Level": 3
+ },
+ {
+  "UID": 121014,
+  "Level": 4
+ },
+ {
+  "UID": 121015,
+  "Level": 5
+ },
+ {
+  "UID": 121020,
+  "name": "Lenient Ninja",
+  "cost": 8,
+  "Level": 0,
+  "hp": 110,
+  "attackType1": 2,
+  "attackType2": 1,
+  "attackForce": 20,
+  "attackSpeed": 1.1,
+  "attackDistance": 11,
+  "criticalForce": 1.2,
+  "criticalProbability": 15,
+  "defenseForce": 3,
+  "moveSpeed": 11,
+  "skillCooltime": 1,
+  "specialtyOn": "Assassin Squad",
+  "specialtyTwo": "Bandits"
+ },
+ {
+  "UID": 121021,
+  "Level": 1
+ },
+ {
+  "UID": 121022,
+  "Level": 2
+ },
+ {
+  "UID": 121023,
+  "Level": 3
+ },
+ {
+  "UID": 121024,
+  "Level": 4
+ },
+ {
+  "UID": 121025,
+  "Level": 5
+ },
+ {
+  "UID": 121030,
+  "Level": 0
+ },
+ {
+  "UID": 121031,
+  "Level": 1
+ },
+ {
+  "UID": 121032,
+  "Level": 2
+ },
+ {
+  "UID": 121033,
+  "Level": 3
+ },
+ {
+  "UID": 121034,
+  "Level": 4
+ },
+ {
+  "UID": 121035,
+  "Level": 5
+ },
+ {
+  "UID": 121040,
+  "Level": 0
+ },
+ {
+  "UID": 121041,
+  "Level": 1
+ },
+ {
+  "UID": 121042,
+  "Level": 2
+ },
+ {
+  "UID": 121043,
+  "Level": 3
+ },
+ {
+  "UID": 121044,
+  "Level": 4
+ },
+ {
+  "UID": 121045,
+  "Level": 5
+ },
+ {
+  "UID": 121050,
+  "Level": 0
+ },
+ {
+  "UID": 121051,
+  "Level": 1
+ },
+ {
+  "UID": 121052,
+  "Level": 2
+ },
+ {
+  "UID": 121053,
+  "Level": 3
+ },
+ {
+  "UID": 121054,
+  "Level": 4
+ },
+ {
+  "UID": 121055,
+  "Level": 5
+ },
+ {
+  "UID": 122010,
+  "name": "Fiery Archer",
+  "cost": 12,
+  "Level": 0,
+  "hp": 68,
+  "attackType1": 2,
+  "attackType2": 2,
+  "attackForce": 52,
+  "attackSpeed": 4.5,
+  "attackDistance": 15,
+  "criticalForce": 1.5,
+  "criticalProbability": 3,
+  "defenseForce": 4,
+  "moveSpeed": 7,
+  "skillCooltime": 1,
+  "specialtyOn": "Sniper Group",
+  "specialtyTwo": "Sorcerer Group"
+ },
+ {
+  "UID": 122011,
+  "Level": 1
+ },
+ {
+  "UID": 122012,
+  "Level": 2
+ },
+ {
+  "UID": 122013,
+  "Level": 3
+ },
+ {
+  "UID": 122014,
+  "Level": 4
+ },
+ {
+  "UID": 122015,
+  "Level": 5
+ },
+ {
+  "UID": 122020,
+  "Level": 0
+ },
+ {
+  "UID": 122021,
+  "Level": 1
+ },
+ {
+  "UID": 122022,
+  "Level": 2
+ },
+ {
+  "UID": 122023,
+  "Level": 3
+ },
+ {
+  "UID": 122024,
+  "Level": 4
+ },
+ {
+  "UID": 122025,
+  "Level": 5
+ },
+ {
+  "UID": 122030,
+  "Level": 0
+ },
+ {
+  "UID": 122031,
+  "Level": 1
+ },
+ {
+  "UID": 122032,
+  "Level": 2
+ },
+ {
+  "UID": 122033,
+  "Level": 3
+ },
+ {
+  "UID": 122034,
+  "Level": 4
+ },
+ {
+  "UID": 122035,
+  "Level": 5
+ },
+ {
+  "UID": 122040,
+  "Level": 0
+ },
+ {
+  "UID": 122041,
+  "Level": 1
+ },
+ {
+  "UID": 122042,
+  "Level": 2
+ },
+ {
+  "UID": 122043,
+  "Level": 3
+ },
+ {
+  "UID": 122044,
+  "Level": 4
+ },
+ {
+  "UID": 122045,
+  "Level": 5
+ },
+ {
+  "UID": 122050,
+  "Level": 0
+ },
+ {
+  "UID": 122051,
+  "Level": 1
+ },
+ {
+  "UID": 122052,
+  "Level": 2
+ },
+ {
+  "UID": 122053,
+  "Level": 3
+ },
+ {
+  "UID": 122054,
+  "Level": 4
+ },
+ {
+  "UID": 122055,
+  "Level": 5
  }
 ]
 }

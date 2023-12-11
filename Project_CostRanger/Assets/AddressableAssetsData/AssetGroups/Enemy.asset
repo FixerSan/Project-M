@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  m_GroupName: Enemy
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a3b2ac2dba9c2ba4d9c31344a358d9e9
+  m_SerializeEntries:
+  - m_GUID: ec869acc8cee2e04b8bd4fe2123510cd
+    m_Address: DazedZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 2ff94be4fa4f3114596f383a275c5444
+    m_Address: FarmerZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: aec02d839a8a54a40980fb431567e4e3
+    m_Address: RedKnightZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 94f389aaf1d4bde46804b05f712dad34
+    m_Address: BlackKnightZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: f25e7c2d423f1584596a311cf5692150
+    m_Address: SuperPowerZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 1b5a47a41f8615847bb06228598db5b9
+    m_Address: BerserkZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 2ec0b8f9daad3be4fa52dc5202a48199
+    m_Address: HeroZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: c564656c817da5b4880714cdf7946cb3
+    m_Address: WitchZombie.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: c545f8ce12ee0fb408b43ea09b6de47c
+    m_Address: DazedZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 802007dbd3f3c1e4291b37538ce18e6b
+    m_Address: FarmerZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: e6907ad0f3bcea84f904048bb72f7174
+    m_Address: RedKnightZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 44d0067dbf7a9064981476078729d6cf
+    m_Address: BlackKnightZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: d76a71b2ce082084395d3f51ec8fc314
+    m_Address: SuperPowerZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: d12b245f7ffd507419ffb28d872ec009
+    m_Address: BerserkZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: ed4bea9fc2456d84d9866083aa751d49
+    m_Address: HeroZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 3658268902f5a374fbf5a3e5312a40cf
+    m_Address: WitchZombie.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b5a58d722143792459e673cbcd0992a4, type: 2}
+    - {fileID: 11400000, guid: 79003676fab74f442bc25b41d89a1939, type: 2}
