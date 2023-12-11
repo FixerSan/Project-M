@@ -51,13 +51,13 @@ public static class Extension
         return _array[_index];
     }
 
-    public static int FindEmptyArrayIndex<T>(this T[] _array)
+    public static T FindEmpty<T>(this T[] _array) where T : class
     {
         for (int i = 0; i < _array.Length; i++)
         {
-            if (_array[i] == null) return i;
+            if (_array[i] == null) return _array[i];
         }
-        return -1;
+        return null;
     }
 
     public static int NullCount<T>(this T[] _array) where T : class
@@ -91,6 +91,15 @@ public static class Extension
                 list.Add(_array[i]);
         }
         return list;
+    }
+
+    public static T FindNotDrawed<T>(this T[] _array) where T : UIBase
+    {
+        for (int i = 0; i < _array.Length; i++)
+        {
+            if (_array[i] != null && !_array[i].isDrawed) return _array[i];
+        }
+        return null;
     }
 
     #endregion

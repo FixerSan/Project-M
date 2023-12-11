@@ -2,15 +2,14 @@
     "stageDatas": [
         {
             "UID": 0,
-            "stageName": "0",
-            "canUseCost": 100,
-            "enemyUIDs": "0,1,2,3,4,5,6,7,8"
-        },
-        {
-            "UID": 101,
-            "stageName": "101",
-            "canUseCost": 101,
-            "enemyUIDs": "101,101,101,101,101,101,101,101,101"
+            "stageName": "Test",
+            "stageNumber": "1-1",
+            "canUseCost": 10,
+            "enemyUIDs": "0,1,2,3,4,5,6,7,8",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
         }
     ]
 }

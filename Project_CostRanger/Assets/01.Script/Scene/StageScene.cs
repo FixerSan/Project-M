@@ -12,8 +12,6 @@ public class StageScene : BaseScene
     
     public override void Init(Action _callback)
     {
-        Managers.UI.ShowSceneUI<UIScene_Stage>();
-
         Managers.Object.Rangers.Clear();
         Managers.Object.Enemies.Clear();
         sceneStartDelay = new WaitForSeconds(Define.sceneStartDelay);
@@ -21,6 +19,7 @@ public class StageScene : BaseScene
         rangerSpawnTranses= new Dictionary<int, Transform>();
 
         SceneEvent(0);
+        _callback.Invoke();
     }
 
 
@@ -78,6 +77,7 @@ public class StageScene : BaseScene
 
         for (int i = 0; i < Managers.Object.Rangers.Count; i++)
             Managers.Object.Rangers[i].ChangeDirection(Define.Direction.Right);
+        Managers.UI.ShowSceneUI<UIScene_Stage>();
         StartCoroutine(SceneEventZeroRoutine());
     }
 

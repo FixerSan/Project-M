@@ -61,9 +61,7 @@ public class GameManager : Singleton<GameManager>
         if (battleStageSystem == null)
             battleStageSystem = new BattleStageSystem();
 
-        battleStageSystem.Init(prepareStageSystem);
-        Managers.Scene.LoadScene(Define.Scene.Stage);
-    }
+        battleStageSystem.Init(prepareStageSystem);    }
 
     public void EndBattleStage()
     {
@@ -263,8 +261,8 @@ public class BattleStageSystem
     //현재 진행중인 스테이지중 플레이어의 상태
     public int canUseCost;
     public int nowUseCost;
-    public int armyCurrentHP;
-    public int armyMaxHP;
+    public float rangersTotalCurrentHP;
+    public float rangersTotalMaxHP;
     public int armyAttackForce;
     public int armybattleForce;
     public int allDamage;
@@ -274,8 +272,8 @@ public class BattleStageSystem
 
     //현재 진행중인 스테이지중 적의 상태
     public int nowEnemyCount;
-    public int enemyCurrentHP;
-    public int enemyMaxHP;
+    public float enemiesTotalCurrentHP;
+    public float enemiesTotalMaxHP;
     public int enemyAttackForce;
     public int enemybattleForce;
 
@@ -291,8 +289,8 @@ public class BattleStageSystem
     {
         //현재 진행중인 스테이지중 플레이어의 상태
         nowUseCost = 0;
-        armyCurrentHP = 0;
-        armyMaxHP = 0;
+        rangersTotalCurrentHP = 0;
+        rangersTotalMaxHP = 0;
         armyAttackForce = 0;
         armybattleForce = 0;
         allDamage = 0;
@@ -303,8 +301,8 @@ public class BattleStageSystem
 
         //현재 진행중인 스테이지중 적의 상태
         nowEnemyCount = 0;
-        enemyCurrentHP = 0;
-        enemyMaxHP = 0;
+        enemiesTotalCurrentHP = 0;
+        enemiesTotalMaxHP = 0;
         enemyAttackForce = 0;
         enemybattleForce = 0;
 
@@ -315,8 +313,9 @@ public class BattleStageSystem
         time = 0;
 
         Managers.Event.AddUpdate(Update);
-        Managers.Event.AddVoidEvent(VoidEventType.OnPlayerDead, CheckLose);
         Managers.Event.AddVoidEvent(VoidEventType.OnEnemyDead, CheckVictory);
+        Managers.Event.AddVoidEvent(VoidEventType.OnPlayerDead, CheckLose);
+        Managers.Event.AddVoidEvent(VoidEventType.OnChangeBattle, UpdateStage);
     }
 
     public void Init(PrepareStageSystem _prepareSystem)
@@ -331,15 +330,15 @@ public class BattleStageSystem
         
         //여기서 프리페어 시스템 정보를 적용시킬 것임
         nowUseCost = 0;
-        armyCurrentHP = 0;
-        armyMaxHP = 0;
+        rangersTotalCurrentHP = 0;
+        rangersTotalMaxHP = 0;
         armyAttackForce = 0;
         armybattleForce = 0;
         allDamage = 0;
 
         nowEnemyCount = 0;
-        enemyCurrentHP = 0;
-        enemyMaxHP = 0;
+        enemiesTotalCurrentHP = 0;
+        enemiesTotalMaxHP = 0;
         enemyAttackForce = 0;
         enemybattleForce = 0;
 
@@ -348,6 +347,8 @@ public class BattleStageSystem
         isAutoSkill = false;
         isFastSpeed = false;
         isCanUseSkill = true;
+
+        Managers.Scene.LoadScene(Define.Scene.Stage, _loadCallback:UpdateStage);
     }
 
     public void StartStage()
@@ -365,6 +366,27 @@ public class BattleStageSystem
     {
         if (Managers.Game.state != GameState.BattleProgress) return;
         CheckTime();
+    }
+
+    public void UpdateStage()
+    {
+        rangersTotalCurrentHP = 0;
+        rangersTotalMaxHP = 0;
+        for (int i = 0; i < Managers.Object.Rangers.Count; i++)
+        {
+            rangersTotalCurrentHP += Managers.Object.Rangers[i].status.CurrentHP;
+            rangersTotalMaxHP += Managers.Object.Rangers[i].status.CurrentMaxHP;
+        }
+
+        enemiesTotalCurrentHP = 0;
+        enemiesTotalMaxHP = 0;
+        for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+        {
+            enemiesTotalCurrentHP += Managers.Object.Enemies[i].status.CurrentHP;
+            enemiesTotalMaxHP += Managers.Object.Enemies[i].status.CurrentMaxHP;
+        }
+
+        RedrawUI();
     }
 
     public void CheckTime()
@@ -491,5 +513,6 @@ public class BattleStageSystem
         Managers.Event.RemoveUpdate(Update);
         Managers.Event.RemoveVoidEvent(VoidEventType.OnPlayerDead, CheckLose);
         Managers.Event.RemoveVoidEvent(VoidEventType.OnEnemyDead, CheckVictory);
+        Managers.Event.RemoveVoidEvent(VoidEventType.OnChangeBattle, UpdateStage);
     }
 }

@@ -20,8 +20,18 @@ public class UISlot_CanUseRanger : UISlot_PrepareRanger
         canvasTrans = _canvasTrans;
         contentTrans = transform.parent;
         slotIndex = -1; //사용가능한 레인저를 보여주는 슬롯인 이 객체의 인덱스는 -1로 설정
-        BindObject(typeof(Objects));
         BindImage(typeof(Images));
+        BindText(typeof(Texts));
+        BindObject(typeof(Objects));
+
+        Managers.Resource.Load<Sprite>($"Card_{_data.cost}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"CostPlace_{_data.cost}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>(_data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
+
+        GetText((int)Texts.Text_Cost).text = data.cost.ToString();
+        GetText((int)Texts.Text_Level).text = "1";
+        GetText((int)Texts.Text_Name).text = data.name.ToString();
+
         GetObject((int)Objects.RangerTrans).gameObject.GetOrAddComponent<UIPrepareRanger>().Init(_data, _canvasTrans, this);
     }
     
@@ -37,22 +47,22 @@ public class UISlot_CanUseRanger : UISlot_PrepareRanger
 
     public override void OnChanging()
     {
-        if (GetImage((int)Images.Image_Illust).gameObject.activeSelf)
-            GetImage((int)Images.Image_Illust).gameObject.SetActive(false);
+        if (GetObject((int)Objects.Bundle_GameObject).activeSelf)
+            GetObject((int)Objects.Bundle_GameObject).SetActive(false);
     }
 
     private enum Images
     {
-        Image_Illust
+        Image_Illust, Image_Card, Image_CostPlace
     }
     
     public enum Texts
     {
-        Text_Level
+        Text_Level, Text_Cost, Text_Name
     }
 
     public enum Objects
     {
-        RangerTrans
+        RangerTrans, Bundle_GameObject
     } 
 }

@@ -157,7 +157,7 @@ public class EnemyStatus : ControllerStatus
         controller = _controller;
         //공격력
         defaultAttackForce = _data.attackForce;
-        currentAttackForce = _data.attackForce;
+        plustAttackForce = 0;
 
         //공격속도
         defaultAttackSpeed = _data.attackSpeed;

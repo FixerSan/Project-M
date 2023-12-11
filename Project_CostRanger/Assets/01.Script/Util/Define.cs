@@ -16,6 +16,8 @@ public class Define
     public static readonly float normalSkillAnimationTime = 0.5f;
     public static readonly float sceneStartDelay = 3;
     public static readonly float skillScreenTime = 1;
+    public static readonly Color stageinfoDrawedSlotColor = new Color(1,1,1,1);
+    public static readonly Color stageinfoNotDrawedSlotColor = new Color(1,1,1,0.5f);
 
     public enum GameState
     {
@@ -47,7 +49,7 @@ public class Define
 
     public enum BattleEntityType
     {
-        Army, Enemy
+        Ranger, Enemy
     }
 
     public enum BattleEntityState
@@ -128,10 +130,12 @@ public class Define
 
     public enum UIType
     {
-        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage
+        UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage, UIPopup_StageInfo
+    }
 
-        // °¡Ã­ ¾À
-        , UIPopup_Gacha, UIPopup_GachaResult, UIPopup_GachaSlide, UIPopup_GachaChart, UIPopup_GachaAnimation
+    public enum RewardType
+    {
+        Gold, EXP, Gem, UpgradeCost
     }
 
     public enum SpeakerType

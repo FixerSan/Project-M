@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 8
 --- !u!1 &185599000264571677
 GameObject:
@@ -467,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 1
 --- !u!1 &577353743825523607
 GameObject:
@@ -905,6 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 7
 --- !u!1 &1500786153169628752
 GameObject:
@@ -1340,14 +1343,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
+    m_Left: 50
+    m_Right: 50
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: 80
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1456,6 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 4
 --- !u!1 &2381814252646383085
 GameObject:
@@ -1623,6 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 3
 --- !u!1 &3606732880841587132
 GameObject:
@@ -1744,6 +1749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6900cf206509374f9e6fdf56297e8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   batchOne_UseRangerSlots:
   - {fileID: 4191065072488012366}
   - {fileID: 4228133717070339484}
@@ -1752,6 +1758,16 @@ MonoBehaviour:
   - {fileID: 6186171177712439420}
   - {fileID: 2391103112961273645}
   batchTwo_UseRangerSlots: []
+  enemySlot:
+  - {fileID: 8860214981113330483}
+  - {fileID: 810798373622078642}
+  - {fileID: 6980779319928854978}
+  - {fileID: 5533102574494257822}
+  - {fileID: 4011585516765287035}
+  - {fileID: 8076978681193062063}
+  - {fileID: 5300671461087109532}
+  - {fileID: 6697353817322878407}
+  - {fileID: 2863858816656425985}
 --- !u!1 &3606732882033215023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1917,6 +1933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 6
 --- !u!1 &3947975228375548671
 GameObject:
@@ -2007,6 +2024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 0
 --- !u!1 &4206973186983757391
 GameObject:
@@ -2232,6 +2250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 1
 --- !u!1 &4818691261470782032
 GameObject:
@@ -2945,6 +2964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 5
 --- !u!1 &5825349421444451176
 GameObject:
@@ -3035,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 4
 --- !u!1 &6221316891577745491
 GameObject:
@@ -3125,6 +3146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 3
 --- !u!1 &6353394889881190427
 GameObject:
@@ -3215,6 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 2
 --- !u!1 &6396524619022642509
 GameObject:
@@ -3382,6 +3405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfbcdf961f44b145bd30555a6e83b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 5
 --- !u!1 &6763221431974807368
 GameObject:
@@ -4277,6 +4301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 2
 --- !u!1 &7958648017183543301
 GameObject:
@@ -4775,4 +4800,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30d42b6b90adc4eb9eb0427f9e5c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
   slotIndex: 0

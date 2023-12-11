@@ -122,7 +122,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 099627b7a4745b743b72042997064e4d
+  - m_GUID: c881a7aa33165d0469ffcb22dd135501
     m_Address: UISlot_CanUseRanger.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -167,18 +167,68 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 3a0f56ababe0d494baf048eb50a7cfe4
-    m_Address: UIPopup_Gacha.prefab
+  - m_GUID: bf86922dde20d5944bae5b6afd8ebbd7
+    m_Address: UIPopup_StageInfo.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: ebe22ddd588c42343955e2edf3f313e2
-    m_Address: RecruitmentRegularData.Data
+  - m_GUID: 0c0c14921ce84794dacf22c0e74ee05d
+    m_Address: Slot_StageRanger.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 298804c9b86db224abbb7de9401314f9
-    m_Address: UIPopup_GachaChart.prefab
+  - m_GUID: da651f7a3c5e30a46b2054f4994faf87
+    m_Address: Slot_StageEnemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: eb0f75dc6f6ec1a44be0ed2444dc0742
+    m_Address: Card_5.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 07d388422b363cc4ba073ea11779109f
+    m_Address: CostPlace_4.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 94a4d1dd3c08ef6429cb5d205295f411
+    m_Address: CostPlace_3.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 7f78c991a51811f4b99f503eeb92be63
+    m_Address: CostPlace_5.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 235fa6783461a62469b1ac7d9d330b25
+    m_Address: Card_4.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 783de42069e723945aba1ce636e61bf5
+    m_Address: Card_1.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: dce8fdcc998175f4f8681b97196cb32f
+    m_Address: CostPlace_2.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: e4eef98d26d78884c97b5390c29e7df8
+    m_Address: Card_2.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 423a2ba65ce594c48a0ada28c9b8b07a
+    m_Address: Card_3.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: c5f7ef8a816710240afffeb94cc16616
+    m_Address: CostPlace_1.Sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload

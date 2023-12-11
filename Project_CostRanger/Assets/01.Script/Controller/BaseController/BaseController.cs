@@ -59,17 +59,12 @@ public abstract class ControllerStatus
     protected BaseController controller;
     //°ø°Ý·Â
     public float defaultAttackForce;
-    protected float currentAttackForce;
+    public float plustAttackForce;
     public float CurrentAttackForce
     {
         get
         {
-            return currentAttackForce;
-        }
-
-        set
-        {
-            currentAttackForce = value;
+            return defaultAttackForce + plustAttackForce;
         }
     }
 
@@ -180,6 +175,7 @@ public abstract class ControllerStatus
         {
             if (currentHP == 0) return;
             currentHP = value;
+            Managers.Event.InvokeVoidEvent(Define.VoidEventType.OnChangeBattle);
             if (currentHP <= 0)
                 currentHP = 0;
             controller.CheckDie();
