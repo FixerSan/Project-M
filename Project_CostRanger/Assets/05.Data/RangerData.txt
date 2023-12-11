@@ -11,7 +11,8 @@
   "name": "Unemployed Knight",
   "cost": 3,
   "level": 0,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Common"
  },
  {
   "UID": 111011,
@@ -38,7 +39,8 @@
   "name": "Boring Spearman",
   "cost": 4,
   "level": 0,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Common"
  },
  {
   "UID": 111021,
@@ -65,7 +67,8 @@
   "name": "Dull Axeman",
   "cost": 7,
   "level": 0,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Epic"
  },
  {
   "UID": 111031,
@@ -92,7 +95,8 @@
   "name": "Strange Assassin",
   "cost": 9,
   "level": 0,
-  "specialtyOn": "Assassin Squad"
+  "specialtyOne": "Assassin Squad",
+  "rarity": "Rare"
  },
  {
   "UID": 111041,
@@ -143,7 +147,8 @@
   "name": "Goofy Hammeman",
   "cost": 6,
   "level": 0,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Epic"
  },
  {
   "UID": 112011,
@@ -170,7 +175,8 @@
   "name": "Scared Thug",
   "cost": 5,
   "level": 0,
-  "specialtyOn": "Revolutionary Group"
+  "specialtyOne": "Revolutionary Group",
+  "rarity": "Common"
  },
  {
   "UID": 112021,
@@ -269,8 +275,9 @@
   "name": "Clumsy Archer",
   "cost": 10,
   "level": 0,
-  "specialtyOn": "Knightage",
-  "specialtyTwo": "Sniper Group"
+  "specialtyOne": "Knightage",
+  "specialtyTwo": "Sniper Group",
+  "rarity": "Common"
  },
  {
   "UID": 121011,
@@ -297,8 +304,9 @@
   "name": "Lenient Ninja",
   "cost": 8,
   "level": 0,
-  "specialtyOn": "Assassin Squad",
-  "specialtyTwo": "Bandits"
+  "specialtyOne": "Assassin Squad",
+  "specialtyTwo": "Bandits",
+  "rarity": "Rare"
  },
  {
   "UID": 121021,
@@ -397,8 +405,9 @@
   "name": "Fiery Archer",
   "cost": 12,
   "level": 0,
-  "specialtyOn": "Sniper Group",
-  "specialtyTwo": "Sorcerer Group"
+  "specialtyOne": "Sniper Group",
+  "specialtyTwo": "Sorcerer Group",
+  "rarity": "Legendary"
  },
  {
   "UID": 122011,
@@ -522,10 +531,9 @@
   "UID": 0,
   "name": "TestRanger",
   "cost": 3,
-  "Level": 0,
+  "level": 0,
   "hp": 500,
-  "attackType1": 1,
-  "attackType2": 1,
+  "attackType": "short",
   "attackForce": 50,
   "attackSpeed": 1.2,
   "attackDistance": 5,
@@ -537,12 +545,11 @@
  },
  {
   "UID": 111010,
-  "name": "Unemployed Knight",
+  "name": "UnemployedKnight",
   "cost": 3,
-  "Level": 0,
+  "level": 0,
   "hp": 180,
-  "attackType1": 1,
-  "attackType2": 1,
+  "attackType": "short",
   "attackForce": 50,
   "attackSpeed": 1,
   "attackDistance": 2,
@@ -551,36 +558,37 @@
   "defenseForce": 10,
   "moveSpeed": 4,
   "skillCooltime": 5,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Common",
+  "skillSentence": "½ÇÁ÷ÀÚÀÇ ÈûÀ» º¸¿©ÁÖÁö!!!!!"
  },
  {
   "UID": 111011,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 111012,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 111013,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 111014,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 111015,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 111020,
-  "name": "Boring Spearman",
+  "name": "BoringSpearman",
   "cost": 4,
-  "Level": 0,
+  "level": 0,
   "hp": 140,
-  "attackType1": 1,
-  "attackType2": 1,
+  "attackType": "short",
   "attackForce": 44,
   "attackSpeed": 1.6,
   "attackDistance": 7.6,
@@ -589,36 +597,37 @@
   "defenseForce": 6,
   "moveSpeed": 6,
   "skillCooltime": 9,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Common",
+  "skillSentence": "³» Á×Ã¢ ¸ÀÀ» ºÁ¶ó~"
  },
  {
   "UID": 111021,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 111022,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 111023,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 111024,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 111025,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 111030,
-  "name": "Dull Axeman",
+  "name": "DullAxeman",
   "cost": 7,
-  "Level": 0,
+  "level": 0,
   "hp": 200,
-  "attackType1": 1,
-  "attackType2": 1,
+  "attackType": "short",
   "attackForce": 120,
   "attackSpeed": 4.2,
   "attackDistance": 6,
@@ -627,36 +636,37 @@
   "defenseForce": 12,
   "moveSpeed": 3,
   "skillCooltime": 22,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Epic",
+  "skillSentence": "148KgÀÇ ¹«°Ô¸¦ ½Ç°¨ÇØ¶ó!!!!"
  },
  {
   "UID": 111031,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 111032,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 111033,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 111034,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 111035,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 111040,
-  "name": "Strange Assassin",
+  "name": "StrangeAssassin",
   "cost": 9,
-  "Level": 0,
+  "level": 0,
   "hp": 130,
-  "attackType1": 1,
-  "attackType2": 1,
+  "attackType": "short",
   "attackForce": 30,
   "attackSpeed": 0.8,
   "attackDistance": 1.6,
@@ -665,60 +675,61 @@
   "defenseForce": 0,
   "moveSpeed": 9,
   "skillCooltime": 12,
-  "specialtyOn": "Assassin Squad"
+  "specialtyOne": "Assassin Squad",
+  "rarity": "Rare",
+  "skillSentence": "½´½µ... ½µ..½´½µ!!!"
  },
  {
   "UID": 111041,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 111042,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 111043,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 111044,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 111045,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 111050,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 111051,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 111052,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 111053,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 111054,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 111055,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 112010,
-  "name": "Goofy Hammeman",
+  "name": "GoofyHammeman",
   "cost": 6,
-  "Level": 0,
+  "level": 0,
   "hp": 210,
-  "attackType1": 1,
-  "attackType2": 2,
+  "attackType": "short",
   "attackForce": 85,
   "attackSpeed": 3.3,
   "attackDistance": 6.3,
@@ -727,36 +738,37 @@
   "defenseForce": 15,
   "moveSpeed": 3.5,
   "skillCooltime": 1,
-  "specialtyOn": "Knightage"
+  "specialtyOne": "Knightage",
+  "rarity": "Epic",
+  "skillSentence": "»Ð¸ÁÄ¡º¸´Ü ¾ÆÇÃ°É?"
  },
  {
   "UID": 112011,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 112012,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 112013,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 112014,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 112015,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 112020,
-  "name": "Scared Thug",
+  "name": "ScaredThug",
   "cost": 4,
-  "Level": 0,
+  "level": 0,
   "hp": 100,
-  "attackType1": 1,
-  "attackType2": 2,
+  "attackType": "short",
   "attackForce": 48,
   "attackSpeed": 2,
   "attackDistance": 6.5,
@@ -765,108 +777,109 @@
   "defenseForce": 4,
   "moveSpeed": 3.8,
   "skillCooltime": 1,
-  "specialtyOn": "Revolutionary Group"
+  "specialtyOne": "Revolutionary Group",
+  "rarity": "Common",
+  "skillSentence": "³­... ¾àÇÏÁö ¾Ê¾Æ..!!!"
  },
  {
   "UID": 112021,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 112022,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 112023,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 112024,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 112025,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 112030,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 112031,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 112032,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 112033,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 112034,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 112035,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 112040,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 112041,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 112042,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 112043,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 112044,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 112045,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 112050,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 112051,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 112052,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 112053,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 112054,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 112055,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 121010,
-  "name": "Clumsy Archer",
+  "name": "ClumsyArcher",
   "cost": 10,
-  "Level": 0,
+  "level": 0,
   "hp": 80,
-  "attackType1": 2,
-  "attackType2": 1,
+  "attackType": "long",
   "attackForce": 30,
   "attackSpeed": 3,
   "attackDistance": 15,
@@ -875,37 +888,38 @@
   "defenseForce": 6,
   "moveSpeed": 6,
   "skillCooltime": 1,
-  "specialtyOn": "Knightage",
-  "specialtyTwo": "Sniper Group"
+  "specialtyOne": "Knightage",
+  "specialtyTwo": "Sniper Group",
+  "rarity": "Common",
+  "skillSentence": "¤²...º¸ÀÎ´Ù º¸¿©..!"
  },
  {
   "UID": 121011,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 121012,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 121013,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 121014,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 121015,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 121020,
-  "name": "Lenient Ninja",
+  "name": "LenientNinja",
   "cost": 8,
-  "Level": 0,
+  "level": 0,
   "hp": 110,
-  "attackType1": 2,
-  "attackType2": 1,
+  "attackType": "long",
   "attackForce": 20,
   "attackSpeed": 1.1,
   "attackDistance": 11,
@@ -914,109 +928,110 @@
   "defenseForce": 3,
   "moveSpeed": 11,
   "skillCooltime": 1,
-  "specialtyOn": "Assassin Squad",
-  "specialtyTwo": "Bandits"
+  "specialtyOne": "Assassin Squad",
+  "specialtyTwo": "Bandits",
+  "rarity": "Rare",
+  "skillSentence": "½²."
  },
  {
   "UID": 121021,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 121022,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 121023,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 121024,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 121025,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 121030,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 121031,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 121032,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 121033,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 121034,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 121035,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 121040,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 121041,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 121042,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 121043,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 121044,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 121045,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 121050,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 121051,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 121052,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 121053,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 121054,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 121055,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 122010,
-  "name": "Fiery Archer",
+  "name": "FieryArcher",
   "cost": 12,
-  "Level": 0,
+  "level": 0,
   "hp": 68,
-  "attackType1": 2,
-  "attackType2": 2,
+  "attackType": "long",
   "attackForce": 52,
   "attackSpeed": 4.5,
   "attackDistance": 15,
@@ -1025,124 +1040,126 @@
   "defenseForce": 4,
   "moveSpeed": 7,
   "skillCooltime": 1,
-  "specialtyOn": "Sniper Group",
-  "specialtyTwo": "Sorcerer Group"
+  "specialtyOne": "Sniper Group",
+  "specialtyTwo": "Sorcerer Group",
+  "rarity": "Legendary",
+  "skillSentence": "À¸¾ð¤·¤±¤¤¶ó¤Ó¤·¤¤¤©¤¤¶û Â¥Áõ³ª!@#@!"
  },
  {
   "UID": 122011,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 122012,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 122013,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 122014,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 122015,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 122020,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 122021,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 122022,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 122023,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 122024,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 122025,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 122030,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 122031,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 122032,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 122033,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 122034,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 122035,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 122040,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 122041,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 122042,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 122043,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 122044,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 122045,
-  "Level": 5
+  "level": 5
  },
  {
   "UID": 122050,
-  "Level": 0
+  "level": 0
  },
  {
   "UID": 122051,
-  "Level": 1
+  "level": 1
  },
  {
   "UID": 122052,
-  "Level": 2
+  "level": 2
  },
  {
   "UID": 122053,
-  "Level": 3
+  "level": 3
  },
  {
   "UID": 122054,
-  "Level": 4
+  "level": 4
  },
  {
   "UID": 122055,
-  "Level": 5
+  "level": 5
  }
 ]
 }

@@ -1,276 +1,478 @@
 {
-"controllersData":[
- {
-  "UID": 0,
-  "name": "TestEnemyZero",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 1,
-  "name": "TestEnemyOne",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 2,
-  "name": "TestEnemyTwo",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 3,
-  "name": "TestEnemyThree",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 4,
-  "name": "TestEnemyFour",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 5,
-  "name": "TestEnemyFive",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 6,
-  "name": "TestEnemySix",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 7,
-  "name": "TestEnemySeven",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 8,
-  "name": "TestEnemyEight",
-  "cost": 1,
-  "hp": 100,
-  "attackForce": 10,
-  "attackSpeed": 1,
-  "attackDistance": 1,
-  "criticalForce": 1.5,
-  "criticalProbability": 50,
-  "defenseForce": 10,
-  "moveSpeed": 2,
-  "skillCooltime": 5
- },
- {
-  "UID": 211010
- },
- {
-  "UID": 211011
- },
- {
-  "UID": 211012
- },
- {
-  "UID": 211013
- },
- {
-  "UID": 211014
- },
- {
-  "UID": 211015
- },
- {
-  "UID": 211020
- },
- {
-  "UID": 211021
- },
- {
-  "UID": 211022
- },
- {
-  "UID": 211023
- },
- {
-  "UID": 211024
- },
- {
-  "UID": 211025
- },
- {
-  "UID": 211030
- },
- {
-  "UID": 211031
- },
- {
-  "UID": 211032
- },
- {
-  "UID": 211033
- },
- {
-  "UID": 211034
- },
- {
-  "UID": 211035
- },
- {
-  "UID": 211040
- },
- {
-  "UID": 211041
- },
- {
-  "UID": 211042
- },
- {
-  "UID": 211043
- },
- {
-  "UID": 211044
- },
- {
-  "UID": 211045
- },
- {
-  "UID": 211050
- },
- {
-  "UID": 211051
- },
- {
-  "UID": 211052
- },
- {
-  "UID": 211053
- },
- {
-  "UID": 211054
- },
- {
-  "UID": 211055
- }
-],
 "infoDatas":[
  {
   "UID": 0,
   "name": "TestEnemyZero",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 1,
   "name": "TestEnemyOne",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 2,
   "name": "TestEnemyTwo",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 3,
   "name": "TestEnemyThree",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 4,
   "name": "TestEnemyFour",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 5,
   "name": "TestEnemyFive",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 6,
   "name": "TestEnemySix",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 7,
   "name": "TestEnemySeven",
   "cost": 1,
-  "level": 1
+  "level": 1,
+  "rarity": "Common"
  },
  {
   "UID": 8,
   "name": "TestEnemyEight",
   "cost": 1,
+  "level": 1,
+  "rarity": "Common"
+ },
+ {
+  "UID": 211010,
+  "name": "DazedZombie",
+  "rarity": "Common"
+ },
+ {
+  "UID": 211020,
+  "name": "FarmerZombie",
+  "rarity": "Common"
+ },
+ {
+  "UID": 211030,
+  "name": "RedKnightZombie",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211040,
+  "name": "BlackKnightZombie",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211050,
+  "name": "SuperPowerZombie",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211060,
+  "name": "HeroZombie",
+  "rarity": "Epic"
+ },
+ {
+  "UID": 212010,
+  "name": "BerserkZombie",
+  "rarity": "Epic"
+ },
+ {
+  "UID": 222010,
+  "name": "WitchZombie",
+  "rarity": "Legendary"
+ }
+],
+"controllersData":[
+ {
+  "UID": 0,
+  "name": "TestEnemyZero",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 1,
+  "name": "TestEnemyOne",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 2,
+  "name": "TestEnemyTwo",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 3,
+  "name": "TestEnemyThree",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 4,
+  "name": "TestEnemyFour",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 5,
+  "name": "TestEnemyFive",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 6,
+  "name": "TestEnemySix",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 7,
+  "name": "TestEnemySeven",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 8,
+  "name": "TestEnemyEight",
+  "cost": 1,
+  "level": 0,
+  "hp": 100,
+  "attackType": "short",
+  "attackForce": 10,
+  "attackSpeed": 1,
+  "attackDistance": 1,
+  "criticalForce": 1.5,
+  "criticalProbability": 50,
+  "defenseForce": 10,
+  "moveSpeed": 2,
+  "skillCooltime": 5,
+  "rarity": "Common"
+ },
+ {
+  "UID": 211010,
+  "name": "DazedZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Common"
+ },
+ {
+  "UID": 211011,
   "level": 1
+ },
+ {
+  "UID": 211012,
+  "level": 2
+ },
+ {
+  "UID": 211013,
+  "level": 3
+ },
+ {
+  "UID": 211014,
+  "level": 4
+ },
+ {
+  "UID": 211015,
+  "level": 5
+ },
+ {
+  "UID": 211020,
+  "name": "FarmerZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Common"
+ },
+ {
+  "UID": 211021,
+  "level": 1
+ },
+ {
+  "UID": 211022,
+  "level": 2
+ },
+ {
+  "UID": 211023,
+  "level": 3
+ },
+ {
+  "UID": 211024,
+  "level": 4
+ },
+ {
+  "UID": 211025,
+  "level": 5
+ },
+ {
+  "UID": 211030,
+  "name": "RedKnightZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211031,
+  "level": 1
+ },
+ {
+  "UID": 211032,
+  "level": 2
+ },
+ {
+  "UID": 211033,
+  "level": 3
+ },
+ {
+  "UID": 211034,
+  "level": 4
+ },
+ {
+  "UID": 211035,
+  "level": 5
+ },
+ {
+  "UID": 211040,
+  "name": "BlackKnightZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211041,
+  "level": 1
+ },
+ {
+  "UID": 211042,
+  "level": 2
+ },
+ {
+  "UID": 211043,
+  "level": 3
+ },
+ {
+  "UID": 211044,
+  "level": 4
+ },
+ {
+  "UID": 211045,
+  "level": 5
+ },
+ {
+  "UID": 211050,
+  "name": "SuperPowerZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Rare"
+ },
+ {
+  "UID": 211051,
+  "level": 1
+ },
+ {
+  "UID": 211052,
+  "level": 2
+ },
+ {
+  "UID": 211053,
+  "level": 3
+ },
+ {
+  "UID": 211054,
+  "level": 4
+ },
+ {
+  "UID": 211055,
+  "level": 5
+ },
+ {
+  "UID": 211060,
+  "name": "HeroZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Epic"
+ },
+ {
+  "UID": 211061,
+  "level": 1
+ },
+ {
+  "UID": 211062,
+  "level": 2
+ },
+ {
+  "UID": 211063,
+  "level": 3
+ },
+ {
+  "UID": 211064,
+  "level": 4
+ },
+ {
+  "UID": 211065,
+  "level": 5
+ },
+ {
+  "UID": 212010,
+  "name": "BerserkZombie",
+  "level": 0,
+  "attackType": "short",
+  "rarity": "Epic"
+ },
+ {
+  "UID": 212011,
+  "level": 1
+ },
+ {
+  "UID": 212012,
+  "level": 2
+ },
+ {
+  "UID": 212013,
+  "level": 3
+ },
+ {
+  "UID": 212014,
+  "level": 4
+ },
+ {
+  "UID": 212015,
+  "level": 5
+ },
+ {
+  "UID": 222010,
+  "name": "WitchZombie",
+  "level": 0,
+  "attackType": "long",
+  "rarity": "Legendary"
+ },
+ {
+  "UID": 222011,
+  "level": 1
+ },
+ {
+  "UID": 222012,
+  "level": 2
+ },
+ {
+  "UID": 222013,
+  "level": 3
+ },
+ {
+  "UID": 222014,
+  "level": 4
+ },
+ {
+  "UID": 222015,
+  "level": 5
  }
 ]
 }

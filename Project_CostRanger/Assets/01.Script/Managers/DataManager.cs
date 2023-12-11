@@ -438,8 +438,10 @@ public class RangerInfoData : Data
     public int UID;                     //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
-    public string description;
-    public string sentence;
+    public int level;                   //레벨
+    public string specialtyOne;         //소속 1
+    public string specialtyTwo;         //소속 2
+    public string rarity;               //희귀도
 }
 
 [System.Serializable]
@@ -448,17 +450,21 @@ public class RangerControllerData : Data
     public int UID;                     //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
-    public string specialtyOne;            //소속One
-    public string specialtyTwo;            //소속Two
+    public int level;                   //레벨
+    public float hp;                    //체력
+    public string attackType;           //공격 타입
     public float attackForce;           //공격력
     public float attackSpeed;           //공격속도
     public float attackDistance;        //공격 사거리
     public float criticalForce;         //크리티컬 배율
     public float criticalProbability;   //크리티컬 확률
     public float defenseForce;          //방어력
-    public float hp;                    //체력
     public float moveSpeed;             //이동속도
     public float skillCooltime;         //스킬 쿨타임
+    public string specialtyOne;         //소속 1
+    public string specialtyTwo;         //소속 2
+    public string rarity;               //희귀도
+    public string skillSentence;        //스킬 대사
 }
 
 [System.Serializable]
@@ -471,11 +477,11 @@ public class EnemyDatas
 [System.Serializable]
 public class EnemyInfoData : Data
 {
-    public int UID = -1;                     //인덱스
+    public int UID = -1;                //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
-    public string description;
-    public string sentence;
+    public int level;                   //레벨
+    public string rarity;               //희귀도
 }
 
 [System.Serializable]
@@ -484,15 +490,18 @@ public class EnemyControllerData : Data
     public int UID;                     //인덱스
     public string name;                 //이름
     public int cost;                    //코스트
+    public int level;                   //레벨
+    public float hp;                    //체력
+    public string attackType;           //공격 타입
     public float attackForce;           //공격력
     public float attackSpeed;           //공격속도
     public float attackDistance;        //공격 사거리
     public float criticalForce;         //크리티컬 배율
     public float criticalProbability;   //크리티컬 확률
     public float defenseForce;          //방어력
-    public float hp;                    //체력
     public float moveSpeed;             //이동속도
     public float skillCooltime;         //스킬 쿨타임
+    public float rarity;                //희귀도
 }
 
 [Serializable]

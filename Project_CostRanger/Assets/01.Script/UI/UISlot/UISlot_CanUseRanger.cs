@@ -24,12 +24,13 @@ public class UISlot_CanUseRanger : UISlot_PrepareRanger
         BindText(typeof(Texts));
         BindObject(typeof(Objects));
 
-        Managers.Resource.Load<Sprite>($"Card_{_data.cost}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
-        Managers.Resource.Load<Sprite>($"CostPlace_{_data.cost}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"Card_{_data.rarity}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"CostPlace_{_data.rarity}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
         Managers.Resource.Load<Sprite>(_data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
 
         GetText((int)Texts.Text_Cost).text = data.cost.ToString();
-        GetText((int)Texts.Text_Level).text = "1";
+        if(data.level != 0)
+            GetText((int)Texts.Text_Level).text = $"+{data.level}";
         GetText((int)Texts.Text_Name).text = data.name.ToString();
 
         GetObject((int)Objects.RangerTrans).gameObject.GetOrAddComponent<UIPrepareRanger>().Init(_data, _canvasTrans, this);

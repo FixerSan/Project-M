@@ -18,6 +18,7 @@ public class UISlot_StageInfoEnemy : UIBase
 
     public void DrawSlot(EnemyInfoData _enemyInfoData)
     {
+        //if (enemyInfoData.UID == -1) return;
         isDrawed = true;
         GetImage((int)Images.Image_EnemyCount).gameObject.SetActive(true);
         enemyInfoData = _enemyInfoData;
