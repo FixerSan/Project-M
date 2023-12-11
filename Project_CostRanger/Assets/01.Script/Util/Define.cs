@@ -59,7 +59,8 @@ public class Define
     
     public enum Ranger
     {
-        TestRanger
+        TestRanger, UnemployedKnight, BoringSpearman, DullAxeman, StrangeAssassin, GoofyHammeman,
+        ScaredThug, ClumsyArcher, LenientNinja, FieryArcher,
     }
 
     public enum RangerState
@@ -69,7 +70,8 @@ public class Define
 
     public enum Enemy
     {
-        TestEnemyZero, TestEnemyOne, TestEnemyTwo, TestEnemyThree , TestEnemyFour , TestEnemyFive , TestEnemySix , TestEnemySeven , TestEnemyEight
+        TestEnemyZero, TestEnemyOne, TestEnemyTwo, TestEnemyThree , TestEnemyFour , TestEnemyFive , TestEnemySix , TestEnemySeven , TestEnemyEight,
+        DazedZombie, FarmerZombie, RedKnightZombie, BlackKnightZombie, SuperPowerZombie, HeroZombie, BerserkZombie, WitchZombie
     }
 
     public enum EnemyState

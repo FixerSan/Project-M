@@ -71,7 +71,7 @@ public class StageScene : BaseScene
         //利 牧飘费矾 积己
         string[] enemyUIDArray = Managers.Game.battleStageSystem.currentStageData.enemyUIDs.Split(",");
         for (int i = 0; i < enemyUIDArray.Length; i++)
-            if (Int32.TryParse(enemyUIDArray[i], out int enemyUID))
+            if (Int32.TryParse(enemyUIDArray[i], out int enemyUID) && enemyUID != -1)
                 Managers.Object.SpawnEnemy(enemyUID, enemySpawnTranses[i].position);
 
 

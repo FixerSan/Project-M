@@ -20,8 +20,8 @@ public class UISlot_StageEnemy : UIBase
         GetImage((int)Images.Image_HPbar).fillAmount = 1;
         Managers.Resource.Load<Sprite>(controller.data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
         Managers.Resource.Load<Sprite>(controller.data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
-        Managers.Resource.Load<Sprite>($"Card_{controller.data.cost}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
-        Managers.Resource.Load<Sprite>($"CostPlace_{controller.data.cost}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"Card_{controller.data.rarity}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"CostPlace_{controller.data.rarity}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
     }
 
     public void Redraw()

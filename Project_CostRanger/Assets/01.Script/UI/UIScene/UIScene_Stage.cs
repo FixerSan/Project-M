@@ -17,7 +17,7 @@ public class UIScene_Stage : UIScene
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, OnClick_FastSpeed);
         BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, OnClick_AutoSkill);
 
-        Transform tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSlot");
+        Transform tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSlot", true);
         UISlot_StageRanger rangerSlot;
         for (int i = 0; i < Managers.Object.Rangers.Count; i++)
         {
@@ -27,7 +27,7 @@ public class UIScene_Stage : UIScene
         }
 
         UISlot_StageEnemy enemySlot;
-        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_EnemySlot");
+        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_EnemySlot", true);
         for (int i = 0; i < Managers.Object.Enemies.Count; i++)
         {
             enemySlot = Managers.UI.CreateStageEnemySlot(tempTrans);
@@ -35,7 +35,7 @@ public class UIScene_Stage : UIScene
             enemySlots.Add(enemySlot);
         }
 
-        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSkillSlot");
+        tempTrans = Util.FindChild<Transform>(gameObject, _name: "Trans_RangerSkillSlot", true);
         rangerSkillSlot = tempTrans.GetComponentsInChildren<UISlot_StageRangerSkill>();
         for (int i = 0; i < rangerSkillSlot.Length; i++)
         {

@@ -501,7 +501,7 @@ public class EnemyControllerData : Data
     public float defenseForce;          //¹æ¾î·Â
     public float moveSpeed;             //ÀÌµ¿¼Óµµ
     public float skillCooltime;         //½ºÅ³ ÄðÅ¸ÀÓ
-    public float rarity;                //Èñ±Íµµ
+    public string rarity;                //Èñ±Íµµ
 }
 
 [Serializable]

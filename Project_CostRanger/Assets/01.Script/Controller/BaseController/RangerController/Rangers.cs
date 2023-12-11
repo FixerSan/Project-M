@@ -148,9 +148,9 @@ public abstract class Ranger
 
 namespace Rangers
 {
-    public class TestRanger : Ranger
+    public class Base : Ranger
     {
-        public TestRanger(RangerController _controller)
+        public Base(RangerController _controller)
         {
             controller = _controller;
             attackWaitForSeceonds = new WaitForSeconds(Define.normalAttackAnimationTime);

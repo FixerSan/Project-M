@@ -37,7 +37,7 @@ public class UIPopup_StageInfo : UIPopup
         string[] enemyStringArray = stageData.enemyUIDs.Split(",");
         for (int i = 0; i < enemyStringArray.Length; i++)
         {
-            if (Int32.TryParse(enemyStringArray[i], out int _enemyIndex) && _enemyIndex != 0)
+            if (Int32.TryParse(enemyStringArray[i], out int _enemyIndex) && _enemyIndex != -1)
                 enemies.Add(Managers.Data.GetEnemyInfoData(_enemyIndex));
         }
 
