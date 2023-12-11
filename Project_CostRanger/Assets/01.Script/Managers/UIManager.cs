@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.Rendering;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
 
 public class UIManager 
 {
