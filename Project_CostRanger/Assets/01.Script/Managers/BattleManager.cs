@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class BattleManager
 {
-    private bool isCritical = false;
-
     ////공격 처리
     public void AttackCalculation(BaseController _attacker, BaseController _hiter, float _damage = -1 ,Action<float> _damageCallback = null)
     {
-        isCritical = false;
         float currentDamage = _damage;
         if (_damage == -1)
             currentDamage = _attacker.status.CurrentAttackForce;
@@ -18,10 +15,7 @@ public class BattleManager
         //치명타인지 체크 후 맞으면 치명타 처리
         float tempInt = UnityEngine.Random.Range(0, 100);
         if (tempInt < _attacker.status.CurrentCriticalProbability)
-        {
-            isCritical = true;
             currentDamage = (int)(currentDamage * _attacker.status.CurrentCriticalForce);
-        }
 
         //방어력 계산
         currentDamage = currentDamage * (100 / (_hiter.status.CurrentDefenseForce + 100));

@@ -7,17 +7,34 @@ public class Define
     public static readonly int currentBattleEntityCount = 6;
     public static readonly int currentBattleEntityMaxLevel = 5;
     public static readonly int userUID = 0;
+
     public static readonly Vector2 prepareEnemyOffset = new Vector2(0, -40);
     public static readonly Vector2 prepareRangerOffset = new Vector2(0, -60);
+
     public static readonly float attackAnimationTime = 1;
     public static readonly float fastSpeed = 3;
-    public static readonly float normalAttackAnimationTime = 0.417f;
-    public static readonly float skillAnimationTime = 1;
-    public static readonly float normalSkillAnimationTime = 0.5f;
     public static readonly float sceneStartDelay = 3;
     public static readonly float skillScreenTime = 1;
     public static readonly Color stageinfoDrawedSlotColor = new Color(1,1,1,1);
     public static readonly Color stageinfoNotDrawedSlotColor = new Color(1,1,1,0.5f);
+
+    //공격 시간
+    public static readonly float magicAndNormalAttackBeforeTime = 0.24f;
+    public static readonly float magicAndNormalAttackAfterTime = 0.16f;
+
+    public static readonly float bowAttackBeforeTime = 0.28f;
+    public static readonly float bowAttackAfterTime = 0.12f;
+
+    //스킬 시간
+    public static readonly float normalSkillBeforeTime = 0.32f;
+    public static readonly float normalSkillAfterTime = 0.28f;
+
+    public static readonly float magicSkillBeforeTime = 0.45f;
+    public static readonly float magicSkillAfterTime = 0.15f;
+
+    public static readonly float bowSkillBeforeTime = 0.43f;
+    public static readonly float bowSkillAfterTime = 0.17f;
+
 
     public enum GameState
     {

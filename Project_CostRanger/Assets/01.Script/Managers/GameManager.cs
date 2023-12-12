@@ -462,7 +462,7 @@ public class BattleStageSystem
         }
 
         if (tempBool)
-            Victory();
+            Lose();
     }
 
     public void Victory()

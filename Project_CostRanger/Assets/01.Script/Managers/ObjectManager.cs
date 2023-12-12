@@ -110,8 +110,20 @@ public class ObjectManager
         Define.Enemy rangerEnum = Util.ParseEnum<Define.Enemy>(data.name);
         switch (rangerEnum)
         {
+            case Define.Enemy.WitchZombie:
+                enemy = new Enemies.WitchZombie(controller);
+                states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
+                states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
+                states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());
+                states.Add(Define.EnemyState.Follow, new EnemyStates.Base.Follow());
+                states.Add(Define.EnemyState.Attack, new EnemyStates.Base.Attack());
+                states.Add(Define.EnemyState.SkillCast, new EnemyStates.Base.SkillCast());
+                states.Add(Define.EnemyState.Die, new EnemyStates.Base.Die());
+                states.Add(Define.EnemyState.EndBattle, new EnemyStates.Base.EndBattle());
+
+                break;
             default:
-                enemy = new Enemies.TestEnemy(controller);
+                enemy = new Enemies.Base(controller);
                 states.Add(Define.EnemyState.Stay, new EnemyStates.Base.Stay());
                 states.Add(Define.EnemyState.Idle, new EnemyStates.Base.Idle());
                 states.Add(Define.EnemyState.Move, new EnemyStates.Base.Move());

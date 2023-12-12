@@ -103,6 +103,12 @@ public class RangerController : BaseController
         StopAllCoroutines();
     }
 
+    public override void CheckDie()
+    {
+        if (status.CurrentHP == 0)
+            ChangeState(RangerState.Die);
+    }
+
     public void FindAttackTarget()
     {
         attackTarget = null;
@@ -135,11 +141,6 @@ public class RangerController : BaseController
         rb.velocity = Vector2.zero;
     }
 
-    public override void CheckDie()
-    {
-        if (status.CurrentHP == 0)
-            ChangeState(RangerState.Die);
-    }
 }
 
 public class RangerStatus : ControllerStatus

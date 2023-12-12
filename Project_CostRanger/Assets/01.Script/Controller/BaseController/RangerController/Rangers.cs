@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using System.Timers;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Define;
 
 public abstract class Ranger 
 {
     protected RangerController controller;
     public List<Define.SpecialtyType> specialties;
-    protected WaitForSeconds attackWaitForSeceonds;
-    protected WaitForSeconds skillWaitForSeconds;
+    protected WaitForSeconds attackBeforeWaitForSeceonds;
+    protected WaitForSeconds attackAfterWaitForSeceonds;
+    protected WaitForSeconds skillBeforeWaitForSeconds;
+    protected WaitForSeconds skillAfterWaitForSeconds;
 
     public virtual void AddAnimationHash()
     {
-        controller.animationHash.Add(RangerState.Idle, Animator.StringToHash("0_idle"));
-        controller.animationHash.Add(RangerState.Follow, Animator.StringToHash("1_Run"));
-        controller.animationHash.Add(RangerState.Attack, Animator.StringToHash("2_Attack_Normal"));
-        controller.animationHash.Add(RangerState.Die, Animator.StringToHash("4_Death"));
-        controller.animationHash.Add(RangerState.SkillCast, Animator.StringToHash("5_Skill_Normal"));
+        controller.animationHash.Add(Define.RangerState.Idle, Animator.StringToHash("0_idle"));
+        controller.animationHash.Add(Define.RangerState.Follow, Animator.StringToHash("1_Run"));
+        controller.animationHash.Add(Define.RangerState.Attack, Animator.StringToHash("2_Attack_Normal"));
+        controller.animationHash.Add(Define.RangerState.Die, Animator.StringToHash("4_Death"));
+        controller.animationHash.Add(Define.RangerState.SkillCast, Animator.StringToHash("5_Skill_Normal"));
     }
 
     public virtual bool CheckFollow()
     {
-        if (controller.attackTarget == null || controller.attackTarget.currentState == EnemyState.Die)
+        if (controller.attackTarget == null || controller.attackTarget.currentState == Define.EnemyState.Die)
             controller.FindAttackTarget();
 
         if (controller.attackTarget == null)
@@ -64,7 +65,7 @@ public abstract class Ranger
     public virtual bool CheckAttack()
     {
         //예외 처리
-        if (controller.attackTarget == null || controller.attackTarget.currentState == EnemyState.Die)
+        if (controller.attackTarget == null || controller.attackTarget.currentState == Define.EnemyState.Die)
             controller.FindAttackTarget();
 
         if (controller.attackTarget == null) return false;
@@ -90,8 +91,11 @@ public abstract class Ranger
     {
         controller.Stop();
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+        
+        yield return attackBeforeWaitForSeceonds; //애니메이션 시간 기다리는 거임
         Managers.Battle.AttackCalculation(controller, controller.attackTarget);
-        yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
+        yield return attackAfterWaitForSeceonds; //애니메이션 시간 기다리는 거임
+
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
         controller.ChangeState(Define.RangerState.Idle);
         controller.routines.Remove("attack");
@@ -111,7 +115,7 @@ public abstract class Ranger
     {
         if (controller.status.CheckSkillCooltime <= 0)
         {
-            controller.ChangeState(RangerState.SkillCast);
+            controller.ChangeState(Define.RangerState.SkillCast);
         }
     }
 
@@ -121,7 +125,7 @@ public abstract class Ranger
         if (!Managers.Game.battleStageSystem.isAutoSkill) return false;
         if (controller.status.CheckSkillCooltime == 0)
         {
-            controller.ChangeState(RangerState.SkillCast);
+            controller.ChangeState(Define.RangerState.SkillCast);
             return true;
         }
 
@@ -139,7 +143,8 @@ public abstract class Ranger
         Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
         controller.Stop();
         Debug.Log("스킬 사용됨");
-        yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임
+        yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+        yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
         controller.ChangeState(Define.RangerState.Idle);
         controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
         controller.routines.Remove("skill");
@@ -153,8 +158,11 @@ namespace Rangers
         public Base(RangerController _controller)
         {
             controller = _controller;
-            attackWaitForSeceonds = new WaitForSeconds(Define.normalAttackAnimationTime);
-            skillWaitForSeconds = new WaitForSeconds(Define.skillAnimationTime);
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
             specialties = new List<Define.SpecialtyType>();
         }
     }

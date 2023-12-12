@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Define;
 
 public abstract class Enemy
 {
     protected EnemyController controller;
     public List<Define.SpecialtyType> specialties;
-    protected WaitForSeconds attackWaitForSeceonds;
-    protected WaitForSeconds skillWaitForSeconds;
+
+    protected WaitForSeconds attackBeforeWaitForSeceonds;
+    protected WaitForSeconds attackAfterWaitForSeceonds;
+    protected WaitForSeconds skillBeforeWaitForSeconds;
+    protected WaitForSeconds skillAfterWaitForSeconds;
 
 
     public virtual void AddAnimationHash()
     {
-        controller.animationHash.Add(EnemyState.Idle, Animator.StringToHash("0_idle"));
-        controller.animationHash.Add(EnemyState.Follow, Animator.StringToHash("1_Run"));
-        controller.animationHash.Add(EnemyState.Attack, Animator.StringToHash("2_Attack_Normal"));
-        controller.animationHash.Add(EnemyState.Die, Animator.StringToHash("4_Death"));
-        controller.animationHash.Add(EnemyState.SkillCast, Animator.StringToHash("5_Skill_Normal"));
+        controller.animationHash.Add(Define.EnemyState.Idle, Animator.StringToHash("0_idle"));
+        controller.animationHash.Add(Define.EnemyState.Follow, Animator.StringToHash("1_Run"));
+        controller.animationHash.Add(Define.EnemyState.Attack, Animator.StringToHash("2_Attack_Normal"));
+        controller.animationHash.Add(Define.EnemyState.Die, Animator.StringToHash("4_Death"));
+        controller.animationHash.Add(Define.EnemyState.SkillCast, Animator.StringToHash("5_Skill_Normal"));
     }
 
     public virtual bool CheckFollow()
@@ -60,6 +62,9 @@ public abstract class Enemy
     public virtual bool CheckAttack()
     {
         //예외 처리
+        if (controller.attackTarget == null || controller.attackTarget.currentState == Define.RangerState.Die)
+            controller.FindAttackTarget();
+
         if (controller.attackTarget == null) return false;
         if (controller.status.CheckAttackCooltime > 0) return false;
 
@@ -85,7 +90,9 @@ public abstract class Enemy
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
         //Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage) => { /*controller.mvpPoint += _damage;*/ });
         //Managers.Game.battleInfo.UpdateMVPPoints();
-        yield return attackWaitForSeceonds; //애니메이션 시간 기다리는 거임
+        yield return attackBeforeWaitForSeceonds; //애니메이션 시간 기다리는 거임
+        Managers.Battle.AttackCalculation(controller, controller.attackTarget);
+        yield return attackAfterWaitForSeceonds; //애니메이션 시간 기다리는 거임
         controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
         controller.ChangeState(Define.EnemyState.Idle);
         controller.routines.Remove("attack");
@@ -105,7 +112,7 @@ public abstract class Enemy
     {
         if (controller.status.CheckSkillCooltime == 0)
         {
-            controller.ChangeState(EnemyState.SkillCast);
+            controller.ChangeState(Define.EnemyState.SkillCast);
         }
     }
 
@@ -113,7 +120,7 @@ public abstract class Enemy
     {
         if (controller.status.CheckSkillCooltime == 0)
         {
-            controller.ChangeState(EnemyState.SkillCast);
+            controller.ChangeState(Define.EnemyState.SkillCast);
             return true;
         }
 
@@ -130,7 +137,9 @@ public abstract class Enemy
     {
         controller.Stop();
         Debug.Log("스킬 사용됨");
-        yield return skillWaitForSeconds; //애니메이션 시간 기다리는 거임
+        yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+        //스킬 발동
+        yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
         controller.ChangeState(Define.EnemyState.Idle);
         controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
         controller.routines.Remove("skill");
@@ -139,14 +148,38 @@ public abstract class Enemy
 
 namespace Enemies
 {
-    public class TestEnemy : Enemy
+    public class Base : Enemy
     {
-        public TestEnemy(EnemyController _controller)
+        public Base(EnemyController _controller)
         {
             controller = _controller;
-            attackWaitForSeceonds = new WaitForSeconds(Define.attackAnimationTime);
-            skillWaitForSeconds = new WaitForSeconds(Define.skillAnimationTime);
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
             specialties = new List<Define.SpecialtyType>();
+        }
+    }
+
+    public class WitchZombie : Enemy
+    {
+        public WitchZombie(EnemyController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.magicSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.magicSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        public override void AddAnimationHash()
+        {
+            controller.animationHash.Add(Define.EnemyState.Idle, Animator.StringToHash("0_idle"));
+            controller.animationHash.Add(Define.EnemyState.Follow, Animator.StringToHash("1_Run"));
+            controller.animationHash.Add(Define.EnemyState.Attack, Animator.StringToHash("2_Attack_Magic"));
+            controller.animationHash.Add(Define.EnemyState.Die, Animator.StringToHash("4_Death"));
+            controller.animationHash.Add(Define.EnemyState.SkillCast, Animator.StringToHash("5_Skill_Magic"));
         }
     }
 }
