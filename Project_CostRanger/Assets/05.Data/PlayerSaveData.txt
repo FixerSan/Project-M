@@ -9,7 +9,7 @@
             "gold": 123456789,
             "gem": 123456789,
             "upgradeCost": 0,
-            "hasRangerUID": "0,111010",
+            "hasRangerUID": "0,122010",
             "lastClearStageUID": -1
         },
         {

@@ -81,6 +81,114 @@ public class ObjectManager
         Define.Ranger rangerEnum = Util.ParseEnum<Define.Ranger>(data.name);
         switch (rangerEnum)
         {
+            case Define.Ranger.UnemployedKnight:
+                ranger = new Rangers.UnemployedKnight(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+            
+            case Define.Ranger.BoringSpearman:
+                ranger = new Rangers.BoringSpearman(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
+            case Define.Ranger.DullAxeman:
+                ranger = new Rangers.DullAxeman(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
+            case Define.Ranger.StrangeAssassin:
+                ranger = new Rangers.StrangeAssassin(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+            
+            case Define.Ranger.GoofyHammeman:
+                ranger = new Rangers.GoofyHammeman(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
+            case Define.Ranger.ScaredThug:
+                ranger = new Rangers.ScaredThug(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
+            case Define.Ranger.ClumsyArcher:
+                ranger = new Rangers.ClumsyArcher(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
+            case Define.Ranger.LenientNinja:
+                ranger = new Rangers.LenientNinja(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+            
+            case Define.Ranger.FieryArcher:
+                ranger = new Rangers.FieryArcher(controller);
+                states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());
+                states.Add(Define.RangerState.Idle, new RangerStates.Base.Idle());
+                states.Add(Define.RangerState.Move, new RangerStates.Base.Move());
+                states.Add(Define.RangerState.Follow, new RangerStates.Base.Follow());
+                states.Add(Define.RangerState.Attack, new RangerStates.Base.Attack());
+                states.Add(Define.RangerState.SkillCast, new RangerStates.Base.SkillCast());
+                states.Add(Define.RangerState.Die, new RangerStates.Base.Die());
+                states.Add(Define.RangerState.EndBattle, new RangerStates.Base.EndBattle());
+                break;
+
             default:
                 ranger = new Rangers.Base(controller);
                 states.Add(Define.RangerState.Stay, new RangerStates.Base.Stay());

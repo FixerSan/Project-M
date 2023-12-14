@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Attack And Skill
+  m_EditorClassIdentifier: 
+  m_GroupName: Attack And Skill
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 180cc5dd8a3c5344d8fefdf2ff1082f3
+  m_SerializeEntries:
+  - m_GUID: bfbb0141b122f9243bf55fe6481ce29c
+    m_Address: GoofyHammemanSkill.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: b9731322cd3cad44a9091dd196a34c3c
+    m_Address: ArcherAttack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 2538eedc7f071df46a83c060bbf3ab3d
+    m_Address: NinjaAttack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d792acc0e0cacfd4998c2c8ce5e08d65, type: 2}
+    - {fileID: 11400000, guid: cc932fa9cee2fee4bb0a69d543c889af, type: 2}

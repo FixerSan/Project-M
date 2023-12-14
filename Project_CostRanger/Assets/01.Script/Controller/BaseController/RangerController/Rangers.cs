@@ -103,6 +103,7 @@ public abstract class Ranger
 
     public virtual void CheckSkillCooltime()
     {
+        if (controller.isSkillUsing) return;
         if (controller.status.CheckSkillCooltime > 0)
         {
             controller.status.CheckSkillCooltime -= Time.deltaTime;
@@ -134,6 +135,11 @@ public abstract class Ranger
 
     public virtual void Skill()
     {
+        if (controller.routines.TryGetValue("attack", out Coroutine _routine))
+        {
+            controller.StopCoroutine(_routine);
+            controller.routines.Remove("attack");
+        }
         controller.routines.Add("skill", controller.StartCoroutine(SkillRoutine()));
     }
 
@@ -148,6 +154,16 @@ public abstract class Ranger
         controller.ChangeState(Define.RangerState.Idle);
         controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
         controller.routines.Remove("skill");
+    }
+
+    public virtual void GetDamage(float _damage)
+    {
+        controller.status.CurrentHP -= _damage;
+    }
+
+    public virtual void Hit(float _damage)
+    {
+        GetDamage(_damage);
     }
 }
 
@@ -164,6 +180,336 @@ namespace Rangers
             skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
             skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
             specialties = new List<Define.SpecialtyType>();
+        }
+    }
+
+    public class UnemployedKnight : Ranger
+    {
+        public UnemployedKnight(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            Managers.Battle.AttackCalculation(controller, controller.attackTarget, controller.status.CurrentAttackForce * 2);
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+    }
+
+    public class BoringSpearman : Ranger
+    {
+        public BoringSpearman(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.AddBuffAndNerf(new BuffsAndNerfs.BoringSpearmanSkill(controller, 4.3f));
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+    }
+    public class DullAxeman : Ranger
+    {
+        public DullAxeman(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.AddBuffAndNerf(new BuffsAndNerfs.DullAxemanSkill(controller, 10f));
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+    }
+
+    public class StrangeAssassin : Ranger
+    {
+        public StrangeAssassin(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.AddBuffAndNerf(new BuffsAndNerfs.StrangeAssassinSkill(controller, 4f));
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+    }
+
+    public class GoofyHammeman : Ranger
+    {
+        public GoofyHammeman(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            //광역 공격 스킬
+            AreaAttack attack = Managers.Resource.Instantiate("GoofyHammemanSkill", controller.attackTrans).GetComponent<AreaAttack>();
+            attack.Attack(controller, Define.BattleEntityType.Ranger, controller.status.CurrentAttackForce * 1.6f);
+            Managers.Resource.Destroy(attack.gameObject);
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+    }
+
+    public class ScaredThug : Ranger
+    {
+        public ScaredThug(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.AddBuffAndNerf(new BuffsAndNerfs.ScaredThugSkill(controller, 5f));
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+
+        public override void GetDamage(float _damage)
+        {
+            if(controller.isSkillUsing)
+                controller.status.CurrentHP -= 0;
+
+            controller.status.CurrentHP -= _damage;
+        }
+    }
+    
+    public class ClumsyArcher : Ranger
+    {
+        public ClumsyArcher(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.status.CurrentHP += controller.status.CurrentMaxHP * 0.7f;
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+
+        public override void GetDamage(float _damage)
+        {
+            if(controller.isSkillUsing)
+                controller.status.CurrentHP -= 0;
+
+            controller.status.CurrentHP -= _damage;
+        }
+
+        public override IEnumerator AttackRoutine()
+        {
+            controller.Stop();
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+
+            yield return attackBeforeWaitForSeceonds; //애니메이션 시간 기다리는 거임
+            LongAttack attack = Managers.Resource.Instantiate("ArcherAttack", controller.attackTrans).GetComponent<LongAttack>();
+            attack.Attack(controller, controller.attackTarget);
+            yield return attackAfterWaitForSeceonds; //애니메이션 시간 기다리는 거임
+
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.routines.Remove("attack");
+        }
+    }
+
+    public class LenientNinja : Ranger
+    {
+        public LenientNinja(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.AddBuffAndNerf(new BuffsAndNerfs.LenientNinjaSkill(controller, 7));
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+
+        public override void GetDamage(float _damage)
+        {
+            if (controller.isSkillUsing)
+                controller.status.CurrentHP -= 0;
+
+            controller.status.CurrentHP -= _damage;
+        }
+
+        public override IEnumerator AttackRoutine()
+        {
+            controller.Stop();
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+
+            yield return attackBeforeWaitForSeceonds; //애니메이션 시간 기다리는 거임
+            LongAttack attack = Managers.Resource.Instantiate("NinjaAttack", controller.attackTrans).GetComponent<LongAttack>();
+            attack.Attack(controller, controller.attackTarget);
+            yield return attackAfterWaitForSeceonds; //애니메이션 시간 기다리는 거임
+
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.routines.Remove("attack");
+        }
+    }
+    public class FieryArcher : Ranger
+    {
+        public FieryArcher(RangerController _controller)
+        {
+            controller = _controller;
+            attackBeforeWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackBeforeTime);
+            attackAfterWaitForSeceonds = new WaitForSeconds(Define.magicAndNormalAttackAfterTime);
+            skillBeforeWaitForSeconds = new WaitForSeconds(Define.normalSkillBeforeTime);
+            skillAfterWaitForSeconds = new WaitForSeconds(Define.normalSkillAfterTime);
+            specialties = new List<Define.SpecialtyType>();
+        }
+
+        //스킬 처리 루틴
+        public override IEnumerator SkillRoutine()
+        {
+            Managers.Game.battleStageSystem.UseRangerSkill(controller.data.UID);
+            controller.Stop();
+            Debug.Log("스킬 사용됨");
+            yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
+            for (int i = 0; i < Managers.Object.Enemies.Count; i++)
+            {
+                LongAttack attack = Managers.Resource.Instantiate("ArcherAttack", controller.attackTrans).GetComponent<LongAttack>();
+                attack.Attack(controller, Managers.Object.Enemies[i], controller.status.CurrentAttackForce * 2);
+            }
+            yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;
+            controller.routines.Remove("skill");
+        }
+
+        public override void GetDamage(float _damage)
+        {
+            if (controller.isSkillUsing)
+                controller.status.CurrentHP -= 0;
+
+            controller.status.CurrentHP -= _damage;
+        }
+
+        public override IEnumerator AttackRoutine()
+        {
+            controller.Stop();
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+
+            yield return attackBeforeWaitForSeceonds; //애니메이션 시간 기다리는 거임
+            LongAttack attack = Managers.Resource.Instantiate("ArcherAttack", controller.attackTrans).GetComponent<LongAttack>();
+            attack.Attack(controller, controller.attackTarget);
+            yield return attackAfterWaitForSeceonds; //애니메이션 시간 기다리는 거임
+
+            controller.status.CheckAttackCooltime = controller.status.CurrentAttackSpeed;
+            controller.ChangeState(Define.RangerState.Idle);
+            controller.routines.Remove("attack");
         }
     }
 }

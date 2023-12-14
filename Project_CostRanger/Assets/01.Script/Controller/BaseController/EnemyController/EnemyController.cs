@@ -150,6 +150,7 @@ public class EnemyController : BaseController
             ChangeState(EnemyState.Die);
     }
 }
+[System.Serializable]
 public class EnemyStatus : ControllerStatus
 {
     public EnemyStatus(BaseController _controller,EnemyControllerData _data)

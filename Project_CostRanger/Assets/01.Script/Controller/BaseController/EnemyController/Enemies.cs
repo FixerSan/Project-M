@@ -80,6 +80,11 @@ public abstract class Enemy
     //공격 처리
     public virtual void Attack()
     {
+        if (controller.routines.TryGetValue("attack", out Coroutine _routine))
+        {
+            controller.StopCoroutine(_routine);
+            controller.routines.Remove("attack");
+        }
         controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));
     }
 
@@ -118,7 +123,7 @@ public abstract class Enemy
 
     public virtual bool CheckCanUseSkill()
     {
-        if (controller.status.CheckSkillCooltime == 0)
+        if (controller.status.CheckSkillCooltime == 0 && Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) <= controller.status.CurrentAttackDistance)
         {
             controller.ChangeState(Define.EnemyState.SkillCast);
             return true;
@@ -138,7 +143,7 @@ public abstract class Enemy
         controller.Stop();
         Debug.Log("스킬 사용됨");
         yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
-        //스킬 발동
+        Managers.Battle.AttackCalculation(controller, controller.attackTarget, controller.status.CurrentAttackForce * 1.5f);
         yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임
         controller.ChangeState(Define.EnemyState.Idle);
         controller.status.CheckSkillCooltime = controller.status.CurrentSkillCooltime;

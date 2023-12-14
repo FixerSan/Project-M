@@ -11,7 +11,7 @@ public class RangerController : BaseController
     public RangerControllerData data;
 
     //Ranger State
-    public RangerState setState;   //외부에서 스테이트를 조작하기 위해 만든 프로퍼티 같은 느낌
+    public RangerState setState;        //외부에서 스테이트를 조작하기 위해 만든 프로퍼티 같은 느낌
     public RangerState currentState;
     public Dictionary<RangerState, State<RangerController>> states;
     public StateMachine<RangerController> stateMachine;
@@ -23,6 +23,7 @@ public class RangerController : BaseController
     public Animator animator;
     public Dictionary<RangerState, int> animationHash;
     public EnemyController attackTarget;
+    public Transform attackTrans;
 
     public void Init(Ranger _ranger, RangerControllerData _data, RangerStatus _status, Dictionary<RangerState, State<RangerController>> _states)
     {
@@ -35,7 +36,8 @@ public class RangerController : BaseController
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
         rb.gravityScale = 0;
 
-        animator = Util.FindChild<Animator>(gameObject, "UnitRoot");
+        animator = Util.FindChild<Animator>(gameObject, "UnitRoot",true);
+        attackTrans = Util.FindChild<Transform>(gameObject, "AttackTrans", true);
         animationHash = new Dictionary<RangerState, int>();
         ranger.AddAnimationHash();
 
@@ -46,7 +48,7 @@ public class RangerController : BaseController
         isInit = true;
 
         worldTextTrans = Util.FindChild<Transform>(gameObject, "Trans_WorldTest");
-
+        
         SetHPBar();
     }
 
@@ -77,6 +79,7 @@ public class RangerController : BaseController
         if (!isInit) return;
         stateMachine.UpdateState();
         CheckChangeState();
+        Debug.Log(status.CurrentAttackSpeed);
     }
 
     private void CheckChangeState()
@@ -87,12 +90,12 @@ public class RangerController : BaseController
 
     public override void Hit(float _damage)
     {
-        GetDamage(_damage);
+        ranger.Hit(_damage);
     }
 
     public override void GetDamage(float _damage)
     {
-        status.CurrentHP -= _damage;
+        ranger.GetDamage(_damage);
     }
 
     public override void Die()
@@ -140,9 +143,9 @@ public class RangerController : BaseController
     {
         rb.velocity = Vector2.zero;
     }
-
 }
 
+[System.Serializable]
 public class RangerStatus : ControllerStatus
 {
     public RangerStatus(BaseController _controller, RangerControllerData _data)
@@ -161,8 +164,8 @@ public class RangerStatus : ControllerStatus
         currentAttackDistance = _data.attackDistance;
 
         //크리티컬 배율
-        defaultCriticalForce = _data.criticalForce;
-        currentCriticalForce = _data.criticalForce;
+        defaultCriticalForce = 2;
+        currentCriticalForce = 2;
 
         //크리터컬 확률
         defaultCriticalProbability = _data.criticalProbability;

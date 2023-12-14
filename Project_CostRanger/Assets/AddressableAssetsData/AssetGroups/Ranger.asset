@@ -53,7 +53,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
   - m_GUID: 174ef104b90e5304bbcfa607d6a3086c
-    m_Address: /DullAxeman.prefab
+    m_Address: DullAxeman.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
@@ -70,8 +70,7 @@ MonoBehaviour:
   - m_GUID: 4d71c160d545561409d9286a9e2a6cba
     m_Address: UnemployedKnight.Sprite
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
+    m_SerializedLabels: []
   - m_GUID: 80eab2144cf980745a9ab78924c7f510
     m_Address: StrangeAssassin.Sprite
     m_ReadOnly: 0

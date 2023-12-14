@@ -10,6 +10,8 @@ public abstract class BaseController : MonoBehaviour
     private Vector3 localScale = Vector3.zero;
     public Transform hpBarTrans;
     public Transform worldTextTrans;
+    public List<BuffAndNerfEffect> buffAndNerfEffects = new List<BuffAndNerfEffect>();
+    public bool isSkillUsing = false;
 
     public abstract void Hit(float _damage);
     public abstract void GetDamage(float _damage);
@@ -52,8 +54,18 @@ public abstract class BaseController : MonoBehaviour
     {
         Managers.UI.ReleseHPBar(this);
     }
-}
 
+    public void AddBuffAndNerf(BuffAndNerfEffect _buffAndNerf)
+    {
+        buffAndNerfEffects.Add(_buffAndNerf);
+    }
+
+    public void RemoveBuffAndNerf(BuffAndNerfEffect _buffAndNerf)
+    {
+        buffAndNerfEffects.Remove(_buffAndNerf);
+    }
+}
+[System.Serializable]
 public abstract class ControllerStatus
 {
     protected BaseController controller;
@@ -70,12 +82,26 @@ public abstract class ControllerStatus
 
     //공격속도
     public float defaultAttackSpeed;
+    private float plusAttackSpeed;
+    public float PlusAttackSpeed
+    {
+        get
+        {
+            return plusAttackSpeed;
+        }
+
+        set
+        {
+            plusAttackSpeed = value;
+        }
+    }
+
     protected float currentAttackSpeed;
     public float CurrentAttackSpeed
     {
         get
         {
-            return currentAttackSpeed;
+            return defaultAttackSpeed + plusAttackSpeed;
         }
 
         set
@@ -175,6 +201,8 @@ public abstract class ControllerStatus
         {
             if (currentHP == 0) return;
             currentHP = value;
+            if (currentHP > CurrentMaxHP)
+                currentHP = CurrentMaxHP;
             Managers.Event.InvokeVoidEvent(Define.VoidEventType.OnChangeBattle);
             if (currentHP <= 0)
                 currentHP = 0;
