@@ -13,6 +13,7 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
     public float maxScrollX;
     public float dragForce;
 
+    public StageProfile chapterOneStageProfle;
     public override bool Init()
     {
         if(!base.Init()) return false;
@@ -24,10 +25,11 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
         BindEvent(GetObject((int)Objects.Image_Background), _dragCallback: OnDrag, _type: Define.UIEventType.Drag);
 
         BindEvent(GetButton((int)Buttons.Button_Close).gameObject, () => { Managers.UI.ClosePopupUI(this); });
-        BindEvent(GetButton((int)Buttons.Button_StageOne).gameObject, () => 
-        { 
-            Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(0);
-        });
+        BindEvent(GetButton((int)Buttons.Button_StageOne).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageOneUID); });
+        BindEvent(GetButton((int)Buttons.Button_StageTwo).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageTwoUID); });
+        BindEvent(GetButton((int)Buttons.Button_StageThree).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageThreeUID); });
+        BindEvent(GetButton((int)Buttons.Button_StageFour).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageFourUID); });
+        BindEvent(GetButton((int)Buttons.Button_StageFive).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageFiveUID); });
 
 
         return true;
@@ -57,7 +59,7 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
 
     private enum Buttons
     {
-        Button_StageOne, Button_StageTwo, Button_Close
+        Button_StageOne, Button_StageTwo, Button_StageThree, Button_StageFour, Button_StageFive, Button_Close
     }
 
     private enum Objects
