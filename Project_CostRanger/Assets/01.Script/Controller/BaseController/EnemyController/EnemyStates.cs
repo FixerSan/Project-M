@@ -82,7 +82,8 @@ namespace EnemyStates
                 if (_entity.enemy.CheckAttack()) return;
                 _entity.enemy.CheckAttackCooltime();
                 _entity.enemy.CheckSkillCooltime();
-                _entity.enemy.Follow();
+                if (_entity.enemy.CheckStop()) return;
+                _entity.Follow();
             }
         }
 

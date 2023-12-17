@@ -12,6 +12,8 @@ public abstract class Enemy
     protected WaitForSeconds skillBeforeWaitForSeconds;
     protected WaitForSeconds skillAfterWaitForSeconds;
 
+    protected Vector2 dir;
+
 
     public virtual void AddAnimationHash()
     {
@@ -45,6 +47,23 @@ public abstract class Enemy
 
         Vector2 dir = (controller.attackTarget.transform.position - controller.transform.position).normalized;
         controller.rb.velocity = dir * controller.status.CurrentMoveSpeed * Time.fixedDeltaTime * 10;
+    }
+
+    public virtual bool CheckStop()
+    {
+        if (controller.attackTarget == null)
+        {
+            controller.ChangeState(Define.EnemyState.Idle);
+            return true;
+        }
+
+        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) <= controller.status.CurrentAttackDistance)
+        {
+            controller.ChangeState(Define.EnemyState.Idle);
+            return true;
+        }
+
+        return false;
     }
 
     public virtual void CheckAttackCooltime()

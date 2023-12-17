@@ -82,6 +82,7 @@ namespace RangerStates
                 if (_entity.ranger.CheckAttack()) return;
                 _entity.ranger.CheckAttackCooltime();
                 _entity.ranger.CheckSkillCooltime();
+                if (_entity.ranger.CheckStop()) return; 
                 _entity.ranger.Follow();
             }
         }

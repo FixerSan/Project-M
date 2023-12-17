@@ -50,6 +50,23 @@ public abstract class Ranger
         controller.rb.velocity = dir * controller.status.CurrentMoveSpeed * Time.fixedDeltaTime * 10;
     }
 
+    public virtual bool CheckStop()
+    {
+        if (controller.attackTarget == null)
+        {
+            controller.ChangeState(Define.RangerState.Idle);
+            return true;
+        }
+
+        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) <= controller.status.CurrentAttackDistance)
+        {
+            controller.ChangeState(Define.RangerState.Idle);
+            return true;
+        }
+
+        return false;
+    }
+
     public virtual void CheckAttackCooltime()
     {
         //공격 쿨타임이 있을 때 쿨타임 감소
@@ -79,6 +96,7 @@ public abstract class Ranger
         }
         return false;
     }
+
 
     //공격 처리
     public virtual void Attack()
