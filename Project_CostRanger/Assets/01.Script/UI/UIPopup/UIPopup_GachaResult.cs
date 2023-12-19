@@ -15,6 +15,7 @@ public class UIPopup_GachaResult : UIPopup
         BindText(typeof(Texts));
 
         BindEvent(GetButton((int)Buttons.Button_Next).gameObject, _callback: OnClick_Next);
+        BindEvent(GetButton((int)Buttons.Button_Back).gameObject, _callback: OnClick_Back);
 
         RedrawGachaSlot(Managers.Gacha.GetGachaResult());
 
@@ -48,18 +49,29 @@ public class UIPopup_GachaResult : UIPopup
         }
     }
 
+    public override void RedrawUI()
+    {
+        GetText((int)Texts.Text_UserGem).text = $"{Managers.Game.playerData.gem}";
+        GetText((int)Texts.Text_UserGold).text = $"{Managers.Game.playerData.gold}";
+    }
+
     public void OnClick_Next()
     {
         Managers.UI.ClosePopupUI(this);
     }
 
-    public enum Buttons
+    public void OnClick_Back()
     {
-        Button_Next
+        Managers.UI.ClosePopupUI(this);
     }
 
-    public enum Texts
+    private enum Buttons
     {
+        Button_Next, Button_Back
+    }
 
+    private enum Texts
+    {
+        Text_UserGem, Text_UserGold
     }
 }

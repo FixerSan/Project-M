@@ -25,14 +25,15 @@ public class UISlot_GachaInfo : UIBase
         gameObject.SetActive(true);
         gameObject.transform.localScale = Vector3.zero;
 
-        GetImage((int)Images.Image_RangerBG).sprite = Managers.Resource.Load<Sprite>($"{_uid}.sprite");
+        GetImage((int)Images.Image_ObtainedStatusBG).gameObject.SetActive(false);
+        GetImage((int)Images.Image_NewBG).gameObject.SetActive(false);
 
-        GetText((int)Texts.Text_RangerName).gameObject.SetActive(true);
-        GetText((int)Texts.Text_RangerName).text = $"{_uid}";
+        GetImage((int)Images.Image_Ranger).sprite = Managers.Resource.Load<Sprite>($"{_uid}.sprite");
 
         if (!_isAlreadyObtained)
         {
             GetImage((int)Images.Image_ObtainedStatusBG).gameObject.SetActive(true);
+            GetImage((int)Images.Image_NewBG).gameObject.SetActive(true);
         }
 
         gameObject.transform.DOScale(1f, 0.8f).SetEase(Ease.InBounce);
@@ -41,17 +42,17 @@ public class UISlot_GachaInfo : UIBase
     public void OnDisable()
     {
         GetImage((int)Images.Image_ObtainedStatusBG).gameObject.SetActive(false);
-        GetImage((int)Images.Image_RangerBG).sprite = null;
+        GetImage((int)Images.Image_NewBG).gameObject.SetActive(false);
+        GetImage((int)Images.Image_Ranger).sprite = null;
     }
 
-    public enum Images
+    private enum Images
     {
-        Image_RangerBG, Image_ObtainedStatusBG
+        Image_Ranger, Image_RangerBG, Image_ObtainedStatusBG, Image_NewBG
     }
 
-    public enum Texts
+    private enum Texts
     {
         Text_RangerName, Text_ObtainedStatus
     }
-
 }

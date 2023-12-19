@@ -13,12 +13,14 @@ public class UIPopup_Gacha : UIPopup
         BindText(typeof(Texts));
 
         BindEvent(GetButton((int)Buttons.Button_Back).gameObject, _callback: () => { Managers.UI.ClosePopupUI(this); });
-        BindEvent(GetButton((int)Buttons.Button_ShowChart).gameObject, _callback: OnClick_ShowChart);
+        // BindEvent(GetButton((int)Buttons.Button_ShowChart).gameObject, _callback: OnClick_ShowChart);
         BindEvent(GetButton((int)Buttons.Button_TryGacha).gameObject, _callback: OnClick_TryGacha);
         BindEvent(GetButton((int)Buttons.Button_TryGachaTenTimes).gameObject, _callback: OnClick_TryGachaTenTimes);
 
         //GetText((int)Texts.Text_Confirmation).gameObject.SetActive(false);
         //GetText((int)Texts.Text_NotEnoughGem).gameObject.SetActive(false);
+
+        RedrawUI();
         return true;
     }
 
@@ -47,6 +49,13 @@ public class UIPopup_Gacha : UIPopup
         Managers.UI.ShowPopupUI<UIPopup_GachaChart>();
     }
 
+
+    public override void RedrawUI()
+    {
+        GetText((int)Texts.Text_UserGem).text = $"{Managers.Game.playerData.gem}";
+        GetText((int)Texts.Text_UserGold).text = $"{Managers.Game.playerData.gold}";
+    }
+
     private enum Buttons
     {
         Button_Back, Button_ShowChart, Button_TryGacha, Button_TryGachaTenTimes
@@ -54,6 +63,7 @@ public class UIPopup_Gacha : UIPopup
 
     private enum Texts
     {
-        Text_Confirmation, Text_NotEnoughGem
+        Text_Confirmation, Text_NotEnoughGem,
+        Text_UserGem, Text_UserGold
     }
 }

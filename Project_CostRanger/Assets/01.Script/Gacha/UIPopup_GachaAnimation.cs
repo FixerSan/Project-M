@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class UIPopup_GachaAnimation : UIPopup
 {
@@ -27,33 +29,68 @@ public class UIPopup_GachaAnimation : UIPopup
 
         Sequence raritySequence = DOTween.Sequence();
 
+        bool isEpic = false;
+        bool isLegendary = false;
+
         foreach (var item in Managers.Gacha.GetGachaResult())
         {
-            // 아이템 확률에 따라 연출 변경
+            // 각 가챠 유닛의 확률을 전부 구해서
+            // 만약 하나라도 레전드 이상일 경우 -> 레어 가챠 연출
+
+            var data = Managers.Data.GetRangerInfoData(item);
+
+            if (data != null)
+            {
+                if (data.rarity == "Epic" && isEpic == false)
+                {
+                    Debug.Log("이쉬끼 Epic인데요?");
+                    isEpic = true;
+                }
+
+                if (data.rarity == "Legendary" && isLegendary == false)
+                {
+                    Debug.Log("이쉬끼 Legendary인데요?");
+                    isEpic = true;
+                    isLegendary = true;
+                }
+            }
         }
 
-        if (Random.Range(0, 2) == 0)
+        if (isEpic)
         {
-            Debug.Log("레어 가챠");
             raritySequence
-            .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOScale(1.4f, 0.5f).SetEase(Ease.InQuart))
-            .Join(GetImage((int)Images.Image_RecruitmentPaper).DOColor(Color.white, 0.5f).SetEase(Ease.InQuart))
+            .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOScale(1.2f, 0.5f).SetEase(Ease.InQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(Color.white, 0.5f).SetEase(Ease.InQuart))
             .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOScale(1f, 0.5f).SetEase(Ease.OutQuart))
-            .Join(GetImage((int)Images.Image_RecruitmentPaper).DOColor(Color.yellow, 0.5f).SetEase(Ease.OutQuart))
-            .Join(GetImage((int)Images.Image_HaloEffect).DOColor(Color.yellow, 0.1f))
+            .Join(GetImage((int)Images.Image_RecruitmentPaper).DOColor(new Color(148f / 255f, 0, 211f / 255f), 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(new Color(148f / 255f, 0, 211f / 255f, 0f/255f), 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).transform.DOScale(1.5f, 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_HaloEffect).DOColor(new Color(148f / 255f, 0, 211f / 255f), 0.1f))
+            .Append(GetImage((int)Images.Image_GlowEffect).transform.DOScale(1f, 0f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(Color.clear, 0f).SetEase(Ease.InQuart))
             ;
         }
-        else
-        {
-            Debug.Log("일반가챠");
 
+        if (isLegendary)
+        {
+            raritySequence
+            .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOScale(1.2f, 0.5f).SetEase(Ease.InQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(Color.white, 0.5f).SetEase(Ease.InQuart))
+            .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOScale(1f, 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_RecruitmentPaper).DOColor(Color.yellow, 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(new Color(255f/255f, 220f/255f, 8f/255f, 0f/255f), 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).transform.DOScale(1.5f, 0.5f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_HaloEffect).DOColor(Color.yellow, 0.1f))
+            .Append(GetImage((int)Images.Image_GlowEffect).transform.DOScale(1f, 0f).SetEase(Ease.OutQuart))
+            .Join(GetImage((int)Images.Image_GlowEffect).DOColor(Color.clear, 0f).SetEase(Ease.InQuart))
+            ;
         }
 
-
-
+        TweenerCore<Quaternion, Vector3, QuaternionOptions> loopTweener = default;
         var mySequence = DOTween.Sequence().OnStart(() =>
     {
-        GetImage((int)Images.Image_HaloEffect).transform.DORotate(new Vector3(0, 0, 180), 0.2f).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+        loopTweener = GetImage((int)Images.Image_HaloEffect).transform.DORotate(new Vector3(0, 0, 180), 0.2f).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+
     })
     .Append(GetImage((int)Images.Image_RecruitmentPaper).transform.DOMoveY(0, 2f).SetEase(Ease.OutQuart))
     //.Append(GetImage((int)Images.Image_HaloEffect).transform.DOMoveX(0, 3f).SetEase(Ease.Linear))
@@ -62,8 +99,8 @@ public class UIPopup_GachaAnimation : UIPopup
     .Append(GetImage((int)Images.Image_Block).DOColor(Color.white, 1f))
     .OnComplete(() =>
     {
+        loopTweener.Kill();
         Managers.UI.ClosePopupUI(this);
-        Debug.Log("애니메이션 끝");
         Managers.UI.ShowPopupUI<UIPopup_GachaResult>();
     });
     }
@@ -75,6 +112,6 @@ public class UIPopup_GachaAnimation : UIPopup
 
     private enum Images
     {
-        Image_BG, Image_HaloEffect, Image_RecruitmentPaper, Image_Block
+        Image_BG, Image_HaloEffect, Image_RecruitmentPaper, Image_Block, Image_GlowEffect
     }
 }
