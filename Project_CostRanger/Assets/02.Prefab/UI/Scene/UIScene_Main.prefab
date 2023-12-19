@@ -1277,7 +1277,7 @@ GameObject:
   - component: {fileID: 991021374009390931}
   - component: {fileID: 8995385021440854869}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Image_RangerButtonsMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

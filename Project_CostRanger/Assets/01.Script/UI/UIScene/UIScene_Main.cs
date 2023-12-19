@@ -24,7 +24,7 @@ public class UIScene_Main : UIScene
 
         BindEvent(GetButton((int)Buttons.Button_Ranger).gameObject, _callback: OnClick_Ranger);
         BindEvent(GetButton((int)Buttons.Button_RangerList).gameObject, () => { });
-        BindEvent(GetButton((int)Buttons.Button_RangerDraw).gameObject, () => { });
+        BindEvent(GetButton((int)Buttons.Button_RangerDraw).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_Gacha>(); });
         BindEvent(GetButton((int)Buttons.Button_RangerStatUP).gameObject, () => { });
 
         isRangerToggled = false;

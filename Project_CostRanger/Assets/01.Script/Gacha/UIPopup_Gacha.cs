@@ -37,7 +37,7 @@ public class UIPopup_Gacha : UIPopup
         if (Managers.Gacha.TryGacha(10) == true)
         {
             Managers.Gacha.StartGachaAll(10);
-            Managers.UI.ShowPopupUI<UIPopup_GachaAnimation>();
+            Managers.Screen.FadeInOut(1f, () => Managers.UI.ShowPopupUI<UIPopup_GachaAnimation>());
         }
         //GetText((int)Texts.Text_Confirmation).gameObject.SetActive(true);
     }

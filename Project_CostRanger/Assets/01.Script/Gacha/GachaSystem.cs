@@ -34,7 +34,7 @@ public class GachaSystem
     public bool TryGacha(int _gachaCount = 1)
     {
         // 재화 개수 검사
-        bool isEnable = true; // _gachaCount * 120 <= Managers.Data.playerData.gem ? true : false;
+        bool isEnable = _gachaCount * 120 <= Managers.Game.playerData.gem ? true : false;
 
         if (isEnable)
         {

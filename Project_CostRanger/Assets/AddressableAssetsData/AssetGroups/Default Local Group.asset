@@ -232,6 +232,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 3a0f56ababe0d494baf048eb50a7cfe4
+    m_Address: UIPopup_Gacha.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: be31ceedc3df2e64c8193ecc29aefcbe
+    m_Address: UIPopup_GachaAnimation.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 298804c9b86db224abbb7de9401314f9
+    m_Address: UIPopup_GachaChart.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 43ced32698e9abf4dbd37989b001fb66
+    m_Address: UIPopup_GachaResult.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: ebe22ddd588c42343955e2edf3f313e2
+    m_Address: RecruitmentRegularData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:
