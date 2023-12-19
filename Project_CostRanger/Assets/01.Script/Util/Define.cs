@@ -188,4 +188,9 @@ public class Define
     {
         One, Two
     }
+
+    public enum SoundType
+    {
+        BGM, UI, Effect, Max    
+    }
 }

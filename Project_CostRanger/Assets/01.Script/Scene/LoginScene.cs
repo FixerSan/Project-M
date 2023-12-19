@@ -8,7 +8,7 @@ public class LoginScene : BaseScene
     public override void Init(Action _callback)
     {
         Managers.UI.ShowSceneUI<UIScene_Login>();
-        _callback?.Invoke();
+        Managers.Sound.FadeChangeBGM("101_SpreadScene", 0.5f,_callback);
     }
 
     public override void Clear()

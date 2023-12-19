@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StageProfle", menuName = "Container/StageProfle.", order = 0)]
+[CreateAssetMenu(fileName = "StageProfle", menuName = "Container/StageProfle", order = 0)]
 public class StageProfile : ScriptableObject
 {
     [Header("StageUIDs")]

@@ -8,15 +8,16 @@ public class UIScene_Login: UIScene
     {
         if (!base.Init())
             return false;
-        BindButton(typeof(Buttons));
-        BindInputField(typeof(InputFields));
-        BindText(typeof(Texts));
+        //BindButton(typeof(Buttons));
+        //BindInputField(typeof(InputFields));
+        //BindText(typeof(Texts));
 
-        BindEvent(GetButton((int)Buttons.Button_Login).gameObject, _callback: OnClick_Login);
-        BindEvent(GetButton((int)Buttons.Button_SignUp).gameObject, _callback: OnClick_SignUp);
-        BindEvent(GetButton((int)Buttons.Button_FixerLogin).gameObject, _callback: OnClick_FixerLogin);
-        GetText((int)Texts.Text_NotExistPlayerData).gameObject.SetActive(false);
-        GetText((int)Texts.Text_IncorrectPassward).gameObject.SetActive(false);
+        BindEvent(gameObject, _callback: OnClick_FixerLogin);
+        //BindEvent(GetButton((int)Buttons.Button_Login).gameObject, _callback: OnClick_Login);
+        //BindEvent(GetButton((int)Buttons.Button_SignUp).gameObject, _callback: OnClick_SignUp);
+        //BindEvent(GetButton((int)Buttons.Button_FixerLogin).gameObject, _callback: OnClick_FixerLogin);
+        //GetText((int)Texts.Text_NotExistPlayerData).gameObject.SetActive(false);
+        //GetText((int)Texts.Text_IncorrectPassward).gameObject.SetActive(false);
         return true;
     }
 
