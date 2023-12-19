@@ -150,6 +150,9 @@ public class Define
     public enum UIType
     {
         UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage, UIPopup_StageInfo
+
+        // °¡Ã­ ¾À
+        ,UIPopup_Gacha, UIPopup_GachaResult, UIPopup_GachaSlide, UIPopup_GachaChart, UIPopup_GachaAnimation
     }
 
     public enum RewardType
