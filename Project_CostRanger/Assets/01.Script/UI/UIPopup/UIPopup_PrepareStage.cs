@@ -46,6 +46,9 @@ public class UIPopup_PrepareStage : UIPopup
         RedrawCanUseSlot();
         RedrawUseSlot();
         DrawEnemy();
+
+        //GetText((int)Texts.Text_UserGem).text = $"{Managers.Game.playerData.gem}";
+        //GetText((int)Texts.Text_UserGold).text = $"{Managers.Game.playerData.gold}";
     }
 
     public void RedrawCanUseSlot()

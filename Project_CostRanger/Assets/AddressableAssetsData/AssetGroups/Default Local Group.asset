@@ -42,11 +42,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 063d9be49bf7b7e4c896552cd7896133
-    m_Address: UIPopup_PrepareStage.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
   - m_GUID: a6baf832f99a1aa498cbf3ad34911338
     m_Address: UIScene_CreateStage.prefab
     m_ReadOnly: 0
@@ -209,6 +204,11 @@ MonoBehaviour:
     - Preload
   - m_GUID: ebe22ddd588c42343955e2edf3f313e2
     m_Address: RecruitmentRegularData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 866fb771dc3d1e749b32fe83d73566a0
+    m_Address: UIPopup_PrepareStage.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload

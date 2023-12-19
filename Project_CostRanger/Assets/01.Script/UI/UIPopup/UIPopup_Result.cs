@@ -6,10 +6,18 @@ public class UIPopup_Result : UIPopup
 {
     public void Init(Define.GameResult _result, int _resultUID)
     {
+        BindObject(typeof(Objects));
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
 
-        BindEvent(GetButton((int)Buttons.Button_Home).gameObject, OnClick_Home);
+        BindEvent(GetButton((int)Buttons.Button_FullScreen).gameObject, OnClick_FullScreen);
+        BindEvent(GetButton((int)Buttons.Button_Exit).gameObject, OnClick_Exit);
+        BindEvent(GetButton((int)Buttons.Button_Retry).gameObject, OnClick_Retry);
+        BindEvent(GetButton((int)Buttons.Button_Draw).gameObject, OnClick_Draw);
+        BindEvent(GetButton((int)Buttons.Button_Enhance).gameObject, OnClick_Enhance);
+
+        GetObject((int)Objects.Victory).SetActive(false);
+        GetObject((int)Objects.Lose).SetActive(false);
 
         if (_result == Define.GameResult.Victory) Victory();
         if (_result == Define.GameResult.Lose) Lose();
@@ -17,22 +25,49 @@ public class UIPopup_Result : UIPopup
 
     public void Victory()
     {
-        GetText((int)Texts.Text_Result).text = "Victory";
+        GetObject((int)Objects.Victory).SetActive(true);
+        GetObject((int)Objects.Lose).SetActive(false);
     }
 
     public void Lose()
     {
-        GetText((int)Texts.Text_Result).text = "Lose";
+        GetObject((int)Objects.Victory).SetActive(false);
+        GetObject((int)Objects.Lose).SetActive(true);
     }
 
-    public void OnClick_Home()
+    public void OnClick_FullScreen()
     {
         Managers.Scene.LoadScene(Define.Scene.Main);
+    }
+
+    public void OnClick_Exit()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Stage);
+    }
+
+    public void OnClick_Retry()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Main);
+    }
+
+    public void OnClick_Draw()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Main);
+    }
+
+    public void OnClick_Enhance()
+    {
+        // °­È­
     }
 
     public override void RedrawUI()
     {
 
+    }
+
+    private enum Objects
+    {
+        Victory, Lose
     }
 
     private enum Texts
@@ -42,6 +77,10 @@ public class UIPopup_Result : UIPopup
 
     private enum Buttons
     {
-        Button_Home
+        // Victory
+        Button_FullScreen,
+
+        // Lose
+        Button_Exit, Button_Retry, Button_Draw, Button_Enhance
     }
 }

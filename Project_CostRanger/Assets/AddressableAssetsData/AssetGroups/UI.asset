@@ -16,47 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 674f91345733abb46becafb2de40ca7a
-  m_SerializeEntries:
-  - m_GUID: eb0f75dc6f6ec1a44be0ed2444dc0742
-    m_Address: Card_Legendary.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 07d388422b363cc4ba073ea11779109f
-    m_Address: CostPlace_Epic.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 94a4d1dd3c08ef6429cb5d205295f411
-    m_Address: CostPlace_Rare.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 7f78c991a51811f4b99f503eeb92be63
-    m_Address: CostPlace_Legendary.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 235fa6783461a62469b1ac7d9d330b25
-    m_Address: Card_Epic.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 783de42069e723945aba1ce636e61bf5
-    m_Address: Card_Common.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: 423a2ba65ce594c48a0ada28c9b8b07a
-    m_Address: Card_Rare.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-  - m_GUID: c5f7ef8a816710240afffeb94cc16616
-    m_Address: CostPlace_Common.Sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 121e0c33f384ded489253598a3009b2d, type: 2}
   m_SchemaSet:

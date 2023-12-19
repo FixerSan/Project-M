@@ -35,10 +35,10 @@ public class UIScene_Main : UIScene
 
     public override void RedrawUI()
     {
-        GetText((int)Texts.Text_Name).text = $"{Managers.Game.playerData.name}";
-        GetText((int)Texts.Text_Level).text = $"LV.{Managers.Game.playerData.level}";
-        GetText((int)Texts.Text_Gem).text = $"{Managers.Game.playerData.gem}";
-        GetText((int)Texts.Text_Gold).text = $"{Managers.Game.playerData.gold}";
+        GetText((int)Texts.Text_UserName).text = $"{Managers.Game.playerData.name}";
+        GetText((int)Texts.Text_UserLevel).text = $"LV.{Managers.Game.playerData.level}";
+        GetText((int)Texts.Text_UserGem).text = $"{Managers.Game.playerData.gem}";
+        GetText((int)Texts.Text_UserGold).text = $"{Managers.Game.playerData.gold}";
         // GetText((int)Texts.Text_EXP).text = $"{Managers.Game.playerData.exp}";
 
         // GetImage((int)Images.Image_EXPGauge).fillAmount = n(currentEXP) / N(maxEXP);
@@ -85,6 +85,6 @@ public class UIScene_Main : UIScene
 
     private enum Texts
     {
-        Text_Name, Text_Level, Text_Gem, Text_Gold, Text_EXP
+        Text_UserName, Text_UserLevel, Text_UserGem, Text_UserGold, Text_EXP
     }
 }
