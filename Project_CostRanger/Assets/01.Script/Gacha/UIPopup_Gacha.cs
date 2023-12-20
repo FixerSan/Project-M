@@ -28,9 +28,10 @@ public class UIPopup_Gacha : UIPopup
     {
         if (Managers.Gacha.TryGacha(1) == true)
         {
-            Managers.Gacha.StartGachaAll(1);
-            Managers.UI.ShowPopupUI<UIPopup_GachaAnimation>();
+            Managers.UI.ShowPopupUI<UIPopup_GachaConfirmation>().Init(1, Managers.Gacha.OneGachaConsumeAmount);
         }
+        else
+            Debug.Log($"젬이 최소 {10}개 필요하다맨");
         //GetText((int)Texts.Text_Confirmation).gameObject.SetActive(true);
     }
 
@@ -38,9 +39,10 @@ public class UIPopup_Gacha : UIPopup
     {
         if (Managers.Gacha.TryGacha(10) == true)
         {
-            Managers.Gacha.StartGachaAll(10);
-            Managers.Screen.FadeInOut(1f, () => Managers.UI.ShowPopupUI<UIPopup_GachaAnimation>());
+            Managers.UI.ShowPopupUI<UIPopup_GachaConfirmation>().Init(10, 10 * Managers.Gacha.OneGachaConsumeAmount);
         }
+        else
+            Debug.Log($"젬이 최소 {100}개 필요하다맨");
         //GetText((int)Texts.Text_Confirmation).gameObject.SetActive(true);
     }
 

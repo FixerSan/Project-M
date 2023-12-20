@@ -29,17 +29,18 @@ public class UIPopup_GachaAnimation : UIPopup
 
         Sequence raritySequence = DOTween.Sequence();
 
+        var obtainedPool = Managers.Gacha.GetGachaResult();
         bool isEpic = false;
         bool isLegendary = false;
 
-        foreach (var item in Managers.Gacha.GetGachaResult())
+        foreach (var item in obtainedPool)
         {
             // 각 가챠 유닛의 확률을 전부 구해서
             // 만약 하나라도 레전드 이상일 경우 -> 레어 가챠 연출
 
             var data = Managers.Data.GetRangerInfoData(item);
 
-            if (data != null)
+            if (data != null && data.UID != 0)
             {
                 if (data.rarity == "Epic" && isEpic == false)
                 {

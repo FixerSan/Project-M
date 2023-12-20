@@ -17,6 +17,8 @@ public class GachaSystem
     private Queue<string> obtainedRangers;
     private int[] lastObtainedRangers;
 
+    public readonly int OneGachaConsumeAmount = 10;
+
     public bool Init()
     {
         obtainedRangers = new Queue<string>(10);
@@ -34,7 +36,7 @@ public class GachaSystem
     public bool TryGacha(int _gachaCount = 1)
     {
         // 재화 개수 검사
-        bool isEnable = _gachaCount * 120 <= Managers.Game.playerData.gem ? true : false;
+        bool isEnable = _gachaCount * 10 <= Managers.Game.playerData.gem ? true : false;
 
         if (isEnable)
         {
@@ -138,8 +140,18 @@ public class GachaSystem
         for (int i = 0; i < imax; i++)
         {
             lastObtainedRangers[i] = Int32.Parse(obtainedRangers.Peek());
+
+            var lastRanger = Managers.Data.GetRangerInfoData(lastObtainedRangers[i]);
+            if (lastRanger != null && !Managers.Game.playerData.hasRangers.Contains(lastRanger))
+            {
+                Managers.Game.playerData.hasRangers.Add(lastRanger);
+                Debug.Log($"{lastRanger.UID} 플레이어 소유에 추가");
+            }
+
             Debug.Log($"{i + 1}번째 뽑기 : {obtainedRangers.Dequeue()} 획득!");
         }
+
+        Managers.Game.playerData.gem -= OneGachaConsumeAmount - lastObtainedRangers.Length;
     }
 
     public int[] GetGachaResult()
@@ -225,8 +237,16 @@ public class GachaTable
             // 레어도 명시가 잘못되어 있을 경우 실패
             if (!isAvailable)
             {
+                Debug.LogError($"레어도가 잘못 표기되어 있습니다. {item.UID} : {item.rarityPool}");
                 return false;
             }
+
+            // 인게임에 동일한 UID가 등록된 것이 없을 경우 실패
+            //if (Managers.Data.GetRangerInfoData(item.UID) == null)
+            //{
+            //    Debug.LogError($"게임 데이터에 등록된 동일한 UID가 없습니다. {item.UID} : {item.rarityPool}");
+            //    return false;
+            //}
 
             // 픽업캐 처리
             switch (rarity)

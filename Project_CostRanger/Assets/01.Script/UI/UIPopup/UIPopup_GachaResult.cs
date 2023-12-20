@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +23,7 @@ public class UIPopup_GachaResult : UIPopup
     }
 
     public void RedrawGachaSlot(int[] _obtainedList)
+
     {
         foreach (var slot in gachaInfoSlots)
         {
@@ -31,18 +32,19 @@ public class UIPopup_GachaResult : UIPopup
 
         for (int i = 0; i < _obtainedList.Length; i++)
         {
-            if (_obtainedList[i] != 0)
+            if (_obtainedList[i] != 0)  
             {
                 bool isAlreadyObtained = false;
 
-                //for (int j = 0, jmax = Managers.Data.playerData.hasRangers.Count; j < jmax; i++)
-                //{
-                //    if (Managers.Data.playerData.hasRangers[i] != null && Managers.Data.playerData.hasRangers[i].UID == _obtainedList[i])
-                //    {
-                //        isAlreadyObtained = true;
-                //        break;
-                //    }
-                //}
+                for (int j = 0, jmax = Managers.Game.playerData.hasRangers.Count; j < jmax; j++)
+                {
+                    if (Managers.Game.playerData.hasRangers[j] != null && Managers.Game.playerData.hasRangers[j].UID == _obtainedList[i])
+                    {
+                        Debug.Log($"{Managers.Game.playerData.hasRangers[j].UID} = {_obtainedList[i]}를 이미 갖고 있습니다.");
+                        isAlreadyObtained = true;
+                        break;
+                    }
+                }
 
                 gachaInfoSlots[i].Redraw(_obtainedList[i], isAlreadyObtained);
             }
