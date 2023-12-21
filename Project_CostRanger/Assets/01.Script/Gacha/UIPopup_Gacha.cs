@@ -12,7 +12,7 @@ public class UIPopup_Gacha : UIPopup
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
 
-        BindEvent(GetButton((int)Buttons.Button_Back).gameObject, _callback: () => { Managers.UI.ClosePopupUI(this); });
+        BindEvent(GetButton((int)Buttons.Button_Back).gameObject, _callback: OnClick_Back);
         // BindEvent(GetButton((int)Buttons.Button_ShowChart).gameObject, _callback: OnClick_ShowChart);
         BindEvent(GetButton((int)Buttons.Button_TryGacha).gameObject, _callback: OnClick_TryGacha);
         BindEvent(GetButton((int)Buttons.Button_TryGachaTenTimes).gameObject, _callback: OnClick_TryGachaTenTimes);
@@ -22,6 +22,12 @@ public class UIPopup_Gacha : UIPopup
 
         RedrawUI();
         return true;
+    }
+
+    public void OnClick_Back()
+    {
+        Managers.UI.ClosePopupUI(this);
+        Managers.UI.SceneUI.RedrawUI();
     }
 
     public void OnClick_TryGacha()

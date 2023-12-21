@@ -17,6 +17,7 @@ public class UIPopup_PrepareStage : UIPopup
     {
         Managers.UI.SetCanvas(gameObject, true);
         BindButton(typeof(Buttons));
+        BindText(typeof(Texts));
         canUseRangerSlots = new List<UISlot_CanUseRanger>();
         canUseRangerSlotParent = Util.FindChild(gameObject, _name: "Content_CanUseSlot", _recursive: true).transform;
 
@@ -46,7 +47,7 @@ public class UIPopup_PrepareStage : UIPopup
         RedrawCanUseSlot();
         RedrawUseSlot();
         DrawEnemy();
-
+        GetText((int)Texts.Text_CostInfo).text = $"{Managers.Game.prepareStageSystem.currentCost}/{Managers.Game.prepareStageSystem.stageData.canUseCost}";
         //GetText((int)Texts.Text_UserGem).text = $"{Managers.Game.playerData.gem}";
         //GetText((int)Texts.Text_UserGold).text = $"{Managers.Game.playerData.gold}";
     }
@@ -102,5 +103,10 @@ public class UIPopup_PrepareStage : UIPopup
     private enum Buttons
     {
         Button_Start, Button_Back
+    }
+
+    private enum Texts
+    {
+        Text_CostInfo
     }
 }

@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         {
             Managers.Data.LoadPreData(() =>
             {
+                Screen.SetResolution(1920, 1080, true);
                 Managers.Screen.SetCameraPosition(new Vector3(0,0,-10f));
                 Managers.Scene.LoadScene(Define.Scene.Login);
                 Managers.Gacha.Init();
@@ -91,13 +92,13 @@ public class GameManager : Singleton<GameManager>
 
     public void OnApplicationPause(bool pause)
     {
-        if (pause)
-            SaveGame();
+        //if (pause)
+        //    SaveGame();
     }
 
     public void OnApplicationQuit()
     {
-        SaveGame();
+        //SaveGame();
     }
 }
 
@@ -159,17 +160,20 @@ public class PrepareStageSystem
     public StageData stageData;
     public RangerControllerData[] rangerControllerData;
     public EnemyControllerData[] enemies;
+    public int currentCost;
 
     public Dictionary<SpecialtyType ,Specialty> specialties;
     public Batch batch;
 
     private SpecialtyType tempSpecialtyType;
 
+
     public PrepareStageSystem()
     {
         rangerControllerData = new RangerControllerData[6];
         enemies = new EnemyControllerData[9];
         specialties = new Dictionary<SpecialtyType, Specialty>();
+        currentCost = 0;
     }
 
     //초기 설정
@@ -180,7 +184,7 @@ public class PrepareStageSystem
         rangerControllerData = new RangerControllerData[6];
         enemies = new EnemyControllerData[9]; 
         specialties.Clear();
-
+        currentCost = 0;
         //저장된 레인저 프리셋 설정
         SetupEnemy();
         RedrawUI();
@@ -193,7 +197,19 @@ public class PrepareStageSystem
 
     public void SetUseRanger(int _rangerIndex, int _slotIndex)
     {
-        rangerControllerData[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
+        RangerInfoData rangerInfoData = Managers.Data.GetRangerInfoData(_rangerIndex);
+        if(currentCost + rangerInfoData.cost <= stageData.canUseCost)
+        {
+            rangerControllerData[_slotIndex] = Managers.Data.GetRangerControllerData(_rangerIndex);
+            currentCost = 0;
+            for (int i = 0; i < rangerControllerData.Length; i++)
+            {
+                if (rangerControllerData[i] == null)
+                    continue;
+
+                currentCost += rangerControllerData[i].cost;
+            }
+        }
         SetSpecialty();
         RedrawUI();
     }
@@ -201,6 +217,15 @@ public class PrepareStageSystem
     {
         if (_slotIndex == -1) return;
         rangerControllerData[_slotIndex] = null;
+        currentCost = 0;
+        for (int i = 0; i < rangerControllerData.Length; i++)
+        {
+            if (rangerControllerData[i] == null)
+                continue;
+
+            currentCost += rangerControllerData[i].cost;
+        }
+
         SetSpecialty();
         RedrawUI();
     }

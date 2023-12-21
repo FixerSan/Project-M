@@ -1,4 +1,4 @@
-{
+ï»¿{
 "infoDatas":[
  {
   "UID": 0,
@@ -533,9 +533,9 @@
   "name": "TestRanger",
   "cost": 3,
   "level": 0,
-  "hp": 5000000,
+  "hp": 500,
   "attackType": "short",
-  "attackForce": 0,
+  "attackForce": 50,
   "attackSpeed": 1.2,
   "attackDistance": 5,
   "criticalProbability": 10,
@@ -553,14 +553,14 @@
   "attackType": "short",
   "attackForce": 50,
   "attackSpeed": 1,
-  "attackDistance": 2,
-  "criticalProbability": 4.2,
-  "defenseForce": 90,
+  "attackDistance": 1.2,
+  "criticalProbability": 30,
+  "defenseForce": 110,
   "moveSpeed": 4,
   "skillCooltime": 5,
   "specialtyOne": "Knightage",
   "rarity": "Common",
-  "skillSentence": "½ÇÁ÷ÀÚÀÇ ÈûÀ» º¸¿©ÁÖÁö!!!!!"
+  "skillSentence": "                      !!!!!"
  },
  {
   "UID": 111011,
@@ -590,15 +590,15 @@
   "hp": 230,
   "attackType": "short",
   "attackForce": 44,
-  "attackSpeed": 1.6,
-  "attackDistance": 7.6,
-  "criticalProbability": 3.8,
+  "attackSpeed": 1.15,
+  "attackDistance": 2.4,
+  "criticalProbability": 30,
   "defenseForce": 80,
   "moveSpeed": 6,
   "skillCooltime": 9,
   "specialtyOne": "Knightage",
   "rarity": "Common",
-  "skillSentence": "³» Á×Ã¢ ¸ÀÀ» ºÁ¶ó~"
+  "skillSentence": "     Ã¢          ~"
  },
  {
   "UID": 111021,
@@ -629,14 +629,14 @@
   "attackType": "short",
   "attackForce": 120,
   "attackSpeed": 4.2,
-  "attackDistance": 6,
-  "criticalProbability": 2,
+  "attackDistance": 1.2,
+  "criticalProbability": 50,
   "defenseForce": 120,
   "moveSpeed": 3,
   "skillCooltime": 22,
   "specialtyOne": "Knightage",
   "rarity": "Epic",
-  "skillSentence": "148KgÀÇ ¹«°Ô¸¦ ½Ç°¨ÇØ¶ó!!!!"
+  "skillSentence": "148Kg      Ô¸   Ç°  Ø¶ !!!!"
  },
  {
   "UID": 111031,
@@ -667,14 +667,14 @@
   "attackType": "short",
   "attackForce": 30,
   "attackSpeed": 0.8,
-  "attackDistance": 1.6,
-  "criticalProbability": 1.2,
+  "attackDistance": 1.2,
+  "criticalProbability": 20,
   "defenseForce": 60,
   "moveSpeed": 9,
   "skillCooltime": 12,
   "specialtyOne": "Assassin Squad",
   "rarity": "Rare",
-  "skillSentence": "½´½µ... ½µ..½´½µ!!!"
+  "skillSentence": "    ...   ..    !!!"
  },
  {
   "UID": 111041,
@@ -725,18 +725,18 @@
   "name": "GoofyHammeman",
   "cost": 6,
   "level": 0,
-  "hp": 600,
+  "hp": 760,
   "attackType": "short",
   "attackForce": 60,
-  "attackSpeed": 3.3,
-  "attackDistance": 6.3,
-  "criticalProbability": 2.2,
-  "defenseForce": 170,
+  "attackSpeed": 5.8,
+  "attackDistance": 1.2,
+  "criticalProbability": 20,
+  "defenseForce": 220,
   "moveSpeed": 3.5,
-  "skillCooltime": 1,
+  "skillCooltime": 10,
   "specialtyOne": "Knightage",
   "rarity": "Epic",
-  "skillSentence": "»Ð¸ÁÄ¡º¸´Ü ¾ÆÇÃ°É?"
+  "skillSentence": " Ð¸ Ä¡        Ã° ?"
  },
  {
   "UID": 112011,
@@ -767,14 +767,14 @@
   "attackType": "short",
   "attackForce": 48,
   "attackSpeed": 2,
-  "attackDistance": 6.5,
-  "criticalProbability": 6,
+  "attackDistance": 1.2,
+  "criticalProbability": 25,
   "defenseForce": 100,
   "moveSpeed": 3.8,
-  "skillCooltime": 1,
+  "skillCooltime": 16,
   "specialtyOne": "Revolutionary Group",
   "rarity": "Common",
-  "skillSentence": "³­... ¾àÇÏÁö ¾Ê¾Æ..!!!"
+  "skillSentence": "  ...         Ê¾ ..!!!"
  },
  {
   "UID": 112021,
@@ -875,17 +875,17 @@
   "level": 0,
   "hp": 180,
   "attackType": "long",
-  "attackForce": 30,
+  "attackForce": 36,
   "attackSpeed": 3,
-  "attackDistance": 15,
-  "criticalProbability": 3,
+  "attackDistance": 8,
+  "criticalProbability": 30,
   "defenseForce": 70,
   "moveSpeed": 6,
-  "skillCooltime": 1,
+  "skillCooltime": 20,
   "specialtyOne": "Knightage",
   "specialtyTwo": "Sniper Group",
   "rarity": "Common",
-  "skillSentence": "¤²...º¸ÀÎ´Ù º¸¿©..!"
+  "skillSentence": "  ...   Î´      ..!"
  },
  {
   "UID": 121011,
@@ -914,17 +914,17 @@
   "level": 0,
   "hp": 250,
   "attackType": "long",
-  "attackForce": 20,
-  "attackSpeed": 1.1,
-  "attackDistance": 11,
-  "criticalProbability": 15,
+  "attackForce": 75,
+  "attackSpeed": 7,
+  "attackDistance": 6.5,
+  "criticalProbability": 50,
   "defenseForce": 100,
   "moveSpeed": 11,
-  "skillCooltime": 1,
+  "skillCooltime": 20,
   "specialtyOne": "Assassin Squad",
   "specialtyTwo": "Bandits",
   "rarity": "Rare",
-  "skillSentence": "½²."
+  "skillSentence": "  ."
  },
  {
   "UID": 121021,
@@ -1027,15 +1027,15 @@
   "attackType": "long",
   "attackForce": 52,
   "attackSpeed": 4.5,
-  "attackDistance": 15,
+  "attackDistance": 9.5,
   "criticalProbability": 3,
   "defenseForce": 80,
   "moveSpeed": 7,
-  "skillCooltime": 1,
+  "skillCooltime": 30,
   "specialtyOne": "Sniper Group",
   "specialtyTwo": "Sorcerer Group",
   "rarity": "Legendary",
-  "skillSentence": "À¸¾ð¤·¤±¤¤¶ó¤Ó¤·¤¤¤©¤¤¶û Â¥Áõ³ª!@#@!"
+  "skillSentence": "   ð¤·¤     Ó¤          Â¥    !@#@!"
  },
  {
   "UID": 122011,

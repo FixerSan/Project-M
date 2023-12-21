@@ -11,147 +11,47 @@
 ],
 "poolDatas":[
  {
-  "UID": 1,
+  "UID": 111010,
   "rarityPool": "Common",
   "pickupProbability": 0
  },
  {
-  "UID": 2,
+  "UID": 111020,
   "rarityPool": "Common",
   "pickupProbability": 0
  },
  {
-  "UID": 3,
+  "UID": 112020,
   "rarityPool": "Common",
   "pickupProbability": 0
  },
  {
-  "UID": 4,
+  "UID": 121010,
   "rarityPool": "Common",
   "pickupProbability": 0
  },
  {
-  "UID": 5,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 6,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 7,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 8,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 9,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 10,
-  "rarityPool": "Common",
-  "pickupProbability": 0
- },
- {
-  "UID": 11,
+  "UID": 111040,
   "rarityPool": "Rare",
   "pickupProbability": 0
  },
  {
-  "UID": 12,
+  "UID": 121020,
   "rarityPool": "Rare",
   "pickupProbability": 0
  },
  {
-  "UID": 13,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 14,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 15,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 16,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 17,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 18,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 19,
-  "rarityPool": "Rare",
-  "pickupProbability": 0
- },
- {
-  "UID": 20,
+  "UID": 111030,
   "rarityPool": "Epic",
   "pickupProbability": 0
  },
  {
-  "UID": 21,
+  "UID": 112010,
   "rarityPool": "Epic",
   "pickupProbability": 0
  },
  {
-  "UID": 22,
-  "rarityPool": "Epic",
-  "pickupProbability": 0
- },
- {
-  "UID": 23,
-  "rarityPool": "Epic",
-  "pickupProbability": 0
- },
- {
-  "UID": 24,
-  "rarityPool": "Legendary",
-  "pickupProbability": 30
- },
- {
-  "UID": 25,
-  "rarityPool": "Legendary",
-  "pickupProbability": 20
- },
- {
-  "UID": 26,
-  "rarityPool": "Legendary",
-  "pickupProbability": 0
- },
- {
-  "UID": 27,
-  "rarityPool": "Legendary",
-  "pickupProbability": 0
- },
- {
-  "UID": 28,
-  "rarityPool": "Legendary",
-  "pickupProbability": 0
- },
- {
-  "UID": 29,
+  "UID": 122010,
   "rarityPool": "Legendary",
   "pickupProbability": 0
  }

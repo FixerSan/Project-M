@@ -12,7 +12,7 @@ public class Define
     public static readonly Vector2 prepareRangerOffset = new Vector2(0, -60);
 
     public static readonly float attackAnimationTime = 1;
-    public static readonly float fastSpeed = 3;
+    public static readonly float fastSpeed = 2;
     public static readonly float sceneStartDelay = 3;
     public static readonly float skillScreenTime = 1;
     public static readonly Color stageinfoDrawedSlotColor = new Color(1,1,1,1);

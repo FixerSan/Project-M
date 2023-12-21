@@ -44,13 +44,11 @@ public class UIPopup_GachaAnimation : UIPopup
             {
                 if (data.rarity == "Epic" && isEpic == false)
                 {
-                    Debug.Log("ÀÌ½¬³¢ EpicÀÎµ¥¿ä?");
                     isEpic = true;
                 }
 
                 if (data.rarity == "Legendary" && isLegendary == false)
                 {
-                    Debug.Log("ÀÌ½¬³¢ LegendaryÀÎµ¥¿ä?");
                     isEpic = true;
                     isLegendary = true;
                 }

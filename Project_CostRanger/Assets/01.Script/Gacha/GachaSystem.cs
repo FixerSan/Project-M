@@ -15,14 +15,14 @@ public class GachaSystem
 
     // 결과창 UI용 뽑은 개수 정리
     private Queue<string> obtainedRangers;
-    private int[] lastObtainedRangers;
+    private int[,] lastObtainedRangers;
 
     public readonly int OneGachaConsumeAmount = 10;
 
     public bool Init()
     {
         obtainedRangers = new Queue<string>(10);
-        lastObtainedRangers = new int[10];
+        lastObtainedRangers = new int[10,2];
 
         currentTable = new GachaTable();
         currentTable.Init(Managers.Resource.Load<TextAsset>("RecruitmentRegularData"));
@@ -129,9 +129,9 @@ public class GachaSystem
     public void CompleteGacha()
     {
         // 마지막 가챠 배열 초기화
-        for (int i = 0; i < lastObtainedRangers.Length; i++)
+        for (int i = 0; i < lastObtainedRangers.GetLength(0); i++)
         {
-            lastObtainedRangers[i] = 0;
+            lastObtainedRangers[i,0] = 0;
         }
 
         int imax = obtainedRangers.Count;
@@ -139,22 +139,24 @@ public class GachaSystem
         // obtainedRangers 에 등록된 만큼 완료 처리
         for (int i = 0; i < imax; i++)
         {
-            lastObtainedRangers[i] = Int32.Parse(obtainedRangers.Peek());
+            lastObtainedRangers[i,0] = Int32.Parse(obtainedRangers.Peek());
+            lastObtainedRangers[i, 1] = 0;
 
-            var lastRanger = Managers.Data.GetRangerInfoData(lastObtainedRangers[i]);
+            var lastRanger = Managers.Data.GetRangerInfoData(lastObtainedRangers[i,0]);
             if (lastRanger != null && !Managers.Game.playerData.hasRangers.Contains(lastRanger))
             {
                 Managers.Game.playerData.hasRangers.Add(lastRanger);
+                lastObtainedRangers[i, 1] = 1;
                 Debug.Log($"{lastRanger.UID} 플레이어 소유에 추가");
             }
 
             Debug.Log($"{i + 1}번째 뽑기 : {obtainedRangers.Dequeue()} 획득!");
         }
 
-        Managers.Game.playerData.gem -= OneGachaConsumeAmount - lastObtainedRangers.Length;
+        Managers.Game.playerData.gem -= OneGachaConsumeAmount * lastObtainedRangers.GetLength(0);
     }
 
-    public int[] GetGachaResult()
+    public int[,] GetGachaResult()
     {
         return lastObtainedRangers;
     }

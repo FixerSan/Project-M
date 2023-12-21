@@ -10,6 +10,63 @@
             "clearRewardEXP": 0,
             "clearRewardUpgradeCost": 0,
             "clearRewardGem": 0
+        },
+        {
+            "UID": 101,
+            "stageName": "1-1",
+            "stageNumber": "",
+            "canUseCost": 13,
+            "enemyUIDs": "211010,211010,211010,,,,,,",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
+        },
+        {
+            "UID": 102,
+            "stageName": "1-2",
+            "stageNumber": "",
+            "canUseCost": 21,
+            "enemyUIDs": "211010,211010,211010,,211010,,,211020,",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
+        },
+        {
+            "UID": 103,
+            "stageName": "1-3",
+            "stageNumber": "",
+            "canUseCost": 29,
+            "enemyUIDs": "211010,211020,211010,211020,,211020,,211030,",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
+        }
+        ,
+        {
+            "UID": 104,
+            "stageName": "1-4",
+            "stageNumber": "",
+            "canUseCost": 29,
+            "enemyUIDs": "211020,211020,211020,211020,211030,211020,,211040,",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
+        }
+        ,
+        {
+            "UID": 105,
+            "stageName": "1-5",
+            "stageNumber": "",
+            "canUseCost": 29,
+            "enemyUIDs": "211020,211050,211020,211030,,211040,,,",
+            "clearRewardGold": 0,
+            "clearRewardEXP": 0,
+            "clearRewardUpgradeCost": 0,
+            "clearRewardGem": 0
         }
     ]
 }

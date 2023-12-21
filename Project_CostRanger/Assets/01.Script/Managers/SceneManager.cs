@@ -42,7 +42,7 @@ public class SceneManager
                 AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
                 async.completed += (_) =>
                 {
-                    AddScene(sceneName, null);
+                    AddScene(sceneName, ()=> { loadCallback?.Invoke(); });
                     isLoading = false;
                 };
             });
@@ -64,7 +64,7 @@ public class SceneManager
                 AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{sceneName}");
                 async.completed += (_) =>
                 {
-                    AddScene(sceneName,()=> { isLoading = false; Managers.Screen.FadeOut(0.25f); });
+                    AddScene(sceneName,()=> { isLoading = false; loadCallback?.Invoke(); Managers.Screen.FadeOut(0.25f); });
                 };
             });
         });
@@ -121,8 +121,7 @@ public class SceneManager
                 break;
 
             default:
-                loadCallback?.Invoke();
-                loadCallback = null;
+                _addSceneCallback?.Invoke();
                 return;
         }
 

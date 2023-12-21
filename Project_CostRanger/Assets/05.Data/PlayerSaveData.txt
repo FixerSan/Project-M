@@ -6,10 +6,10 @@
             "name": "Fixer",
             "level": 999,
             "exp": 0,
-            "gold": 123456789,
-            "gem": 123456789,
+            "gold": 10000,
+            "gem": 10000,
             "upgradeCost": 0,
-            "hasRangerUID": "0,122010",
+            "hasRangerUID": "111010,111020",
             "lastClearStageUID": -1
         },
         {

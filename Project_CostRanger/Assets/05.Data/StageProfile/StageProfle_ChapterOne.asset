@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c1d49767c435d4d81c973e17d6b839, type: 3}
   m_Name: StageProfle_ChapterOne
   m_EditorClassIdentifier: 
+  stageOneUID: 101
+  stageTwoUID: 102
+  stageThreeUID: 103
+  stageFourUID: 104
+  stageFiveUID: 105

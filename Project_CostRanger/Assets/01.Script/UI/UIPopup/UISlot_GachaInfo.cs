@@ -28,12 +28,20 @@ public class UISlot_GachaInfo : UIBase
         GetImage((int)Images.Image_ObtainedStatusBG).gameObject.SetActive(false);
         GetImage((int)Images.Image_NewBG).gameObject.SetActive(false);
 
-        GetImage((int)Images.Image_Ranger).sprite = Managers.Resource.Load<Sprite>($"{_uid}.sprite");
+        RangerInfoData data = Managers.Data.GetRangerInfoData(_uid);
+
+        Managers.Resource.Load<Sprite>($"{data.name}", _callback: (_sprite) => { GetImage((int)Images.Image_Ranger).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"Card_{data.rarity}", (_sprite) => { GetImage((int)Images.Image_Card).sprite = _sprite; });
+        Managers.Resource.Load<Sprite>($"CostPlace_{data.rarity}", (_sprite) => { GetImage((int)Images.Image_CostPlace).sprite = _sprite; });
+        GetText((int)Texts.Text_Cost).text = data.cost.ToString();
+        GetText((int)Texts.Text_Name).text = data.name.ToString();
+
+
 
         if (!_isAlreadyObtained)
         {
             GetImage((int)Images.Image_ObtainedStatusBG).gameObject.SetActive(true);
-            GetImage((int)Images.Image_NewBG).gameObject.SetActive(true);
+            //GetImage((int)Images.Image_NewBG).gameObject.SetActive(true);
         }
 
         gameObject.transform.DOScale(1f, 0.8f).SetEase(Ease.InBounce);
@@ -48,11 +56,11 @@ public class UISlot_GachaInfo : UIBase
 
     private enum Images
     {
-        Image_Ranger, Image_RangerBG, Image_ObtainedStatusBG, Image_NewBG
+        Image_Ranger, Image_RangerBG, Image_ObtainedStatusBG, Image_NewBG, Image_CostPlace, Image_Card
     }
 
     private enum Texts
     {
-        Text_RangerName, Text_ObtainedStatus
+        Text_RangerName, Text_ObtainedStatus, Text_Name, Text_Cost
     }
 }
