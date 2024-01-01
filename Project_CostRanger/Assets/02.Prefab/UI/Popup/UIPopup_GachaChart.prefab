@@ -961,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a38687c2922db44af5d0b7d0cafef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
 --- !u!1 &6112744395445967310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,6 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b83da624e07e8d478259cf70a049497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawed: 0
 --- !u!1 &9219611806619338719
 GameObject:
   m_ObjectHideFlags: 0

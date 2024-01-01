@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static UIPopup_GachaResult;
 using UnityEngine.UI;
 
 public class UIScene_Main : UIScene
@@ -23,7 +22,7 @@ public class UIScene_Main : UIScene
         //BindEvent(GetButton((int)Buttons.Button_Gacha).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_Gacha>(); });
 
         BindEvent(GetButton((int)Buttons.Button_Ranger).gameObject, _callback: OnClick_Ranger);
-        BindEvent(GetButton((int)Buttons.Button_RangerList).gameObject, () => { });
+        BindEvent(GetButton((int)Buttons.Button_RangerList).gameObject, OnClick_List);
         BindEvent(GetButton((int)Buttons.Button_RangerDraw).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_Gacha>(); });
         BindEvent(GetButton((int)Buttons.Button_RangerStatUP).gameObject, () => { });
 
@@ -66,6 +65,11 @@ public class UIScene_Main : UIScene
                 DOMoveX(GetObject((int)Transforms.Transform_RangerButtonsNotActive).transform.position.x, 0.4f)
                 .SetEase(Ease.OutQuart);
             });
+    }
+
+    public void OnClick_List()
+    {
+        Managers.UI.ShowPopupUI<UIPopup_RangerList>();
     }
 
     private enum Transforms

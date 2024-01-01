@@ -56,13 +56,13 @@ public class UISlot_CanUseRanger : UISlot_PrepareRanger
     {
         Image_Illust, Image_Card, Image_CostPlace
     }
-    
-    public enum Texts
+
+    private enum Texts
     {
         Text_Level, Text_Cost, Text_Name
     }
 
-    public enum Objects
+    private enum Objects
     {
         RangerTrans, Bundle_GameObject
     } 

@@ -152,7 +152,7 @@ public class Define
         UIPopup_PrepareStage, UIPopup_Result, UIPopup_SignUp, UIPopup_WorldMap_ChapterOne, UIScene_CreateStage, UIScene_Login, UIScene_Main, UIScene_Stage, UIPopup_StageInfo
 
         // °¡Ã­ ¾À
-        ,UIPopup_Gacha, UIPopup_GachaResult, UIPopup_GachaSlide, UIPopup_GachaChart, UIPopup_GachaAnimation, UIPopup_GachaConfirmation
+        ,UIPopup_Gacha, UIPopup_GachaResult, UIPopup_GachaSlide, UIPopup_GachaChart, UIPopup_GachaAnimation, UIPopup_GachaConfirmation, UIPopup_RangerList
     }
 
     public enum RewardType
