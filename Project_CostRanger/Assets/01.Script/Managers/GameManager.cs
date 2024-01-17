@@ -502,6 +502,7 @@ public class BattleStageSystem
         Managers.Object.ClearRangers();
         Managers.Object.ClearEnemies();
         Managers.Stage.ClearReward(currentStageData.UID);
+        Managers.Game.playerData.lastClearStageUID = currentStageData.UID;
         Managers.Screen.FadeIn(0.25f, () => 
         {
             UIPopup_Result ui = Managers.UI.ShowPopupUI<UIPopup_Result>();

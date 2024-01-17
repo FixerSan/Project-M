@@ -20,7 +20,6 @@ public class BattleManager
             if(_attacker is RangerController)
             {
                 RangerController ranger = _attacker as RangerController;
-                Debug.Log($"{ranger.data.name} :: 치명타 데메지 :: {currentDamage}");
             }
         }
 

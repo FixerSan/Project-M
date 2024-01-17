@@ -27,5 +27,10 @@ public class UIHPBar : MonoBehaviour
         hpSlider.fillAmount = (float)controller.status.CurrentHP / (float)controller.status.CurrentMaxHP;
         bundle.transform.position = Camera.main.WorldToScreenPoint(controller.hpBarTrans.position);
         bundle.localScale = controller.transform.localScale;
+
+        if(controller.status.CurrentHP == 0)
+        {
+            Managers.Resource.Destroy(gameObject);
+        }
     }
 }

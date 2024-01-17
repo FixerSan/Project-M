@@ -21,6 +21,7 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
 
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
+        BindImage(typeof(Images));
         BindObject(typeof(Objects));
 
         // BindEvent(GetObject((int)Objects.Image_Background), _dragCallback: OnDrag, _type: Define.UIEventType.Drag);
@@ -31,6 +32,46 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
         BindEvent(GetButton((int)Buttons.Button_StageThree).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageThreeUID); });
         BindEvent(GetButton((int)Buttons.Button_StageFour).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageFourUID); });
         BindEvent(GetButton((int)Buttons.Button_StageFive).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_StageInfo>().Init(chapterOneStageProfle.stageFiveUID); });
+
+        switch(Managers.Game.playerData.lastClearStageUID)
+        {
+            case 0:
+
+                break;
+            case 101:
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageOneStar).sprite = _sprite; });
+                break;
+
+            case 102:
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageOneStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageTwoStar).sprite = _sprite; });
+
+                break;
+
+            case 103:
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageOneStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageTwoStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageThreeStar).sprite = _sprite; });
+
+                break;
+
+            case 104:
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageOneStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageTwoStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageThreeStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageFourStar).sprite = _sprite; });
+
+                break;
+
+            case 105:
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageOneStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageTwoStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageThreeStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageFourStar).sprite = _sprite; });
+                Managers.Resource.Load<Sprite>("ChapterStarsClear", (_sprite) => { GetImage((int)Images.Image_StageFiveStar).sprite = _sprite; });
+                break;
+        }
+
 
 
         return true;
@@ -67,7 +108,7 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
 
     private enum Texts
     {
-        
+        Text_StageOne, Text_StageTwo, Text_StageThree, Text_StageFour, Text_StageFive,
         Text_UserGem, Text_UserGold, Text_UserEXP
     }
 

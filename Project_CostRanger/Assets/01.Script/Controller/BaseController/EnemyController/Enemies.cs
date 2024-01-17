@@ -160,7 +160,6 @@ public abstract class Enemy
     public virtual IEnumerator SkillRoutine()
     {
         controller.Stop();
-        Debug.Log("스킬 사용됨");
         yield return skillBeforeWaitForSeconds; //애니메이션 시간 기다리는 거임
         Managers.Battle.AttackCalculation(controller, controller.attackTarget, controller.status.CurrentAttackForce * 1.5f);
         yield return skillAfterWaitForSeconds; //애니메이션 시간 기다리는 거임

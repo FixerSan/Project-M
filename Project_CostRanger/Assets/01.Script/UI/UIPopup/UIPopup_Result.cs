@@ -42,12 +42,12 @@ public class UIPopup_Result : UIPopup
 
     public void OnClick_Exit()
     {
-        Managers.Scene.LoadScene(Define.Scene.Stage);
+        Managers.Scene.LoadScene(Define.Scene.Main);
     }
 
     public void OnClick_Retry()
     {
-        Managers.Scene.LoadScene(Define.Scene.Main);
+        Managers.Scene.LoadScene(Define.Scene.Stage);
     }
 
     public void OnClick_Draw()

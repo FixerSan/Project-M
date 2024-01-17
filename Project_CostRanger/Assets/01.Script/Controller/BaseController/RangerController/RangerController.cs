@@ -79,7 +79,6 @@ public class RangerController : BaseController
         if (!isInit) return;
         stateMachine.UpdateState();
         CheckChangeState();
-        Debug.Log(status.CurrentAttackSpeed);
     }
 
     private void CheckChangeState()
